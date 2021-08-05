@@ -1,0 +1,21 @@
+{
+    "ActionPatterns": [
+       {
+          "@name": "AP-Farm",
+          "action": [
+             {
+                "@name": "MoveWithinRange"
+             },
+             {
+                "@name": "LastHit"
+             }
+          ]
+       },
+       {
+          "@name": "AP-Return",
+          "action": {
+             "@name": "ReturnToBase"
+          }
+       }
+    ]
+ }
