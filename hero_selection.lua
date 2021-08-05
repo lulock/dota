@@ -14,36 +14,37 @@
 --safelane core 
 local position_1 =
 {
-	"npc_dota_hero_alchemist",
-	"npc_dota_hero_medusa",
+	"npc_dota_hero_gyrocopter", --gyrocopter
+	"npc_dota_hero_sniper",
+	"npc_dota_hero_drow_ranger", --drow ranger
 }
 
 --midlaner
 local position_2 =
 {
-	"npc_dota_hero_death_prophet",
-	"npc_dota_hero_viper",
+	"npc_dota_hero_nevermore", --shadow fiend
+	"npc_dota_hero_viper", --viper
 
 }
 
 --offlane core
 local position_3 =
 {
-	"npc_dota_hero_doom_bringer",
-	"npc_dota_hero_leshrac",
+	"npc_dota_hero_tidehunter", --tidehunter
+	"npc_dota_hero_bristleback", --bristleback
 }
 
 --offlane support
 local position_4 =
 {
-	"npc_dota_hero_ember_spirit",
+	"npc_dota_hero_crystal_maiden", --crystal maiden
 	"npc_dota_hero_shadow_shaman",
 }
 
 --safelane support
 local position_5 =
 {
-	"npc_dota_hero_oracle",
+	"npc_dota_hero_ogre_magi", -- ogre magi
 	"npc_dota_hero_witch_doctor",
 }
 
