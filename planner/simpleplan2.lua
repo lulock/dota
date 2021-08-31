@@ -34,16 +34,47 @@ local x = [[{
 			]
 		}
 	],
-	"CompetenceElements": [],
-	"Competences": [],
+	"Competences": [
+		{
+			"name": "C-GoToLane",
+			"goals": [],
+			"elements": [
+				{
+					"name": "CE-GoToCorrectLane",
+					"Senses": [
+						{
+							"name": "IsFarmingTime",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-GoToLane"
+				},
+				{
+					"name": "CE-GoToCreepWave",
+					"Senses": [],
+					"element": ""
+				},
+				{
+					"name": "CE-LastHit",
+					"Senses": [],
+					"element": ""
+				}
+			]
+		},
+		{
+			"name": "C-lastHitFarm",
+			"goals": [],
+			"elements": []
+		}
+	],
 	"DriveElements": [
 		{
 			"name": "DE-Retreat",
-			"triggers": [
-				{
-					"name": "AP-GoToSafeLocation"
-				}
-			],
+			"element":
+			{
+				"name": "AP-GoToSafeLocation"
+			},
 			"checkTime": "0",
 			"Senses": [
 				{
@@ -55,11 +86,10 @@ local x = [[{
 		},
 		{
 			"name": "DE-WardDefensive",
-			"triggers": [
-				{
-					"name": "AP-PlaceWardInLane"
-				}
-			],
+			"element":
+			{
+				"name": "AP-PlaceWardInLane"
+			},
 			"checkTime": "0",
 			"Senses": [
 				{
@@ -71,11 +101,10 @@ local x = [[{
 		},
 		{
 			"name": "DE-Idle",
-			"triggers": [
-				{
-					"name": "AP-Idle"
-				}
-			],
+			"element": 
+			{
+				"name": "AP-Idle"
+			},
 			"checkTime": "0",
 			"Senses": [
 				{

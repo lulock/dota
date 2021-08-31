@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------
--- NOTE: this file needs significant refactoring
+-- NOTE: this file needs significant refactoring                                    --
 --                                                                                  -- 
 -- this is the Planner class                                                        --
 -- a Planner will:                                                                  --
@@ -14,6 +14,7 @@ Planner = Class{}
 function Planner:init(planFile)
     -- self.planFile = planFile --json plan file
     self.plan = readPlanFile(planFile)
+    self.elements = {}
     -- self.planTree = test()
 end
 
@@ -26,98 +27,71 @@ function readPlanFile(file)
     return plan --return table
 end
 
-function Planner:getDrives()
-    return self.plan["Drives"]
-end
-
-function Planner:getDriveElements()
-    return self.plan["DriveElements"]
-end
-
-function Planner:getCompetences()
-    return self.plan["Competences"]
-end
-
-function Planner:getCompetenceElements()
-    return self.plan["CompetenceElements"]
-end
-
-function Planner:getActionPatterns()
-    return self.plan["ActionPatterns"]
-end
-
 function Planner:buildActionPatterns()
-    local actionPatterns = {}
-    for _,ap in pairs(self.plan["ActionPatterns"]) do 
+    for _,ap in pairs(self.plan.ActionPatterns) do 
         -- print(ap["name"])
         -- print(ap["actions"])
         local actions = {}
-        for _,a in pairs(ap["actions"]) do 
-            table.insert(actions, Action(a["name"], 0))
+        for _,a in pairs(ap.actions) do 
+            if not self.elements[a.name] then
+                table.insert(actions, Action(a.name, 0)) -- construct new action
+            end
             -- actions[a["name"]] = Action(a["name"],0)
         end
         -- table.insert(actionPatterns, ActionPattern(ap["name"], actions))
-        actionPatterns[ap["name"]] = ActionPattern(ap["name"], actions)
+        self.elements[ap.name] = ActionPattern(ap.name, actions)
     end
-    return actionPatterns
 end
 
-function Planner:buildCompetenceElements(elements)
-    local competenceElements = {}
-    for _,ce in pairs(self.plan["CompetenceElements"]) do 
-        print(ce["name"])
-        print(ce["element"])
+function Planner:buildCompetence()  
+    for _,c in pairs(self.plan.Competences) do 
 
-        local senses = {}
-        for _, s in pairs(ce["Senses"]) do
-            local sense = Sense(s.name, s.value, s.comparator)
-            table.insert(senses, sense)
-        end
-
-        competenceElements[ce["name"]] = CompetenceElement(ce["name"], senses, elements[ce["element"].name])
-    end
-    return competenceElements
-end
-
-function Planner:buildCompetence(elements)  
-    local competences = {}
-    for _,c in pairs(self.plan["Competences"]) do 
-        -- print(c["name"])
-        -- print(c["goals"])
-        local comp_elements = {}
-        for _,ce in pairs(c["CompetenceElements"]) do 
-            --find name in elements list
-            -- print(ce,elements[ce.name])
-            table.insert(comp_elements, elements[ce.name])
-        end
-
+        -- start by building goals
         local goals = {}
-        for _, g in pairs(c["goals"]) do
-            local goal = Sense(g.name, g.value, g.comparator)
-            table.insert(goals, goal)
+        for _, g in pairs(c.goals) do
+            if not self.elements[g.name] then
+                table.insert(goals, Sense(g.name, g.value, g.comparator)) -- construct new sense
+            end
         end
 
-        competences[c["name"]] = Competence(c["name"], goals, comp_elements)
+        -- next build competence elements
+        local comp_elements = {}
+        for _,ce in pairs(c.elements) do
+            if not self.elements[ce.name] then -- check if ce exists already
+                local senses = {}
+                for _,s in pairs(ce.Senses) do
+                    if not self.elements[s.name] then
+                        table.insert(senses, Sense(s.name, s.value, s.comparator)) -- construct new sense
+                    end
+                end
+                table.insert(comp_elements, CompetenceElement(ce.name, senses, self.elements[ce.element])) -- construct new sense
+            else
+                table.insert(comp_elements, self.elements[ce.name])
+            end
+        end
+
+        self.elements[c.name] = Competence(c.name, goals, comp_elements)
     end
-    return competences
 end
 
-function Planner:buildDrive(elements)  
+
+function Planner:buildDrive()  
+    PrintTable(self.plan)
     local driveElements = {}
-    for _,de in pairs(self.plan["DriveElements"]) do 
-        print(de["name"])
-        print(de["Senses"])
-        print(de["element"])
-        print('is this the same', de.element.name)
+    for _,de in pairs(self.plan.DriveElements) do 
+        print(de.name)
+        print(de.Senses)
+        print(de.element)
 
         local senses = {}
-        for _, s in pairs(de["Senses"]) do
+        for _, s in pairs(de.Senses) do
             local sense = Sense(s.name, s.value, s.comparator)
+            print(s.name, s.value, s.comparator)
             table.insert(senses, sense)
         end
 
         -- driveElements[de["name"]] = Drive(de["name"], senses, triggers[1])
-        table.insert(driveElements, Drive(de["name"], senses, elements[de["element"].name))
+        table.insert(driveElements, Drive(de.name, senses, self.elements[de.element.name]))
     end
     return driveElements
 end
@@ -128,16 +102,11 @@ end
 
 
 function Planner:buildPlanner()  
-    local ap = self:buildActionPatterns() --action patterns
-    local ce = self:buildCompetenceElements(ap) --competence elements
-    local c = self:buildCompetence(ce) --competences
+    self:buildActionPatterns() --action patterns
+    self:buildCompetence() --competences
+    -- local newC = self:buildCompetenceNew(ap) --competence + competence elements
 
-    local elements = {}
-    for k,v in pairs(ap) do elements[k] = v end 
-    for k,v in pairs(c) do elements[k] = v end 
-    -- PrintTable(elements)
-
-    local de = self:buildDrive(elements) --drive elements
+    local de = self:buildDrive() --drive elements
     local dc = self:buildDriveCollection(de) --drives
     
     -- PrintTable(dc)
@@ -176,5 +145,5 @@ end
 function test(file)
     local p = Planner(file)
     dc = p:buildPlanner()
-    p:tickRoot(dc) -- this isn't right. Return values are handled by parent nodes
+    -- p:tickRoot(dc) -- this isn't right. Return values are handled by parent nodes
 end

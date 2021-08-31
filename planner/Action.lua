@@ -16,7 +16,7 @@
 --------------------------------------------------------------------------------------
 
 Action = Class{__includes = PlanElement}
-require ( GetScriptDirectory().."/planner/BehaviourLib" )
+-- require ( GetScriptDirectory().."/planner/BehaviourLib" )
 
 
 function Action:init(name, timeToComplete)

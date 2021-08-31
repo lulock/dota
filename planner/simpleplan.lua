@@ -34,45 +34,36 @@ local x = [[{
 			]
 		}
 	],
-	"CompetenceElements": [
-		{
-			"name": "CE-GoToCorrectLane",
-			"Senses": [
-
-			],
-			"element": "C-GoToLane"
-		},
-		{
-			"name": "CE-GoToCreepWave",
-			"Senses": [
-
-			],
-			"element": ""
-		},
-		{
-			"name": "CE-LastHit",
-			"Senses": [
-
-			],
-			"element": ""
-		}
-
-	],
 	"Competences": [
 		{
+			"name": "C-GoToLane",
+			"goals": [],
+			"elements": []
+		},
+		{
 			"name": "C-lastHitFarm",
-			"goals": [
-
-			],
+			"goals": [],
 			"elements": [
 				{
-					"name" : "CE-GoToCorrectLane"
+					"name": "CE-GoToCorrectLane",
+					"Senses": [
+						{
+							"name": "IsFarmingTime",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-GoToLane"
 				},
 				{
-					"name" : "CE-GoToCreepWave"
+					"name": "CE-GoToCreepWave",
+					"Senses": [],
+					"element": ""
 				},
 				{
-					"name" : "CE-LastHit"
+					"name": "CE-LastHit",
+					"Senses": [],
+					"element": ""
 				}
 			] 
 		}
