@@ -34,16 +34,56 @@ local x = [[{
 			]
 		}
 	],
-	"CompetenceElements": [],
-	"Competences": [],
+	"CompetenceElements": [
+		{
+			"name": "CE-GoToCorrectLane",
+			"Senses": [
+
+			],
+			"element": "C-GoToLane"
+		},
+		{
+			"name": "CE-GoToCreepWave",
+			"Senses": [
+
+			],
+			"element": ""
+		},
+		{
+			"name": "CE-LastHit",
+			"Senses": [
+
+			],
+			"element": ""
+		}
+
+	],
+	"Competences": [
+		{
+			"name": "C-lastHitFarm",
+			"goals": [
+
+			],
+			"elements": [
+				{
+					"name" : "CE-GoToCorrectLane"
+				},
+				{
+					"name" : "CE-GoToCreepWave"
+				},
+				{
+					"name" : "CE-LastHit"
+				}
+			] 
+		}
+	],
 	"DriveElements": [
 		{
 			"name": "DE-Retreat",
-			"triggers": [
-				{
-					"name": "AP-GoToSafeLocation"
-				}
-			],
+			"element": 
+			{
+				"name": "AP-GoToSafeLocation"
+			},
 			"checkTime": "0",
 			"Senses": [
 				{
@@ -54,12 +94,31 @@ local x = [[{
 			]
 		},
 		{
-			"name": "DE-WardDefensive",
-			"triggers": [
+			"name": "DE-FarmLane",
+			"element": 
+			{
+				"name": "C-LastHitFarm"
+			},
+			"checkTime": "0",
+			"Senses": [
 				{
-					"name": "AP-PlaceWardInLane"
+					"name": "IsFarmingTime",
+					"value": "1",
+					"comparator": "bool"
+				},
+				{
+					"name": "IsSafeToFarm",
+					"value": "1",
+					"comparator": "bool"
 				}
-			],
+			]
+		},
+		{
+			"name": "DE-WardDefensive",
+			"element":
+			{
+				"name": "AP-PlaceWardInLane"
+			},
 			"checkTime": "0",
 			"Senses": [
 				{
@@ -71,11 +130,10 @@ local x = [[{
 		},
 		{
 			"name": "DE-Idle",
-			"triggers": [
-				{
-					"name": "AP-Idle"
-				}
-			],
+			"element":
+			{
+				"name": "AP-Idle"
+			},
 			"checkTime": "0",
 			"Senses": [
 				{

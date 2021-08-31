@@ -5,7 +5,7 @@
 -- an Competence is an aggregate defined by:                                        --
 --  . unique name identifier                                                        --
 --  . list of Senses that trigger an Action, ActionPattern, or Competence           --
---  . trigger THAT NEEDS RENAMING TO SOMETHING MORE APPROPRIATELY DESCRIPTIVE       --
+--  . element                                                                       --
 --                                                                                  --
 -- tick() checks Senses and only:                                                   --
 --  . ticks element if all senses are satisfied                                     --
@@ -15,10 +15,10 @@
 
 CompetenceElement = Class{__includes = PlanElement}
 
-function CompetenceElement:init(name, trigger, senses)
+function CompetenceElement:init(name, senses, element)
     self.name = name --string name
     self.senses = senses --list of senses
-    self.trigger = trigger --should probably be renamed to element or something
+    self.element = element --should probably be renamed to element or something
 end
 
 function CompetenceElement:tick()
@@ -28,5 +28,5 @@ function CompetenceElement:tick()
         end
     end
 
-    return self.trigger:tick() --tick trigger element only if all conditions satisfied
+    return self.element:tick() --tick trigger element only if all conditions satisfied
 end

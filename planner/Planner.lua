@@ -62,18 +62,19 @@ function Planner:buildActionPatterns()
     return actionPatterns
 end
 
-function Planner:buildCompetenceElements(ap)
+function Planner:buildCompetenceElements(elements)
     local competenceElements = {}
     for _,ce in pairs(self.plan["CompetenceElements"]) do 
-        -- print(ce["name"])
-        -- print(ce["triggers"])
-        local triggers = {}
-        for _,t in pairs(ce["triggers"]) do 
-            --find trigger name in AP list
-            -- print(t,ap[t.name])
-            table.insert(triggers, ap[t.name])
+        print(ce["name"])
+        print(ce["element"])
+
+        local senses = {}
+        for _, s in pairs(ce["Senses"]) do
+            local sense = Sense(s.name, s.value, s.comparator)
+            table.insert(senses, sense)
         end
-        competenceElements[ce["name"]] = CompetenceElement(ce["name"], triggers, ce["Senses"])
+
+        competenceElements[ce["name"]] = CompetenceElement(ce["name"], senses, elements[ce["element"].name])
     end
     return competenceElements
 end
@@ -89,7 +90,14 @@ function Planner:buildCompetence(elements)
             -- print(ce,elements[ce.name])
             table.insert(comp_elements, elements[ce.name])
         end
-        competences[c["name"]] = Competence(c["name"], c["goals"], comp_elements)
+
+        local goals = {}
+        for _, g in pairs(c["goals"]) do
+            local goal = Sense(g.name, g.value, g.comparator)
+            table.insert(goals, goal)
+        end
+
+        competences[c["name"]] = Competence(c["name"], goals, comp_elements)
     end
     return competences
 end
@@ -97,16 +105,10 @@ end
 function Planner:buildDrive(elements)  
     local driveElements = {}
     for _,de in pairs(self.plan["DriveElements"]) do 
-        -- print(de["name"])
-        -- print(de["Senses"])
-        -- print(de["triggers"])
-
-        local triggers = {}
-        for _, t in pairs(de["triggers"]) do 
-            --find trigger name in AP list
-            -- print(t,elements[t.name])
-            table.insert(triggers, elements[t.name])
-        end
+        print(de["name"])
+        print(de["Senses"])
+        print(de["element"])
+        print('is this the same', de.element.name)
 
         local senses = {}
         for _, s in pairs(de["Senses"]) do
@@ -115,7 +117,7 @@ function Planner:buildDrive(elements)
         end
 
         -- driveElements[de["name"]] = Drive(de["name"], senses, triggers[1])
-        table.insert(driveElements, Drive(de["name"], senses, triggers[1]))
+        table.insert(driveElements, Drive(de["name"], senses, elements[de["element"].name))
     end
     return driveElements
 end
