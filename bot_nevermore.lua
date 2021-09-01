@@ -10,13 +10,11 @@ require ( GetScriptDirectory().."/Dependencies" )
 
 local file = require ( GetScriptDirectory().."/planner/simpleplan" ) -- json string
 
-local plan = Planner( file ) -- load plan from json string
-local dc = plan:buildPlanner() -- build planner from leaves to root
-
-PrintTable(dc.drives) -- DEBUG
+local planner = Planner( file ) -- load plan from json string
+PrintTable(planner.root.drives) -- DEBUG
 
 bot = GetBot() -- this is probably not necessary
 
 function Think()
-	plan:tickRoot(dc) -- Return values ('success', 'running', or 'failure') handled by parent nodes.
+	planner.root:tick() -- Return values ('success', 'running', or 'failure') handled by parent nodes.
 end

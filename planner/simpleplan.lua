@@ -38,11 +38,6 @@ local x = [[{
 		{
 			"name": "C-GoToLane",
 			"goals": [],
-			"elements": []
-		},
-		{
-			"name": "C-lastHitFarm",
-			"goals": [],
 			"elements": [
 				{
 					"name": "CE-GoToCorrectLane",
@@ -53,7 +48,7 @@ local x = [[{
 							"comparator": "bool"
 						}
 					],
-					"element": "C-GoToLane"
+					"element": "AP-PlaceWardInLane"
 				},
 				{
 					"name": "CE-GoToCreepWave",
@@ -65,13 +60,22 @@ local x = [[{
 					"Senses": [],
 					"element": ""
 				}
-			] 
+			]
+		},
+		{
+			"name": "C-lastHitFarm",
+			"goals": [],
+			"elements": [
+				{
+					"name": "C-GoToLane"
+				}
+			]
 		}
 	],
 	"DriveElements": [
 		{
 			"name": "DE-Retreat",
-			"element": 
+			"element":
 			{
 				"name": "AP-GoToSafeLocation"
 			},
@@ -79,26 +83,6 @@ local x = [[{
 			"Senses": [
 				{
 					"name": "EnemyNearby",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
-			"name": "DE-FarmLane",
-			"element": 
-			{
-				"name": "C-LastHitFarm"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "IsFarmingTime",
-					"value": "1",
-					"comparator": "bool"
-				},
-				{
-					"name": "IsSafeToFarm",
 					"value": "1",
 					"comparator": "bool"
 				}
@@ -121,7 +105,7 @@ local x = [[{
 		},
 		{
 			"name": "DE-Idle",
-			"element":
+			"element": 
 			{
 				"name": "AP-Idle"
 			},

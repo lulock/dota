@@ -48,7 +48,7 @@ local x = [[{
 							"comparator": "bool"
 						}
 					],
-					"element": "C-GoToLane"
+					"element": "AP-PlaceWardInLane"
 				},
 				{
 					"name": "CE-GoToCreepWave",
@@ -65,7 +65,11 @@ local x = [[{
 		{
 			"name": "C-lastHitFarm",
 			"goals": [],
-			"elements": []
+			"elements": [
+				{
+					"name": "C-GoToLane"
+				}
+			]
 		}
 	],
 	"DriveElements": [
@@ -94,6 +98,21 @@ local x = [[{
 			"Senses": [
 				{
 					"name": "HasObserverWard",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
+		{
+			"name": "DE-Farm",
+			"element": 
+			{
+				"name": "C-lastHitFarm"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "IsFarmingTime",
 					"value": "1",
 					"comparator": "bool"
 				}

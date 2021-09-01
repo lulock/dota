@@ -6,9 +6,8 @@ require 'planner/CompetenceElement'
 require 'planner/Drive'
 require 'planner/DriveCollection'
 require 'planner/Sense'
-file = require 'planner/simpleplan2'
+file = require 'planner/simpleplan'
 require 'planner/Planner'
 json = require 'utils/json'
 
 p = Planner(file)
-dc = p:buildPlanner()

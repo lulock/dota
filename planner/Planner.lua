@@ -10,72 +10,55 @@
 
 Planner = Class{}
 
--- input: json plan file
+-- input: json string
 function Planner:init(planFile)
-    -- self.planFile = planFile --json plan file
-    self.plan = readPlanFile(planFile)
-    self.elements = {}
-    -- self.planTree = test()
+    self.plan = json.decode(planFile) -- plan loaded as lua table
+    self.elements = {} -- list of currently constructed plan elements
+    self.root = self:buildPlanner()
 end
 
-function readPlanFile(file)
-    -- read plan file
-    -- local f = assert(io.open(file, "rb")) --try to open file
-    -- local content = f:read("*all") --read content as json string
-    -- f:close() --close file
-    plan = json.decode(file) --decode json string into table
-    return plan --return table
-end
-
+-- builds Action Patterns and stores in self.elements
 function Planner:buildActionPatterns()
     for _,ap in pairs(self.plan.ActionPatterns) do 
         -- print(ap["name"])
         -- print(ap["actions"])
         local actions = {}
         for _,a in pairs(ap.actions) do 
-            if not self.elements[a.name] then
-                table.insert(actions, Action(a.name, 0)) -- construct new action
-            end
-            -- actions[a["name"]] = Action(a["name"],0)
+            table.insert(actions, Action(a.name, 0)) -- construct actions and add to action pattern sequence
         end
-        -- table.insert(actionPatterns, ActionPattern(ap["name"], actions))
-        self.elements[ap.name] = ActionPattern(ap.name, actions)
+        self.elements[ap.name] = ActionPattern(ap.name, actions) -- add action pattern to current list of plan elements
     end
 end
 
+-- builds Competences and stores in self.elements
 function Planner:buildCompetence()  
     for _,c in pairs(self.plan.Competences) do 
 
-        -- start by building goals
+        -- start by building new goals (which are Senses)
         local goals = {}
         for _, g in pairs(c.goals) do
-            if not self.elements[g.name] then
-                table.insert(goals, Sense(g.name, g.value, g.comparator)) -- construct new sense
-            end
+            table.insert(goals, Sense(g.name, g.value, g.comparator)) -- construct new sense
         end
 
         -- next build competence elements
         local comp_elements = {}
         for _,ce in pairs(c.elements) do
-            if not self.elements[ce.name] then -- check if ce exists already
+            if not self.elements[ce.name] then -- check if competence element exists already
                 local senses = {}
                 for _,s in pairs(ce.Senses) do
-                    if not self.elements[s.name] then
-                        table.insert(senses, Sense(s.name, s.value, s.comparator)) -- construct new sense
-                    end
+                    table.insert(senses, Sense(s.name, s.value, s.comparator)) -- construct new sense
                 end
-                table.insert(comp_elements, CompetenceElement(ce.name, senses, self.elements[ce.element])) -- construct new sense
+                table.insert(comp_elements, CompetenceElement(ce.name, senses, self.elements[ce.element])) -- construct new competence element
             else
-                table.insert(comp_elements, self.elements[ce.name])
+                table.insert(comp_elements, self.elements[ce.name]) -- reuse existing competence element
             end
         end
-
-        self.elements[c.name] = Competence(c.name, goals, comp_elements)
+        self.elements[c.name] = Competence(c.name, goals, comp_elements) -- add competence to current list of plan elements
     end
 end
 
-
-function Planner:buildDrive()  
+-- builds Drives and returns list in order
+function Planner:buildDriveCollection()  
     PrintTable(self.plan)
     local driveElements = {}
     for _,de in pairs(self.plan.DriveElements) do 
@@ -93,29 +76,17 @@ function Planner:buildDrive()
         -- driveElements[de["name"]] = Drive(de["name"], senses, triggers[1])
         table.insert(driveElements, Drive(de.name, senses, self.elements[de.element.name]))
     end
-    return driveElements
+    return DriveCollection('life', driveElements) 
 end
-
-function Planner:buildDriveCollection(elements)  
-    return DriveCollection('life', elements) 
-end
-
 
 function Planner:buildPlanner()  
-    self:buildActionPatterns() --action patterns
-    self:buildCompetence() --competences
-    -- local newC = self:buildCompetenceNew(ap) --competence + competence elements
-
-    local de = self:buildDrive() --drive elements
-    local dc = self:buildDriveCollection(de) --drives
-    
-    -- PrintTable(dc)
-
-    return dc
+    self:buildActionPatterns()
+    self:buildCompetence()
+    return self:buildDriveCollection()
 end
 
-function Planner:tickRoot(dc)  
-    dc:tick()
+function Planner:tickRoot()  
+    self.root:tick()
 end
 
 --- helper functions ---
@@ -140,10 +111,4 @@ function newPrint (t, count)
     else
         print (prefix, t) 
     end
-end
-
-function test(file)
-    local p = Planner(file)
-    dc = p:buildPlanner()
-    -- p:tickRoot(dc) -- this isn't right. Return values are handled by parent nodes
 end
