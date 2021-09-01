@@ -17,6 +17,7 @@ local bot = GetBot() -- gets bot this script is currently running on
 
 -- MEMORY -- 
 local targetLoc = nil
+local targetCreep = nil
 
 -- ACTIONS --
 function SelectWardLocation()
@@ -30,8 +31,8 @@ function SelectWardLocation()
 end
 
 function SelectLaneLocation()
-    targetLoc = GetLocationAlongLane( LANE_MID , 0.0 )
-    print('location along mid-lane is', GetLocationAlongLane( LANE_MID , 0.0 ))
+    targetLoc = GetLocationAlongLane( LANE_MID , 0.5 )
+    print('location along mid-lane is', GetLocationAlongLane( LANE_MID , 0.5 ))
     return 'success'
 end
 
@@ -86,6 +87,25 @@ function Idle()
     return 'success'
 end
 
+function SelectTarget()
+    print('SelectTarget function fired')
+    local enemiesNearby = GetNearbyLaneCreeps(700, true)
+    for _v in pairs(enemiesNearby) do
+        print('enemy creeps', v,'health is: ', GetHealth(v)/GetMaxHealth(v))
+        if GetHealth(v)/GetMaxHealth(v) < 0.5 then
+            targetCreep = v
+            return 'success'
+        end
+    end
+    return 'failure'
+end
+
+function RightClickAttack()
+    print('RightClickAttack function fired')
+    bot:Action_AttackUnit(targetCreep)
+    return 'success'
+end
+
 -- SENSES --
 function EnemyNearby()
     nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
@@ -101,9 +121,9 @@ function HasObserverWard()
     return 1
 end
 
-function InCorrectLane()
+function IsCorrectLane()
     -- correct lane is LANE_MID for now
-    print('InCorrectLane sense fired')
+    print('IsCorrectLane sense fired')
     print('distance between bot current location and lane_mid is:', GetAmountAlongLane( LANE_MID, bot:GetLocation() ).distance)
     return 0
 end
@@ -123,7 +143,36 @@ function IsSafeToFarm()
     return 1
 end
 
-function InCorrectLane()
-    print('IsScrollAvailable')
+function IsScrollAvailable()
+    print('IsScrollAvailable sense fired')
+    return 0
+end
+
+function IsLastHit()
+    print('IsLastHit sense fired')
+    --here check if target is dead
+    return 0
+end
+
+function HasHighestPriorityAround()
+    print('HasHighestPriorityAround sense fired')
+    return 1
+end
+
+function EnemyCreepLowHealth()
+--     { hUnit, ... } GetNearbyLaneCreeps( nRadius, bEnemies )
+-- Returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
+    print('EnemyCreepLowHealth sense fired')
+    local enemiesNearby = GetNearbyLaneCreeps(700, true)
+    print('Nearby enemy creeps are ', enemiesNearby)
+    print('Nearby enemy creeps health are ', enemiesNearby)
+
+    for _v in pairs(enemiesNearby) do
+        print('enemy creeps', v,'health is: ', GetHealth(v)/GetMaxHealth(v))
+        if GetHealth(v)/GetMaxHealth(v) < 0.5 then
+            return 1
+        end
+    end
+
     return 0
 end

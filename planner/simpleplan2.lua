@@ -54,6 +54,17 @@ local x = [[{
 					"name": "TeleportToLocation"
 				}
 			]
+		},
+		{
+			"name": "AP-RightClickAttack",
+			"actions": [
+				{
+					"name": "SelectTarget"
+				},
+				{
+					"name": "RightClickAttack"
+				}
+			]
 		}
 	],
 	"Competences": [
@@ -61,7 +72,7 @@ local x = [[{
 			"name": "C-GoToLane",
 			"goals": [
 				{
-					"name": "InCorrectLane",
+					"name": "IsCorrectLane",
 					"value": "1",
 					"comparator": "bool"
 				}
@@ -88,6 +99,95 @@ local x = [[{
 						}
 					],
 					"element": "AP-TeleportToLaneTower"
+				}
+			]
+		},
+		{
+			"name": "C-LastHitAttack",
+			"goals": [
+				{
+					"name": "IsLastHit",
+					"value": "1",
+					"comparator": "bool"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-RightClick",
+					"Senses": [
+						{
+							"name": "CreepWithinRightClickRange",
+							"value": "1",
+							"comparator": "bool"
+						},
+						{
+							"name": "CreepCanBeLastHit",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-RightClickAttack"
+				},
+				{
+					"name": "CE-Teleport",
+					"Senses": [
+						{
+							"name": "IsScrollAvailable",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-TeleportToLaneTower"
+				}
+			]
+		},
+		{
+			"name": "C-LastHitFarm",
+			"goals": [
+				{
+					"name": "IsCorrectLane",
+					"value": "1",
+					"comparator": "bool"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-GoToCorrectLane",
+					"Senses": [
+						{
+							"name": "IsCorrectLane",
+							"value": "0",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-goToLane"
+				},
+				{
+					"name": "CE-LastHit",
+					"Senses": [
+						{
+							"name": "HasHighestPriorityAround",
+							"value": "1",
+							"comparator": "bool"
+						},
+						{
+							"name": "EnemyCreepLowHealth",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-LastHitAttack"
+				},
+				{
+					"name": "CE-GoToCreepWave",
+					"Senses": [
+						{
+							"name": "IsCorrectLane",
+							"value": "0",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-goToLane"
 				}
 			]
 		}
