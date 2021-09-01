@@ -6,7 +6,7 @@ require 'planner/CompetenceElement'
 require 'planner/Drive'
 require 'planner/DriveCollection'
 require 'planner/Sense'
-file = require 'planner/simpleplan'
+file = require 'planner/simpleplan2'
 require 'planner/Planner'
 json = require 'utils/json'
 

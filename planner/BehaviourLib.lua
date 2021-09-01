@@ -16,7 +16,7 @@ BehaviourLib = Class{ }
 local bot = GetBot() -- gets bot this script is currently running on
 
 -- MEMORY -- 
-targetLoc = nil
+local targetLoc = nil
 
 -- ACTIONS --
 function SelectWardLocation()
@@ -27,6 +27,16 @@ function SelectWardLocation()
     else
         return 'running'
     end
+end
+
+function SelectLaneLocation()
+    targetLoc = GetLocationAlongLane( LANE_MID , 0.0 )
+    print('location along mid-lane is', GetLocationAlongLane( LANE_MID , 0.0 ))
+    return 'success'
+end
+
+function SelectLaneTowerLocation()
+    return RandomVector( 700 )
 end
 
 function GoToLocation()
@@ -89,4 +99,31 @@ end
 function HasObserverWard()
     print('Has observer ward sense fired')
     return 1
+end
+
+function InCorrectLane()
+    -- correct lane is LANE_MID for now
+    print('InCorrectLane sense fired')
+    print('distance between bot current location and lane_mid is:', GetAmountAlongLane( LANE_MID, bot:GetLocation() ).distance)
+    return 0
+end
+
+function IsWalkableDistance()
+    print('IsWalkableDistance sense fired')
+    return 1
+end
+
+function IsFarmingTime()
+    print('IsFarmingTime sense fired')
+    return 1
+end
+
+function IsSafeToFarm()
+    print('IsSafeToFarm sense fired')
+    return 1
+end
+
+function InCorrectLane()
+    print('IsScrollAvailable')
+    return 0
 end
