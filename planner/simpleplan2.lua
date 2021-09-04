@@ -160,7 +160,7 @@ local x = [[{
 							"comparator": "bool"
 						}
 					],
-					"element": "C-goToLane"
+					"element": "C-GoToLane"
 				},
 				{
 					"name": "CE-LastHit",
@@ -187,7 +187,7 @@ local x = [[{
 							"comparator": "bool"
 						}
 					],
-					"element": "C-goToLane"
+					"element": "C-GoToLane"
 				}
 			]
 		}
