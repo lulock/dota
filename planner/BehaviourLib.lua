@@ -125,6 +125,7 @@ function IsCorrectLane()
     -- correct lane is LANE_MID for now
     print('IsCorrectLane sense fired')
     print('distance between bot current location and lane_mid is:', GetAmountAlongLane( LANE_MID, bot:GetLocation() ).distance)
+    print('returning 0')
     return 0
 end
 

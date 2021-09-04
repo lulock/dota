@@ -194,21 +194,6 @@ local x = [[{
 	],
 	"DriveElements": [
 		{
-			"name": "DE-Retreat",
-			"element":
-			{
-				"name": "AP-GoToSafeLocation"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "EnemyNearby",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
 			"name": "DE-FarmLane",
 			"element": 
 			{
@@ -223,6 +208,21 @@ local x = [[{
 				},
 				{
 					"name": "IsSafeToFarm",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
+		{
+			"name": "DE-Retreat",
+			"element":
+			{
+				"name": "AP-GoToSafeLocation"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "EnemyNearby",
 					"value": "1",
 					"comparator": "bool"
 				}

@@ -22,11 +22,13 @@ function CompetenceElement:init(name, senses, element)
 end
 
 function CompetenceElement:tick()
+    print('in competence element', self.name, 'with child element', self.element.name)
     for _,sense in pairs(self.senses) do --check all conditions
         if not sense:tick() then
+            print('competence element sense returned failure')
             return 'failure'
         end
     end
-
+    print('competence element ticking trigger element', self.element.name)
     return self.element:tick() --tick trigger element only if all conditions satisfied
 end
