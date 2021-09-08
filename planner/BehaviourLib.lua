@@ -19,6 +19,17 @@ local bot = GetBot() -- gets bot this script is currently running on
 local targetLoc = nil
 local targetCreep = nil
 
+
+function getEnemyTeam(team)
+    if team == TEAM_RADIANT then 
+        return TEAM_DIRE
+    else
+        return TEAM_RADIANT
+    end
+end
+
+local enemyTeam = getEnemyTeam(bot:GetTeam())
+
 -- ACTIONS --
 function SelectWardLocation()
     targetLoc = GetRuneSpawnLocation( RUNE_POWERUP_1 ) -- temp at rune location
@@ -44,6 +55,20 @@ function GoToLocation()
     print('GoToLocation')
     bot:Action_MoveToLocation( targetLoc )
     if bot:GetLocation() == targetLoc then
+        return 'success'
+    else
+        return 'running'
+    end
+    -- add condition if times up, return failure
+end
+
+function GoToCreepWave()
+    print('GoToCreepWave')
+    local laneLocation = GetLaneFrontLocation(enemyTeam, LANE_MID, 0)
+    bot:Action_MoveToLocation(laneLocation);
+
+    -- bot:Action_MoveToLocation( targetLoc )
+    if bot:GetLocation() == laneLocation then
         return 'success'
     else
         return 'running'
