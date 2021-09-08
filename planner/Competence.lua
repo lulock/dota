@@ -41,7 +41,7 @@ function Competence:tick()
             for _,element in pairs(self.elements) do --tick all children
                 print('ticking competence element', element.name, 'with #senses:', #element.senses, 'and child element')
                 self.status = element:tick()
-                print('and returned', self.status)
+                print('and competence returned', self.status)
                 if self.status == 'running' or self.status == 'success' then
                     return self.status 
                 end

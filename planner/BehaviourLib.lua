@@ -64,7 +64,7 @@ end
 
 function GoToCreepWave()
     print('GoToCreepWave')
-    local laneLocation = GetLaneFrontLocation(enemyTeam, LANE_MID, 0)
+    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
     bot:Action_MoveToLocation(laneLocation);
 
     -- bot:Action_MoveToLocation( targetLoc )
@@ -132,8 +132,15 @@ function RightClickAttack()
 end
 
 -- SENSES --
+function HasLowHealth()
+    local currentHealth = bot:GetHealth()/bot:GetMaxHealth()
+    print('health is:', currentHealth)
+
+    return currentHealth < 0.8 and 1 or 0
+end
+
 function EnemyNearby()
-    nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
+    local nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
     print('EnemyNearby', (#nearbyEnemyHeroes > 0))
 
     return #nearbyEnemyHeroes > 0 and 1 or 0
@@ -149,7 +156,10 @@ end
 function IsCorrectLane()
     -- correct lane is LANE_MID for now
     print('IsCorrectLane sense fired')
-    print('distance between bot current location and lane_mid is:', GetAmountAlongLane( LANE_MID, bot:GetLocation() ).distance)
+    -- print('difference between bot current location and lane front location is:', bot:GetLocation() - GetLaneFrontLocation( bot:GetTeam() , LANE_MID, 0) )
+    print('current bot location is:', bot:GetLocation())
+    print('lane front location is:', GetLaneFrontLocation( bot:GetTeam() , LANE_MID, 0))
+    print('unit to location distance', GetUnitToLocationDistance( bot, GetLaneFrontLocation( bot:GetTeam() , LANE_MID, 0) ))
     print('returning 0')
     return 0
 end
@@ -182,6 +192,16 @@ end
 
 function HasHighestPriorityAround()
     print('HasHighestPriorityAround sense fired')
+    return 1
+end
+
+function CreepWithinRightClickRange()
+    print('CreepWithinRightClickRange sense fired')
+    return 1
+end
+
+function CreepCanBeLastHit()
+    print('CreepCanBeLastHit sense fired')
     return 1
 end
 

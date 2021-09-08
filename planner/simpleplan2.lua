@@ -199,7 +199,7 @@ local x = [[{
 			"checkTime": "0",
 			"Senses": [
 				{
-					"name": "EnemyNearby",
+					"name": "HasLowHealth",
 					"value": "1",
 					"comparator": "bool"
 				}

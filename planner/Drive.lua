@@ -40,6 +40,6 @@ function Drive:tick()
     end
     print('ticking element.', self.element.name)
     self.status = self.element:tick() --only trigger if all sense conditions satisfied
-    print('and returned.', self.status)
+    print('and drive returned.', self.status)
     return self.status
 end
