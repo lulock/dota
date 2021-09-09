@@ -14,7 +14,7 @@ Dota 2 MAS designed using OperA and BOD.
   - [x] JSON plan structure
   - [x] Plan elements
   - [x] Plan builder
-  - [] Behaviour library
+  - [ ] Behaviour library
 
 ## How to run
 
