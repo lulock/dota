@@ -142,8 +142,8 @@ local x = [[{
 			"name": "C-LastHitFarm",
 			"goals": [
 				{
-					"name": "IsCorrectLane",
-					"value": "1",
+					"name": "FarmLaneDesire",
+					"value": "0",
 					"comparator": "bool"
 				}
 			],
@@ -168,12 +168,12 @@ local x = [[{
 							"comparator": "bool"
 						},
 						{
-							"name": "EnemyCreepLowHealth",
+							"name": "EnemyCreepAround",
 							"value": "1",
 							"comparator": "bool"
 						}
 					],
-					"element": "C-LastHitAttack"
+					"element": "AP-RightClickAttack"
 				},
 				{
 					"name": "CE-GoToCreepWave",

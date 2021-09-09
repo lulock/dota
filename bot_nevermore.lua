@@ -13,7 +13,7 @@ local file = require ( GetScriptDirectory().."/planner/simpleplan2" ) -- json st
 local planner = Planner( file ) -- load plan from json string
 PrintTable(planner.root.drives) -- DEBUG
 
-bot = GetBot() -- this is probably not necessary
+-- bot = GetBot() -- this is probably not necessary
 
 function Think()
 	planner.root:tick() -- Return values ('success', 'running', or 'failure') handled by parent nodes.

@@ -103,31 +103,39 @@ function SelectSafeLocation()
     
     print('current targetLoc is', targetLoc)
     --TODO: ASSERT TYPE
-    -- targetLoc = RandomVector( 700 ) -- and run towards first one otherwise run in random direciton lol.
     return 'success'
 end
 
+-- Idle does nothing.
 function Idle()
     print('Idle function fired')
     return 'success'
 end
 
+-- SelectTarget sets creepTarget as creep with lowest health around.
 function SelectTarget()
     print('SelectTarget function fired')
-    local enemiesNearby = GetNearbyLaneCreeps(700, true)
-    for _v in pairs(enemiesNearby) do
-        print('enemy creeps', v,'health is: ', GetHealth(v)/GetMaxHealth(v))
-        if GetHealth(v)/GetMaxHealth(v) < 0.5 then
+
+    local enemiesNearby = bot:GetNearbyCreeps(700, true)
+    print('There are', #enemiesNearby, 'nearby enemy creeps')
+
+    for _,v in pairs(enemiesNearby) do
+        print('enemy creep', v,'health is: ', v:GetHealth()/v:GetMaxHealth())
+        if v:GetHealth()/v:GetMaxHealth() < 0.3 then
             targetCreep = v
+            print('target creep is', targetCreep, 'returning success')
             return 'success'
         end
     end
+
+
+    print('select target failed.')
     return 'failure'
 end
 
 function RightClickAttack()
     print('RightClickAttack function fired')
-    bot:Action_AttackUnit(targetCreep)
+    bot:Action_AttackUnit(targetCreep, true)
     return 'success'
 end
 
@@ -149,14 +157,21 @@ function EnemyNearby()
 end
 
 function HasObserverWard()
-    print('Has observer ward sense fired')
+    print('HasObserverWard sense fired')
     return 1
+end
+
+function FarmLaneDesire()
+    print('FarmLaneDesire sense fired')
+    print('GetFarmLaneDesire', GetFarmLaneDesire(bot:GetAssignedLane()))
+
+    return GetFarmLaneDesire(bot:GetAssignedLane()) > 0 and 1 or 0
 end
 
 function IsCorrectLane()
     -- currently checks distance from lane front but should check assigned lane instead
     print('IsCorrectLane sense fired')
-    print('bots assigne lane is:', bot:GetAssignedLane())
+    print('bots assigned lane is:', bot:GetAssignedLane())
     
     local dist = GetUnitToLocationDistance( bot, GetLaneFrontLocation( bot:GetTeam() , bot:GetAssignedLane(), 0) )
 
@@ -200,6 +215,7 @@ end
 
 function HasHighestPriorityAround()
     print('HasHighestPriorityAround sense fired')
+    -- print('getpriority does this work', bot:GetPriority()) -- it does not
     return 1
 end
 
@@ -213,20 +229,12 @@ function CreepCanBeLastHit()
     return 1
 end
 
-function EnemyCreepLowHealth()
+function EnemyCreepAround()
 --     { hUnit, ... } GetNearbyLaneCreeps( nRadius, bEnemies )
 -- Returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
-    print('EnemyCreepLowHealth sense fired')
-    local enemiesNearby = GetNearbyLaneCreeps(700, true)
-    print('Nearby enemy creeps are ', enemiesNearby)
-    print('Nearby enemy creeps health are ', enemiesNearby)
+    print('EnemyCreepAround sense fired')
+    local enemiesNearby = bot:GetNearbyCreeps(700, true)
+    print('There are', #enemiesNearby, 'nearby enemy creeps')
 
-    for _v in pairs(enemiesNearby) do
-        print('enemy creeps', v,'health is: ', GetHealth(v)/GetMaxHealth(v))
-        if GetHealth(v)/GetMaxHealth(v) < 0.5 then
-            return 1
-        end
-    end
-
-    return 0
+    return #enemiesNearby > 0 and 1 or 0
 end
