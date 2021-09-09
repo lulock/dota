@@ -10,9 +10,11 @@ Dota 2 MAS designed using OperA and BOD.
   - [x] Hero selection (Sorted into Positions 1 through 5)
   - [x] Lane assignment (Determined by position)
   
-- [ ] Item selection
-- [ ] Role behaviour
-  - [ ] Reactive plans
+- [ ] Reactive planner
+  - [x] JSON plan structure
+  - [x] Plan elements
+  - [x] Plan builder
+  - [] Behaviour library
 
 ## How to run
 
