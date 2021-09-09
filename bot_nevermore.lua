@@ -1,9 +1,9 @@
 --------------------------------------------------------------------------------------
--- this script handles control of Shadow Fiend bot									--
--- 	. Think() - Called every frame. Completely takes over bots.						--
---		. currently ticks planner's root node.										--	
--- NOTE: Valve limits which Lua modules are available in secure Lua VM 				--
--- (i.e. io module unavailable) so store plan as a json string in lua file instead.	--
+-- this script handles control of Shadow Fiend bot                                  --
+--  . Think() - Called every frame. Completely takes over bots.                     --
+--    . currently ticks planner's root node.                                        --
+-- NOTE: Valve limits which Lua modules are available in secure Lua VM              --
+-- (i.e. io module unavailable) so store plan as a json string in lua file instead. --
 --------------------------------------------------------------------------------------
 
 require ( GetScriptDirectory().."/Dependencies" )

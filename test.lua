@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------------
+-- this file is to test building a planner outside of dota 2                        --
+--------------------------------------------------------------------------------------
+
 Class = require 'utils/class'
 require 'planner/Action'
 require 'planner/ActionPattern'
