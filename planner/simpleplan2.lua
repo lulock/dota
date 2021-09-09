@@ -168,7 +168,7 @@ local x = [[{
 							"comparator": "bool"
 						},
 						{
-							"name": "EnemyCreepAround",
+							"name": "EnemyCreepNearby",
 							"value": "1",
 							"comparator": "bool"
 						}

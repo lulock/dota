@@ -6,6 +6,9 @@
 --  . shared amongst all agents                                                     --
 --  . where actions and senses are defined                                          --
 --                                                                                  --
+-- dota bot scripting api:                                                          --
+--     https://developer.valvesoftware.com/wiki/Dota_Bot_Scripting                  --
+--                                                                                  --
 -- for more on the Behaviour Library see:                                           --
 --      http://www.cs.bath.ac.uk/~jjb/web/posh.html                                 --
 --------------------------------------------------------------------------------------
@@ -19,7 +22,7 @@ local bot = GetBot() -- gets bot this script is currently running on
 local targetLoc = nil
 local targetCreep = nil
 
-
+-- HELPER FUNCTIONS --
 function getEnemyTeam(team)
     if team == TEAM_RADIANT then 
         return TEAM_DIRE
@@ -31,6 +34,8 @@ end
 local enemyTeam = getEnemyTeam(bot:GetTeam())
 
 -- ACTIONS --
+
+-- TODO: select location to place ward and set targetLoc
 function SelectWardLocation()
     targetLoc = GetRuneSpawnLocation( RUNE_POWERUP_1 ) -- temp at rune location
     print('SelectWardLocation', targetLoc)
@@ -41,16 +46,19 @@ function SelectWardLocation()
     end
 end
 
+-- select and set targetLoc as location along lane
 function SelectLaneLocation()
     targetLoc = GetLocationAlongLane( LANE_MID , 0.5 )
     print('location along mid-lane is', GetLocationAlongLane( LANE_MID , 0.5 ))
     return 'success'
 end
 
+-- TODO: select closest tower to targetLoc
 function SelectLaneTowerLocation()
     return RandomVector( 700 )
 end
 
+-- moves to targetLoc location
 function GoToLocation()
     print('GoToLocation')
     bot:Action_MoveToLocation( targetLoc )
@@ -62,6 +70,7 @@ function GoToLocation()
     -- add condition if times up, return failure
 end
 
+-- gets lane front and moves to location
 function GoToCreepWave()
     print('GoToCreepWave')
     local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
@@ -73,21 +82,20 @@ function GoToCreepWave()
     else
         return 'running'
     end
-    -- add condition if times up, return failure
+    -- TODO: add condition if times up, return failure
 end
 
+-- TODO: drop the observer ward
 function PlaceObserverWard()
     print('PlaceObserverWard')
-    bot:Action_PickUpRune( RUNE_POWERUP_1 )
-    return 'success' -- for now
     -- drop observer ward item
     -- Action_DropItem( hItem, vLocation )
     -- ActionPush_DropItem( hItem, vLocation )
     -- ActionQueue_DropItem( hItem, vLocation )
-
-    -- Command a bot to drop the specified item and the provided location
+    return 'success' -- for now
 end
 
+-- selects base as safe location
 function SelectSafeLocation()
     print('SelectSafeLocation')
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
@@ -106,13 +114,13 @@ function SelectSafeLocation()
     return 'success'
 end
 
--- Idle does nothing.
+-- does nothing
 function Idle()
     print('Idle function fired')
     return 'success'
 end
 
--- SelectTarget sets creepTarget as creep with lowest health around.
+-- sets creepTarget as creep with lowest health around
 function SelectTarget()
     print('SelectTarget function fired')
 
@@ -128,11 +136,11 @@ function SelectTarget()
         end
     end
 
-
     print('select target failed.')
     return 'failure'
 end
 
+-- right click attacks targetCreep once
 function RightClickAttack()
     print('RightClickAttack function fired')
     bot:Action_AttackUnit(targetCreep, true)
@@ -140,6 +148,8 @@ function RightClickAttack()
 end
 
 -- SENSES --
+
+-- check if hero has health below 80%
 function HasLowHealth()
     local currentHealth = bot:GetHealth()/bot:GetMaxHealth()
     print('health is:', currentHealth)
@@ -147,20 +157,21 @@ function HasLowHealth()
     return currentHealth < 0.8 and 1 or 0
 end
 
+-- check if any enemy hero is within 700 unit radius
 function EnemyNearby()
     local nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
     print('EnemyNearby', (#nearbyEnemyHeroes > 0))
 
     return #nearbyEnemyHeroes > 0 and 1 or 0
-    -- { hUnit, ... } GetNearbyHeroes( nRadius, bEnemies, nMode)
-    -- Returns a table of heroes, sorted closest-to-furthest, that are in the specified mode. If nMode is BOT_MODE_NONE, searches for all heroes. If bEnemies is true, nMode must be BOT_MODE_NONE. nRadius must be less than 1600.
 end
 
+-- TODO: check if observer ward available
 function HasObserverWard()
     print('HasObserverWard sense fired')
     return 1
 end
 
+-- check team's desire to farm
 function FarmLaneDesire()
     print('FarmLaneDesire sense fired')
     print('GetFarmLaneDesire', GetFarmLaneDesire(bot:GetAssignedLane()))
@@ -168,8 +179,8 @@ function FarmLaneDesire()
     return GetFarmLaneDesire(bot:GetAssignedLane()) > 0 and 1 or 0
 end
 
+-- TODO: currently checks distance from lane front but should check assigned lane instead
 function IsCorrectLane()
-    -- currently checks distance from lane front but should check assigned lane instead
     print('IsCorrectLane sense fired')
     print('bots assigned lane is:', bot:GetAssignedLane())
     
@@ -187,53 +198,70 @@ function IsCorrectLane()
     end
 end
 
+-- TODO: check if distance to target location is walkable 
 function IsWalkableDistance()
     print('IsWalkableDistance sense fired')
     return 1
 end
 
+-- TODO: check if it is farming time
 function IsFarmingTime()
     print('IsFarmingTime sense fired')
+    
+    -- API functions to use:
+    --- float DotaTime()
+    --- Returns the game time. Matches game clock. Pauses with game pause.
+    
+    --- float GameTime()
+    --- Returns the time since the hero picking phase started. Pauses with game pause.
+    
+    --- float RealTime()
+    --- Returns the real-world time since the app has started. Does not pause with game pause.
+    
     return 1
 end
 
+-- TODO: check if it is safe to farm
 function IsSafeToFarm()
     print('IsSafeToFarm sense fired')
     return 1
 end
 
+-- TODO: check if teleportation scroll is available
 function IsScrollAvailable()
     print('IsScrollAvailable sense fired')
     return 0
 end
 
+-- TODO: check if target is dead
 function IsLastHit()
     print('IsLastHit sense fired')
-    --here check if target is dead
     return 0
 end
 
+-- TODO: check if this hero has highest position around
 function HasHighestPriorityAround()
     print('HasHighestPriorityAround sense fired')
     -- print('getpriority does this work', bot:GetPriority()) -- it does not
     return 1
 end
 
+-- TODO: check if creeps within right click range
 function CreepWithinRightClickRange()
     print('CreepWithinRightClickRange sense fired')
     return 1
 end
 
+-- TODO: check if creeps can be last hit
 function CreepCanBeLastHit()
     print('CreepCanBeLastHit sense fired')
     return 1
 end
 
-function EnemyCreepAround()
---     { hUnit, ... } GetNearbyLaneCreeps( nRadius, bEnemies )
--- Returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
-    print('EnemyCreepAround sense fired')
-    local enemiesNearby = bot:GetNearbyCreeps(700, true)
+-- checks if there are any enemy creeps within 700 unit radius
+function EnemyCreepNearby()
+    print('EnemyCreepNearby sense fired')
+    local enemiesNearby = bot:GetNearbyCreeps(700, true) -- returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
     print('There are', #enemiesNearby, 'nearby enemy creeps')
 
     return #enemiesNearby > 0 and 1 or 0
