@@ -154,14 +154,22 @@ function HasObserverWard()
 end
 
 function IsCorrectLane()
-    -- correct lane is LANE_MID for now
+    -- currently checks distance from lane front but should check assigned lane instead
     print('IsCorrectLane sense fired')
-    -- print('difference between bot current location and lane front location is:', bot:GetLocation() - GetLaneFrontLocation( bot:GetTeam() , LANE_MID, 0) )
-    print('current bot location is:', bot:GetLocation())
-    print('lane front location is:', GetLaneFrontLocation( bot:GetTeam() , LANE_MID, 0))
-    print('unit to location distance', GetUnitToLocationDistance( bot, GetLaneFrontLocation( bot:GetTeam() , LANE_MID, 0) ))
-    print('returning 0')
-    return 0
+    print('bots assigne lane is:', bot:GetAssignedLane())
+    
+    local dist = GetUnitToLocationDistance( bot, GetLaneFrontLocation( bot:GetTeam() , bot:GetAssignedLane(), 0) )
+
+
+    local botDistanceDownAssignedLane = GetAmountAlongLane(bot:GetAssignedLane(), bot:GetLocation()).distance 
+    
+    if dist < 500 then --500 might not be the right number
+        print('in assigned lane')
+        return 1
+    else -- either > 500 or something went wrong :) 
+        print('not in assigned lane')
+        return 0
+    end
 end
 
 function IsWalkableDistance()
