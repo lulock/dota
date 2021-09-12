@@ -21,6 +21,7 @@ local bot = GetBot() -- gets bot this script is currently running on
 -- MEMORY -- 
 local targetLoc = nil
 local targetCreep = nil
+local interval = 10
 
 -- HELPER FUNCTIONS --
 function getEnemyTeam(team)
@@ -136,16 +137,22 @@ function SelectTarget()
     -- float GetSecondsPerAttack()
     -- Returns the number of seconds per attack (including backswing) of the unit.
 
-    local enemiesNearby = bot:GetNearbyCreeps(700, true)
-    print('There are', #enemiesNearby, 'nearby enemy creeps')
-    
-    for _,v in pairs(enemiesNearby) do
-        print('enemy creep', v,'health is: ', v:GetHealth())
-        print('enemy creep', v,'health ratio is: ', v:GetHealth()/v:GetMaxHealth())
-        print('and bot attack damage is', bot:GetAttackDamage())
+    -- float GetEstimatedDamageToTarget( bCurrentlyAvailable, hTarget, fDuration, nDamageTypes )
+    -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
 
-        if v:GetHealth() <= 2*bot:GetAttackDamage() then
-            targetCreep = v
+    local enemyCreepsNearby = bot:GetNearbyCreeps(700, true)
+    print('There are', #enemyCreepsNearby, 'nearby enemy creeps')
+    
+    for _,creep in pairs(enemyCreepsNearby) do
+        print('enemy creep', creep,'health is: ', creep:GetHealth())
+        print('enemy creep', creep,'health ratio is: ', creep:GetHealth()/creep:GetMaxHealth())
+        print('and bot attack damage is', bot:GetAttackDamage())
+        print('creeps actual incoming damage is', creep:GetActualIncomingDamage( bot:GetAttackDamage(), DAMAGE_TYPE_PHYSICAL ))
+        print('estimated damage to target', bot:GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL ))
+
+        -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
+        if creep:GetHealth() <= 2*bot:GetAttackDamage() then
+            targetCreep = creep
             print('target creep is', targetCreep, 'returning success')
             return 'success'
         end
@@ -219,9 +226,11 @@ function IsWalkableDistance()
     return 1
 end
 
--- TODO: check if it is farming time
+-- check if it is farming time
 function IsFarmingTime()
     print('IsFarmingTime sense fired')
+    print('dota time is', DotaTime())
+    
     -- API functions to use:
     --- float DotaTime()
     --- Returns the game time. Matches game clock. Pauses with game pause.
@@ -231,26 +240,29 @@ function IsFarmingTime()
     
     --- float RealTime()
     --- Returns the real-world time since the app has started. Does not pause with game pause.
-    
-    return 1
+
+    return DotaTime() < 10 * 60 and 1 or 0 -- for now, farming time is first 10 mins (laning phase)
 end
 
--- TODO: check if it is safe to farm
+-- check if it is safe to farm
 function IsSafeToFarm()
     print('IsSafeToFarm sense fired')
-    return 1
+
+    return bot:WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
 end
 
--- TODO: check if teleportation scroll is available
+-- check if teleportation scroll is available
 function IsScrollAvailable()
     print('IsScrollAvailable sense fired')
-    return 0
+
+    return GetItemStockCount( "item_tpscroll" ) > 0 and 1 or 0
 end
 
--- TODO: check if target is dead
+-- check if target is dead
 function IsLastHit()
     print('IsLastHit sense fired')
-    return 0
+    print('check if target creep has been killed', targetCreep:IsAlive())
+    return targetCreep:IsAlive() and 1 or 0
 end
 
 -- TODO: check if this hero has highest position around
@@ -283,6 +295,10 @@ end
 -- TODO: check if creeps within right click range
 function CreepWithinRightClickRange()
     print('CreepWithinRightClickRange sense fired')
+    
+    -- int GetAttackRange()
+    -- Returns the range at which the unit can attack another unit.
+    print('this bots attack range is ', bot:GetAttackRange())
     return 1
 end
 
