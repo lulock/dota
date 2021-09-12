@@ -116,7 +116,8 @@ function UpdateLaneAssignments()
     if ( GetTeam() == TEAM_RADIANT )
     then
         return {
-        [1] = LANE_BOT,
+        -- [1] = LANE_BOT,
+        [1] = LANE_MID,
         [2] = LANE_MID,
         [3] = LANE_TOP,
         [4] = LANE_TOP,

@@ -74,7 +74,7 @@ end
 function GoToCreepWave()
     print('GoToCreepWave')
     local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
-    bot:Action_MoveToLocation(laneLocation);
+    bot:Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
 
     -- bot:Action_MoveToLocation( targetLoc )
     if bot:GetLocation() == laneLocation then
@@ -124,12 +124,27 @@ end
 function SelectTarget()
     print('SelectTarget function fired')
 
+    -- float GetAttackDamage()
+    -- Returns actual attack damage (with bonuses) of the unit.
+    
+    -- int GetAttackRange()
+    -- Returns the range at which the unit can attack another unit.
+    
+    -- int GetAttackSpeed()
+    -- Returns the attack speed value of the unit.
+    
+    -- float GetSecondsPerAttack()
+    -- Returns the number of seconds per attack (including backswing) of the unit.
+
     local enemiesNearby = bot:GetNearbyCreeps(700, true)
     print('There are', #enemiesNearby, 'nearby enemy creeps')
-
+    
     for _,v in pairs(enemiesNearby) do
-        print('enemy creep', v,'health is: ', v:GetHealth()/v:GetMaxHealth())
-        if v:GetHealth()/v:GetMaxHealth() < 0.3 then
+        print('enemy creep', v,'health is: ', v:GetHealth())
+        print('enemy creep', v,'health ratio is: ', v:GetHealth()/v:GetMaxHealth())
+        print('and bot attack damage is', bot:GetAttackDamage())
+
+        if v:GetHealth() <= 2*bot:GetAttackDamage() then
             targetCreep = v
             print('target creep is', targetCreep, 'returning success')
             return 'success'
@@ -207,7 +222,6 @@ end
 -- TODO: check if it is farming time
 function IsFarmingTime()
     print('IsFarmingTime sense fired')
-    
     -- API functions to use:
     --- float DotaTime()
     --- Returns the game time. Matches game clock. Pauses with game pause.
@@ -242,8 +256,28 @@ end
 -- TODO: check if this hero has highest position around
 function HasHighestPriorityAround()
     print('HasHighestPriorityAround sense fired')
-    -- print('getpriority does this work', bot:GetPriority()) -- it does not
-    return 1
+    print('unit name is', bot:GetUnitName())
+
+    -- first, get all allied heroes nearby. 
+    alliesNearby = bot:GetNearbyHeroes( 1600, false, BOT_MODE_NONE) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
+    
+    -- remove this bot unit from allied heroes list
+    table.remove(alliesNearby, 1) 
+    print('after table remove', alliesNearby, 'has size', #alliesNearby) 
+
+    if #alliesNearby > 0 then
+        for _,ally in pairs(alliesNearby) do
+            print('bot', bot:GetUnitName(), 'position is', POSITIONS[bot:GetUnitName()])
+            print('ally', ally:GetUnitName(), 'position is', POSITIONS[ally:GetUnitName()])
+            return POSITIONS[bot:GetUnitName()] <= POSITIONS[ally:GetUnitName()] and 1 or 0
+        end
+    else
+        print('unit', bot:GetUnitName(),'has highest priority')
+        return 1 -- no allies around, return true
+    end
+--     { hUnit, ... } GetNearbyHeroes( nRadius, bEnemies, nMode)
+-- Returns a table of heroes, sorted closest-to-furthest, that are in the specified mode. If nMode is BOT_MODE_NONE, searches for all heroes. If bEnemies is true, nMode must be BOT_MODE_NONE. nRadius must be less than 1600.
+
 end
 
 -- TODO: check if creeps within right click range
@@ -262,7 +296,25 @@ end
 function EnemyCreepNearby()
     print('EnemyCreepNearby sense fired')
     local enemiesNearby = bot:GetNearbyCreeps(700, true) -- returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
-    print('There are', #enemiesNearby, 'nearby enemy creeps')
+    print('There are', #enemiesNearby, 'enemy creeps near')
+    print(bot:GetUnitName())
 
     return #enemiesNearby > 0 and 1 or 0
 end
+
+
+-- float GetAttackPoint()
+
+-- Returns the point in the animation where a unit will execute the attack.
+-- float GetLastAttackTime()
+
+-- Returns the time that the unit last executed an attack.
+-- hUnit GetAttackTarget()
+
+-- Returns a the attack target of the unit.
+-- int GetAcquisitionRange()
+
+-- Returns the range at which this unit will attack a target.
+-- int GetAttackProjectileSpeed()
+
+-- Returns the speed of the unit's attack projectile.

@@ -224,36 +224,6 @@ local x = [[{
 					"comparator": "bool"
 				}
 			]
-		},
-		{
-			"name": "DE-WardDefensive",
-			"element":
-			{
-				"name": "AP-PlaceWardInLane"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "HasObserverWard",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
-			"name": "DE-Idle",
-			"element": 
-			{
-				"name": "AP-Idle"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "EnemyNearby",
-					"value": "0",
-					"comparator": "bool"
-				}
-			]
 		}
 	]
 }]]
