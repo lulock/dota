@@ -14,4 +14,5 @@ require ( GetScriptDirectory().."/planner/DriveCollection" )
 require ( GetScriptDirectory().."/planner/Competence" )
 require ( GetScriptDirectory().."/planner/CompetenceElement" )
 
-require ( GetScriptDirectory().."/planner/BehaviourLib" )
+require ( GetScriptDirectory().."/planner/BehaviourLib" ) -- to be moved
+require ( GetScriptDirectory().."/Constants" )
