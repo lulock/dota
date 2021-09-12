@@ -34,7 +34,8 @@ function ActionPattern:tick()
         end    
         --continue
     end
-    return 'success' --return running, failure, or success
+    -- return 'success' --return running, failure, or success
+    return self.status --return running, failure, or success
 end
 
 function ActionPattern:oldtick()
