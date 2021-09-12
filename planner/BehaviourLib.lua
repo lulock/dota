@@ -21,7 +21,9 @@ local bot = GetBot() -- gets bot this script is currently running on
 -- MEMORY -- 
 local targetLoc = nil
 local targetCreep = nil
+local targetHero = nil
 local interval = 10
+local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
 
 -- HELPER FUNCTIONS --
 function getEnemyTeam(team)
@@ -166,6 +168,32 @@ end
 function RightClickAttack()
     print('RightClickAttack function fired')
     bot:Action_AttackUnit(targetCreep, true)
+    return 'success'
+end
+
+function SelectHeroToHeal()
+    print('SelectHero function fired')
+    local alliedHeroesNearby = bot:GetNearbyHeroes(1600, false)
+    print('There are', #alliedHeroesNearby, 'nearby allied heroes')
+    
+    for _,hero in pairs(alliedHeroesNearby) do
+        print('hero', hero,'health is: ', hero:GetHealth())
+        print('hero', hero,'health ratio is: ', hero:GetHealth()/hero:GetMaxHealth())
+
+        if hero:GetHealth()/hero:GetMaxHealth() <= 0.5 and bot:GetUnitName() ~= hero:GetUnitName() then
+            targetHero = hero
+            print('target hero is', targetHero, 'returning success')
+            return 'success'
+        end
+    end
+
+    print('select target hero failed.')
+    return 'failure' 
+end
+
+function CastHealingAbility()
+    print('CastHealingAbility function fired')
+    bot:ActionPush_UseAbilityOnEntity(ability, targetHero);
     return 'success'
 end
 
@@ -334,3 +362,32 @@ end
 -- int GetAttackProjectileSpeed()
 
 -- Returns the speed of the unit's attack projectile.
+
+-- checks if healing ability is available
+function IsHealingAbilityAvailable()
+    return ability:IsFullyCastable() and 1 or 0
+end
+
+
+
+-- Action_UseAbility( hAbility )
+-- ActionPush_UseAbility( hAbility )
+-- ActionQueue_UseAbility( hAbility )
+
+-- Command a bot to use a non-targeted ability or item
+-- Action_UseAbilityOnEntity( hAbility, hTarget )
+-- ActionPush_UseAbilityOnEntity( hAbility, hTarget )
+-- ActionQueue_UseAbilityOnEntity( hAbility, hTarget )
+
+-- Command a bot to use a unit targeted ability or item on the specified target unit
+-- Action_UseAbilityOnLocation( hAbility, vLocation )
+-- ActionPush_UseAbilityOnLocation( hAbility, vLocation )
+-- ActionQueue_UseAbilityOnLocation( hAbility, vLocation )
+
+-- Command a bot to use a ground targeted ability or item on the specified location
+-- Action_UseAbilityOnTree( hAbility, iTree )
+-- ActionPush_UseAbilityOnTree( hAbility, iTree )
+-- ActionQueue_UseAbilityOnTree( hAbility, iTree )
+
+-- Command a bot to use a tree targeted ability or item on the specified tree
+-- Action_PickUpRune( nRune )
