@@ -2,7 +2,7 @@
 -- constants live here                                                              --
 --------------------------------------------------------------------------------------
 
-POSITIONS = {
+POSITIONS = { -- can this go in OperA role table?!
     ["npc_dota_hero_gyrocopter"] = 1,
 	["npc_dota_hero_sniper"] = 1,
 	["npc_dota_hero_drow_ranger"] = 1,
