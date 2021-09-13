@@ -2,17 +2,22 @@
 -- this is where all dependencies live (:                                           --
 --------------------------------------------------------------------------------------
 
+-- utility functions
 Class = require ( GetScriptDirectory().."/utils/class" )
 json = require ( GetScriptDirectory().."/utils/json" )
+
+-- planner
 p = require ( GetScriptDirectory().."/planner/Planner" )
 
-require ( GetScriptDirectory().."/planner/Action" )
-require ( GetScriptDirectory().."/planner/ActionPattern" )
-require ( GetScriptDirectory().."/planner/Sense" )
-require ( GetScriptDirectory().."/planner/Drive" )
-require ( GetScriptDirectory().."/planner/DriveCollection" )
-require ( GetScriptDirectory().."/planner/Competence" )
-require ( GetScriptDirectory().."/planner/CompetenceElement" )
+-- elements
+require ( GetScriptDirectory().."/planner/elements/Action" )
+require ( GetScriptDirectory().."/planner/elements/ActionPattern" )
+require ( GetScriptDirectory().."/planner/elements/Sense" )
+require ( GetScriptDirectory().."/planner/elements/Drive" )
+require ( GetScriptDirectory().."/planner/elements/DriveCollection" )
+require ( GetScriptDirectory().."/planner/elements/Competence" )
+require ( GetScriptDirectory().."/planner/elements/CompetenceElement" )
 
-require ( GetScriptDirectory().."/planner/BehaviourLib" ) -- to be moved
+-- behaviour library and global constants
+require ( GetScriptDirectory().."/BehaviourLib" )
 require ( GetScriptDirectory().."/Constants" )
