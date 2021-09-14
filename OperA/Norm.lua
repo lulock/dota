@@ -1,3 +1,12 @@
+--------------------------------------------------------------------------------------
+-- this is the Norm class                                                           --
+-- a Norm will:                                                                     --
+--  . validate bot behaviour                                                        --
+--  . apply sanctions on violated norms                                             --
+--                                                                                  --
+-- validate() cross-checks bot's active drive with expected behaviour               --
+--------------------------------------------------------------------------------------
+
 Norm =  Class{ }
 
 -- should a norm have one agent or MORE? 
