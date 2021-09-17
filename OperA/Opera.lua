@@ -25,9 +25,9 @@
 --  wip
 Opera = Class{ }
 
-function Opera:init(operaFile)
+function Opera:init(operaFile, planner)
     local operaTable = json.decode(operaFile) -- norms loaded as lua table
-    self.norms = self:buildNorms(operaTable)
+    self.norms = self:buildNorms(operaTable, planner)
 
     -- self.scenes = sceneFile
 end
@@ -36,11 +36,12 @@ function Opera:update()
 
 end
 
-function Opera:buildNorms(operaTable)
+function Opera:buildNorms(operaTable, planner)
     local norms = {}
     for _, norm in pairs(operaTable.norms) do
-        print(norm.name, norm.agent, norm.behaviour, norm.operator)
-        local agent = norm.agent -- get bot here. 
+        print(norm.name, planner.root.name, norm.behaviour, norm.operator)
+        -- local agent = norm.agent -- get bot here. 
+        local agent = planner -- pointer to planner here. 
         local n = Norm(norm.name, agent, norm.behaviour, norm.operator)
         table.insert(norms, n)
     end

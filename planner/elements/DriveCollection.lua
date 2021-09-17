@@ -26,6 +26,7 @@ function DriveCollection:init(name, drives)
     self.drives = drives --list of drives
     self.goal = false --should be a sense
     self.status = 'idle'
+    self.currentDrive = nil -- keep pointer to currently running drive
 end
 
 function DriveCollection:tick()
@@ -46,9 +47,13 @@ function DriveCollection:tick()
             local childStatus = drive:tick() --tick child
             if childStatus == 'running' or childStatus == 'success' then --if running or success, return success this tick
                 self.status = 'running'
+                if self.currentDrive ~= drive.name then --if not already running
+                    self.currentDrive = drive.name --keep track of running drive
+                    print('current active drive is ', self.currentDrive)
+                end
                 return 'running'
             end
-            print('child status is', childStatus, 'go to next child!')
+            print('child status is', childStatus, 'go to next child!') -- this should always be failure
             
         end --else 'failure', so move on to next child
 

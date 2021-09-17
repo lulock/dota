@@ -6,6 +6,10 @@
 Class = require ( GetScriptDirectory().."/utils/class" )
 json = require ( GetScriptDirectory().."/utils/json" )
 
+-- opera
+o = require ( GetScriptDirectory().."/OperA/Opera" )
+require ( GetScriptDirectory().."/OperA/Norm" )
+
 -- planner
 p = require ( GetScriptDirectory().."/planner/Planner" )
 
