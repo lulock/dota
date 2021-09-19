@@ -26,7 +26,8 @@ function DriveCollection:init(name, drives)
     self.drives = drives --list of drives
     self.goal = false --should be a sense
     self.status = 'idle'
-    self.currentDrive = nil -- keep pointer to currently running drive
+    self.currentDrive = nil -- keep pointer to currently running drive index
+    self.currentDriveName = nil -- keep pointer to currently running drive name
 end
 
 function DriveCollection:tick()
@@ -42,14 +43,15 @@ function DriveCollection:tick()
     end
 
     if self.status == 'running' then --if running, execute children in order
-        for _,drive in pairs(self.drives) do
+        for i,drive in pairs(self.drives) do
 
             local childStatus = drive:tick() --tick child
             if childStatus == 'running' or childStatus == 'success' then --if running or success, return success this tick
                 self.status = 'running'
-                if self.currentDrive ~= drive.name then --if not already running
-                    self.currentDrive = drive.name --keep track of running drive
-                    print('current active drive is ', self.currentDrive)
+                if self.currentDriveName ~= drive.name then --if not already running
+                    self.currentDrive = i --keep track of running drive index (in case of removal later)
+                    self.currentDriveName = drive.name --keep track of running drive name
+                    print('current active drive index is ', self.currentDrive, 'and drive name is ', self.currentDriveName)
                 end
                 return 'running'
             end
@@ -61,4 +63,17 @@ function DriveCollection:tick()
         print ('somehow all drives failed. return failure.')
         return 'failure'
     end
+end
+
+function DriveCollection:removeDrive(index)
+    -- remove from DC table
+    table.remove(self.drives, index)
+end
+
+-- this function inserts a drive into the existing drive collection
+-- this can either take a json description of the drive, and build it in-method, then append
+-- OR take a pre-built drive object and insert it directly. 
+function DriveCollection:insertDrive(drive, index)
+    -- insert into DC table at specified index
+    table.insert(self.drives, index)
 end
