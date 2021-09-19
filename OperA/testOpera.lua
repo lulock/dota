@@ -9,7 +9,7 @@ require 'planner/elements/Sense'
 require 'planner/Planner'
 json = require 'utils/json'
 
-file = require 'OperA/simplenorm'
+file = require 'OperA/simplemodel'
 require 'OperA/Opera'
 require 'OperA/Norm'
 

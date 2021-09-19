@@ -19,14 +19,21 @@ Norm =  Class{ }
 
 -- what does opera say about doing a job WELL? so, maybe the agent will execute an action, but fail. is there a sanction? should be.
 
-function Norm:init(name, agent, behaviour, operator)
+function Norm:init(name, planner, behaviour, operator)
     self.name = name -- unique name id
-    self.agent = agent -- pointer to bot (or rather bot's planner??) 
+    self.planner = planner -- pointer to bot (or rather bot's planner??) 
     self.behaviour = behaviour -- maybe this should be drive ID?
     self.operator = operator -- OBLIGED / PERMITTED
 end
 
 function Norm:validate()
-    print(self.agent, 'is', self.operator, 'to', self.behaviour)
+    print(self.planner, 'is', self.operator, 'to', self.behaviour)
+    if self.planner.root.currentDriveName ~= self.behaviour then
+        print ('NORM VIOLATION')
+        print ('Current behaviour set to:', self.planner.root.currentDriveName,'but it should be ', self.behaviour)
+    else
+        print ('behaviour approved')
+        print ('Current behaviour set to:', self.planner.root.currentDriveName,'which aligns with ', self.behaviour)
+    end
     -- maybe this should check obligation / permission against agent's active drive?
 end
