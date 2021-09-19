@@ -15,8 +15,25 @@ local x = [[{
 		{
                   "name" : "farmingTime",
                   "roles" : [],
-                  "landmarks" : [],
-                  "results" : [],
+                  "landmarks" : [
+				{
+					"name": "IsFarmingTime",
+					"value": "1",
+					"comparator": "bool"
+				},
+				{
+					"name": "IsSafeToFarm",
+					"value": "1",
+					"comparator": "bool"
+				}
+			],
+                  "results" : [
+				{
+					"name": "IsFarmingTime",
+					"value": "0",
+					"comparator": "bool"
+				}
+                  ],
                   "norms" : [
                         {
                               "name" : "farm"

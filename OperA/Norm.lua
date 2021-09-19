@@ -31,9 +31,11 @@ function Norm:validate()
     if self.planner.root.currentDriveName ~= self.behaviour then
         print ('NORM VIOLATION')
         print ('Current behaviour set to:', self.planner.root.currentDriveName,'but it should be ', self.behaviour)
+        return false
     else
         print ('behaviour approved')
         print ('Current behaviour set to:', self.planner.root.currentDriveName,'which aligns with ', self.behaviour)
+        return true
     end
     -- maybe this should check obligation / permission against agent's active drive?
 end

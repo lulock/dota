@@ -46,10 +46,16 @@ function Opera:init(operaFile, planner)
     local operaTable = json.decode(operaFile) -- norms loaded as lua table
     self.norms = self:buildNorms(operaTable, planner)
     self.scenes = self:buildScenes(operaTable)
+    self.currentScenes = {}
 end
 
 function Opera:update()
+    print('there are ', #self.scenes, 'scenes in this opera model')
 
+    for _,scene in pairs(self.scenes) do
+        print('scene', scene.name)
+        local s = scene:update()
+    end
 end
 
 function Opera:buildNorms(operaTable, planner)
@@ -57,7 +63,7 @@ function Opera:buildNorms(operaTable, planner)
     for _, norm in pairs(operaTable.norms) do
         print(norm.name, planner.root.name, norm.behaviour, norm.operator)
         local n = Norm(norm.name, planner, norm.behaviour, norm.operator)
-        table.insert(norms, n)
+        norms[norm.name] = n
     end
     return norms
 end
@@ -65,9 +71,26 @@ end
 function Opera:buildScenes(operaTable)
     local scenes = {}
     for _, scene in pairs(operaTable.scenes) do
-        print(scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
-        -- local s = Scene(scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
-        -- table.insert(scenes, s)
+        print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
+        
+        local landmarks = {}
+        for _, l in pairs(scene.landmarks) do
+            table.insert(landmarks, Sense(l.name, l.value, l.comparator))
+        end
+
+        local results = {}
+        for _, r in pairs(scene.results) do
+            table.insert(results, Sense(r.name, r.value, r.comparator))
+        end
+
+        local norms = {}
+        for _, n in pairs(scene.norms) do
+            table.insert(norms, self.norms[n.name])
+        end
+
+        local s = Scene(scene.name, scene.roles, landmarks, results, norms)
+        print('scene just created is ', s.name)
+        table.insert(scenes, s)
     end
     return scenes
 end
