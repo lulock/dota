@@ -268,8 +268,17 @@ function IsFarmingTime()
     
     --- float RealTime()
     --- Returns the real-world time since the app has started. Does not pause with game pause.
+    local time = DotaTime()
+    return time < 10 * 60 and 1 or 0 -- for now, farming time is first 10 mins (laning phase)
+end
 
-    return DotaTime() < 10 * 60 and 1 or 0 -- for now, farming time is first 10 mins (laning phase)
+-- THIS IS A DUMMY FUNCTION USED TO TEST OPERA
+function IsWardingTime()
+    print('IsWardingTime sense fired')
+    print('dota time is', DotaTime())
+    
+    local time = DotaTime()
+    return ( time < 0 and time > -80 ) and 1 or 0 -- for now, farming time is first 10 mins (laning phase)
 end
 
 -- check if it is safe to farm

@@ -27,12 +27,29 @@ function Scene:update()
                 if not legal then -- if agent in violation
                     -- impose sanction (e.g. alter plan)
                     print('norm', norm.name, 'will impose SANCTIONS!')
+                    -- for now sanction is to switch expected drive and current drive
+
+                    -- THIS IS UGLY AND NEEDS TO BE CHANGED
+                    for i,d in pairs(norm.planner.root.drives) do
+                        if d.name == norm.behaviour then
+                            print('drive is', d.name)
+                            norm.planner.root:removeDrive(i)
+                            norm.planner.root:insertDrive(d, 1)
+                        end
+                    end
+
+                    print('planner now looks like')
+                    PrintTable(norm.planner.root.drives)
                     return false -- not sure if false should be returned here
                 end
             end
         end -- else continue checking result senses
     end
     -- self:deactivate()
+    -- THIS IS UGLY AND NEEDS TO BE CHANGED
+    
+    print('planner now looks like')
+    PrintTable(norm.planner.root)
     print('scene complete! return true')
     return true
     

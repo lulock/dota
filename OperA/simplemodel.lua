@@ -6,12 +6,35 @@ local x = [[{
                   "operator" : "PERMITTED"
             },
             {
-                  "name" : "heal",
-                  "behaviour" : "DE-HealAlly",
+                  "name" : "ward",
+                  "behaviour" : "DE-WardDefensive",
                   "operator" : "OBLIGED"
 		}
 	],
 	"scenes": [
+		{
+                  "name" : "wardingTime",
+                  "roles" : [],
+                  "landmarks" : [
+				{
+					"name": "IsWardingTime",
+					"value": "1",
+					"comparator": "bool"
+				}
+			],
+                  "results" : [
+				{
+					"name": "IsWardingTime",
+					"value": "0",
+					"comparator": "bool"
+				}
+                  ],
+                  "norms" : [
+                        {
+                              "name" : "ward"
+                        }
+                  ]
+		},
 		{
                   "name" : "farmingTime",
                   "roles" : [],

@@ -75,5 +75,5 @@ end
 -- OR take a pre-built drive object and insert it directly. 
 function DriveCollection:insertDrive(drive, index)
     -- insert into DC table at specified index
-    table.insert(self.drives, index)
+    table.insert(self.drives, index, drive)
 end
