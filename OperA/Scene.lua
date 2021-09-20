@@ -45,11 +45,7 @@ function Scene:update()
             end
         end -- else continue checking result senses
     end
-    -- self:deactivate()
-    -- THIS IS UGLY AND NEEDS TO BE CHANGED
-    
-    print('planner now looks like')
-    PrintTable(norm.planner.root)
+    -- self:deactivate()    
     print('scene complete! return true')
     return true
     

@@ -49,7 +49,7 @@ function DriveCollection:tick()
             if childStatus == 'running' or childStatus == 'success' then --if running or success, return success this tick
                 self.status = 'running'
                 if self.currentDriveName ~= drive.name then --if not already running
-                    self.currentDrive = i --keep track of running drive index (in case of removal later)
+                    self.currentDrive = i --keep track of running drive index (in case of removal later) MAYBE THIS SHOULD BE A POINTER TO DRIVE ITSELFFFF
                     self.currentDriveName = drive.name --keep track of running drive name
                     print('current active drive index is ', self.currentDrive, 'and drive name is ', self.currentDriveName)
                 end

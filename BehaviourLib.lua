@@ -75,8 +75,10 @@ end
 
 -- gets lane front and moves to location
 function GoToCreepWave()
+    -- bot:Action_ClearActions( false )
     print('GoToCreepWave')
     local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
+    targetLoc = laneLocation
     bot:Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
 
     -- bot:Action_MoveToLocation( targetLoc )
@@ -120,6 +122,18 @@ end
 -- does nothing
 function Idle()
     print('Idle function fired')
+    return 'success'
+end
+
+-- does nothing
+function CowardlyRetreat()
+    print('CowardlyRetreat function fired')
+    local base = GetAncient(GetTeam())
+    print('base is:', base)
+    
+    local baseLoc = base:GetLocation()
+    print('base location is:', baseLoc)
+    
     return 'success'
 end
 

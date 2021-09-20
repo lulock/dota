@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------------
--- constants live here  I THINK THIS SHOULD BE SOCIAL STRUCTURE IN OM               --
+-- ROLE ASSIGNMENTS                                                                 --
 --------------------------------------------------------------------------------------
 
-POSITIONS = { -- can this go in OperA role table?!
+POSITIONS = { 
     ["npc_dota_hero_gyrocopter"] = 1,
 	["npc_dota_hero_sniper"] = 1,
 	["npc_dota_hero_drow_ranger"] = 1,
