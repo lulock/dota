@@ -45,9 +45,9 @@ local enemyTeam = getEnemyTeam(bot:GetTeam())
 function ExtrapolateHealth( unit, interval )
     -- Get the health of a unit in the future if all the current units keep attacking it.
     local nearbyEnemies = {}
-    nearbyEnemies.append(unit:GetNearbyCreeps( 500, true ))
-    nearbyEnemies.append(unit:GetNearbyHeroes( 700, true, BOT_MODE_NONE ))
-    nearbyEnemies.append(unit:GetNearbyTowers( 500, true ))
+    table.insert(nearbyEnemies, unit:GetNearbyCreeps( 500, true ))
+    table.insert(nearbyEnemies, unit:GetNearbyHeroes( 700, true, BOT_MODE_NONE))
+    table.insert(nearbyEnemies, unit:GetNearbyTowers( 500, true ))
 
     local expectedDamage = 0;
     if ( nearbyEnemies ~= nil ) then
@@ -72,6 +72,9 @@ function GoToCore()
 
     if targetAlly ~= nil then
         bot:Action_MoveToLocation(targetAlly:GetLocation() + RandomVector(RandomFloat(-100,100)))
+        return 'success'
+    else
+        return 'failure'
     end
 end
 
@@ -246,12 +249,6 @@ end
 function CastHealingAbility()
     print('CastHealingAbility function fired')
     bot:ActionPush_UseAbilityOnEntity(ability, targetHero);
-    return 'success'
-end
-
-function GoToCore()
-    print('GoToCore function fired')
-    bot:Action_MoveToLocation();
     return 'success'
 end
 
