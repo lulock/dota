@@ -24,6 +24,7 @@ local targetCreep = nil
 local targetHero = nil
 local interval = 10
 local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
+local thresholdTarget = 2*bot:GetAttackDamage()
 
 -- HELPER FUNCTIONS --
 function getEnemyTeam(team)
@@ -34,9 +35,45 @@ function getEnemyTeam(team)
     end
 end
 
+function adjustThreshold(delta)
+    thresholdTarget = thresholdTarget * delta
+end
+
 local enemyTeam = getEnemyTeam(bot:GetTeam())
 
+
+function ExtrapolateHealth( unit, interval )
+    -- Get the health of a unit in the future if all the current units keep attacking it.
+    local nearbyEnemies = {}
+    nearbyEnemies.append(unit:GetNearbyCreeps( 500, true ))
+    nearbyEnemies.append(unit:GetNearbyHeroes( 700, true, BOT_MODE_NONE ))
+    nearbyEnemies.append(unit:GetNearbyTowers( 500, true ))
+
+    local expectedDamage = 0;
+    if ( nearbyEnemies ~= nil ) then
+        for _, enemy in pairs( nearbyEnemies ) do
+            if ( enemy:GetAttackTarget() == unit ) then
+                expectedDamage = expectedDamage + enemy:GetEstimatedDamageToTarget(
+                    true, unit, interval, DAMAGE_TYPE_PHYSICAL );
+            end
+        end
+    end
+
+    return math.max( 0, unit:GetHealth() - expectedDamage );
+end
+
 -- ACTIONS --
+
+function GoToCore()
+    local targetAlly = nil
+    if POSITIONS[bot:GetUnitName()] == 2 then
+        targetAlly = GetTeamMember(1)
+    end
+
+    if targetAlly ~= nil then
+        bot:Action_MoveToLocation(targetAlly:GetLocation() + RandomVector(RandomFloat(-100,100)))
+    end
+end
 
 -- TODO: select location to place ward and set targetLoc
 function SelectWardLocation()
@@ -165,9 +202,10 @@ function SelectTarget()
         print('and bot attack damage is', bot:GetAttackDamage())
         print('creeps actual incoming damage is', creep:GetActualIncomingDamage( bot:GetAttackDamage(), DAMAGE_TYPE_PHYSICAL ))
         print('estimated damage to target', bot:GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL ))
+        print('extrapolated health is', ExtrapolateHealth( creep, 1000 ))
 
         -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
-        if creep:GetHealth() <= 2*bot:GetAttackDamage() then
+        if creep:GetHealth() <= thresholdTarget then
             targetCreep = creep
             print('target creep is', targetCreep, 'returning success')
             return 'success'
@@ -209,6 +247,31 @@ function CastHealingAbility()
     print('CastHealingAbility function fired')
     bot:ActionPush_UseAbilityOnEntity(ability, targetHero);
     return 'success'
+end
+
+function GoToCore()
+    print('GoToCore function fired')
+    bot:Action_MoveToLocation();
+    return 'success'
+end
+
+-- returns table of unit handles in order of position (role)
+function GetUnits()
+    local units = { }
+
+    for i=1,5 do
+        local member = GetTeamMember( i )
+        print('index is', i, 'and member is', member)
+
+        if member ~= nil then
+            local membername = member:GetUnitName()
+            print('membername is', membername)
+            local pos = POSITIONS[ membername ]
+            units[pos] = member
+        end
+    end
+    
+    return units
 end
 
 -- SENSES --
@@ -389,6 +452,15 @@ end
 -- checks if healing ability is available
 function IsHealingAbilityAvailable()
     return ability:IsFullyCastable() and 1 or 0
+end
+
+function IsFarFromCarry()
+    local targetAlly = nil
+    if POSITIONS[bot:GetUnitName()] == 2 then
+        targetAlly = GetTeamMember(1)
+    end
+    print('farm from carry returns', GetUnitToUnitDistance(bot, targetAlly))
+    return (GetUnitToUnitDistance(bot, targetAlly) > 250) and 1 or 0
 end
 
 

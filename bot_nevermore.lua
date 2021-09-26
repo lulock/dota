@@ -22,6 +22,12 @@ local opera = Opera( norms, planner ) -- load plan from json string
 -- bot = GetBot() -- this is probably not necessary
 
 function Think()
-	planner.root:tick() -- Return values ('success', 'running', or 'failure') handled by parent nodes.
-	opera:update()
+	if DotaTime() >= -80 then
+		if opera.units == nil then
+			opera.units = _G['GetUnits']() --call function (by name) in the global namespace
+		end
+		
+		planner.root:tick() -- Return values ('success', 'running', or 'failure') handled by parent nodes.
+		opera:update()
+	end
 end

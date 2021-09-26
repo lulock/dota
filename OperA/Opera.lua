@@ -44,9 +44,13 @@ Opera = Class{ }
 
 function Opera:init(operaFile, planner)
     local operaTable = json.decode(operaFile) -- norms loaded as lua table
+    -- some OMs
     self.norms = self:buildNorms(operaTable, planner)
     self.scenes = self:buildScenes(operaTable)
     self.currentScenes = {}
+
+    -- SM
+    self.units = nil 
 end
 
 function Opera:update()

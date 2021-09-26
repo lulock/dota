@@ -28,8 +28,13 @@ end
 
 function Norm:validate()
     print(self.planner, 'is', self.operator, 'to', self.behaviour)
+
     if self.planner.root.currentDriveName ~= self.behaviour then
         print ('NORM VIOLATION')
+
+        -- ping at bot location where norm has been violated!! 
+        local loc = GetBot():GetLocation()
+        GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
         print ('Current behaviour set to:', self.planner.root.currentDriveName,'but it should be ', self.behaviour)
         return false
     else

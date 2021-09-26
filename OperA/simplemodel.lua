@@ -6,35 +6,12 @@ local x = [[{
                   "operator" : "PERMITTED"
             },
             {
-                  "name" : "ward",
-                  "behaviour" : "DE-WardDefensive",
+                  "name" : "support",
+                  "behaviour" : "DE-Support",
                   "operator" : "OBLIGED"
 		}
 	],
 	"scenes": [
-		{
-                  "name" : "wardingTime",
-                  "roles" : [],
-                  "landmarks" : [
-				{
-					"name": "IsWardingTime",
-					"value": "1",
-					"comparator": "bool"
-				}
-			],
-                  "results" : [
-				{
-					"name": "IsWardingTime",
-					"value": "0",
-					"comparator": "bool"
-				}
-                  ],
-                  "norms" : [
-                        {
-                              "name" : "ward"
-                        }
-                  ]
-		},
 		{
                   "name" : "farmingTime",
                   "roles" : [],
@@ -59,7 +36,7 @@ local x = [[{
                   ],
                   "norms" : [
                         {
-                              "name" : "farm"
+                            "name" : "support"
                         }
                   ]
 		}

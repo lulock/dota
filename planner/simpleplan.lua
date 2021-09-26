@@ -32,42 +32,162 @@ local x = [[{
 					"name": "Idle"
 				}
 			]
+		},
+		{
+			"name": "AP-GoToLane",
+			"actions": [
+				{
+					"name": "GoToCreepWave"
+				}
+			]
+		},
+		{
+			"name": "AP-Follow",
+			"actions": [
+				{
+					"name": "GoToCore"
+				}
+			]
+		},
+		{
+			"name": "AP-TeleportToLaneTower",
+			"actions": [
+				{
+					"name": "SelectLaneTowerLocation"
+				},
+				{
+					"name": "TeleportToLocation"
+				}
+			]
+		},
+		{
+			"name": "AP-RightClickAttack",
+			"actions": [
+				{
+					"name": "SelectTarget"
+				},
+				{
+					"name": "RightClickAttack"
+				}
+			]
 		}
 	],
 	"Competences": [
 		{
 			"name": "C-GoToLane",
-			"goals": [],
+			"goals": [
+				{
+					"name": "IsCorrectLane",
+					"value": "1",
+					"comparator": "bool"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-Walk",
+					"Senses": [
+						{
+							"name": "IsWalkableDistance",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-GoToLane"
+				},
+				{
+					"name": "CE-Teleport",
+					"Senses": [
+						{
+							"name": "IsScrollAvailable",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-TeleportToLaneTower"
+				}
+			]
+		},
+		{
+			"name": "C-LastHitAttack",
+			"goals": [
+				{
+					"name": "IsLastHit",
+					"value": "1",
+					"comparator": "bool"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-RightClick",
+					"Senses": [
+						{
+							"name": "CreepWithinRightClickRange",
+							"value": "1",
+							"comparator": "bool"
+						},
+						{
+							"name": "CreepCanBeLastHit",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-RightClickAttack"
+				},
+				{
+					"name": "CE-Teleport",
+					"Senses": [
+						{
+							"name": "IsScrollAvailable",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-TeleportToLaneTower"
+				}
+			]
+		},
+		{
+			"name": "C-LastHitFarm",
+			"goals": [
+				{
+					"name": "FarmLaneDesire",
+					"value": "0",
+					"comparator": "bool"
+				}
+			],
 			"elements": [
 				{
 					"name": "CE-GoToCorrectLane",
 					"Senses": [
 						{
-							"name": "IsFarmingTime",
+							"name": "IsCorrectLane",
+							"value": "0",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-GoToLane"
+				},
+				{
+					"name": "CE-LastHit",
+					"Senses": [
+						{
+							"name": "EnemyCreepNearby",
 							"value": "1",
 							"comparator": "bool"
 						}
 					],
-					"element": "AP-PlaceWardInLane"
+					"element": "AP-RightClickAttack"
 				},
 				{
 					"name": "CE-GoToCreepWave",
-					"Senses": [],
-					"element": ""
-				},
-				{
-					"name": "CE-LastHit",
-					"Senses": [],
-					"element": ""
-				}
-			]
-		},
-		{
-			"name": "C-lastHitFarm",
-			"goals": [],
-			"elements": [
-				{
-					"name": "C-GoToLane"
+					"Senses": [
+						{
+							"name": "IsCorrectLane",
+							"value": "0",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-GoToLane"
 				}
 			]
 		}
@@ -82,22 +202,27 @@ local x = [[{
 			"checkTime": "0",
 			"Senses": [
 				{
-					"name": "EnemyNearby",
+					"name": "HasLowHealth",
 					"value": "1",
 					"comparator": "bool"
 				}
 			]
 		},
 		{
-			"name": "DE-WardDefensive",
-			"element":
+			"name": "DE-FarmLane",
+			"element": 
 			{
-				"name": "AP-PlaceWardInLane"
+				"name": "C-LastHitFarm"
 			},
 			"checkTime": "0",
 			"Senses": [
 				{
-					"name": "HasObserverWard",
+					"name": "IsFarmingTime",
+					"value": "1",
+					"comparator": "bool"
+				},
+				{
+					"name": "IsSafeToFarm",
 					"value": "1",
 					"comparator": "bool"
 				}
@@ -117,7 +242,22 @@ local x = [[{
 					"comparator": "bool"
 				}
 			]
-		}
+		},
+		{
+			"name": "DE-Support",
+			"element":
+			{
+				"name": "AP-Follow"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "IsFarFromCarry",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
 	]
 }]]
 

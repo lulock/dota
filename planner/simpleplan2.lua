@@ -42,6 +42,14 @@ local x = [[{
 			]
 		},
 		{
+			"name": "AP-Follow",
+			"actions": [
+				{
+					"name": "GoToCore"
+				}
+			]
+		},
+		{
 			"name": "AP-TeleportToLaneTower",
 			"actions": [
 				{
@@ -241,15 +249,15 @@ local x = [[{
 			]
 		},
 		{
-			"name": "DE-WardDefensive",
+			"name": "DE-Support",
 			"element":
 			{
-				"name": "AP-PlaceWardInLane"
+				"name": "AP-Follow"
 			},
 			"checkTime": "0",
 			"Senses": [
 				{
-					"name": "HasObserverWard",
+					"name": "IsFarFromCarry",
 					"value": "1",
 					"comparator": "bool"
 				}
