@@ -14,12 +14,20 @@ local norms = require ( GetScriptDirectory().."/OperA/simplemodel" ) -- json str
 local planner = Planner( file ) -- load plan from json string
 PrintTable(planner.root.drives) -- DEBUG
 
-local opera = Opera( norms, planner ) -- load plan from json string
+local position = 2
+
+-- immediately append built plan to global table of team plans ... 
+PLANS[GetTeam()][position] = planner
+-- print('GLOBAL PLANNERS FOR OPERA')
+-- for i,v in pairs(PLANS[GetTeam()]) do print(i,v) end
+
+-- local opera = Opera( norms, planner ) -- load plan from json string
 -- for _,norm in pairs(opera.norms) do
 -- 	print('norm name is', norm.name)-- DEBUG
 -- 	norm:validate()
 -- end
 -- bot = GetBot() -- this is probably not necessary
+
 
 function Think()
 	if DotaTime() >= -80 then

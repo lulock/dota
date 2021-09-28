@@ -171,6 +171,11 @@ local x = [[{
 					"name": "CE-LastHit",
 					"Senses": [
 						{
+							"name": "HasHighestPriorityAround",
+							"value": "1",
+							"comparator": "bool"
+						},
+						{
 							"name": "EnemyCreepNearby",
 							"value": "1",
 							"comparator": "bool"

@@ -41,5 +41,5 @@ function Drive:tick()
     print('ticking element.', self.element.name)
     self.status = self.element:tick() --only trigger if all sense conditions satisfied
     print('and drive returned.', self.status)
-    return self.status
+    return 'running' --THIS MIGHT BE WRONG, RETURNS RUNNING IF DRIVE FIRES REGARDLESS OF SUCCESS??
 end

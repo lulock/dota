@@ -50,7 +50,7 @@ function Opera:init(operaFile, planner)
     self.currentScenes = {}
 
     -- SM
-    self.units = nil 
+    self.units = nil
 end
 
 function Opera:update()
@@ -72,11 +72,27 @@ function Opera:buildNorms(operaTable, planner)
     return norms
 end
 
+function Opera:buildNorm(operaTable, name, planner)
+    for _, norm in pairs(operaTable.norms) do
+        print(norm.name, planner.root.name, norm.behaviour, norm.operator)
+        if norm.name == name then
+            return Norm(norm.name, planner, norm.behaviour, norm.operator)
+        end
+    end
+    print('CANT FIND NORM WITH NAME', name)
+    return nil -- no norm in norm table with that name
+end
+
 function Opera:buildScenes(operaTable)
     local scenes = {}
     for _, scene in pairs(operaTable.scenes) do
         print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
         
+        local roles = {}
+        for _, role in pairs(scene.roles) do
+            table.insert(roles, tonumber(role))
+        end
+
         local landmarks = {}
         for _, l in pairs(scene.landmarks) do
             table.insert(landmarks, Sense(l.name, l.value, l.comparator))
@@ -89,11 +105,16 @@ function Opera:buildScenes(operaTable)
 
         local norms = {}
         for _, n in pairs(scene.norms) do
-            table.insert(norms, self.norms[n.name])
+            local assignedNorm = self.norms[n.name]
+            assignedNorm.planner = PLANS[GetTeam()][tonumber(n.role)]
+            table.insert(norms, assignedNorm)
         end
 
-        local s = Scene(scene.name, scene.roles, landmarks, results, norms)
+        local s = Scene(scene.name, roles, landmarks, results, norms)
         print('scene just created is ', s.name)
+        print('and roles are ')
+        for _,ir in pairs(roles) do print(ir) end
+        
         table.insert(scenes, s)
     end
     return scenes

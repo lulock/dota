@@ -19,3 +19,20 @@ POSITIONS = { -- can this go in OperA role table?!
     ["npc_dota_hero_ogre_magi"] = 5,
     ["npc_dota_hero_witch_doctor"] = 5
 }
+
+PLANS = { -- collections of team plans for OperA??!?
+    [TEAM_RADIANT] = {
+        [1] = nil,
+        [2] = nil,
+        [3] = nil,
+        [4] = nil,
+        [5] = nil, 
+    },
+    [TEAM_DIRE] = {
+        [1] = nil,
+        [2] = nil,
+        [3] = nil,
+        [4] = nil,
+        [5] = nil, 
+    }
+}

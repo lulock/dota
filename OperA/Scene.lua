@@ -29,17 +29,17 @@ function Scene:update()
                     print('norm', norm.name, 'will impose SANCTIONS!')
                     -- for now sanction is to switch expected drive and current drive
 
-                    -- THIS IS UGLY AND NEEDS TO BE CHANGED
-                    for i,d in pairs(norm.planner.root.drives) do
-                        if d.name == norm.behaviour then
-                            print('drive is', d.name)
-                            norm.planner.root:removeDrive(i)
-                            norm.planner.root:insertDrive(d, 1)
-                        end
-                    end
+                    -- -- THIS IS UGLY AND NEEDS TO BE CHANGED
+                    -- for i,d in pairs(norm.planner.root.drives) do
+                    --     if d.name == norm.behaviour then
+                    --         print('drive is', d.name)
+                    --         norm.planner.root:removeDrive(i)
+                    --         norm.planner.root:insertDrive(d, 1)
+                    --     end
+                    -- end
 
-                    print('planner now looks like')
-                    PrintTable(norm.planner.root.drives)
+                    -- print('planner now looks like')
+                    -- PrintTable(norm.planner.root.drives)
                     return false -- not sure if false should be returned here
                 end
             end

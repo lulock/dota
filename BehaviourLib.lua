@@ -23,8 +23,8 @@ local targetLoc = nil
 local targetCreep = nil
 local targetHero = nil
 local interval = 10
-local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
-local thresholdTarget = 2*bot:GetAttackDamage()
+-- local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
+-- local thresholdTarget = 2*bot:GetAttackDamage()
 
 -- HELPER FUNCTIONS --
 function getEnemyTeam(team)
@@ -39,28 +39,7 @@ function adjustThreshold(delta)
     thresholdTarget = thresholdTarget * delta
 end
 
-local enemyTeam = getEnemyTeam(bot:GetTeam())
-
-
-function ExtrapolateHealth( unit, interval )
-    -- Get the health of a unit in the future if all the current units keep attacking it.
-    local nearbyEnemies = {}
-    table.insert(nearbyEnemies, unit:GetNearbyCreeps( 500, true ))
-    table.insert(nearbyEnemies, unit:GetNearbyHeroes( 700, true, BOT_MODE_NONE))
-    table.insert(nearbyEnemies, unit:GetNearbyTowers( 500, true ))
-
-    local expectedDamage = 0;
-    if ( nearbyEnemies ~= nil ) then
-        for _, enemy in pairs( nearbyEnemies ) do
-            if ( enemy:GetAttackTarget() == unit ) then
-                expectedDamage = expectedDamage + enemy:GetEstimatedDamageToTarget(
-                    true, unit, interval, DAMAGE_TYPE_PHYSICAL );
-            end
-        end
-    end
-
-    return math.max( 0, unit:GetHealth() - expectedDamage );
-end
+-- local enemyTeam = getEnemyTeam(bot:GetTeam())
 
 -- ACTIONS --
 
@@ -71,10 +50,23 @@ function GoToCore()
     end
 
     if targetAlly ~= nil then
-        bot:Action_MoveToLocation(targetAlly:GetLocation() + RandomVector(RandomFloat(-100,100)))
+        bot:Action_MoveToLocation(targetAlly:GetLocation() + Vector(-80, -80))
         return 'success'
     else
         return 'failure'
+    end
+end
+
+function Loiter()
+    print('Loiter')
+    
+    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -700)
+    bot:Action_MoveToLocation(laneLocation + Vector(-80, -80))
+
+    if bot:GetLocation() == laneLocation then
+        return 'success'
+    else
+        return 'running'
     end
 end
 
@@ -119,7 +111,7 @@ function GoToCreepWave()
     print('GoToCreepWave')
     local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
     targetLoc = laneLocation
-    bot:Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
+    bot:Action_MoveToLocation(laneLocation + Vector(-80, -80))
 
     -- bot:Action_MoveToLocation( targetLoc )
     if bot:GetLocation() == laneLocation then
@@ -200,17 +192,11 @@ function SelectTarget()
     print('There are', #enemyCreepsNearby, 'nearby enemy creeps')
     
     for _,creep in pairs(enemyCreepsNearby) do
-        print('enemy creep', creep,'health is: ', creep:GetHealth())
-        print('enemy creep', creep,'health ratio is: ', creep:GetHealth()/creep:GetMaxHealth())
-        print('and bot attack damage is', bot:GetAttackDamage())
-        print('creeps actual incoming damage is', creep:GetActualIncomingDamage( bot:GetAttackDamage(), DAMAGE_TYPE_PHYSICAL ))
-        print('estimated damage to target', bot:GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL ))
-        print('extrapolated health is', ExtrapolateHealth( creep, 1000 ))
-
         -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
-        if creep:GetHealth() <= thresholdTarget then
+        -- if creep:GetHealth() <= thresholdTarget then
+        if creep:GetHealth() <= bot:GetEstimatedDamageToTarget( true, creep, 2*bot:GetSecondsPerAttack(), DAMAGE_TYPE_PHYSICAL ) then -- This estimation needs improvement
             targetCreep = creep
-            print('target creep is', targetCreep, 'returning success')
+            print('target creep has', targetCreep:GetHealth(), 'returning success')
             return 'success'
         end
     end
@@ -222,6 +208,7 @@ end
 -- right click attacks targetCreep once
 function RightClickAttack()
     print('RightClickAttack function fired')
+    print('target health is', targetCreep:GetHealth())
     bot:Action_AttackUnit(targetCreep, true)
     return 'success'
 end
@@ -427,6 +414,10 @@ function EnemyCreepNearby()
     print(bot:GetUnitName())
 
     return #enemiesNearby > 0 and 1 or 0
+end
+
+function PartnerNearby()
+    print('PartnerNearby sense fired')
 end
 
 

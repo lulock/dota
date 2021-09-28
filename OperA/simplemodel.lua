@@ -14,7 +14,7 @@ local x = [[{
 	"scenes": [
 		{
                   "name" : "farmingTime",
-                  "roles" : [],
+                  "roles" : [ "1", "2" ],
                   "landmarks" : [
 				{
 					"name": "IsFarmingTime",
@@ -22,22 +22,27 @@ local x = [[{
 					"comparator": "bool"
 				},
 				{
-					"name": "IsSafeToFarm",
+					"name": "PartnerNearby",
 					"value": "1",
 					"comparator": "bool"
 				}
 			],
                   "results" : [
 				{
-					"name": "IsFarmingTime",
+					"name": "PartnerNearby",
 					"value": "0",
 					"comparator": "bool"
 				}
                   ],
                   "norms" : [
                         {
-                            "name" : "support"
-                        }
+                            "name" : "support",
+							"role" : "2"
+                        },
+						{
+							"name" : "farm",
+							"role" : "1"
+						}
                   ]
 		}
 	]

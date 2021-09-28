@@ -171,28 +171,12 @@ local x = [[{
 					"name": "CE-LastHit",
 					"Senses": [
 						{
-							"name": "HasHighestPriorityAround",
-							"value": "1",
-							"comparator": "bool"
-						},
-						{
 							"name": "EnemyCreepNearby",
 							"value": "1",
 							"comparator": "bool"
 						}
 					],
 					"element": "AP-RightClickAttack"
-				},
-				{
-					"name": "CE-GoToCreepWave",
-					"Senses": [
-						{
-							"name": "IsCorrectLane",
-							"value": "0",
-							"comparator": "bool"
-						}
-					],
-					"element": "C-GoToLane"
 				}
 			]
 		}
@@ -247,22 +231,7 @@ local x = [[{
 					"comparator": "bool"
 				}
 			]
-		},
-		{
-			"name": "DE-Support",
-			"element":
-			{
-				"name": "AP-Follow"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "IsFarFromCarry",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
+		}
 	]
 }]]
 

@@ -29,6 +29,11 @@ end
 function Norm:validate()
     print(self.planner, 'is', self.operator, 'to', self.behaviour)
 
+    if self.planner == nil then
+        print('NO ACCESS TO PLANNER')
+        return false
+    end
+
     if self.planner.root.currentDriveName ~= self.behaviour then
         print ('NORM VIOLATION')
 

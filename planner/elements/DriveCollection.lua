@@ -55,6 +55,7 @@ function DriveCollection:tick()
                 end
                 return 'running'
             end
+            -- THERE IS A BUG HERE. NEEDS MAINTAIN FIRING DRIVE IF SENSE IS TRUE EVEN IF DRIVE FAILS? CONTEMPLATE THIS.
             print('child status is', childStatus, 'go to next child!') -- this should always be failure
             
         end --else 'failure', so move on to next child
