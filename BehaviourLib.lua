@@ -18,13 +18,15 @@ BehaviourLib = Class{ }
 -- AGENT --
 local bot = GetBot() -- gets bot this script is currently running on
 
+print("BOT IS", bot)
+
 -- MEMORY -- 
 local targetLoc = nil
 local targetCreep = nil
 local targetHero = nil
 local interval = 10
--- local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
--- local thresholdTarget = 2*bot:GetAttackDamage()
+local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
+local thresholdTarget = 2*bot:GetAttackDamage()
 
 -- HELPER FUNCTIONS --
 function getEnemyTeam(team)
@@ -39,7 +41,7 @@ function adjustThreshold(delta)
     thresholdTarget = thresholdTarget * delta
 end
 
--- local enemyTeam = getEnemyTeam(bot:GetTeam())
+local enemyTeam = getEnemyTeam(bot:GetTeam())
 
 -- ACTIONS --
 
@@ -60,7 +62,8 @@ end
 function Loiter()
     print('Loiter')
     
-    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -700)
+    -- local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -700)
+    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), bot:GetAssignedLane(), -700)
     bot:Action_MoveToLocation(laneLocation + Vector(-80, -80))
 
     if bot:GetLocation() == laneLocation then
@@ -83,8 +86,9 @@ end
 
 -- select and set targetLoc as location along lane
 function SelectLaneLocation()
-    targetLoc = GetLocationAlongLane( LANE_MID , 0.5 )
-    print('location along mid-lane is', GetLocationAlongLane( LANE_MID , 0.5 ))
+    -- targetLoc = GetLocationAlongLane( LANE_MID , 0.5 )
+    targetLoc = GetLocationAlongLane( bot:GetAssignedLane() , 0.5 )
+    print('location along assigned lane is', GetLocationAlongLane( bot:GetAssignedLane() , 0.5 ))
     return 'success'
 end
 
@@ -109,7 +113,7 @@ end
 function GoToCreepWave()
     -- bot:Action_ClearActions( false )
     print('GoToCreepWave')
-    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
+    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), bot:GetAssignedLane(), -200)
     targetLoc = laneLocation
     bot:Action_MoveToLocation(laneLocation + Vector(-80, -80))
 
@@ -418,6 +422,19 @@ end
 
 function PartnerNearby()
     print('PartnerNearby sense fired')
+    local alliedHeroesNearby = bot:GetNearbyHeroes( 1600, false, BOT_MODE_NONE) -- within 1600 unit radius, BOT_MODE_NONE specifies all heroes
+    local botPos = POSITIONS[bot:GetUnitName()]
+    print('There are', #alliedHeroesNearby, 'nearby allied heroes')
+
+    for _,v in pairs(alliedHeroesNearby) do
+        print('THIS ALLY IS POSITION', POSITIONS[v:GetUnitName()])
+        if POSITIONS[v:GetUnitName()] == PARTNER[botPos] then
+            print('PARTNER IS NEARBY !')
+            return 1
+        end
+    end
+
+    return 0 -- no partner nearby
 end
 
 

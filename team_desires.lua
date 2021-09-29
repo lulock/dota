@@ -11,21 +11,21 @@
 
 --------------------------------------------------------------------------------------
 
-require ( GetScriptDirectory().."/Dependencies" )
+-- require ( GetScriptDirectory().."/Dependencies" )
 
-local norms = require ( GetScriptDirectory().."/OperA/simplemodel" ) -- json string
+-- local norms = require ( GetScriptDirectory().."/OperA/simplemodel" ) -- json string
 
-print('IN TEAM DESIRES')
-local opera = {}
+-- print('IN TEAM DESIRES')
+-- -- local opera = {}
 
-function TeamThink()
+-- function TeamThink()
 
-    if opera == nil and PLANS[GetTeam()][2] ~= nil then
-        -- immediately append built plan to global table of team plans ... 
-        print('GLOBAL PLANNERS FOR OPERA')
-        for i,v in pairs( PLANS[GetTeam()] ) do print(i,v) end
+--     -- if opera == nil and PLANS[GetTeam()][2] ~= nil then
+--     --     -- immediately append built plan to global table of team plans ... 
+--     --     print('GLOBAL PLANNERS FOR OPERA')
+--     --     for i,v in pairs( PLANS[GetTeam()] ) do print(i,v) end
 
-        opera = Opera( norms, PLANS[GetTeam()][2] ) -- load plan from json string
-    end
+--     --     opera = Opera( norms, PLANS[GetTeam()][2] ) -- load plan from json string
+--     -- end
 
-end
+-- end

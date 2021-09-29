@@ -117,7 +117,7 @@ function UpdateLaneAssignments()
     then
         return {
         -- [1] = LANE_BOT,
-        [1] = LANE_MID,
+        [1] = LANE_BOT,
         [2] = LANE_MID,
         [3] = LANE_TOP,
         [4] = LANE_TOP,

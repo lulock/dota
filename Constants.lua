@@ -36,3 +36,11 @@ PLANS = { -- collections of team plans for OperA??!?
         [5] = nil, 
     }
 }
+
+PARTNER = { -- team partner assignments for OperA??!?
+    [1] = 5, -- safelane
+    [2] = 1, -- WRONG, TEMPORARY for testing purposes
+    [3] = 4, -- offlane
+    [4] = 3, -- offlane
+    [5] = 1, -- safelane
+}
