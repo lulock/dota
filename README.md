@@ -24,3 +24,8 @@ Dota 2 MAS designed using OperA and BOD.
 4. Tick enable cheats and list yourself as either a coach or unassigned player.
 5. Edit the lobby settings and in your chosen team's section (can be either Radiant, Dire, or both) select from the bot difficulty dropdown any option but 'None'. From the bots dropdown, select 'Local Dev Script'.
 6. Start the match.
+
+
+## Cheats to help debug in-game
+
+https://dota2.fandom.com/wiki/Cheats

@@ -205,7 +205,7 @@ function SelectTarget()
         print('and bot attack damage is', bot:GetAttackDamage())
         print('creeps actual incoming damage is', creep:GetActualIncomingDamage( bot:GetAttackDamage(), DAMAGE_TYPE_PHYSICAL ))
         print('estimated damage to target', bot:GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL ))
-        print('extrapolated health is', ExtrapolateHealth( creep, 1000 ))
+        -- print('extrapolated health is', ExtrapolateHealth( creep, 1000 ))
 
         -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
         if creep:GetHealth() <= thresholdTarget then

@@ -41,5 +41,6 @@ function Drive:tick()
     print('ticking element.', self.element.name)
     self.status = self.element:tick() --only trigger if all sense conditions satisfied
     print('and drive returned.', self.status)
-    return self.status
+    -- return self.status
+    return 'running' -- if all sense conditions satisfied, then return running, even if drive competences/actions fail!! 
 end

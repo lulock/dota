@@ -55,7 +55,7 @@ function DriveCollection:tick()
                 end
                 return 'running'
             end
-            print('child status is', childStatus, 'go to next child!') -- this should always be failure
+            print('child status is', childStatus, 'go to next child!') -- this should always be failure. But we do not want to move to next drive if prev drive fails, rather we want to move to next drive if SENSES from prev drive fails?
             
         end --else 'failure', so move on to next child
 

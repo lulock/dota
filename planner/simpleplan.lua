@@ -168,6 +168,17 @@ local x = [[{
 			],
 			"elements": [
 				{
+					"name": "CE-GoToCorrectLane",
+					"Senses": [
+						{
+							"name": "IsCorrectLane",
+							"value": "0",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-GoToLane"
+				},
+				{
 					"name": "CE-EnemyRightClick",
 					"Senses": [
 						{
@@ -238,6 +249,21 @@ local x = [[{
 				{
 					"name": "HasLowHealth",
 					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
+		{
+			"name": "DE-Harrass",
+			"element": 
+			{
+				"name": "C-Harrass"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "HasLowHealth",
+					"value": "0",
 					"comparator": "bool"
 				}
 			]

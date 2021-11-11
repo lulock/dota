@@ -8,7 +8,7 @@
 
 require ( GetScriptDirectory().."/Dependencies" )
 
-local file = require ( GetScriptDirectory().."/planner/simpleplan2" ) -- json string
+local file = require ( GetScriptDirectory().."/planner/simpleplan" ) -- json string
 local norms = require ( GetScriptDirectory().."/OperA/simplemodel" ) -- json string
 
 local planner = Planner( file ) -- load plan from json string
@@ -23,9 +23,9 @@ local opera = Opera( norms, planner ) -- load plan from json string
 
 function Think()
 	if DotaTime() >= -80 then
-		if opera.units == nil then
-			opera.units = _G['GetUnits']() --call function (by name) in the global namespace
-		end
+		-- if opera.units == nil then
+		-- 	opera.units = _G['GetUnits']() --call function (by name) in the global namespace
+		-- end
 		
 		planner.root:tick() -- Return values ('success', 'running', or 'failure') handled by parent nodes.
 		-- opera:update()
