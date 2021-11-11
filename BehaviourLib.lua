@@ -20,8 +20,8 @@ local bot = GetBot() -- gets bot this script is currently running on
 
 -- MEMORY -- 
 local targetLoc = nil
-local targetCreep = nil
-local targetHero = nil
+local target = nil
+local targetAllyHero = nil
 local interval = 10
 local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
 local thresholdTarget = 2*bot:GetAttackDamage()
@@ -209,8 +209,8 @@ function SelectTarget()
 
         -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
         if creep:GetHealth() <= thresholdTarget then
-            targetCreep = creep
-            print('target creep is', targetCreep, 'returning success')
+            target = creep
+            print('target creep is', target, 'returning success')
             return 'success'
         end
     end
@@ -219,13 +219,35 @@ function SelectTarget()
     return 'failure'
 end
 
--- right click attacks targetCreep once
+-- select enemy hero target
+function SelectHeroTarget()
+    print('SelectHeroTarget function fired')
+
+    -- first check if any enemy heroes nearby
+    local enemyHeroesNearby = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
+    print('There are', #enemyHeroesNearby, 'nearby enemy heroes')
+
+    -- just return closest enemy hero
+    if enemyHeroesNearby > 0 then
+        target = enemyHeroesNearby[0]
+        print('target hero is', target, 'returning success')
+        return 'success'
+    end
+    
+    -- else
+    print('select target failed.')
+    return 'failure'
+end
+
+-- right click attacks target once
 function RightClickAttack()
     print('RightClickAttack function fired')
-    bot:Action_AttackUnit(targetCreep, true)
+    bot:Action_AttackUnit(target, true)
     return 'success'
 end
 
+
+-- selects allied hero to heal
 function SelectHeroToHeal()
     print('SelectHero function fired')
     local alliedHeroesNearby = bot:GetNearbyHeroes(1600, false)
@@ -236,8 +258,8 @@ function SelectHeroToHeal()
         print('hero', hero,'health ratio is: ', hero:GetHealth()/hero:GetMaxHealth())
 
         if hero:GetHealth()/hero:GetMaxHealth() <= 0.5 and bot:GetUnitName() ~= hero:GetUnitName() then
-            targetHero = hero
-            print('target hero is', targetHero, 'returning success')
+            targetAllyHero = hero
+            print('target hero is', targetAllyHero, 'returning success')
             return 'success'
         end
     end
@@ -248,7 +270,7 @@ end
 
 function CastHealingAbility()
     print('CastHealingAbility function fired')
-    bot:ActionPush_UseAbilityOnEntity(ability, targetHero);
+    bot:ActionPush_UseAbilityOnEntity(ability, targetAllyHero);
     return 'success'
 end
 
@@ -279,6 +301,14 @@ function HasLowHealth()
     print('health is:', currentHealth)
 
     return currentHealth < 0.8 and 1 or 0
+end
+
+-- check if any enemy hero is within 700 unit radius
+function EnemyNearby()
+    local nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
+    print('EnemyNearby', (#nearbyEnemyHeroes > 0))
+
+    return #nearbyEnemyHeroes > 0 and 1 or 0
 end
 
 -- check if any enemy hero is within 700 unit radius
@@ -372,8 +402,8 @@ end
 -- check if target is dead
 function IsLastHit()
     print('IsLastHit sense fired')
-    print('check if target creep has been killed', targetCreep:IsAlive())
-    return targetCreep:IsAlive() and 1 or 0
+    print('check if target creep has been killed', target:IsAlive())
+    return target:IsAlive() and 1 or 0
 end
 
 -- TODO: check if this hero has highest position around

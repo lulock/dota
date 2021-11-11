@@ -147,6 +147,29 @@ local x = [[{
 			]
 		},
 		{
+			"name": "C-Harrass",
+			"goals": [
+				{
+					"name": "EnemyNearby",
+					"value": "0",
+					"comparator": "bool"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-EnemyRightClick",
+					"Senses": [
+						{
+							"name": "EnemyHeroNearby",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-RightClickAttack"
+				}
+			]
+		},
+		{
 			"name": "C-LastHitFarm",
 			"goals": [
 				{

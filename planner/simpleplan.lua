@@ -70,6 +70,17 @@ local x = [[{
 					"name": "RightClickAttack"
 				}
 			]
+		},
+		{
+			"name": "AP-RightClickAttackHero",
+			"actions": [
+				{
+					"name": "SelectHeroTarget"
+				},
+				{
+					"name": "RightClickAttack"
+				}
+			]
 		}
 	],
 	"Competences": [
@@ -143,6 +154,29 @@ local x = [[{
 						}
 					],
 					"element": "AP-TeleportToLaneTower"
+				}
+			]
+		},
+		{
+			"name": "C-Harrass",
+			"goals": [
+				{
+					"name": "EnemyNearby",
+					"value": "0",
+					"comparator": "bool"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-EnemyRightClick",
+					"Senses": [
+						{
+							"name": "EnemyHeroNearby",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-RightClickAttackHero"
 				}
 			]
 		},
