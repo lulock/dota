@@ -228,8 +228,8 @@ function SelectHeroTarget()
     print('There are', #enemyHeroesNearby, 'nearby enemy heroes')
 
     -- just return closest enemy hero
-    if enemyHeroesNearby > 0 then
-        target = enemyHeroesNearby[0]
+    if #enemyHeroesNearby > 0 then
+        target = enemyHeroesNearby[1]
         print('target hero is', target, 'returning success')
         return 'success'
     end
@@ -301,14 +301,6 @@ function HasLowHealth()
     print('health is:', currentHealth)
 
     return currentHealth < 0.8 and 1 or 0
-end
-
--- check if any enemy hero is within 700 unit radius
-function EnemyNearby()
-    local nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
-    print('EnemyNearby', (#nearbyEnemyHeroes > 0))
-
-    return #nearbyEnemyHeroes > 0 and 1 or 0
 end
 
 -- check if any enemy hero is within 700 unit radius

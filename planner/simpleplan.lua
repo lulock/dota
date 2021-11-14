@@ -158,10 +158,10 @@ local x = [[{
 			]
 		},
 		{
-			"name": "C-Harrass",
+			"name": "C-Harass",
 			"goals": [
 				{
-					"name": "EnemyNearby",
+					"name": "FarmLaneDesire",
 					"value": "0",
 					"comparator": "bool"
 				}
@@ -182,7 +182,7 @@ local x = [[{
 					"name": "CE-EnemyRightClick",
 					"Senses": [
 						{
-							"name": "EnemyHeroNearby",
+							"name": "EnemyNearby",
 							"value": "1",
 							"comparator": "bool"
 						}
@@ -254,10 +254,10 @@ local x = [[{
 			]
 		},
 		{
-			"name": "DE-Harrass",
+			"name": "DE-Harass",
 			"element": 
 			{
-				"name": "C-Harrass"
+				"name": "C-Harass"
 			},
 			"checkTime": "0",
 			"Senses": [

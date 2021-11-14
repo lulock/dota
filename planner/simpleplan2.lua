@@ -147,7 +147,7 @@ local x = [[{
 			]
 		},
 		{
-			"name": "C-Harrass",
+			"name": "C-Harass",
 			"goals": [
 				{
 					"name": "EnemyNearby",
