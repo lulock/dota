@@ -6,13 +6,15 @@
 --  . https://www.reddit.com/r/DotA2/comments/ply3xx/psa_some_items_and_heroes_have_strange_names_for/   --
 -----------------------------------------------------------------------------------------------------------
 
-local bot = GetBot();
+local bot = GetBot()
+local nextUpdate = 0
 
--- local startingItems = {
--- 	[1] = "item_branches",
--- 	[2] = "item_slippers",
--- 	[3] = "item_flask"
--- }
+local abilities = { 
+	[0] = 0, 
+	[1] = 3,
+	[2] = 4, 
+	[3] = 5
+}
 
 -- starting items
 local toBuy = {
@@ -21,8 +23,8 @@ local toBuy = {
 	[3] = "item_circlet",
 	[4] = "item_faerie_fire", 
 	[5] = "item_faerie_fire", 
-	[6] = "item_faerie_fire",
-	[7] = "item_slippers"
+	[6] = "item_faerie_fire", 
+	[7] = "item_slippers" 
 }
 
 function ItemPurchaseThink()
@@ -36,17 +38,22 @@ function ItemPurchaseThink()
 	if #toBuy > 0 then
 		for idx,item in pairs(toBuy) do
 			bot:ActionImmediate_PurchaseItem( item )
-			print( 'remaining gold is ' , bot:GetGold() )
 			table.remove(toBuy, idx)
 		end
 	end
-
-	for i = 0, 23 do
-		local ability = bot:GetAbilityInSlot(i)
-		print('ability is', ability)
-		if ability == nil and ability:IsTalent() then
-			print('ability name is', ability:GetName())
-		end
+	
+	-- return if no ability points available to upgrade
+	if bot:GetAbilityPoints() <= 0 then
+		return
 	end
+
+	-- otherwise, update next ability
+	local ability = bot:GetAbilityInSlot( abilities[nextUpdate] )
+	if ability ~= nil then
+		bot:ActionImmediate_LevelAbility (ability:GetName())
+		print('ability leveled up is', ability:GetName())
+	end
+	nextUpdate = (nextUpdate + 1) % 4
+	print('nextUpdate is', nextUpdate)
 
 end
