@@ -210,10 +210,21 @@ function SelectTarget()
         -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
         if creep:GetHealth() <= thresholdTarget then
             target = creep
-            print('target creep is', target, 'returning success')
+            
+            -- Target setting and getting is available in the API omg 🙄
+            bot:SetTarget( creep )
+
+            print('target creep is', bot:GetTarget( ), 'returning success')
             return 'success'
         end
     end
+    
+    -- SetTarget( hUnit )
+
+    -- Sets the target to be a specific unit. Doesn't actually execute anything, just potentially useful for communicating a target between modes/items.
+    -- hUnit GetTarget()
+
+    -- Gets the target that's been set for a unit.
 
     print('select target failed.')
     return 'failure'
@@ -227,11 +238,31 @@ function SelectHeroTarget()
     local enemyHeroesNearby = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
     print('There are', #enemyHeroesNearby, 'nearby enemy heroes')
 
-    -- just return closest enemy hero
+    -- TODO: check each hero's target, if they are farming / harassing high priority ally, then select that hero.
     if #enemyHeroesNearby > 0 then
+
+        for _,hero in pairs(enemyHeroesNearby) do
+            
+            -- if this hero has a target, then attack
+            if hero:GetAttackTarget() ~= nil then
+                print('target hero is targetting', hero:GetAttackTarget():GetUnitName())
+                local iproj = bot:GetIncomingTrackingProjectiles()
+                print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
+                -- location, caster, player, ability, is_dodgeable, is_attack
+                target = hero
+                bot:SetTarget( hero )
+                print('target hero is', bot:GetTarget( ):GetUnitName(), 'returning success')
+                return 'success'
+            end
+
+        end
+
+        -- otherwise just target the closest enemy 
         target = enemyHeroesNearby[1]
-        print('target hero is', target, 'returning success')
+        bot:SetTarget( target )
+        print('target hero is', bot:GetTarget( ):GetUnitName(), 'returning success')
         return 'success'
+
     end
     
     -- else

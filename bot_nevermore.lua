@@ -22,6 +22,11 @@ local opera = Opera( norms, planner ) -- load plan from json string
 -- bot = GetBot() -- this is probably not necessary
 
 function Think()
+	-- below does not work. cheats not allowed by bots i guess. 
+	-- if GetGameState() == GAME_STATE_PRE_GAME then
+	-- 	GetBot():ActionImmediate_Chat( '-startgame', true )
+	-- end
+	
 	if DotaTime() >= -80 then
 		-- if opera.units == nil then
 		-- 	opera.units = _G['GetUnits']() --call function (by name) in the global namespace
