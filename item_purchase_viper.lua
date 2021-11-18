@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------------------------
--- this script handles control item purchasing by Viper bot                                       --
+-- this script handles control item purchasing by Viper bot                                              --
 --  . ItemPurchaseThink() - Called every frame. Responsible for purchasing items.                        --
 --    . currently starts with 3x Iron Branch, Healing Salve, 2x Slippers of Agility                      --
 -- NOTE Some items have strange names. This Reddit post helped immensely:                                --

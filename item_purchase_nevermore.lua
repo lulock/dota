@@ -41,4 +41,12 @@ function ItemPurchaseThink()
 		end
 	end
 
+	for i = 0, 23 do
+		local ability = bot:GetAbilityInSlot(i)
+		print('ability is', ability)
+		if ability == nil and ability:IsTalent() then
+			print('ability name is', ability:GetName())
+		end
+	end
+
 end
