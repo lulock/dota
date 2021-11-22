@@ -76,7 +76,7 @@ function RandomHero(pos, opponent)
 		hero = positions[pos][num]
 	end
 	
-	print(#positions[pos])
+	--print(#positions[pos])
 	
 	return hero
 end
@@ -87,19 +87,19 @@ function Think()
 	-- RADIANT player ids are 0 to 4, DIRE player ids are 5 to 9
 	if ( GetTeam() == TEAM_RADIANT )
 	then
-		print( "selecting radiant" )
+		--print( "selecting radiant" )
 		offset = 0;
 	elseif (GetTeam() == TEAM_DIRE )
 	then
-		print( "selecting dire" )
+		--print( "selecting dire" )
 		offset = 5
 	end
 
 	-- keep track of opponent heroes to avoid duplicate selections
 	local opponent_pick = {}
 	for x, id in pairs(GetTeamPlayers(GetOpposingTeam())) do
-		print(x)
-		print(GetSelectedHeroName(id))
+		--print(x)
+		--print(GetSelectedHeroName(id))
 		table.insert(opponent_pick, GetSelectedHeroName(id))
 	end
 
@@ -144,7 +144,7 @@ end
 
 -- 	if ( GetTeam() == TEAM_RADIANT )
 -- 	then
--- 		print( "selecting radiant" );
+-- 		--print( "selecting radiant" );
 -- 		SelectHero( 0, "npc_dota_hero_doom_bringer" );
 -- 		SelectHero( 1, "npc_dota_hero_nevermore" );
 -- 		SelectHero( 2, "npc_dota_hero_lich" );
@@ -152,7 +152,7 @@ end
 -- 		SelectHero( 4, "npc_dota_hero_brewmaster" );
 -- 	elseif ( GetTeam() == TEAM_DIRE )
 -- 	then
--- 		print( "selecting dire" );
+-- 		--print( "selecting dire" );
 -- 		SelectHero( 5, "npc_dota_hero_dazzle" );
 -- 		SelectHero( 6, "npc_dota_hero_slardar" );
 -- 		SelectHero( 7, "npc_dota_hero_bane" );

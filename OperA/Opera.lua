@@ -54,10 +54,10 @@ function Opera:init(operaFile, planner)
 end
 
 function Opera:update()
-    print('there are ', #self.scenes, 'scenes in this opera model')
+    --print('there are ', #self.scenes, 'scenes in this opera model')
 
     for _,scene in pairs(self.scenes) do
-        print('scene', scene.name)
+        --print('scene', scene.name)
         local s = scene:update()
     end
 end
@@ -65,7 +65,7 @@ end
 function Opera:buildNorms(operaTable, planner)
     local norms = {}
     for _, norm in pairs(operaTable.norms) do
-        print(norm.name, planner.root.name, norm.behaviour, norm.operator)
+        --print(norm.name, planner.root.name, norm.behaviour, norm.operator)
         local n = Norm(norm.name, planner, norm.behaviour, norm.operator)
         norms[norm.name] = n
     end
@@ -75,7 +75,7 @@ end
 function Opera:buildScenes(operaTable)
     local scenes = {}
     for _, scene in pairs(operaTable.scenes) do
-        print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
+        --print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
         
         local landmarks = {}
         for _, l in pairs(scene.landmarks) do
@@ -93,7 +93,7 @@ function Opera:buildScenes(operaTable)
         end
 
         local s = Scene(scene.name, scene.roles, landmarks, results, norms)
-        print('scene just created is ', s.name)
+        --print('scene just created is ', s.name)
         table.insert(scenes, s)
     end
     return scenes

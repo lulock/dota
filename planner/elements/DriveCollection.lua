@@ -31,7 +31,7 @@ function DriveCollection:init(name, drives)
 end
 
 function DriveCollection:tick()
-    -- print('current status is', self.status)
+    -- --print('current status is', self.status)
     local childStatus = 'idle' --keep track of child state
     if self.goal then --check if goal reached
         return 'success'
@@ -39,7 +39,7 @@ function DriveCollection:tick()
 
     if self.status == 'idle' then --if idle upon tick, update status
         self.status = 'running'
-        print('running drive collection', self.status)
+        --print('running drive collection', self.status)
     end
 
     if self.status == 'running' then --if running, execute children in order
@@ -51,16 +51,16 @@ function DriveCollection:tick()
                 if self.currentDriveName ~= drive.name then --if not already running
                     self.currentDrive = i --keep track of running drive index (in case of removal later) MAYBE THIS SHOULD BE A POINTER TO DRIVE ITSELFFFF
                     self.currentDriveName = drive.name --keep track of running drive name
-                    print('current active drive index is ', self.currentDrive, 'and drive name is ', self.currentDriveName)
+                    --print('current active drive index is ', self.currentDrive, 'and drive name is ', self.currentDriveName)
                 end
                 return 'running'
             end
-            print('child status is', childStatus, 'go to next child!') -- this should always be failure. But we do not want to move to next drive if prev drive fails, rather we want to move to next drive if SENSES from prev drive fails?
+            --print('child status is', childStatus, 'go to next child!') -- this should always be failure. But we do not want to move to next drive if prev drive fails, rather we want to move to next drive if SENSES from prev drive fails?
             
         end --else 'failure', so move on to next child
 
         --if all children traversed ... something went wrong
-        print ('somehow all drives failed. return failure.')
+        --print ('somehow all drives failed. return failure.')
         return 'failure'
     end
 end

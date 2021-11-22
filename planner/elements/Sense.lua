@@ -28,7 +28,7 @@ function Sense:tick()
     if self.comparator == 'bool' then
         return val == self.value
     else
-        print('comparator aint no bool')
+        --print('comparator aint no bool')
         return false
     end
 end

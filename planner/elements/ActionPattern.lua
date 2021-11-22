@@ -39,27 +39,27 @@ function ActionPattern:tick()
 end
 
 function ActionPattern:oldtick()
-    print('ticking action pattern', self.name, 'with', #self.actions, 'actions and index is', self.index)
+    --print('ticking action pattern', self.name, 'with', #self.actions, 'actions and index is', self.index)
     if self.index > #self.actions then --all child actions executed with success
         self.index = 1 -- reset index
-        print('returning AP success and resetting index to', self.index)
+        --print('returning AP success and resetting index to', self.index)
         return 'success'
     else --otherwise, tick through children
     
         local childStatus = 'idle'
-        print('ticking AP child', self.actions[self.index].name)
+        --print('ticking AP child', self.actions[self.index].name)
         childStatus = self.actions[self.index]:tick() --tick child at current index
         if childStatus == 'success' then --increment index to next child when current child returns success
             self.index = self.index + 1
-            print(self.actions[self.index].name 'returned success and incremented index to', self.index)
+            --print(self.actions[self.index].name 'returned success and incremented index to', self.index)
             --status remains running
         elseif childStatus == 'running' then
-            print(self.actions[self.index].name 'returned running and index remains', self.index)
+            --print(self.actions[self.index].name 'returned running and index remains', self.index)
             return childStatus
             --index remains on current child
         elseif childStatus == 'failure' then
             self.index = 1 -- reset index
-            print(self.actions[self.index].name 'returned failure and reset index to', self.index)
+            --print(self.actions[self.index].name 'returned failure and reset index to', self.index)
             return 'failure'
         end
     end

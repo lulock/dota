@@ -20,8 +20,8 @@ end
 -- builds Action Patterns and stores in self.elements
 function Planner:buildActionPatterns()
     for _,ap in pairs(self.plan.ActionPatterns) do 
-        -- print(ap["name"])
-        -- print(ap["actions"])
+        -- --print(ap["name"])
+        -- --print(ap["actions"])
         local actions = {}
         for _,a in pairs(ap.actions) do 
             table.insert(actions, Action(a.name, 0)) -- construct actions and add to action pattern sequence
@@ -59,17 +59,17 @@ end
 
 -- builds Drives and returns list in order
 function Planner:buildDriveCollection()  
-    PrintTable(self.plan)
+    printTable(self.plan)
     local driveElements = {}
     for _,de in pairs(self.plan.DriveElements) do 
-        print(de.name)
-        print(de.Senses)
-        print(de.element)
+        --print(de.name)
+        --print(de.Senses)
+        --print(de.element)
 
         local senses = {}
         for _, s in pairs(de.Senses) do
             local sense = Sense(s.name, s.value, s.comparator)
-            print(s.name, s.value, s.comparator)
+            --print(s.name, s.value, s.comparator)
             table.insert(senses, sense)
         end
 
@@ -97,16 +97,16 @@ function Set (list) --use a set for easier search
     return set
 end
 
-function PrintTable (t)
+function printTable (t)
     for k,v in pairs(t) do print (k,v.name) end
 end
 
-function newPrint (t, count)
+function newprint (t, count)
     prefix = string.rep("-", count)
     if type(t) == 'table' then
         for k,v in pairs(t) do
             print(prefix,k)
-            newPrint(v, count+1)
+            newprint(v, count+1)
         end
     else
         print (prefix, t) 

@@ -1,15 +1,15 @@
 local json = loadfile("./json.lua")()
 
-print('\n--- TEST CASES ---\n')
+--print('\n--- TEST CASES ---\n')
 
 local fmt = string.format
 
 local function test(name, func)
   xpcall(function()
     func()
-    print( fmt("[pass] %s", name) )
+    --print( fmt("[pass] %s", name) )
   end, function(err)
-    print( fmt("[fail] %s : %s", name, err) )
+    --print( fmt("[fail] %s : %s", name, err) )
   end)
 end
 
@@ -244,16 +244,16 @@ test("encode escape", function()
   end
 end)
 
-print('\n--- EXAMPLES OF ENCODE AND DECODE ---\n')
+--print('\n--- EXAMPLES OF ENCODE AND DECODE ---\n')
 
-print(json.encode({ 1, 2, 3, { x = 10 } }))-- Returns '[1,2,3,{"x":10}]'
+--print(json.encode({ 1, 2, 3, { x = 10 } }))-- Returns '[1,2,3,{"x":10}]'
 -- result = json.decode('[1,2,3,{"x":10}]')-- Returns { 1, 2, 3, { x = 10 } }
 result = json.decode('{"ActionPatterns": [{"name": "AP-Farm","action": [{"name": "MoveWithinRange"},{"name": "LastHit"}]},{"name": "AP-Return","action": [{"name": "ReturnToBase"}]}]}')-- Returns { 1, 2, 3, { x = 10 } }
 
-print("\nActionPatterns:")
+--print("\nActionPatterns:")
 for index, value in ipairs(result["ActionPatterns"]) do
-    print(index, value["name"])
+    --print(index, value["name"])
     for key, val in pairs(value["action"]) do
-        print('\t',val["name"])
+        --print('\t',val["name"])
     end
 end

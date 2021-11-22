@@ -14,7 +14,8 @@
 --------------------------------------------------------------------------------------
 
 BehaviourLib = Class{ }
-
+local log = '' 
+local start = GameTime()
 -- AGENT --
 local bot = GetBot() -- gets bot this script is currently running on
 
@@ -26,7 +27,19 @@ local interval = 10
 local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
 local thresholdTarget = 2*bot:GetAttackDamage()
 
+-- default selected ability is first ability but this might be passive ... 
+local selectedAbility = bot:GetAbilityInSlot( 0 )
+
 -- HELPER FUNCTIONS --
+
+function dump() -- this is super inefficient. 
+    if GameTime() - start > 5 then
+        print(log)
+        log = ''
+        start = GameTime()
+    end 
+end
+
 function getEnemyTeam(team)
     if team == TEAM_RADIANT then 
         return TEAM_DIRE
@@ -81,7 +94,7 @@ end
 -- TODO: select location to place ward and set targetLoc
 function SelectWardLocation()
     targetLoc = GetRuneSpawnLocation( RUNE_POWERUP_1 ) -- temp at rune location
-    print('SelectWardLocation', targetLoc)
+    --print '\n','SelectWardLocation',targetLoc
     if targetLoc then
         return 'success'
     else
@@ -92,7 +105,7 @@ end
 -- select and set targetLoc as location along lane
 function SelectLaneLocation()
     targetLoc = GetLocationAlongLane( LANE_MID , 0.5 )
-    print('location along mid-lane is', GetLocationAlongLane( LANE_MID , 0.5 ))
+    --print  '\n','location along mid-lane is',GetLocationAlongLane( LANE_MID , 0.5 )
     return 'success'
 end
 
@@ -103,7 +116,7 @@ end
 
 -- moves to targetLoc location
 function GoToLocation()
-    print('GoToLocation')
+    --print  '\n',('GoToLocation')
     bot:Action_MoveToLocation( targetLoc )
     if bot:GetLocation() == targetLoc then
         return 'success'
@@ -116,7 +129,7 @@ end
 -- gets lane front and moves to location
 function GoToCreepWave()
     -- bot:Action_ClearActions( false )
-    print('GoToCreepWave')
+    --print  '\n',('GoToCreepWave')
     local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
     targetLoc = laneLocation
     bot:Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
@@ -132,7 +145,7 @@ end
 
 -- TODO: drop the observer ward
 function PlaceObserverWard()
-    print('PlaceObserverWard')
+    --print  '\n',('PlaceObserverWard')
     -- drop observer ward item
     -- Action_DropItem( hItem, vLocation )
     -- ActionPush_DropItem( hItem, vLocation )
@@ -142,44 +155,44 @@ end
 
 -- selects base as safe location
 function SelectSafeLocation()
-    print('SelectSafeLocation')
+    --print  '\n',('SelectSafeLocation')
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     -- nearbyAlliedTowers = bot:GetNearbyTowers(700, false) --for now, return nearby allied towers
 
     local base = GetAncient(GetTeam())
-    print('base is:', base)
+    --print  '\n','base is:',base
     
     local baseLoc = base:GetLocation()
-    print('base location is:', baseLoc)
+    --print  '\n','base location is:',baseLoc
 
     targetLoc = baseLoc or RandomVector( 700 ) -- and run towards first one otherwise run in random direciton lol.
     
-    print('current targetLoc is', targetLoc)
+    --print  '\n','current targetLoc is',targetLoc
     --TODO: ASSERT TYPE
     return 'success'
 end
 
 -- does nothing
 function Idle()
-    print('Idle function fired')
+    --print  '\n',('Idle function fired')
     return 'success'
 end
 
 -- does nothing
 function CowardlyRetreat()
-    print('CowardlyRetreat function fired')
+    --print  '\n',('CowardlyRetreat function fired')
     local base = GetAncient(GetTeam())
-    print('base is:', base)
+    --print  '\n','base is:',base
     
     local baseLoc = base:GetLocation()
-    print('base location is:', baseLoc)
+    --print  '\n','base location is:',baseLoc
     
     return 'success'
 end
 
 -- sets creepTarget as creep with lowest health around
 function SelectTarget()
-    print('SelectTarget function fired')
+    --print  '\n',('SelectTarget function fired')
 
     -- float GetAttackDamage()
     -- Returns actual attack damage (with bonuses) of the unit.
@@ -197,15 +210,14 @@ function SelectTarget()
     -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
 
     local enemyCreepsNearby = bot:GetNearbyCreeps(700, true)
-    print('There are', #enemyCreepsNearby, 'nearby enemy creeps')
+    --print  '\n','There are',#enemyCreepsNearby,'nearby enemy creeps'
     
     for _,creep in pairs(enemyCreepsNearby) do
-        print('enemy creep', creep,'health is: ', creep:GetHealth())
-        print('enemy creep', creep,'health ratio is: ', creep:GetHealth()/creep:GetMaxHealth())
-        print('and bot attack damage is', bot:GetAttackDamage())
-        print('creeps actual incoming damage is', creep:GetActualIncomingDamage( bot:GetAttackDamage(), DAMAGE_TYPE_PHYSICAL ))
-        print('estimated damage to target', bot:GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL ))
-        -- print('extrapolated health is', ExtrapolateHealth( creep, 1000 ))
+        --print  '\n','enemy creep',creep ..'health is: ',creep:GetHealth()
+        --print  '\n','enemy creep'.. creep,'health ratio is: ',creep:GetHealth()/creep:GetMaxHealth()
+        --print  '\n','and bot attack damage is',bot:GetAttackDamage()
+        --print  '\n','creeps actual incoming damage is',creep:GetActualIncomingDamage( bot:GetAttackDamage(), DAMAGE_TYPE_PHYSICAL )
+        --print  '\n','estimated damage to target',bot:GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL )
 
         -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
         if creep:GetHealth() <= thresholdTarget then
@@ -214,7 +226,7 @@ function SelectTarget()
             -- Target setting and getting is available in the API omg 🙄
             bot:SetTarget( creep )
 
-            print('target creep is', bot:GetTarget( ), 'returning success')
+            --print  '\n','target creep is',bot:GetTarget( ),'returning success'
             return 'success'
         end
     end
@@ -226,17 +238,33 @@ function SelectTarget()
 
     -- Gets the target that's been set for a unit.
 
-    print('select target failed.')
+    --print  '\n',('select target failed.')
     return 'failure'
+end
+
+-- dodge attack
+function EvadeAttack()
+    local iproj = bot:GetIncomingTrackingProjectiles()
+    if iproj ~= nil then 
+        print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
+        if iproj[1].is_dodgeable then
+            -- Action_MoveDirectly( vLocation )
+            -- ActionPush_MoveDirectly( vLocation )
+            -- ActionQueue_MoveDirectly( vLocation )
+
+            -- Command a bot to move to the specified location, bypassing the bot pathfinder. Identical to a user's right-click.
+            bot:Action_MoveDirectly( RandomVector(100) )
+        end
+    end
 end
 
 -- select enemy hero target
 function SelectHeroTarget()
-    print('SelectHeroTarget function fired')
+    --print  '\n',('SelectHeroTarget function fired')
 
     -- first check if any enemy heroes nearby
     local enemyHeroesNearby = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
-    print('There are', #enemyHeroesNearby, 'nearby enemy heroes')
+    --print  '\n','There are',#enemyHeroesNearby,'nearby enemy heroes'
 
     -- TODO: check each hero's target, if they are farming / harassing high priority ally, then select that hero.
     if #enemyHeroesNearby > 0 then
@@ -245,13 +273,11 @@ function SelectHeroTarget()
             
             -- if this hero has a target, then attack
             if hero:GetAttackTarget() ~= nil then
-                print('target hero is targetting', hero:GetAttackTarget():GetUnitName())
-                local iproj = bot:GetIncomingTrackingProjectiles()
-                print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
+                --print  '\n','target hero is targetting',hero:GetAttackTarget():GetUnitName()
                 -- location, caster, player, ability, is_dodgeable, is_attack
                 target = hero
                 bot:SetTarget( hero )
-                print('target hero is', bot:GetTarget( ):GetUnitName(), 'returning success')
+                --print  '\n','target hero is',bot:GetTarget( ):GetUnitName(),'returning success'
                 return 'success'
             end
 
@@ -260,47 +286,89 @@ function SelectHeroTarget()
         -- otherwise just target the closest enemy 
         target = enemyHeroesNearby[1]
         bot:SetTarget( target )
-        print('target hero is', bot:GetTarget( ):GetUnitName(), 'returning success')
+        --print  '\n','target hero is',bot:GetTarget( ):GetUnitName(),'returning success'
         return 'success'
 
     end
     
     -- else
-    print('select target failed.')
+    --print  '\n',('select target failed.')
     return 'failure'
 end
 
 -- right click attacks target once
 function RightClickAttack()
-    print('RightClickAttack function fired')
-    bot:Action_AttackUnit(target, true)
+    --print  '\n',('RightClickAttack function fired')
+    bot:Action_AttackUnit(bot:GetTarget(), true)
     return 'success'
 end
 
+-- select ability to case
+function SelectAbility()
+    --print  '\n',('SelectAbility function fired')
+
+    -- first check if ultimate is available
+    local ult = bot:GetAbilityInSlot( ULTIMATE[ bot:GetUnitName() ] )
+    if ult:IsFullyCastable() then
+        selectedAbility = ult
+        print('selected ability is ', ult:GetName())
+        return 'success'
+    else
+        for i = 0, 23 do
+            a = bot:GetAbilityInSlot( i )
+            if a ~= nil and not a:IsPassive() and a:IsFullyCastable() then
+                selectedAbility = a 
+                print('selected ability is ', a:GetName())
+                return 'success'
+            end
+        end
+    end
+    print('could not select ability, return failure')
+    return 'failure'
+end
+
+-- cast ability on target once
+function CastAbility()
+    -- Active abilities must be used in order to apply their effects. 
+    -- Active abilities can consume mana, have cooldowns, 
+    -- and usually have some method of targeting related to them. 
+    -- The majority of abilities are active abilities. 
+    -- They can be activated by pressing their associated Hotkey.
+
+    print('CastAbility function fired')
+    if selectedAbility:GetTargetType() == 0 then
+        bot:Action_UseAbility( selectedAbility )
+        return 'success'
+    end
+
+    -- EvadeAttack() -- testing evade
+    bot:Action_UseAbilityOnEntity( selectedAbility , bot:GetTarget() )
+    return 'success'
+end
 
 -- selects allied hero to heal
 function SelectHeroToHeal()
-    print('SelectHero function fired')
+    --print  '\n',('SelectHero function fired')
     local alliedHeroesNearby = bot:GetNearbyHeroes(1600, false)
-    print('There are', #alliedHeroesNearby, 'nearby allied heroes')
+    --print  '\n','There are',#alliedHeroesNearby,'nearby allied heroes'
     
     for _,hero in pairs(alliedHeroesNearby) do
-        print('hero', hero,'health is: ', hero:GetHealth())
-        print('hero', hero,'health ratio is: ', hero:GetHealth()/hero:GetMaxHealth())
+        --print  '\n','hero',hero,'health is: ',hero:GetHealth()
+        --print  '\n','hero',hero,'health ratio is: ',hero:GetHealth()/hero:GetMaxHealth()
 
         if hero:GetHealth()/hero:GetMaxHealth() <= 0.5 and bot:GetUnitName() ~= hero:GetUnitName() then
             targetAllyHero = hero
-            print('target hero is', targetAllyHero, 'returning success')
+            --print  '\n','target hero is',targetAllyHero,'returning success'
             return 'success'
         end
     end
 
-    print('select target hero failed.')
+    --print  '\n',('select target hero failed.')
     return 'failure' 
 end
 
 function CastHealingAbility()
-    print('CastHealingAbility function fired')
+    --print  '\n',('CastHealingAbility function fired')
     bot:ActionPush_UseAbilityOnEntity(ability, targetAllyHero);
     return 'success'
 end
@@ -311,11 +379,11 @@ function GetUnits()
 
     for i=1,5 do
         local member = GetTeamMember( i )
-        print('index is', i, 'and member is', member)
+        --print  '\n','index is',i,'and member is',member
 
         if member ~= nil then
             local membername = member:GetUnitName()
-            print('membername is', membername)
+            --print  '\n','membername is',membername
             local pos = POSITIONS[ membername ]
             units[pos] = member
         end
@@ -329,7 +397,7 @@ end
 -- check if hero has health below 80%
 function HasLowHealth()
     local currentHealth = bot:GetHealth()/bot:GetMaxHealth()
-    print('health is:', currentHealth)
+    --print  '\n','health is:',currentHealth
 
     return currentHealth < 0.8 and 1 or 0
 end
@@ -337,29 +405,29 @@ end
 -- check if any enemy hero is within 700 unit radius
 function EnemyNearby()
     local nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
-    print('EnemyNearby', (#nearbyEnemyHeroes > 0))
+    --print  '\n','EnemyNearby',tostring(#nearbyEnemyHeroes > 0)
 
     return #nearbyEnemyHeroes > 0 and 1 or 0
 end
 
 -- TODO: check if observer ward available
 function HasObserverWard()
-    print('HasObserverWard sense fired')
+    --print  '\n',('HasObserverWard sense fired')
     return 1
 end
 
 -- check team's desire to farm
 function FarmLaneDesire()
-    print('FarmLaneDesire sense fired')
-    print('GetFarmLaneDesire', GetFarmLaneDesire(bot:GetAssignedLane()))
+    --print  '\n',('FarmLaneDesire sense fired')
+    --print  '\n','GetFarmLaneDesire',GetFarmLaneDesire(bot:GetAssignedLane())
 
     return GetFarmLaneDesire(bot:GetAssignedLane()) > 0 and 1 or 0
 end
 
 -- TODO: currently checks distance from lane front but should check assigned lane instead
 function IsCorrectLane()
-    print('IsCorrectLane sense fired')
-    print('bots assigned lane is:', bot:GetAssignedLane())
+    --print  '\n',('IsCorrectLane sense fired')
+    --print  '\n','bots assigned lane is:',bot:GetAssignedLane()
     
     local dist = GetUnitToLocationDistance( bot, GetLaneFrontLocation( bot:GetTeam() , bot:GetAssignedLane(), 0) )
 
@@ -367,24 +435,24 @@ function IsCorrectLane()
     local botDistanceDownAssignedLane = GetAmountAlongLane(bot:GetAssignedLane(), bot:GetLocation()).distance 
     
     if dist < 500 then --500 might not be the right number
-        print('in assigned lane')
+        --print  '\n',('in assigned lane')
         return 1
     else -- either > 500 or something went wrong :) 
-        print('not in assigned lane')
+        --print  '\n',('not in assigned lane')
         return 0
     end
 end
 
 -- TODO: check if distance to target location is walkable 
 function IsWalkableDistance()
-    print('IsWalkableDistance sense fired')
+    --print  '\n',('IsWalkableDistance sense fired')
     return 1
 end
 
 -- check if it is farming time
 function IsFarmingTime()
-    print('IsFarmingTime sense fired')
-    print('dota time is', DotaTime())
+    --print  '\n',('IsFarmingTime sense fired')
+    --print  '\n','dota time is',DotaTime()
     
     -- API functions to use:
     --- float DotaTime()
@@ -401,8 +469,8 @@ end
 
 -- THIS IS A DUMMY FUNCTION USED TO TEST OPERA
 function IsWardingTime()
-    print('IsWardingTime sense fired')
-    print('dota time is', DotaTime())
+    --print  '\n',('IsWardingTime sense fired')
+    --print  '\n','dota time is',DotaTime()
     
     local time = DotaTime()
     return ( time < 0 and time > -80 ) and 1 or 0 -- for now, farming time is first 10 mins (laning phase)
@@ -410,45 +478,45 @@ end
 
 -- check if it is safe to farm
 function IsSafeToFarm()
-    print('IsSafeToFarm sense fired')
+    --print  '\n',('IsSafeToFarm sense fired')
 
     return bot:WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
 end
 
 -- check if teleportation scroll is available
 function IsScrollAvailable()
-    print('IsScrollAvailable sense fired')
+    --print  '\n',('IsScrollAvailable sense fired')
 
     return GetItemStockCount( "item_tpscroll" ) > 0 and 1 or 0
 end
 
 -- check if target is dead
 function IsLastHit()
-    print('IsLastHit sense fired')
-    print('check if target creep has been killed', target:IsAlive())
+    --print  '\n',('IsLastHit sense fired')
+    --print  '\n','check if target creep has been killed',tostring(target:IsAlive())
     return target:IsAlive() and 1 or 0
 end
 
 -- TODO: check if this hero has highest position around
 function HasHighestPriorityAround()
-    print('HasHighestPriorityAround sense fired')
-    print('unit name is', bot:GetUnitName())
+    --print  '\n',('HasHighestPriorityAround sense fired')
+    --print  '\n','unit name is',bot:GetUnitName()
 
     -- first, get all allied heroes nearby. 
     alliesNearby = bot:GetNearbyHeroes( 1600, false, BOT_MODE_NONE) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
     
     -- remove this bot unit from allied heroes list
     table.remove(alliesNearby, 1) 
-    print('after table remove', alliesNearby, 'has size', #alliesNearby) 
+    --print  '\n','after table remove',alliesNearby,'has size',#alliesNearby 
 
     if #alliesNearby > 0 then
         for _,ally in pairs(alliesNearby) do
-            print('bot', bot:GetUnitName(), 'position is', POSITIONS[bot:GetUnitName()])
-            print('ally', ally:GetUnitName(), 'position is', POSITIONS[ally:GetUnitName()])
+            --print  '\n','bot',bot:GetUnitName(),'position is',POSITIONS[bot:GetUnitName()]
+            --print  '\n','ally',ally:GetUnitName(),'position is',POSITIONS[ally:GetUnitName()]
             return POSITIONS[bot:GetUnitName()] <= POSITIONS[ally:GetUnitName()] and 1 or 0
         end
     else
-        print('unit', bot:GetUnitName(),'has highest priority')
+        --print  '\n','unit',bot:GetUnitName(),'has highest priority'
         return 1 -- no allies around, return true
     end
 --     { hUnit, ... } GetNearbyHeroes( nRadius, bEnemies, nMode)
@@ -458,26 +526,26 @@ end
 
 -- TODO: check if creeps within right click range
 function CreepWithinRightClickRange()
-    print('CreepWithinRightClickRange sense fired')
+    --print  '\n',('CreepWithinRightClickRange sense fired')
     
     -- int GetAttackRange()
     -- Returns the range at which the unit can attack another unit.
-    print('this bots attack range is ', bot:GetAttackRange())
+    --print  '\n','this bots attack range is ',bot:GetAttackRange()
     return 1
 end
 
 -- TODO: check if creeps can be last hit
 function CreepCanBeLastHit()
-    print('CreepCanBeLastHit sense fired')
+    --print  '\n',('CreepCanBeLastHit sense fired')
     return 1
 end
 
 -- checks if there are any enemy creeps within 700 unit radius
 function EnemyCreepNearby()
-    print('EnemyCreepNearby sense fired')
+    --print  '\n',('EnemyCreepNearby sense fired')
     local enemiesNearby = bot:GetNearbyCreeps(700, true) -- returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
-    print('There are', #enemiesNearby, 'enemy creeps near')
-    print(bot:GetUnitName())
+    --print  '\n','There are',#enemiesNearby,'enemy creeps near'
+    --print  '\n',(bot:GetUnitName())
 
     return #enemiesNearby > 0 and 1 or 0
 end
@@ -509,11 +577,20 @@ function IsFarFromCarry()
     if POSITIONS[bot:GetUnitName()] == 2 then
         targetAlly = GetTeamMember(1)
     end
-    print('farm from carry returns', GetUnitToUnitDistance(bot, targetAlly))
+    --print  '\n','farm from carry returns',GetUnitToUnitDistance(bot, targetAlly)
     return (GetUnitToUnitDistance(bot, targetAlly) > 250) and 1 or 0
 end
 
-
+-- checks if any ability is levelled up and castable
+function IsAbilityCastable()
+    for i = 0, 23 do
+        a = bot:GetAbilityInSlot( i )
+        if a ~= nil and a:IsFullyCastable() and not a:IsPassive() then
+            return 1 -- at least one ability can be cast
+        end
+    end
+    return 0 -- parsed through all abilities and none are castable
+end
 
 -- Action_UseAbility( hAbility )
 -- ActionPush_UseAbility( hAbility )

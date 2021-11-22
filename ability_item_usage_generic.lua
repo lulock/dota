@@ -13,13 +13,13 @@
 -- local bot = GetBot()
 -- -- Called every frame. Responsible for managing ability leveling.
 -- function AbilityLevelUpThink() 
--- 	print('in ability think level up', bot:GetUnitName())
+-- 	--print('in ability think level up', bot:GetUnitName())
 -- 	if bot:GetUnitName() == 'npc_dota_hero_nevermore' then
 -- 		for i = 0, 23 do
 -- 			local ability = bot:GetAbilityInSlot(i)
--- 			print('ability is', ability)
+-- 			--print('ability is', ability)
 -- 			if ability == nil and ability:IsTalent() then
--- 				print('ability name is', ability:GetName())
+-- 				--print('ability name is', ability:GetName())
 -- 			end
 -- 		end
 -- 	end

@@ -81,6 +81,20 @@ local x = [[{
 					"name": "RightClickAttack"
 				}
 			]
+		},
+		{
+			"name": "AP-CastAbilityAttack",
+			"actions": [
+				{
+					"name": "SelectHeroTarget"
+				},
+				{
+					"name": "SelectAbility"
+				},
+				{
+					"name": "CastAbility"
+				}
+			]
 		}
 	],
 	"Competences": [
@@ -177,6 +191,22 @@ local x = [[{
 						}
 					],
 					"element": "C-GoToLane"
+				},
+				{
+					"name": "CE-EnemyAbility",
+					"Senses": [
+						{
+							"name": "EnemyNearby",
+							"value": "1",
+							"comparator": "bool"
+						},
+						{
+							"name": "IsAbilityCastable",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-CastAbilityAttack"
 				},
 				{
 					"name": "CE-EnemyRightClick",

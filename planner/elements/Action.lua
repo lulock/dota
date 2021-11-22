@@ -26,7 +26,7 @@ function Action:init(name, timeToComplete)
 end
 
 function Action:tick()
-    print('ticking action', self.name)
+    --print('ticking action', self.name)
     self.status = _G[self.name]() --execute command called (by name) in the global namespace
     return self.status --return success, running, or failure
 end
