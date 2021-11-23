@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------------------------
--- this script handles control item purchasing by Viper bot                                              --
+-- this script handles control item purchasing by Shadow Fiend bot                                       --
 --  . ItemPurchaseThink() - Called every frame. Responsible for purchasing items.                        --
 --    . currently starts with 3x Iron Branch, Healing Salve, 2x Slippers of Agility                      --
 -- NOTE Some items have strange names. This Reddit post helped immensely:                                --
@@ -10,19 +10,21 @@ local bot = GetBot()
 local nextUpdate = 0
 
 local abilities = { 
-	[0] = 0, 
-	[1] = 1,
+	[0] = 1, 
+	[1] = 0,
 	[2] = 2, 
 	[3] = 3
 }
 
 -- starting items
 local toBuy = {
-	[1] = "item_branches", -- (50 gold, +1 str, +1 agi, +1 int)
-	[2] = "item_circlet",
-	[3] = "item_circlet",
-	[4] = "item_faerie_fire", 
-	[5] = "item_slippers" 
+	[1] = "item_branches", 
+	[2] = "item_ward_observer",
+	[3] = "item_gauntlets",
+	[4] = "item_clarity", 
+	[5] = "item_clarity", 
+	[6] = "item_clarity", 
+	[7] = "item_clarity" 
 }
 
 function ItemPurchaseThink()
@@ -35,8 +37,11 @@ function ItemPurchaseThink()
 
 	if #toBuy > 0 then
 		for idx,item in pairs(toBuy) do
-			bot:ActionImmediate_PurchaseItem( item )
-			table.remove(toBuy, idx)
+			local cost = GetItemCost( item ) 
+			if cost <= bot:GetGold() then -- purchase item if bot can afford it
+				bot:ActionImmediate_PurchaseItem( item )
+				table.remove(toBuy, idx)
+			end
 		end
 	end
 	

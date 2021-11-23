@@ -29,18 +29,18 @@ function Drive:init(name, senses, element)
 end
 
 function Drive:tick()
-
+    print('drive for bot', GetBot():GetUnitName())
     for _,sense in pairs(self.senses) do --check sense conditions
-        --print('checking sense.', sense.name)
+        print('checking sense.', sense.name)
         local senseStatus = sense:tick()
-        --print('senseStatus is:', senseStatus)
+        print('senseStatus is:', senseStatus)
         if not senseStatus then
             return 'failure'
         end
     end
-    --print('ticking element.', self.element.name)
+    print('ticking element.', self.element.name)
     self.status = self.element:tick() --only trigger if all sense conditions satisfied
-    --print('and drive returned.', self.status)
+    print('and drive returned.', self.status)
     -- return self.status
     return 'running' -- if all sense conditions satisfied, then return running, even if drive competences/actions fail!! 
 end

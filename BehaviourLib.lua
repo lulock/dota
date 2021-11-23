@@ -24,7 +24,7 @@ local targetLoc = nil
 local target = nil
 local targetAllyHero = nil
 local interval = 10
-local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
+-- local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
 local thresholdTarget = 2*bot:GetAttackDamage()
 
 -- default selected ability is first ability but this might be passive ... 
@@ -104,7 +104,7 @@ end
 
 -- select and set targetLoc as location along lane
 function SelectLaneLocation()
-    targetLoc = GetLocationAlongLane( LANE_MID , 0.5 )
+    targetLoc = GetLocationAlongLane( bot:GetAssignedLane() , 0.5 )
     --print  '\n','location along mid-lane is',GetLocationAlongLane( LANE_MID , 0.5 )
     return 'success'
 end
@@ -130,7 +130,7 @@ end
 function GoToCreepWave()
     -- bot:Action_ClearActions( false )
     --print  '\n',('GoToCreepWave')
-    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), LANE_MID, -200)
+    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), bot:GetAssignedLane(), -200)
     targetLoc = laneLocation
     bot:Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
 
@@ -346,7 +346,7 @@ function CastAbility()
     return 'success'
 end
 
--- selects allied hero to heal
+-- selects allied hero to heal TODO: Check the need for this. Voodoo Restoration takes NO TARGET. but perhaps healing salve / tango needs targets to share.
 function SelectHeroToHeal()
     --print  '\n',('SelectHero function fired')
     local alliedHeroesNearby = bot:GetNearbyHeroes(1600, false)
@@ -369,7 +369,8 @@ end
 
 function CastHealingAbility()
     --print  '\n',('CastHealingAbility function fired')
-    bot:ActionPush_UseAbilityOnEntity(ability, targetAllyHero);
+    local ability = bot:GetAbilityByName('witch_doctor_voodoo_restoration')
+    bot:ActionPush_UseAbility(ability);
     return 'success'
 end
 
@@ -390,6 +391,14 @@ function GetUnits()
     end
     
     return units
+end
+
+-- use scroll to target location
+function TpToLocation()
+    local slot = bot:FindItemSlot( "item_tpscroll" )
+    local scroll = bot:GetItemInSlot( slot )
+    bot:Action_UseAbilityOnLocation( scroll , targetLoc )
+    return 'success'
 end
 
 -- SENSES --
@@ -569,6 +578,7 @@ end
 
 -- checks if healing ability is available
 function IsHealingAbilityAvailable()
+    local ability = bot:GetAbilityByName('witch_doctor_voodoo_restoration')
     return ability:IsFullyCastable() and 1 or 0
 end
 
@@ -590,6 +600,36 @@ function IsAbilityCastable()
         end
     end
     return 0 -- parsed through all abilities and none are castable
+end
+
+-- checks if any projectiles incoming towards this unit
+function IsUnderAttack()
+    local iproj = bot:GetIncomingTrackingProjectiles()
+    print('iproj size is ', #iproj)
+    return #iproj > 0 and 1 or 0
+end
+
+
+-- check if allied heroes around have health below 80%
+function NearbyAllyHasLowHealth()
+    -- print('in NearbyAllyHasLowHealth')
+
+    local nearbyAllies = bot:GetNearbyHeroes( 1600 , false , BOT_MODE_NONE) -- get all allied heroes within 1600 radius
+    if nearbyAllies ~= nil then
+        for _,ally in pairs(nearbyAllies) do
+            local health = ally:GetHealth()
+            local maxHealth = ally:GetMaxHealth()
+            if health/maxHealth < 0.8 then
+                -- print('returning true')
+
+                return 1
+            end
+        end
+    end
+    -- print('returning false')
+
+
+    return 0 -- else no nearby ally is low health
 end
 
 -- Action_UseAbility( hAbility )

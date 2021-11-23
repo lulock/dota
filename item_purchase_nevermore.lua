@@ -37,8 +37,11 @@ function ItemPurchaseThink()
 
 	if #toBuy > 0 then
 		for idx,item in pairs(toBuy) do
-			bot:ActionImmediate_PurchaseItem( item )
-			table.remove(toBuy, idx)
+			local cost = GetItemCost( item ) 
+			if cost <= bot:GetGold() then -- purchase item if bot can afford it
+				bot:ActionImmediate_PurchaseItem( item )
+				table.remove(toBuy, idx)
+			end
 		end
 	end
 	
