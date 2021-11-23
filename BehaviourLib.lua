@@ -24,11 +24,11 @@ local targetLoc = nil
 local target = nil
 local targetAllyHero = nil
 local interval = 10
--- local ability = bot:GetAbilityByName( "witch_doctor_voodoo_restoration" )
-local thresholdTarget = 2*bot:GetAttackDamage()
+-- local ability = GetBot():GetAbilityByName( "witch_doctor_voodoo_restoration" )
+local thresholdTarget = 2*GetBot():GetAttackDamage()
 
 -- default selected ability is first ability but this might be passive ... 
-local selectedAbility = bot:GetAbilityInSlot( 0 )
+local selectedAbility = GetBot():GetAbilityInSlot( 0 )
 
 -- HELPER FUNCTIONS --
 
@@ -52,7 +52,7 @@ function adjustThreshold(delta)
     thresholdTarget = thresholdTarget * delta
 end
 
-local enemyTeam = getEnemyTeam(bot:GetTeam())
+local enemyTeam = getEnemyTeam(GetBot():GetTeam())
 
 
 function ExtrapolateHealth( unit, interval )
@@ -79,12 +79,12 @@ end
 
 function GoToCore()
     local targetAlly = nil
-    if POSITIONS[bot:GetUnitName()] == 2 then
+    if POSITIONS[GetBot():GetUnitName()] == 2 then
         targetAlly = GetTeamMember(1)
     end
 
     if targetAlly ~= nil then
-        bot:Action_MoveToLocation(targetAlly:GetLocation() + RandomVector(RandomFloat(-100,100)))
+        GetBot():Action_MoveToLocation(targetAlly:GetLocation() + RandomVector(RandomFloat(-100,100)))
         return 'success'
     else
         return 'failure'
@@ -104,7 +104,7 @@ end
 
 -- select and set targetLoc as location along lane
 function SelectLaneLocation()
-    targetLoc = GetLocationAlongLane( bot:GetAssignedLane() , 0.5 )
+    targetLoc = GetLocationAlongLane( GetBot():GetAssignedLane() , 0.5 )
     --print  '\n','location along mid-lane is',GetLocationAlongLane( LANE_MID , 0.5 )
     return 'success'
 end
@@ -116,9 +116,9 @@ end
 
 -- moves to targetLoc location
 function GoToLocation()
-    --print  '\n',('GoToLocation')
-    bot:Action_MoveToLocation( targetLoc )
-    if bot:GetLocation() == targetLoc then
+    print('GoToLocation for ', GetBot():GetUnitName())
+    GetBot():Action_MoveToLocation( targetLoc )
+    if GetBot():GetLocation() == targetLoc then
         return 'success'
     else
         return 'running'
@@ -128,14 +128,15 @@ end
 
 -- gets lane front and moves to location
 function GoToCreepWave()
-    -- bot:Action_ClearActions( false )
-    --print  '\n',('GoToCreepWave')
-    local laneLocation = GetLaneFrontLocation(bot:GetTeam(), bot:GetAssignedLane(), -200)
+    -- GetBot():Action_ClearActions( false )
+    local bot = GetBot()
+    local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
+    print('GoToCreepWave', laneLocation)
     targetLoc = laneLocation
-    bot:Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
+    GetBot():Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
 
-    -- bot:Action_MoveToLocation( targetLoc )
-    if bot:GetLocation() == laneLocation then
+    -- GetBot():Action_MoveToLocation( targetLoc )
+    if GetBot():GetLocation() == laneLocation then
         return 'success'
     else
         return 'running'
@@ -157,7 +158,7 @@ end
 function SelectSafeLocation()
     --print  '\n',('SelectSafeLocation')
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
-    -- nearbyAlliedTowers = bot:GetNearbyTowers(700, false) --for now, return nearby allied towers
+    -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
 
     local base = GetAncient(GetTeam())
     --print  '\n','base is:',base
@@ -209,24 +210,24 @@ function SelectTarget()
     -- float GetEstimatedDamageToTarget( bCurrentlyAvailable, hTarget, fDuration, nDamageTypes )
     -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
 
-    local enemyCreepsNearby = bot:GetNearbyCreeps(700, true)
+    local enemyCreepsNearby = GetBot():GetNearbyCreeps(700, true)
     --print  '\n','There are',#enemyCreepsNearby,'nearby enemy creeps'
     
     for _,creep in pairs(enemyCreepsNearby) do
         --print  '\n','enemy creep',creep ..'health is: ',creep:GetHealth()
         --print  '\n','enemy creep'.. creep,'health ratio is: ',creep:GetHealth()/creep:GetMaxHealth()
-        --print  '\n','and bot attack damage is',bot:GetAttackDamage()
-        --print  '\n','creeps actual incoming damage is',creep:GetActualIncomingDamage( bot:GetAttackDamage(), DAMAGE_TYPE_PHYSICAL )
-        --print  '\n','estimated damage to target',bot:GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL )
+        --print  '\n','and bot attack damage is',GetBot():GetAttackDamage()
+        --print  '\n','creeps actual incoming damage is',creep:GetActualIncomingDamage( GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL )
+        --print  '\n','estimated damage to target',GetBot():GetEstimatedDamageToTarget( false, creep, 5, DAMAGE_TYPE_PHYSICAL )
 
         -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
         if creep:GetHealth() <= thresholdTarget then
             target = creep
             
             -- Target setting and getting is available in the API omg 🙄
-            bot:SetTarget( creep )
+            GetBot():SetTarget( creep )
 
-            --print  '\n','target creep is',bot:GetTarget( ),'returning success'
+            --print  '\n','target creep is',GetBot():GetTarget( ),'returning success'
             return 'success'
         end
     end
@@ -244,7 +245,7 @@ end
 
 -- dodge attack
 function EvadeAttack()
-    local iproj = bot:GetIncomingTrackingProjectiles()
+    local iproj = GetBot():GetIncomingTrackingProjectiles()
     if iproj ~= nil then 
         print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
         if iproj[1].is_dodgeable then
@@ -253,7 +254,7 @@ function EvadeAttack()
             -- ActionQueue_MoveDirectly( vLocation )
 
             -- Command a bot to move to the specified location, bypassing the bot pathfinder. Identical to a user's right-click.
-            bot:Action_MoveDirectly( RandomVector(100) )
+            GetBot():Action_MoveDirectly( RandomVector(100) )
         end
     end
 end
@@ -263,7 +264,7 @@ function SelectHeroTarget()
     --print  '\n',('SelectHeroTarget function fired')
 
     -- first check if any enemy heroes nearby
-    local enemyHeroesNearby = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
+    local enemyHeroesNearby = GetBot():GetNearbyHeroes(700, true, BOT_MODE_NONE)
     --print  '\n','There are',#enemyHeroesNearby,'nearby enemy heroes'
 
     -- TODO: check each hero's target, if they are farming / harassing high priority ally, then select that hero.
@@ -276,8 +277,8 @@ function SelectHeroTarget()
                 --print  '\n','target hero is targetting',hero:GetAttackTarget():GetUnitName()
                 -- location, caster, player, ability, is_dodgeable, is_attack
                 target = hero
-                bot:SetTarget( hero )
-                --print  '\n','target hero is',bot:GetTarget( ):GetUnitName(),'returning success'
+                GetBot():SetTarget( hero )
+                --print  '\n','target hero is',GetBot():GetTarget( ):GetUnitName(),'returning success'
                 return 'success'
             end
 
@@ -285,8 +286,8 @@ function SelectHeroTarget()
 
         -- otherwise just target the closest enemy 
         target = enemyHeroesNearby[1]
-        bot:SetTarget( target )
-        --print  '\n','target hero is',bot:GetTarget( ):GetUnitName(),'returning success'
+        GetBot():SetTarget( target )
+        --print  '\n','target hero is',GetBot():GetTarget( ):GetUnitName(),'returning success'
         return 'success'
 
     end
@@ -299,7 +300,7 @@ end
 -- right click attacks target once
 function RightClickAttack()
     --print  '\n',('RightClickAttack function fired')
-    bot:Action_AttackUnit(bot:GetTarget(), true)
+    GetBot():Action_AttackUnit(GetBot():GetTarget(), true)
     return 'success'
 end
 
@@ -308,17 +309,18 @@ function SelectAbility()
     --print  '\n',('SelectAbility function fired')
 
     -- first check if ultimate is available
-    local ult = bot:GetAbilityInSlot( ULTIMATE[ bot:GetUnitName() ] )
+    local ult = GetBot():GetAbilityInSlot( ULTIMATE[ GetBot():GetUnitName() ] )
     if ult:IsFullyCastable() then
         selectedAbility = ult
         print('selected ability is ', ult:GetName())
         return 'success'
     else
         for i = 0, 23 do
-            a = bot:GetAbilityInSlot( i )
+            a = GetBot():GetAbilityInSlot( i )
             if a ~= nil and not a:IsPassive() and a:IsFullyCastable() then
                 selectedAbility = a 
                 print('selected ability is ', a:GetName())
+                print('selected ability damage is ', a:GetAbilityDamage())
                 return 'success'
             end
         end
@@ -337,26 +339,26 @@ function CastAbility()
 
     print('CastAbility function fired')
     if selectedAbility:GetTargetType() == 0 then
-        bot:Action_UseAbility( selectedAbility )
+        GetBot():Action_UseAbility( selectedAbility )
         return 'success'
     end
 
     -- EvadeAttack() -- testing evade
-    bot:Action_UseAbilityOnEntity( selectedAbility , bot:GetTarget() )
+    GetBot():Action_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
     return 'success'
 end
 
 -- selects allied hero to heal TODO: Check the need for this. Voodoo Restoration takes NO TARGET. but perhaps healing salve / tango needs targets to share.
 function SelectHeroToHeal()
     --print  '\n',('SelectHero function fired')
-    local alliedHeroesNearby = bot:GetNearbyHeroes(1600, false)
+    local alliedHeroesNearby = GetBot():GetNearbyHeroes(1600, false)
     --print  '\n','There are',#alliedHeroesNearby,'nearby allied heroes'
     
     for _,hero in pairs(alliedHeroesNearby) do
         --print  '\n','hero',hero,'health is: ',hero:GetHealth()
         --print  '\n','hero',hero,'health ratio is: ',hero:GetHealth()/hero:GetMaxHealth()
 
-        if hero:GetHealth()/hero:GetMaxHealth() <= 0.5 and bot:GetUnitName() ~= hero:GetUnitName() then
+        if hero:GetHealth()/hero:GetMaxHealth() <= 0.5 and GetBot():GetUnitName() ~= hero:GetUnitName() then
             targetAllyHero = hero
             --print  '\n','target hero is',targetAllyHero,'returning success'
             return 'success'
@@ -369,8 +371,8 @@ end
 
 function CastHealingAbility()
     --print  '\n',('CastHealingAbility function fired')
-    local ability = bot:GetAbilityByName('witch_doctor_voodoo_restoration')
-    bot:ActionPush_UseAbility(ability);
+    local ability = GetBot():GetAbilityByName('witch_doctor_voodoo_restoration')
+    GetBot():ActionPush_UseAbility(ability);
     return 'success'
 end
 
@@ -395,9 +397,9 @@ end
 
 -- use scroll to target location
 function TpToLocation()
-    local slot = bot:FindItemSlot( "item_tpscroll" )
-    local scroll = bot:GetItemInSlot( slot )
-    bot:Action_UseAbilityOnLocation( scroll , targetLoc )
+    local slot = GetBot():FindItemSlot( "item_tpscroll" )
+    local scroll = GetBot():GetItemInSlot( slot )
+    GetBot():Action_UseAbilityOnLocation( scroll , targetLoc )
     return 'success'
 end
 
@@ -405,7 +407,7 @@ end
 
 -- check if hero has health below 80%
 function HasLowHealth()
-    local currentHealth = bot:GetHealth()/bot:GetMaxHealth()
+    local currentHealth = GetBot():GetHealth()/GetBot():GetMaxHealth()
     --print  '\n','health is:',currentHealth
 
     return currentHealth < 0.8 and 1 or 0
@@ -413,7 +415,7 @@ end
 
 -- check if any enemy hero is within 700 unit radius
 function EnemyNearby()
-    local nearbyEnemyHeroes = bot:GetNearbyHeroes(700, true, BOT_MODE_NONE)
+    local nearbyEnemyHeroes = GetBot():GetNearbyHeroes(700, true, BOT_MODE_NONE)
     --print  '\n','EnemyNearby',tostring(#nearbyEnemyHeroes > 0)
 
     return #nearbyEnemyHeroes > 0 and 1 or 0
@@ -428,20 +430,20 @@ end
 -- check team's desire to farm
 function FarmLaneDesire()
     --print  '\n',('FarmLaneDesire sense fired')
-    --print  '\n','GetFarmLaneDesire',GetFarmLaneDesire(bot:GetAssignedLane())
+    --print  '\n','GetFarmLaneDesire',GetFarmLaneDesire(GetBot():GetAssignedLane())
 
-    return GetFarmLaneDesire(bot:GetAssignedLane()) > 0 and 1 or 0
+    return GetFarmLaneDesire(GetBot():GetAssignedLane()) > 0 and 1 or 0
 end
 
 -- TODO: currently checks distance from lane front but should check assigned lane instead
 function IsCorrectLane()
     --print  '\n',('IsCorrectLane sense fired')
-    --print  '\n','bots assigned lane is:',bot:GetAssignedLane()
+    --print  '\n','bots assigned lane is:',GetBot():GetAssignedLane()
     
-    local dist = GetUnitToLocationDistance( bot, GetLaneFrontLocation( bot:GetTeam() , bot:GetAssignedLane(), 0) )
+    local dist = GetUnitToLocationDistance( GetBot(), GetLaneFrontLocation( GetBot():GetTeam() , GetBot():GetAssignedLane(), 0) )
 
 
-    local botDistanceDownAssignedLane = GetAmountAlongLane(bot:GetAssignedLane(), bot:GetLocation()).distance 
+    local botDistanceDownAssignedLane = GetAmountAlongLane(GetBot():GetAssignedLane(), GetBot():GetLocation()).distance 
     
     if dist < 500 then --500 might not be the right number
         --print  '\n',('in assigned lane')
@@ -489,7 +491,7 @@ end
 function IsSafeToFarm()
     --print  '\n',('IsSafeToFarm sense fired')
 
-    return bot:WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
+    return GetBot():WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
 end
 
 -- check if teleportation scroll is available
@@ -509,10 +511,10 @@ end
 -- TODO: check if this hero has highest position around
 function HasHighestPriorityAround()
     --print  '\n',('HasHighestPriorityAround sense fired')
-    --print  '\n','unit name is',bot:GetUnitName()
+    --print  '\n','unit name is',GetBot():GetUnitName()
 
     -- first, get all allied heroes nearby. 
-    alliesNearby = bot:GetNearbyHeroes( 1600, false, BOT_MODE_NONE) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
+    alliesNearby = GetBot():GetNearbyHeroes( 1600, false, BOT_MODE_NONE) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
     
     -- remove this bot unit from allied heroes list
     table.remove(alliesNearby, 1) 
@@ -520,12 +522,12 @@ function HasHighestPriorityAround()
 
     if #alliesNearby > 0 then
         for _,ally in pairs(alliesNearby) do
-            --print  '\n','bot',bot:GetUnitName(),'position is',POSITIONS[bot:GetUnitName()]
+            --print  '\n','bot',GetBot():GetUnitName(),'position is',POSITIONS[GetBot():GetUnitName()]
             --print  '\n','ally',ally:GetUnitName(),'position is',POSITIONS[ally:GetUnitName()]
-            return POSITIONS[bot:GetUnitName()] <= POSITIONS[ally:GetUnitName()] and 1 or 0
+            return POSITIONS[GetBot():GetUnitName()] <= POSITIONS[ally:GetUnitName()] and 1 or 0
         end
     else
-        --print  '\n','unit',bot:GetUnitName(),'has highest priority'
+        --print  '\n','unit',GetBot():GetUnitName(),'has highest priority'
         return 1 -- no allies around, return true
     end
 --     { hUnit, ... } GetNearbyHeroes( nRadius, bEnemies, nMode)
@@ -539,7 +541,7 @@ function CreepWithinRightClickRange()
     
     -- int GetAttackRange()
     -- Returns the range at which the unit can attack another unit.
-    --print  '\n','this bots attack range is ',bot:GetAttackRange()
+    --print  '\n','this bots attack range is ',GetBot():GetAttackRange()
     return 1
 end
 
@@ -552,9 +554,9 @@ end
 -- checks if there are any enemy creeps within 700 unit radius
 function EnemyCreepNearby()
     --print  '\n',('EnemyCreepNearby sense fired')
-    local enemiesNearby = bot:GetNearbyCreeps(700, true) -- returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
+    local enemiesNearby = GetBot():GetNearbyCreeps(700, true) -- returns a table of lane creeps, sorted closest-to-furthest. nRadius must be less than 1600.
     --print  '\n','There are',#enemiesNearby,'enemy creeps near'
-    --print  '\n',(bot:GetUnitName())
+    --print  '\n',(GetBot():GetUnitName())
 
     return #enemiesNearby > 0 and 1 or 0
 end
@@ -578,23 +580,23 @@ end
 
 -- checks if healing ability is available
 function IsHealingAbilityAvailable()
-    local ability = bot:GetAbilityByName('witch_doctor_voodoo_restoration')
+    local ability = GetBot():GetAbilityByName('witch_doctor_voodoo_restoration')
     return ability:IsFullyCastable() and 1 or 0
 end
 
 function IsFarFromCarry()
     local targetAlly = nil
-    if POSITIONS[bot:GetUnitName()] == 2 then
+    if POSITIONS[GetBot():GetUnitName()] == 2 then
         targetAlly = GetTeamMember(1)
     end
     --print  '\n','farm from carry returns',GetUnitToUnitDistance(bot, targetAlly)
-    return (GetUnitToUnitDistance(bot, targetAlly) > 250) and 1 or 0
+    return (GetUnitToUnitDistance(GetBot(), targetAlly) > 250) and 1 or 0
 end
 
 -- checks if any ability is levelled up and castable
 function IsAbilityCastable()
     for i = 0, 23 do
-        a = bot:GetAbilityInSlot( i )
+        a = GetBot():GetAbilityInSlot( i )
         if a ~= nil and a:IsFullyCastable() and not a:IsPassive() then
             return 1 -- at least one ability can be cast
         end
@@ -604,7 +606,7 @@ end
 
 -- checks if any projectiles incoming towards this unit
 function IsUnderAttack()
-    local iproj = bot:GetIncomingTrackingProjectiles()
+    local iproj = GetBot():GetIncomingTrackingProjectiles()
     print('iproj size is ', #iproj)
     return #iproj > 0 and 1 or 0
 end
@@ -614,7 +616,7 @@ end
 function NearbyAllyHasLowHealth()
     -- print('in NearbyAllyHasLowHealth')
 
-    local nearbyAllies = bot:GetNearbyHeroes( 1600 , false , BOT_MODE_NONE) -- get all allied heroes within 1600 radius
+    local nearbyAllies = GetBot():GetNearbyHeroes( 1600 , false , BOT_MODE_NONE) -- get all allied heroes within 1600 radius
     if nearbyAllies ~= nil then
         for _,ally in pairs(nearbyAllies) do
             local health = ally:GetHealth()
