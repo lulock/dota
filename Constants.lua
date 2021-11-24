@@ -38,3 +38,8 @@ ULTIMATE = { -- each hero has different slots for their ultimate abilities
     ["npc_dota_hero_ogre_magi"] = 3,
     ["npc_dota_hero_witch_doctor"] = 3
 }
+
+IDLE = 0
+RUNNING = 1
+SUCCESS = 2
+FAILURE = 3

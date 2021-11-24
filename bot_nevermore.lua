@@ -33,7 +33,7 @@ function Think()
 		-- 	opera.units = _G['GetUnits']() --call function (by name) in the global namespace
 		-- end
 		
-		planner.root:tick() -- Return values ('success', 'running', or 'failure') handled by parent nodes.
+		planner.root:tick() -- Return values (SUCCESS, RUNNING, or FAILURE) handled by parent nodes.
 		-- opera:update()
 		-- _G['dump']()
 	end

@@ -7,15 +7,15 @@
 --  . list of desired goals of type Sense                                           --
 --  . ordered list of CompetenceElements                                            --
 --  . status that is                                                                --
---      . 'idle'                                                                    --
---      . 'running'                                                                 --
---      . 'success'                                                                 --
---      . 'failure'                                                                 --
+--      . IDLE                                                                    --
+--      . RUNNING                                                                 --
+--      . SUCCESS                                                                 --
+--      . FAILURE                                                                 --
 --                                                                                  --
 -- tick() checks goals and only:                                                    --
 --  . fires competence if any one goal not yet satisfied                            --
---  . returns 'success' once all goals satisfied                                    --
---  . returns 'failure' if none of the elements can fire                            --
+--  . returns SUCCESS once all goals satisfied                                    --
+--  . returns FAILURE if none of the elements can fire                            --
 --                                                                                  --
 -- for more on POSH Competences see:                                                --
 --      http://www.cs.bath.ac.uk/~jjb/web/BOD/AgeS02/node11.html                    --
@@ -27,7 +27,7 @@ function Competence:init(name, goals, elements)
     self.name = name --string name
     self.goals = goals --list of sense goals
     self.elements = elements --list of competence elements
-    self.status = 'idle'
+    self.status = IDLE
 end
 
 function Competence:tick()
@@ -42,7 +42,7 @@ function Competence:tick()
                 --print('ticking competence element', element.name, 'with #senses:', #element.senses, 'and child element')
                 self.status = element:tick()
                 --print('and competence returned', self.status)
-                if self.status == 'running' or self.status == 'success' then
+                if self.status == RUNNING or self.status == SUCCESS then
                     return self.status 
                 end
                 --continue to next child upon failure
@@ -53,7 +53,7 @@ function Competence:tick()
         end
     end
     --print('returning competence success', self.name)
-    self.status = 'success'
+    self.status = SUCCESS
     return self.status --when the goal has been achieved the competence terminates
 
 end

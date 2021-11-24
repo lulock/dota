@@ -4,10 +4,10 @@
 --  . unique name identifier                                                        --
 --  . assigned time to complete (currently not implemented)                         --
 --  . status that is                                                                --
---      . 'idle'                                                                    --
---      . 'running'                                                                 --
---      . 'success'                                                                 --
---      . 'failure'                                                                 --
+--      . IDLE                                                                    --
+--      . RUNNING                                                                 --
+--      . SUCCESS                                                                 --
+--      . FAILURE                                                                 --
 --                                                                                  --
 -- tick() calls corresponding function in behaviour library (shared by agents)      --
 --                                                                                  --
@@ -22,7 +22,7 @@ Action = Class{__includes = PlanElement}
 function Action:init(name, timeToComplete)
     self.name = name --string name
     self.timeToComplete = timeToComplete --double
-    self.status = 'idle'
+    self.status = IDLE
 end
 
 function Action:tick()

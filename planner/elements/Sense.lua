@@ -5,8 +5,8 @@
 --  . a desired world state value                                                   --
 --  . a comparator that checks world state against desired value                    --
 --  . status that is                                                                --
---      . 'success' (currently just true)                                           --
---      . 'failure' (currently just false)                                          --
+--      . SUCCESS (currently just true)                                           --
+--      . FAILURE (currently just false)                                          --
 --                                                                                  --
 -- tick() calls corresponding function in behaviour library (shared by agents)      --
 -- and checks world state against desired value to update status (currently ==)     --

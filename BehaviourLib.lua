@@ -85,9 +85,9 @@ function GoToCore()
 
     if targetAlly ~= nil then
         GetBot():Action_MoveToLocation(targetAlly:GetLocation() + RandomVector(RandomFloat(-100,100)))
-        return 'success'
+        return SUCCESS
     else
-        return 'failure'
+        return FAILURE
     end
 end
 
@@ -96,9 +96,9 @@ function SelectWardLocation()
     targetLoc = GetRuneSpawnLocation( RUNE_POWERUP_1 ) -- temp at rune location
     --print '\n','SelectWardLocation',targetLoc
     if targetLoc then
-        return 'success'
+        return SUCCESS
     else
-        return 'running'
+        return RUNNING
     end
 end
 
@@ -106,7 +106,7 @@ end
 function SelectLaneLocation()
     targetLoc = GetLocationAlongLane( GetBot():GetAssignedLane() , 0.5 )
     --print  '\n','location along mid-lane is',GetLocationAlongLane( LANE_MID , 0.5 )
-    return 'success'
+    return SUCCESS
 end
 
 -- TODO: select closest tower to targetLoc
@@ -119,9 +119,9 @@ function GoToLocation()
     print('GoToLocation for ', GetBot():GetUnitName())
     GetBot():Action_MoveToLocation( targetLoc )
     if GetBot():GetLocation() == targetLoc then
-        return 'success'
+        return SUCCESS
     else
-        return 'running'
+        return RUNNING
     end
     -- add condition if times up, return failure
 end
@@ -137,9 +137,9 @@ function GoToCreepWave()
 
     -- GetBot():Action_MoveToLocation( targetLoc )
     if GetBot():GetLocation() == laneLocation then
-        return 'success'
+        return SUCCESS
     else
-        return 'running'
+        return RUNNING
     end
     -- TODO: add condition if times up, return failure
 end
@@ -151,7 +151,7 @@ function PlaceObserverWard()
     -- Action_DropItem( hItem, vLocation )
     -- ActionPush_DropItem( hItem, vLocation )
     -- ActionQueue_DropItem( hItem, vLocation )
-    return 'success' -- for now
+    return SUCCESS -- for now
 end
 
 -- selects base as safe location
@@ -170,13 +170,13 @@ function SelectSafeLocation()
     
     --print  '\n','current targetLoc is',targetLoc
     --TODO: ASSERT TYPE
-    return 'success'
+    return SUCCESS
 end
 
 -- does nothing
 function Idle()
     --print  '\n',('Idle function fired')
-    return 'success'
+    return SUCCESS
 end
 
 -- does nothing
@@ -188,7 +188,7 @@ function CowardlyRetreat()
     local baseLoc = base:GetLocation()
     --print  '\n','base location is:',baseLoc
     
-    return 'success'
+    return SUCCESS
 end
 
 -- sets creepTarget as creep with lowest health around
@@ -228,7 +228,7 @@ function SelectTarget()
             GetBot():SetTarget( creep )
 
             --print  '\n','target creep is',GetBot():GetTarget( ),'returning success'
-            return 'success'
+            return SUCCESS
         end
     end
     
@@ -240,7 +240,7 @@ function SelectTarget()
     -- Gets the target that's been set for a unit.
 
     --print  '\n',('select target failed.')
-    return 'failure'
+    return FAILURE
 end
 
 -- dodge attack
@@ -279,7 +279,7 @@ function SelectHeroTarget()
                 target = hero
                 GetBot():SetTarget( hero )
                 --print  '\n','target hero is',GetBot():GetTarget( ):GetUnitName(),'returning success'
-                return 'success'
+                return SUCCESS
             end
 
         end
@@ -288,20 +288,20 @@ function SelectHeroTarget()
         target = enemyHeroesNearby[1]
         GetBot():SetTarget( target )
         --print  '\n','target hero is',GetBot():GetTarget( ):GetUnitName(),'returning success'
-        return 'success'
+        return SUCCESS
 
     end
     
     -- else
     --print  '\n',('select target failed.')
-    return 'failure'
+    return FAILURE
 end
 
 -- right click attacks target once
 function RightClickAttack()
     --print  '\n',('RightClickAttack function fired')
     GetBot():Action_AttackUnit(GetBot():GetTarget(), true)
-    return 'success'
+    return SUCCESS
 end
 
 -- select ability to case
@@ -313,7 +313,7 @@ function SelectAbility()
     if ult:IsFullyCastable() then
         selectedAbility = ult
         print('selected ability is ', ult:GetName())
-        return 'success'
+        return SUCCESS
     else
         for i = 0, 23 do
             a = GetBot():GetAbilityInSlot( i )
@@ -321,12 +321,12 @@ function SelectAbility()
                 selectedAbility = a 
                 print('selected ability is ', a:GetName())
                 print('selected ability damage is ', a:GetAbilityDamage())
-                return 'success'
+                return SUCCESS
             end
         end
     end
     print('could not select ability, return failure')
-    return 'failure'
+    return FAILURE
 end
 
 -- cast ability on target once
@@ -340,12 +340,12 @@ function CastAbility()
     print('CastAbility function fired')
     if selectedAbility:GetTargetType() == 0 then
         GetBot():Action_UseAbility( selectedAbility )
-        return 'success'
+        return SUCCESS
     end
 
     -- EvadeAttack() -- testing evade
     GetBot():Action_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
-    return 'success'
+    return SUCCESS
 end
 
 -- selects allied hero to heal TODO: Check the need for this. Voodoo Restoration takes NO TARGET. but perhaps healing salve / tango needs targets to share.
@@ -361,19 +361,19 @@ function SelectHeroToHeal()
         if hero:GetHealth()/hero:GetMaxHealth() <= 0.5 and GetBot():GetUnitName() ~= hero:GetUnitName() then
             targetAllyHero = hero
             --print  '\n','target hero is',targetAllyHero,'returning success'
-            return 'success'
+            return SUCCESS
         end
     end
 
     --print  '\n',('select target hero failed.')
-    return 'failure' 
+    return FAILURE 
 end
 
 function CastHealingAbility()
     --print  '\n',('CastHealingAbility function fired')
     local ability = GetBot():GetAbilityByName('witch_doctor_voodoo_restoration')
     GetBot():ActionPush_UseAbility(ability);
-    return 'success'
+    return SUCCESS
 end
 
 -- returns table of unit handles in order of position (role)
@@ -400,7 +400,7 @@ function TpToLocation()
     local slot = GetBot():FindItemSlot( "item_tpscroll" )
     local scroll = GetBot():GetItemInSlot( slot )
     GetBot():Action_UseAbilityOnLocation( scroll , targetLoc )
-    return 'success'
+    return SUCCESS
 end
 
 -- SENSES --

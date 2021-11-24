@@ -26,7 +26,7 @@ function CompetenceElement:tick()
     for _,sense in pairs(self.senses) do --check all conditions
         if not sense:tick() then
             --print('competence element sense returned failure')
-            return 'failure'
+            return FAILURE
         end
     end
     --print('competence element ticking trigger element', self.element.name)

@@ -3,10 +3,10 @@
 -- a plan element consists simply of a:                                                           --
 --  . unique name identifier                                                                      --
 --  . status that is one of:                                                                      --
---      . 'idle'                                                                                  --
---      . 'running'                                                                               --
---      . 'success'                                                                               --
---      . 'failure'                                                                               --
+--      . IDLE                                                                                  --
+--      . RUNNING                                                                               --
+--      . SUCCESS                                                                               --
+--      . FAILURE                                                                               --
 --                                                                                                --
 -- resources used to help build this planner as a whole:                                          --
 --  . http://www.cs.bath.ac.uk/~jjb/web/BOD/AgeS02/AgeS02.html                                    --
@@ -20,14 +20,14 @@ PlanElement = Class {}
 
 function PlanElement:init(name)
     self.name = name
-    self.status = 'idle' --instantiated as 'idle', updated on tick()
+    self.status = IDLE --instantiated as IDLE, updated on tick()
 end
 
 function PlanElement:getName()
     return self.name -- return this node's name
 end
 
--- all elements can be ticked. return value is the status. default status is 'idle'.
+-- all elements can be ticked. return value is the status. default status is IDLE.
 function PlanElement:tick()
     return self.status
 end
