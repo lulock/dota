@@ -39,6 +39,7 @@ ULTIMATE = { -- each hero has different slots for their ultimate abilities
     ["npc_dota_hero_witch_doctor"] = 3
 }
 
+-- STATUS
 IDLE = 0
 RUNNING = 1
 SUCCESS = 2

@@ -116,7 +116,6 @@ end
 
 -- moves to targetLoc location
 function GoToLocation()
-    print('GoToLocation for ', GetBot():GetUnitName())
     GetBot():Action_MoveToLocation( targetLoc )
     if GetBot():GetLocation() == targetLoc then
         return SUCCESS
@@ -129,9 +128,7 @@ end
 -- gets lane front and moves to location
 function GoToCreepWave()
     -- GetBot():Action_ClearActions( false )
-    local bot = GetBot()
     local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
-    print('GoToCreepWave', laneLocation)
     targetLoc = laneLocation
     GetBot():Action_MoveToLocation(laneLocation + RandomVector(RandomFloat(-100,100))) 
 
@@ -317,7 +314,7 @@ function SelectAbility()
     else
         for i = 0, 23 do
             a = GetBot():GetAbilityInSlot( i )
-            if a ~= nil and not a:IsPassive() and a:IsFullyCastable() then
+            if a ~= nil and not a:IsPassive() and a:IsFullyCastable() and a:GetAbilityDamage() > 0 then
                 selectedAbility = a 
                 print('selected ability is ', a:GetName())
                 print('selected ability damage is ', a:GetAbilityDamage())
