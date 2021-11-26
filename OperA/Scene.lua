@@ -29,12 +29,15 @@ function Scene:update()
                     --print('norm', norm.name, 'will impose SANCTIONS!')
                     -- for now sanction is to switch expected drive and current drive
 
-                    -- THIS IS UGLY AND NEEDS TO BE CHANGED
+                    -- TODO: Clean this up
                     for i,d in pairs(norm.planner.root.drives) do
                         if d.name == norm.behaviour then
                             --print('drive is', d.name)
                             norm.planner.root:removeDrive(i)
-                            norm.planner.root:insertDrive(d, 1)
+                            norm.planner.root:insertDrive(d, 1) -- make drive priority # 1
+                            -- log role, time of change, and name of new priority drive to console
+                            print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', d.name) 
+                            -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
                         end
                     end
 

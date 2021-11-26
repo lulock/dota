@@ -1,0 +1,56 @@
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_witch_doctor
+11/23 16:24:17 [VScript] checking sense.	EnemyNearby
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_witch_doctor
+11/23 16:24:17 [VScript] checking sense.	IsFarmingTime
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] checking sense.	IsSafeToFarm
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] ticking element.	C-LastHitFarm
+11/23 16:24:17 [VScript] GoToCreepWave	Vector 000000000026CE98 [4730.773926 -6202.067871 320.000000]
+11/23 16:24:17 [VScript] and drive returned.	running
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_viper
+11/23 16:24:17 [VScript] checking sense.	HasLowHealth
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_viper
+11/23 16:24:17 [VScript] checking sense.	EnemyNearby
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_viper
+11/23 16:24:17 [VScript] checking sense.	IsFarmingTime
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] checking sense.	IsSafeToFarm
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] ticking element.	C-LastHitFarm
+11/23 16:24:17 [VScript] GoToCreepWave	Vector 000000000033BEF8 [782.609863 613.218262 312.765320]
+11/23 16:24:17 [VScript] and drive returned.	running
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_nevermore
+11/23 16:24:17 [VScript] checking sense.	HasLowHealth
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_nevermore
+11/23 16:24:17 [VScript] checking sense.	EnemyNearby
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_nevermore
+11/23 16:24:17 [VScript] checking sense.	IsFarmingTime
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] checking sense.	IsSafeToFarm
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] ticking element.	C-LastHitFarm
+11/23 16:24:17 [VScript] GoToCreepWave	Vector 000000000026D428 [-1721.920898 -1506.863525 268.303833]
+11/23 16:24:17 [VScript] and drive returned.	running
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_witch_doctor
+11/23 16:24:17 [VScript] checking sense.	NearbyAllyHasLowHealth
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_witch_doctor
+11/23 16:24:17 [VScript] checking sense.	HasLowHealth
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_witch_doctor
+11/23 16:24:17 [VScript] checking sense.	EnemyNearby
+11/23 16:24:17 [VScript] senseStatus is:	false
+11/23 16:24:17 [VScript] drive for bot	npc_dota_hero_witch_doctor
+11/23 16:24:17 [VScript] checking sense.	IsFarmingTime
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] checking sense.	IsSafeToFarm
+11/23 16:24:17 [VScript] senseStatus is:	true
+11/23 16:24:17 [VScript] ticking element.	C-LastHitFarm
+11/23 16:24:17 [VScript] GoToCreepWave	Vector 000000000026D8F8 [4730.773926 -6202.067871 320.000000]
+11/23 16:24:17 [VScript] and drive returned.	running
