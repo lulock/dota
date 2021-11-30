@@ -1,4 +1,4 @@
--- io.open--io.open(filename [,mode])
+-- io.open(filename [,mode])
 
 -- r	Open file read-only,The file must exist.
 -- r+	Open Files Readable and Writable,Other Same
@@ -28,31 +28,7 @@ end
 -- Close open files
 file:close()
 
-writefile = io.open("tempfile.txt", "w")
+writefile = io.open("eval/tempfile.txt", "w")
 -- Write content
 writefile:write(content)
 writefile:close()
-
--- --Locate file cursor(That is, setting where to read or write data from a file)
--- file:seek(whence, offset)
--- --"set": Start from file header
--- --"cur": Start from the current location[default]
--- --"end": Start at the end of the file
--- --offset:Default 0
-
--- file:seek()     --Return to current location
--- file:seek("set")    --Locate to File Header
--- file:seek("end")    --Navigate to end of file
-
--- file:flush()
--- --refresh buffer
--- --Generally for performance reasons, when writing a piece of data to a file, it is not written immediately, but first
--- --Cache to a memory buffer, and then when a condition is met or a display call is made file:flush()time
--- --Will write the buffer's data to the file immediately
-
--- file:setvbuf(mode[, size])
--- --Set Buffer Mode
--- -- 'no' Direct write without buffer(Not recommended unless in development debugging phase)
--- -- 'full' Full buffer, write immediately only when the buffer is full
--- -- 'line' Line buffer, written immediately when line breaks are encountered
--- -- When displaying calls file:flush()Will write immediately
