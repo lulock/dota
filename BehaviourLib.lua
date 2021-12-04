@@ -418,6 +418,13 @@ function EnemyNearby()
     return #nearbyEnemyHeroes > 0 and 1 or 0
 end
 
+-- check if any ally hero is within 700 unit radius
+function AllyNearby()
+    local nearbyAllyHeroes = GetBot():GetNearbyHeroes(700, false, BOT_MODE_NONE)
+
+    return #nearbyEnemyHeroes > 1 and 1 or 0 -- true if > 1 hero; first hero in table is always this bot
+end
+
 -- TODO: check if observer ward available
 function HasObserverWard()
     --print  '\n',('HasObserverWard sense fired')
@@ -511,7 +518,7 @@ function HasHighestPriorityAround()
     --print  '\n','unit name is',GetBot():GetUnitName()
 
     -- first, get all allied heroes nearby. 
-    alliesNearby = GetBot():GetNearbyHeroes( 1600, false, BOT_MODE_NONE) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
+    alliesNearby = GetBot():GetNearbyHeroes( 700, false, BOT_MODE_NONE) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
     
     -- remove this bot unit from allied heroes list
     table.remove(alliesNearby, 1) 
