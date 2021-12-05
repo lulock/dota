@@ -1,11 +1,11 @@
 Scene = Class{ }
 
-function Scene:init(name, roles, landmarks, results, norms)
+function Scene:init(name, roles, landmarks, results, rules)
     self.name = name
     self.roles = roles -- multiple roles involved? or only current agent this scene is running on ...
     self.landmarks = landmarks -- sense
     self.results = results -- sense
-    self.norms = norms --  Norm object. has pointer to this agent's planner
+    self.rules = rules -- Rule object, condition with norm behaviour expectation
     -- self.status = false
 end
 
@@ -22,24 +22,26 @@ function Scene:update()
     for _, result in pairs(self.results) do
         -- self:activate() 
         if not result:tick() then -- if result still not met
-            for _, norm in pairs(self.norms) do -- check agents abiding by norms
-                local legal = norm:validate() -- for now this --prints norm
+            for _, rule in pairs(self.rules) do -- check rules
+                local norm = rule:tick() -- get norm / expected behaviour
+                local legal = norm:validate() -- check if in compliance with norm
+                
                 if not legal then -- if agent in violation
                     -- impose sanction (e.g. alter plan)
-                    --print('norm', norm.name, 'will impose SANCTIONS!')
+                    print('norm', norm.name, 'will impose SANCTIONS!')
                     -- for now sanction is to switch expected drive and current drive
 
                     -- TODO: Clean this up
-                    for i,d in pairs(norm.planner.root.drives) do
-                        if d.name == norm.behaviour then
-                            --print('drive is', d.name)
-                            norm.planner.root:removeDrive(i)
-                            norm.planner.root:insertDrive(d, 1) -- make drive priority # 1
-                            -- log role, time of change, and name of new priority drive to console
-                            print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', d.name) 
-                            -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
-                        end
-                    end
+                    -- for i,d in pairs(norm.planner.root.drives) do
+                    --     if d.name == norm.behaviour then
+                    --         --print('drive is', d.name)
+                    --         norm.planner.root:removeDrive(i)
+                    --         norm.planner.root:insertDrive(d, 1) -- make drive priority # 1
+                    --         -- log role, time of change, and name of new priority drive to console
+                    --         print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', d.name) 
+                    --         -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
+                    --     end
+                    -- end
 
                     --print('planner now looks like')
                     printTable(norm.planner.root.drives)

@@ -9,21 +9,24 @@
 
 Rule =  Class{ }
 
-function Rule:init(name, planner, condition, consequence, alternative)
-    self.name = name -- unique name id
-    self.planner = planner -- pointer to bot (or rather bot's plan??) 
-    self.condition = condition -- Sense (IF)
-    self.consequence = consequence -- Drive (THEN)
-    self.alternative = alternative -- Drive (ELSE)
+-- condition: Sense
+-- consequence: Norm 
+-- alternative: Norm
+function Rule:init(conditions, consequence, alternative)
+    self.conditions = conditions -- Sense (IF)
+    self.consequence = consequence -- Norm (THEN)
+    self.alternative = alternative -- Norm (ELSE)
 end
 
-function Rule:validate()
-    -- should the rule validate the norm? OR the norm validate itself?
-    
-    print('if ', self.condition.name)
-    if self.condition:tick() then
-        print('as per norm, the expected behaviour is ', self.consequence.name)
-    else
-        print('as per norm, the expected behaviour is ', self.alternative.name)
+function Rule:tick()
+    for _, condition in pairs(self.conditions) do
+        print('if ', condition.name)
+        if not condition:tick() then
+            print('as per norm, the expected behaviour is ', self.alternative.name)
+            return self.alternative -- conditions not true, return alt norm behaviour
+        end
     end
+    
+    print('as per norm, the expected behaviour is ', self.consequence.name)
+    return self.consequence -- all conditions true, return consequence norm behaviour
 end

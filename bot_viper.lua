@@ -9,7 +9,7 @@
 require ( GetScriptDirectory().."/Dependencies" )
 
 local file = require ( GetScriptDirectory().."/planner/simpleplan" ) -- json string
-local norms = require ( GetScriptDirectory().."/OperA/simplemodel" ) -- json string
+local norms = require ( GetScriptDirectory().."/OperA/IM/scenes/priorityfarm" ) -- json string
 
 local planner = Planner( file ) -- load plan from json string
 printTable(planner.root.drives) -- DEBUG
@@ -29,6 +29,5 @@ function Think()
 		
 		planner.root:tick() -- Return values (SUCCESS, RUNNING, or FAILURE) handled by parent nodes.
 		-- opera:update()
-		-- _G['dump']()
 	end
 end

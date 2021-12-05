@@ -22,7 +22,7 @@ local x = [[{
                     "name": "AllyNearby",
                     "value": "1",
                     "comparator": "bool",
-                }
+                },
 				{
 					"name": "IsFarmingTime",
 					"value": "1",

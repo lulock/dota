@@ -32,14 +32,6 @@ local selectedAbility = GetBot():GetAbilityInSlot( 0 )
 
 -- HELPER FUNCTIONS --
 
-function dump() -- this is super inefficient. 
-    if GameTime() - start > 5 then
-        print(log)
-        log = ''
-        start = GameTime()
-    end 
-end
-
 function getEnemyTeam(team)
     if team == TEAM_RADIANT then 
         return TEAM_DIRE
@@ -244,7 +236,7 @@ end
 function EvadeAttack()
     local iproj = GetBot():GetIncomingTrackingProjectiles()
     if iproj ~= nil then 
-        print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
+        --print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
         if iproj[1].is_dodgeable then
             -- Action_MoveDirectly( vLocation )
             -- ActionPush_MoveDirectly( vLocation )
@@ -309,20 +301,20 @@ function SelectAbility()
     local ult = GetBot():GetAbilityInSlot( ULTIMATE[ GetBot():GetUnitName() ] )
     if ult:IsFullyCastable() then
         selectedAbility = ult
-        print('selected ability is ', ult:GetName())
+        --print('selected ability is ', ult:GetName())
         return SUCCESS
     else
         for i = 0, 23 do
             a = GetBot():GetAbilityInSlot( i )
             if a ~= nil and not a:IsPassive() and a:IsFullyCastable() and a:GetAbilityDamage() > 0 then
                 selectedAbility = a 
-                print('selected ability is ', a:GetName())
-                print('selected ability damage is ', a:GetAbilityDamage())
+                --print('selected ability is ', a:GetName())
+                --print('selected ability damage is ', a:GetAbilityDamage())
                 return SUCCESS
             end
         end
     end
-    print('could not select ability, return failure')
+    --print('could not select ability, return failure')
     return FAILURE
 end
 
@@ -334,7 +326,7 @@ function CastAbility()
     -- The majority of abilities are active abilities. 
     -- They can be activated by pressing their associated Hotkey.
 
-    print('CastAbility function fired')
+    --print('CastAbility function fired')
     if selectedAbility:GetTargetType() == 0 then
         GetBot():Action_UseAbility( selectedAbility )
         return SUCCESS
@@ -422,7 +414,7 @@ end
 function AllyNearby()
     local nearbyAllyHeroes = GetBot():GetNearbyHeroes(700, false, BOT_MODE_NONE)
 
-    return #nearbyEnemyHeroes > 1 and 1 or 0 -- true if > 1 hero; first hero in table is always this bot
+    return #nearbyAllyHeroes > 1 and 1 or 0 -- true if > 1 hero; first hero in table is always this bot
 end
 
 -- TODO: check if observer ward available
@@ -611,7 +603,7 @@ end
 -- checks if any projectiles incoming towards this unit
 function IsUnderAttack()
     local iproj = GetBot():GetIncomingTrackingProjectiles()
-    print('iproj size is ', #iproj)
+    --print('iproj size is ', #iproj)
     return #iproj > 0 and 1 or 0
 end
 

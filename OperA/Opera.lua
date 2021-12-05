@@ -48,7 +48,6 @@ function Opera:init(operaFile, planner)
     self.norms = self:buildNorms(operaTable, planner)
     self.scenes = self:buildScenes(operaTable)
     self.currentScenes = {}
-    self.rules = {}
 
     -- SM
     self.units = nil 
@@ -76,7 +75,7 @@ end
 function Opera:buildScenes(operaTable)
     local scenes = {}
     for _, scene in pairs(operaTable.scenes) do
-        --print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
+        -- print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
         
         local landmarks = {}
         for _, l in pairs(scene.landmarks) do
@@ -84,14 +83,20 @@ function Opera:buildScenes(operaTable)
         end
 
         local results = {}
-        for _, r in pairs(scene.results) do
-            table.insert(results, Sense(r.name, r.value, r.comparator))
+        for _, res in pairs(scene.results) do
+            table.insert(results, Sense(res.name, res.value, res.comparator))
         end
 
         local rules = {}
         for _, r in pairs(scene.rules) do
-            --- construct conditional
-            table.insert(rules, self.rules[r.name]) --- wrong
+            -- construct conditional
+            local conditions = {}
+            for _, cond in pairs(r.conditions) do
+                table.insert(conditions, Sense(cond.name, cond.value, cond.comparator))
+            end
+            
+            local rule = Rule(conditions, self.norms[r.consequence], self.norms[r.alternative])
+            table.insert(rules, rule)
         end
 
         local s = Scene(scene.name, scene.roles, landmarks, results, rules)
@@ -103,29 +108,29 @@ end
 
 ---- OLD BUILD SCENES ----
 
-function Opera:buildScenes(operaTable)
-    local scenes = {}
-    for _, scene in pairs(operaTable.scenes) do
-        --print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
+-- function Opera:buildScenes(operaTable)
+--     local scenes = {}
+--     for _, scene in pairs(operaTable.scenes) do
+--         --print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
         
-        local landmarks = {}
-        for _, l in pairs(scene.landmarks) do
-            table.insert(landmarks, Sense(l.name, l.value, l.comparator))
-        end
+--         local landmarks = {}
+--         for _, l in pairs(scene.landmarks) do
+--             table.insert(landmarks, Sense(l.name, l.value, l.comparator))
+--         end
 
-        local results = {}
-        for _, r in pairs(scene.results) do
-            table.insert(results, Sense(r.name, r.value, r.comparator))
-        end
+--         local results = {}
+--         for _, r in pairs(scene.results) do
+--             table.insert(results, Sense(r.name, r.value, r.comparator))
+--         end
 
-        local norms = {}
-        for _, n in pairs(scene.norms) do
-            table.insert(norms, self.norms[n.name])
-        end
+--         local norms = {}
+--         for _, n in pairs(scene.norms) do
+--             table.insert(norms, self.norms[n.name])
+--         end
 
-        local s = Scene(scene.name, scene.roles, landmarks, results, norms)
-        --print('scene just created is ', s.name)
-        table.insert(scenes, s)
-    end
-    return scenes
-end
+--         local s = Scene(scene.name, scene.roles, landmarks, results, norms)
+--         --print('scene just created is ', s.name)
+--         table.insert(scenes, s)
+--     end
+--     return scenes
+-- end
