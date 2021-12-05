@@ -1,5 +1,5 @@
 -- priority farming scene for pos 5 role.
--- TODO: add new variable "Rules". IF THEN conditions. Norm is only a bool indicating the expected behaviour (Drive)
+-- TODO: add new variable "Rules". IF (condition) THEN (consequence) ELSE (alternative). Norm is name of the expected behaviour (Drive)
 local x = [[{
 	"norms": [
 		{
@@ -50,17 +50,8 @@ local x = [[{
                             "comparator" : "bool"
                         }
                     ], 
-                    "norm" : "farm"
-                },
-                {
-                    "conditions" : [
-                        {
-                            "name" : "HasHighestPriorityAround",
-                            "value" : "0",
-                            "comparator" : "bool"
-                        }
-                    ], 
-                    "norm" : "harass"
+                    "consequence" : "farm",
+					"alternative" : "harass"
                 }
             ]
 		}

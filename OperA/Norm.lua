@@ -21,9 +21,9 @@ Norm =  Class{ }
 
 function Norm:init(name, planner, behaviour, operator)
     self.name = name -- unique name id
-    self.planner = planner -- pointer to bot (or rather bot's planner??) 
+    self.planner = planner -- pointer to bot (or rather bot's plan??) 
     self.behaviour = behaviour -- maybe this should be drive ID?
-    self.operator = operator -- OBLIGED / PERMITTED
+    self.operator = operator -- OBLIGED / PERMITTED / TODO: NOT PERMITTED
 end
 
 function Norm:validate()

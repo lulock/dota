@@ -48,6 +48,7 @@ function Opera:init(operaFile, planner)
     self.norms = self:buildNorms(operaTable, planner)
     self.scenes = self:buildScenes(operaTable)
     self.currentScenes = {}
+    self.rules = {}
 
     -- SM
     self.units = nil 
@@ -71,6 +72,36 @@ function Opera:buildNorms(operaTable, planner)
     end
     return norms
 end
+
+function Opera:buildScenes(operaTable)
+    local scenes = {}
+    for _, scene in pairs(operaTable.scenes) do
+        --print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
+        
+        local landmarks = {}
+        for _, l in pairs(scene.landmarks) do
+            table.insert(landmarks, Sense(l.name, l.value, l.comparator))
+        end
+
+        local results = {}
+        for _, r in pairs(scene.results) do
+            table.insert(results, Sense(r.name, r.value, r.comparator))
+        end
+
+        local rules = {}
+        for _, r in pairs(scene.rules) do
+            --- construct conditional
+            table.insert(rules, self.rules[r.name]) --- wrong
+        end
+
+        local s = Scene(scene.name, scene.roles, landmarks, results, rules)
+        --print('scene just created is ', s.name)
+        table.insert(scenes, s)
+    end
+    return scenes
+end
+
+---- OLD BUILD SCENES ----
 
 function Opera:buildScenes(operaTable)
     local scenes = {}
