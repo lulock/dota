@@ -23,6 +23,11 @@ local x = [[{
                     "value": "1",
                     "comparator": "bool",
                 },
+                {
+                    "name": "EnemyCreepNearby",
+                    "value": "1",
+                    "comparator": "bool",
+                },
 				{
 					"name": "IsFarmingTime",
 					"value": "1",
