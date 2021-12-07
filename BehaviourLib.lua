@@ -651,3 +651,13 @@ end
 
 -- Command a bot to use a tree targeted ability or item on the specified tree
 -- Action_PickUpRune( nRune )
+
+-- Action_MoveDirectly( vLocation )
+-- ActionPush_MoveDirectly( vLocation )
+-- ActionQueue_MoveDirectly( vLocation )
+
+-- Command a bot to move to the specified location, bypassing the bot pathfinder. Identical to a user's right-click.
+
+-- bool IsEvadeDisabled()
+
+-- Returns whether the unit is unable to evade attacks.

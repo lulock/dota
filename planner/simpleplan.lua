@@ -50,6 +50,14 @@ local x = [[{
 			]
 		},
 		{
+			"name": "AP-EvadeAttack",
+			"actions": [
+				{
+					"name": "EvadeAttack"
+				}
+			]
+		},
+		{
 			"name": "AP-TeleportToLaneTower",
 			"actions": [
 				{
@@ -191,6 +199,17 @@ local x = [[{
 						}
 					],
 					"element": "C-GoToLane"
+				},
+				{
+					"name": "CE-EvadeAttack",
+					"Senses": [
+						{
+							"name": "IsUnderAttack",
+							"value": "1",
+							"comparator": "bool"
+						},
+					],
+					"element": "AP-EvadeAttack"
 				},
 				{
 					"name": "CE-EnemyAbility",
