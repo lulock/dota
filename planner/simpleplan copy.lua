@@ -12,6 +12,20 @@ local x = [[{
 			]
 		},
 		{
+			"name": "AP-PlaceWardInLane",
+			"actions": [
+				{
+					"name": "SelectWardLocation"
+				},
+				{
+					"name": "GoToLocation"
+				},
+				{
+					"name": "PlaceObserverWard"
+				}
+			]
+		},
+		{
 			"name": "AP-Idle",
 			"actions": [
 				{
@@ -50,10 +64,44 @@ local x = [[{
 			"name": "AP-RightClickAttack",
 			"actions": [
 				{
+					"name": "EvadeAttack"
+				},
+				{
 					"name": "SelectTarget"
 				},
 				{
 					"name": "RightClickAttack"
+				}
+			]
+		},
+		{
+			"name": "AP-RightClickAttackHero",
+			"actions": [
+				{
+					"name": "EvadeAttack"
+				},
+				{
+					"name": "SelectHeroTarget"
+				},
+				{
+					"name": "RightClickAttack"
+				}
+			]
+		},
+		{
+			"name": "AP-CastAbilityAttack",
+			"actions": [
+				{
+					"name": "EvadeAttack"
+				},
+				{
+					"name": "SelectHeroTarget"
+				},
+				{
+					"name": "SelectAbility"
+				},
+				{
+					"name": "CastAbility"
 				}
 			]
 		}
@@ -136,22 +184,49 @@ local x = [[{
 			"name": "C-Harass",
 			"goals": [
 				{
-					"name": "EnemyNearby",
+					"name": "FarmLaneDesire",
 					"value": "0",
 					"comparator": "bool"
 				}
 			],
 			"elements": [
 				{
-					"name": "CE-EnemyRightClick",
+					"name": "CE-GoToCorrectLane",
 					"Senses": [
 						{
-							"name": "EnemyHeroNearby",
+							"name": "IsCorrectLane",
+							"value": "0",
+							"comparator": "bool"
+						}
+					],
+					"element": "C-GoToLane"
+				},
+				{
+					"name": "CE-EnemyAbility",
+					"Senses": [
+						{
+							"name": "EnemyNearby",
+							"value": "1",
+							"comparator": "bool"
+						},
+						{
+							"name": "IsAbilityCastable",
 							"value": "1",
 							"comparator": "bool"
 						}
 					],
-					"element": "AP-RightClickAttack"
+					"element": "AP-CastAbilityAttack"
+				},
+				{
+					"name": "CE-EnemyRightClick",
+					"Senses": [
+						{
+							"name": "EnemyNearby",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-RightClickAttackHero"
 				}
 			]
 		},
@@ -179,11 +254,6 @@ local x = [[{
 				{
 					"name": "CE-LastHit",
 					"Senses": [
-						{
-							"name": "HasHighestPriorityAround",
-							"value": "1",
-							"comparator": "bool"
-						},
 						{
 							"name": "EnemyCreepNearby",
 							"value": "1",
@@ -217,6 +287,21 @@ local x = [[{
 			"Senses": [
 				{
 					"name": "HasLowHealth",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
+		{
+			"name": "DE-Harass",
+			"element": 
+			{
+				"name": "C-Harass"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "EnemyNearby",
 					"value": "1",
 					"comparator": "bool"
 				}

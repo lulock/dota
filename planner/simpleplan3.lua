@@ -12,20 +12,6 @@ local x = [[{
 			]
 		},
 		{
-			"name": "AP-PlaceWardInLane",
-			"actions": [
-				{
-					"name": "SelectWardLocation"
-				},
-				{
-					"name": "GoToLocation"
-				},
-				{
-					"name": "PlaceObserverWard"
-				}
-			]
-		},
-		{
 			"name": "AP-Idle",
 			"actions": [
 				{
@@ -45,7 +31,7 @@ local x = [[{
 			"name": "AP-Follow",
 			"actions": [
 				{
-					"name": "GoToCore"
+					"name": "GoToPartner"
 				}
 			]
 		},

@@ -12,20 +12,6 @@ local x = [[{
 			]
 		},
 		{
-			"name": "AP-PlaceWardInLane",
-			"actions": [
-				{
-					"name": "SelectWardLocation"
-				},
-				{
-					"name": "GoToLocation"
-				},
-				{
-					"name": "PlaceObserverWard"
-				}
-			]
-		},
-		{
 			"name": "AP-Idle",
 			"actions": [
 				{
@@ -45,15 +31,7 @@ local x = [[{
 			"name": "AP-Follow",
 			"actions": [
 				{
-					"name": "GoToCore"
-				}
-			]
-		},
-		{
-			"name": "AP-EvadeAttack",
-			"actions": [
-				{
-					"name": "EvadeAttack"
+					"name": "GoToPartner"
 				}
 			]
 		},
@@ -199,17 +177,6 @@ local x = [[{
 						}
 					],
 					"element": "C-GoToLane"
-				},
-				{
-					"name": "CE-EvadeAttack",
-					"Senses": [
-						{
-							"name": "IsUnderAttack",
-							"value": "1",
-							"comparator": "bool"
-						},
-					],
-					"element": "AP-EvadeAttack"
 				},
 				{
 					"name": "CE-EnemyAbility",
@@ -361,7 +328,7 @@ local x = [[{
 			"checkTime": "0",
 			"Senses": [
 				{
-					"name": "IsFarFromCarry",
+					"name": "IsFarFromPartner",
 					"value": "1",
 					"comparator": "bool"
 				}
