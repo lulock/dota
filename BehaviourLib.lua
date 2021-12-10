@@ -24,6 +24,10 @@ local evadeLoc = nil
 local targetAllyHero = nil
 local interval = 10
 
+local evadeLoc = nil
+local maxActions = 4
+local lowHealth = 0.25
+
 -- default selected ability is first ability but this might be passive ... 
 local selectedAbility = GetBot():GetAbilityInSlot( 0 )
 
@@ -127,14 +131,27 @@ function EvadeAttack()
     local iproj = GetBot():GetIncomingTrackingProjectiles()
     -- print("iproj nil?", #iproj)
     if #iproj > 0 then 
+        local attack = iproj[1]
         --print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
-        if iproj[1].is_dodgeable then
-            local loc = GetBot():GetLocation()
-            -- GetBot():Action_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-            -- GetBot():ActionQueue_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-            evadeLoc = Vector(loc.x - 100, loc.y, loc.z)
-            GetBot():Action_MoveToLocation( evadeLoc )
-            print("evaded to", evadeLoc )
+        if attack.is_dodgeable then
+            if evadeLoc == nil then
+                local loc = GetBot():GetLocation()
+                local dist = GetUnitToLocationDistance(GetBot(), attack.location)
+                -- GetBot():Action_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
+                -- GetBot():ActionQueue_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
+                -- evadeLoc = Vector(loc.x - 100, loc.y, loc.z)
+                evadeLoc = (attack.location - loc) / dist
+
+                -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+                GetBot():ActionPush_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+                print("evaded to", evadeLoc )
+            else
+                if GetUnitToLocationDistance(GetBot(), evadeLoc) < 20 then
+                    print("setting evadeloc to nil")
+                    evadeLoc = nil
+                end
+            end
+            -- check if evade in queue
         end
     end
     return SUCCESS
@@ -173,7 +190,38 @@ end
 
 -- right click attacks target once
 function RightClickAttack()
-    GetBot():Action_AttackUnit(GetBot():GetTarget(), true)
+    
+
+    -- GetBot():ActionQueue_MoveToLocation( GetBot():GetLocation() + Vector(100, 0, 0) )
+    local iproj = GetBot():GetIncomingTrackingProjectiles()
+    -- print("iproj nil?", #iproj)
+    if #iproj > 0 then 
+        local attack = iproj[1]
+        --print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
+        if attack.is_dodgeable then
+            
+            local loc = GetBot():GetLocation()
+            local dist = GetUnitToLocationDistance(GetBot(), attack.location)
+            -- GetBot():Action_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
+            -- GetBot():ActionQueue_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
+            -- evadeLoc = Vector(loc.x - 100, loc.y, loc.z)
+            evadeLoc = (attack.location - loc) / dist
+
+            -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+            -- first clear actions
+            GetBot():Action_ClearActions(false)
+            GetBot():ActionPush_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+            print("evaded to", evadeLoc )
+            -- check if evade in queue
+        end
+    end
+
+    if GetBot():NumQueuedActions() < maxActions then
+        GetBot():ActionQueue_AttackUnit(GetBot():GetTarget(), true)
+    end
+    -- GetBot():Action_MoveDirectly(GetBot():GetLocation() - RandomVector(100))
+    -- GetBot():ActionImmediate_Chat( "attack", true ) 
+    -- print("in RCA, # of queued actions ", GetBot():NumQueuedActions())
     return SUCCESS
 end
 
@@ -202,6 +250,7 @@ end
 
 -- cast ability on target once
 function CastAbility()
+
     -- Active abilities must be used in order to apply their effects. 
     -- Active abilities can consume mana, have cooldowns, 
     -- and usually have some method of targeting related to them. 
@@ -209,12 +258,40 @@ function CastAbility()
     -- They can be activated by pressing their associated Hotkey.
 
     --print('CastAbility function fired')
-    if selectedAbility:GetTargetType() == 0 then
-        GetBot():Action_UseAbility( selectedAbility )
-        return SUCCESS
+    -- GetBot():ActionQueue_MoveToLocation( GetBot():GetLocation() + Vector(100, 0, 0) )
+    local iproj = GetBot():GetIncomingTrackingProjectiles()
+    -- print("iproj nil?", #iproj)
+    if #iproj > 0 then 
+        local attack = iproj[1]
+        --print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
+        if attack.is_dodgeable then
+            
+            local loc = GetBot():GetLocation()
+            local dist = GetUnitToLocationDistance(GetBot(), attack.location)
+            -- GetBot():Action_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
+            -- GetBot():ActionQueue_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
+            -- evadeLoc = Vector(loc.x - 100, loc.y, loc.z)
+            evadeLoc = (attack.location - loc) / dist
+
+            -- first clear actions
+            GetBot():Action_ClearActions(true)
+            GetBot():ActionQueue_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+            print("evaded to", evadeLoc )
+            -- check if evade in queue
+        end
+        -- GetBot():ActionQueue_MoveToLocation( GetBot():GetLocation() + Vector(100, 0, 0) )
+        -- GetBot():ActionQueue_AttackUnit(GetBot():GetTarget(), true)
     end
 
-    GetBot():Action_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
+    if GetBot():NumQueuedActions() < maxActions then
+        -- attack with ability
+        if selectedAbility:GetTargetType() == 0 then
+            GetBot():ActionQueue_UseAbility( selectedAbility )
+        else
+            GetBot():ActionQueue_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
+        end
+    end
+
     return SUCCESS
 end
 
@@ -276,7 +353,7 @@ end
 -- check if hero has health below 80%
 function HasLowHealth()
     local currentHealth = GetBot():GetHealth()/GetBot():GetMaxHealth()
-    return currentHealth < 0.8 and 1 or 0
+    return currentHealth < lowHealth and 1 or 0
 end
 
 -- check if any enemy hero is within 700 unit radius
@@ -394,7 +471,7 @@ function NearbyAllyHasLowHealth()
         for _,ally in pairs(nearbyAllies) do
             local health = ally:GetHealth()
             local maxHealth = ally:GetMaxHealth()
-            if health/maxHealth < 0.8 then
+            if health/maxHealth < lowHealth then
                 return 1
             end
         end
