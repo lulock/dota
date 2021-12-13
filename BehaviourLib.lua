@@ -48,36 +48,54 @@ function GoToPartner()
 end
 
 -- select and set targetLoc as location along lane
-function SelectLaneLocation()
-    targetLoc = GetLocationAlongLane( GetBot():GetAssignedLane() , 0.5 )
-    return SUCCESS
+function SelectLaneLocation(status)
+    if status == IDLE then
+        targetLoc = GetLocationAlongLane( GetBot():GetAssignedLane() , 0.5 )
+        return SUCCESS
+    end
+    return status
 end
 
 -- moves to targetLoc location
-function GoToLocation()
+function GoToLocation(status)
     local epsilon = 10
-
-    GetBot():Action_MoveToLocation( targetLoc )
-    if GetUnitToLocationDistance(GetBot(), targetLoc) < epsilon then
-        return SUCCESS
-    else
+    if status == IDLE then
+        GetBot():ActionQueue_MoveToLocation( targetLoc )
         return RUNNING
+    elseif status == RUNNING then 
+        if GetUnitToLocationDistance(GetBot(), targetLoc) < epsilon then
+            return SUCCESS
+        else
+            return RUNNING
+        end
     end
-    -- TODO: add condition if times up, return failure
+    return status
 end
 
 -- gets lane front and moves to location
-function GoToCreepWave()
-    -- GetBot():Action_ClearActions( false )
+function GoToCreepWave(status)
+    print("GoToCreepWave called with status, ", status)
+    local epsilon = 100
     local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
-    GetBot():Action_MoveToLocation(laneLocation) 
+    if status == IDLE then
+        print ("GO2CREEP - start, MOVE TO LOC")
+        GetBot():ActionQueue_MoveToLocation( laneLocation )
+        return RUNNING
+    elseif status == RUNNING then 
+        print ("GO2CREEP - RUNNING: checking destination reached")
+        if GetUnitToLocationDistance( GetBot(), laneLocation ) < epsilon then
+            print ("GO2CREEP - reached DEST")
+            return SUCCESS
+        else
+            return RUNNING
+        end
+    end
+    return status
 
-    return RUNNING
-    -- TODO: add condition if times up, return failure
 end
 
 -- selects base as safe location
-function SelectSafeLocation()
+function SelectSafeLocation(status)
     -- print('SelectSafeLocation')
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
@@ -190,31 +208,7 @@ end
 
 -- right click attacks target once
 function RightClickAttack()
-    
-
     -- GetBot():ActionQueue_MoveToLocation( GetBot():GetLocation() + Vector(100, 0, 0) )
-    local iproj = GetBot():GetIncomingTrackingProjectiles()
-    -- print("iproj nil?", #iproj)
-    if #iproj > 0 then 
-        local attack = iproj[1]
-        --print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
-        if attack.is_dodgeable then
-            
-            local loc = GetBot():GetLocation()
-            local dist = GetUnitToLocationDistance(GetBot(), attack.location)
-            -- GetBot():Action_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-            -- GetBot():ActionQueue_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-            -- evadeLoc = Vector(loc.x - 100, loc.y, loc.z)
-            evadeLoc = (attack.location - loc) / dist
-
-            -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-            -- first clear actions
-            GetBot():Action_ClearActions(false)
-            GetBot():ActionPush_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-            print("evaded to", evadeLoc )
-            -- check if evade in queue
-        end
-    end
 
     if GetBot():NumQueuedActions() < maxActions then
         GetBot():ActionQueue_AttackUnit(GetBot():GetTarget(), true)
@@ -258,31 +252,6 @@ function CastAbility()
     -- They can be activated by pressing their associated Hotkey.
 
     --print('CastAbility function fired')
-    -- GetBot():ActionQueue_MoveToLocation( GetBot():GetLocation() + Vector(100, 0, 0) )
-    local iproj = GetBot():GetIncomingTrackingProjectiles()
-    -- print("iproj nil?", #iproj)
-    if #iproj > 0 then 
-        local attack = iproj[1]
-        --print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
-        if attack.is_dodgeable then
-            
-            local loc = GetBot():GetLocation()
-            local dist = GetUnitToLocationDistance(GetBot(), attack.location)
-            -- GetBot():Action_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-            -- GetBot():ActionQueue_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-            -- evadeLoc = Vector(loc.x - 100, loc.y, loc.z)
-            evadeLoc = (attack.location - loc) / dist
-
-            -- first clear actions
-            GetBot():Action_ClearActions(true)
-            GetBot():ActionQueue_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-            print("evaded to", evadeLoc )
-            -- check if evade in queue
-        end
-        -- GetBot():ActionQueue_MoveToLocation( GetBot():GetLocation() + Vector(100, 0, 0) )
-        -- GetBot():ActionQueue_AttackUnit(GetBot():GetTarget(), true)
-    end
-
     if GetBot():NumQueuedActions() < maxActions then
         -- attack with ability
         if selectedAbility:GetTargetType() == 0 then

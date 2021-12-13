@@ -27,6 +27,17 @@ end
 
 function Action:tick()
     --print('ticking action', self.name)
-    self.status = _G[self.name]() --execute command called (by name) in the global namespace
-    return self.status --return success, running, or failure
+    self.status = _G[self.name](self.status)
+    return self.status
 end
+
+function Action:reset()
+    self.status = IDLE
+end
+
+-- OLD TICK -- 
+-- function Action:tick()
+--     --print('ticking action', self.name)
+--     self.status = _G[self.name]() --execute command called (by name) in the global namespace
+--     return self.status --return success, running, or failure
+-- end

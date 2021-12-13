@@ -27,15 +27,28 @@ function ActionPattern:init(name, actions)
 end
 
 function ActionPattern:tick()
+
     for _,action in pairs(self.actions) do
-        self.status = action:tick() --tick child
-        if self.status == FAILURE or self.status ==RUNNING then
-            break
-        end    
-        --continue
+    
+        local childStatus = action:tick() -- tick child
+        if childStatus == FAILURE then -- action failed, return 
+            self:resetChildren()
+            self.status = IDLE -- reset status
+            return FAILURE
+        elseif childStatus == RUNNING then
+            return RUNNING
+        end
+        -- on success, continue to next child
     end
-    -- return SUCCESS --return running, failure, or success
-    return self.status --return running, failure, or success
+    self.status = IDLE
+    self:resetChildren()
+    return SUCCESS
+end
+
+function ActionPattern:resetChildren()
+    for _,action in pairs(self.actions) do
+        action:reset()
+    end
 end
 
 function ActionPattern:oldtick()
