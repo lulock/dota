@@ -24,6 +24,12 @@ local x = [[{
 			"actions": [
 				{
 					"name": "GoToCreepWave"
+				},
+				{
+					"name": "SelectTarget"
+				},
+				{
+					"name": "RightClickAttack"
 				}
 			]
 		},
@@ -255,40 +261,10 @@ local x = [[{
 	],
 	"DriveElements": [
 		{
-			"name": "DE-Retreat",
+			"name": "DE-GoToLane",
 			"element":
 			{
-				"name": "AP-GoToSafeLocation"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "HasLowHealth",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
-			"name": "DE-Harass",
-			"element": 
-			{
-				"name": "C-Harass"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "EnemyNearby",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
-			"name": "DE-FarmLane",
-			"element": 
-			{
-				"name": "C-LastHitFarm"
+				"name": "AP-GoToLane"
 			},
 			"checkTime": "0",
 			"Senses": [
@@ -299,36 +275,6 @@ local x = [[{
 				},
 				{
 					"name": "IsSafeToFarm",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
-			"name": "DE-Idle",
-			"element": 
-			{
-				"name": "AP-Idle"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "EnemyNearby",
-					"value": "0",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
-			"name": "DE-Support",
-			"element":
-			{
-				"name": "AP-Follow"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "IsFarFromPartner",
 					"value": "1",
 					"comparator": "bool"
 				}

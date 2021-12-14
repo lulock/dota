@@ -33,8 +33,8 @@ local selectedAbility = GetBot():GetAbilityInSlot( 0 )
 
 -- ACTIONS --
 
--- move to assigned ally unit
-function GoToPartner()
+-- move to assigned ally unit TODO: refactor
+function GoToPartner( )
 
     local partnerPos = PARTNERS[ GetBot():GetUnitName() ]
     local partnerHandle = GetTeamMember( POSITIONS[ partnerPos ] )
@@ -170,34 +170,37 @@ function EvadeAttack()
 end
 
 -- select enemy hero target
-function SelectHeroTarget()
-    -- first check if any enemy heroes nearby
-    local enemyHeroesNearby = GetBot():GetNearbyHeroes(700, true, BOT_MODE_NONE)
+function SelectHeroTarget( status )
+    
+    if status == IDLE then
+        -- first check if any enemy heroes nearby
+        local enemyHeroesNearby = GetBot( ):GetNearbyHeroes( 700, true, BOT_MODE_NONE )
+        local thresholdTarget = 2*GetBot( ):GetAttackDamage( )
 
-    -- TODO: check each hero's target, if they are farming / harassing high priority ally, then select that hero.
-    if #enemyHeroesNearby > 0 then
+        -- TODO: check each hero's target, if they are farming / harassing high priority ally, then select that hero.
+        if #enemyHeroesNearby > 0 then
 
-        for _,hero in pairs(enemyHeroesNearby) do
-            
-            -- if this hero has a target, then attack
-            if hero:GetAttackTarget() ~= nil then
-                -- location, caster, player, ability, is_dodgeable, is_attack
-                target = hero
-                GetBot():SetTarget( hero )
-                return SUCCESS
+            for _,hero in pairs( enemyHeroesNearby ) do
+                
+                -- if this hero has a target, then attack
+                if hero:GetAttackTarget( ) ~= nil then
+                    -- location, caster, player, ability, is_dodgeable, is_attack
+                    target = hero
+                    GetBot( ):SetTarget( hero )
+                end
             end
 
+            -- otherwise just target the closest enemy 
+            target = enemyHeroesNearby[1]
+            GetBot( ):SetTarget( target )
+            return SUCCESS
+
         end
-
-        -- otherwise just target the closest enemy 
-        target = enemyHeroesNearby[1]
-        GetBot():SetTarget( target )
-        return SUCCESS
-
+        -- else
+        return FAILURE
     end
-    
-    -- else
-    return FAILURE
+    return status
+
 end
 
 -- right click attacks target once
@@ -222,47 +225,51 @@ end
 
 -- select ability to case
 function SelectAbility()
-    -- first check if ultimate is available
-    local ult = GetBot():GetAbilityInSlot( ULTIMATE[ GetBot():GetUnitName() ] )
-    if ult:IsFullyCastable() then
-        selectedAbility = ult
-        --print('selected ability is ', ult:GetName())
-        return SUCCESS
-    else
-        for i = 0, 23 do
-            a = GetBot():GetAbilityInSlot( i )
-            if a ~= nil and not a:IsPassive() and a:IsFullyCastable() and a:GetAbilityDamage() > 0 then
-                selectedAbility = a 
-                --print('selected ability is ', a:GetName())
-                --print('selected ability damage is ', a:GetAbilityDamage())
-                return SUCCESS
+
+    if status == IDLE then
+        -- first check if ultimate is available
+        local ult = GetBot():GetAbilityInSlot( ULTIMATE[ GetBot():GetUnitName() ] )
+        if ult:IsFullyCastable() then
+            selectedAbility = ult
+            --print('selected ability is ', ult:GetName())
+            return SUCCESS
+        else
+            for i = 0, 23 do
+                a = GetBot():GetAbilityInSlot( i )
+                if a ~= nil and not a:IsPassive() and a:IsFullyCastable() and a:GetAbilityDamage() > 0 then
+                    selectedAbility = a 
+                    --print('selected ability is ', a:GetName())
+                    --print('selected ability damage is ', a:GetAbilityDamage())
+                    return SUCCESS
+                end
             end
         end
+        print('could not select ability, return failure')
+        return FAILURE
     end
-    --print('could not select ability, return failure')
-    return FAILURE
+    return status
 end
 
 -- cast ability on target once
-function CastAbility()
+function CastAbility( status )
 
-    -- Active abilities must be used in order to apply their effects. 
-    -- Active abilities can consume mana, have cooldowns, 
-    -- and usually have some method of targeting related to them. 
-    -- The majority of abilities are active abilities. 
-    -- They can be activated by pressing their associated Hotkey.
-
-    --print('CastAbility function fired')
-    if GetBot():NumQueuedActions() < maxActions then
-        -- attack with ability
+    if status == IDLE then
         if selectedAbility:GetTargetType() == 0 then
             GetBot():ActionQueue_UseAbility( selectedAbility )
         else
             GetBot():ActionQueue_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
         end
+        return RUNNING
+    elseif status == RUNNING then 
+        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY then
+            print ( "Cast Ability - SUCCESS" )
+            return SUCCESS
+        else
+            return RUNNING
+        end
     end
+    return status
 
-    return SUCCESS
 end
 
 -- selects allied hero to heal TODO: Check the need for this. Voodoo Restoration takes NO TARGET. but perhaps healing salve / tango needs targets to share.
@@ -306,48 +313,48 @@ function GetUnits()
 end
 
 -- use scroll to target location
-function TpToLocation()
-    local slot = GetBot():FindItemSlot( "item_tpscroll" )
-    local scroll = GetBot():GetItemInSlot( slot )
-    GetBot():Action_UseAbilityOnLocation( scroll , targetLoc )
+function TpToLocation( status )
+    local slot = GetBot( ):FindItemSlot( "item_tpscroll" )
+    local scroll = GetBot( ):GetItemInSlot( slot )
+    GetBot( ):Action_UseAbilityOnLocation( scroll , targetLoc )
     return SUCCESS
 end
 
 -- does nothing
-function Idle()
+function Idle( status )
     return SUCCESS
 end
 
 -- SENSES --
 
 -- check if hero has health below 80%
-function HasLowHealth()
-    local currentHealth = GetBot():GetHealth()/GetBot():GetMaxHealth()
+function HasLowHealth( )
+    local currentHealth = GetBot( ):GetHealth( )/GetBot( ):GetMaxHealth( )
     return currentHealth < lowHealth and 1 or 0
 end
 
 -- check if any enemy hero is within 700 unit radius
-function EnemyNearby()
-    local nearbyEnemyHeroes = GetBot():GetNearbyHeroes(700, true, BOT_MODE_NONE)
+function EnemyNearby( )
+    local nearbyEnemyHeroes = GetBot( ):GetNearbyHeroes( 700, true, BOT_MODE_NONE )
     return #nearbyEnemyHeroes > 0 and 1 or 0
 end
 
 -- check if any ally hero is within 700 unit radius
-function AllyNearby()
-    local nearbyAllyHeroes = GetBot():GetNearbyHeroes(700, false, BOT_MODE_NONE)
+function AllyNearby( )
+    local nearbyAllyHeroes = GetBot( ):GetNearbyHeroes( 700, false, BOT_MODE_NONE )
 
     return #nearbyAllyHeroes > 1 and 1 or 0 -- true if > 1 hero; first hero in table is always this bot
 end
 
 -- check team's desire to farm
 -- TODO: this should probably be adjustable in the OperA module too. Desire is a top level, team strategy function
-function FarmLaneDesire()
+function FarmLaneDesire( )
     return GetFarmLaneDesire(GetBot():GetAssignedLane()) > 0 and 1 or 0
 end
 
 -- checks if in correct lane and position
-function IsCorrectLane()
-    local dist = GetUnitToLocationDistance( GetBot(), GetLaneFrontLocation( GetBot():GetTeam() , GetBot():GetAssignedLane(), 0) )
+function IsCorrectLane( )
+    local dist = GetUnitToLocationDistance( GetBot( ), GetLaneFrontLocation( GetBot( ):GetTeam( ), GetBot( ):GetAssignedLane( ), 0) )
     
     if dist < 500 then --500 might not be the right number
         return 1
@@ -357,30 +364,30 @@ function IsCorrectLane()
 end
 
 -- check if it is farming time
-function IsFarmingTime()   
-    local time = DotaTime()
+function IsFarmingTime( )   
+    local time = DotaTime( )
     return time < 10 * 60 and 1 or 0 -- for now, farming time is first 10 mins (laning phase)
 end
 
 -- check if it is safe to farm
-function IsSafeToFarm()
-    return GetBot():WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
+function IsSafeToFarm( )
+    return GetBot( ):WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
 end
 
 -- check if teleportation scroll is available
-function IsScrollAvailable()
+function IsScrollAvailable( )
     return GetItemStockCount( "item_tpscroll" ) > 0 and 1 or 0
 end
 
 -- check if target is dead
-function IsLastHit()
-    return target:IsAlive() and 1 or 0
+function IsLastHit( )
+    return target:IsAlive( ) and 1 or 0
 end
 
 -- check if this hero has highest position around
-function HasHighestPriorityAround()
+function HasHighestPriorityAround( )
     -- first, get all allied heroes nearby. 
-    alliesNearby = GetBot():GetNearbyHeroes( 700, false, BOT_MODE_NONE) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
+    alliesNearby = GetBot():GetNearbyHeroes( 700, false, BOT_MODE_NONE ) -- within 700 unit radius, BOT_MODE_NONE specifies all heroes
     
     table.remove(alliesNearby, 1) -- remove this bot unit from allied heroes list
     if #alliesNearby > 0 then
@@ -433,14 +440,14 @@ function IsUnderAttack()
 end
 
 -- check if allied heroes around have health below 80%
-function NearbyAllyHasLowHealth()
+function NearbyAllyHasLowHealth( )
     -- print('in NearbyAllyHasLowHealth')
 
-    local nearbyAllies = GetBot():GetNearbyHeroes( 1600 , false , BOT_MODE_NONE) -- get all allied heroes within 1600 radius
+    local nearbyAllies = GetBot( ):GetNearbyHeroes( 1600 , false , BOT_MODE_NONE) -- get all allied heroes within 1600 radius
     if nearbyAllies ~= nil then
-        for _,ally in pairs(nearbyAllies) do
-            local health = ally:GetHealth()
-            local maxHealth = ally:GetMaxHealth()
+        for _,ally in pairs( nearbyAllies ) do
+            local health = ally:GetHealth( )
+            local maxHealth = ally:GetMaxHealth( )
             if health/maxHealth < lowHealth then
                 return 1
             end
@@ -453,18 +460,18 @@ end
 ---------------- INCOMPLETE IMPLEMENTATIONS ----------------
 
 -- TODO: check if distance to target location is walkable 
-function IsWalkableDistance()
+function IsWalkableDistance( )
     return 1
 end
 
 -- TODO: check if creeps within right click range
-function CreepWithinRightClickRange()    
+function CreepWithinRightClickRange( )    
     -- int GetAttackRange()
     -- Returns the range at which the unit can attack another unit.
     return 1
 end
 
 -- TODO: check if creeps can be last hit
-function CreepCanBeLastHit()
+function CreepCanBeLastHit( )
     return 1
 end
