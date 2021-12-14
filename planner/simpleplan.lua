@@ -24,6 +24,12 @@ local x = [[{
 			"actions": [
 				{
 					"name": "GoToCreepWave"
+				},
+				{
+					"name": "SelectTarget"
+				},
+				{
+					"name": "RightClickAttack"
 				}
 			]
 		},

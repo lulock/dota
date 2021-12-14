@@ -48,16 +48,16 @@ function GoToPartner()
 end
 
 -- select and set targetLoc as location along lane
-function SelectLaneLocation(status)
+function SelectLaneLocation( status )
     if status == IDLE then
-        targetLoc = GetLocationAlongLane( GetBot():GetAssignedLane() , 0.5 )
+        targetLoc = GetLocationAlongLane( GetBot( ):GetAssignedLane( ) , 0.5)
         return SUCCESS
     end
     return status
 end
 
 -- moves to targetLoc location
-function GoToLocation(status)
+function GoToLocation( status )
     local epsilon = 10
     if status == IDLE then
         GetBot():ActionQueue_MoveToLocation( targetLoc )
@@ -73,17 +73,14 @@ function GoToLocation(status)
 end
 
 -- gets lane front and moves to location
-function GoToCreepWave(status)
-    print("GoToCreepWave called with status, ", status)
-    local epsilon = 100
-    local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
+function GoToCreepWave( status )
+    local epsilon = 700
     if status == IDLE then
-        print ("GO2CREEP - start, MOVE TO LOC")
+        local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
         GetBot():ActionQueue_MoveToLocation( laneLocation )
         return RUNNING
     elseif status == RUNNING then 
-        print ("GO2CREEP - RUNNING: checking destination reached")
-        if GetUnitToLocationDistance( GetBot(), laneLocation ) < epsilon then
+        if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO then
             print ("GO2CREEP - reached DEST")
             return SUCCESS
         else
@@ -91,40 +88,39 @@ function GoToCreepWave(status)
         end
     end
     return status
-
 end
 
 -- selects base as safe location
-function SelectSafeLocation(status)
+function SelectSafeLocation( status )
     -- print('SelectSafeLocation')
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
-
-    local base = GetAncient(GetTeam())
-    local baseLoc = base:GetLocation()
-
-    targetLoc = baseLoc or RandomVector( 700 ) -- and run towards first one otherwise run in random direciton lol.
-    
-    -- TODO: ASSERT TYPE
-    return SUCCESS
+    if status == IDLE then
+        local baseLoc = GetAncient( GetTeam( ) ):GetLocation( )
+        targetLoc = baseLoc or RandomVector( 700 ) -- and run towards first one otherwise run in random direciton lol.
+        return SUCCESS
+    end
+    return status
 end
 
 -- sets creepTarget as creep with lowest health around
-function SelectTarget()
+function SelectTarget( status )
 
-    local enemyCreepsNearby = GetBot():GetNearbyCreeps(700, true)
-    local thresholdTarget = 2*GetBot():GetAttackDamage()
- 
-    for _,creep in pairs(enemyCreepsNearby) do
-        -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
-        if creep:GetHealth() <= thresholdTarget then            
-            -- Target setting and getting is available in the API omg 🙄
-            GetBot():SetTarget( creep )
+    if status == IDLE then
+        local enemyCreepsNearby = GetBot( ):GetNearbyCreeps( 700, true )
+        local thresholdTarget = 2*GetBot( ):GetAttackDamage( )
 
-            return SUCCESS
+        for _,creep in pairs( enemyCreepsNearby ) do
+            -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
+            if creep:GetHealth( ) <= thresholdTarget then            
+                -- Target setting and getting is available in the API omg 🙄
+                GetBot( ):SetTarget( creep )
+                return SUCCESS
+            end
         end
+        return FAILURE
     end
-
+    return status
     ---- MORE API FUNCTIONS TO CONSIDER HERE ----
     -- float GetAttackDamage()
     -- Returns actual attack damage (with bonuses) of the unit.
@@ -140,8 +136,6 @@ function SelectTarget()
 
     -- float GetEstimatedDamageToTarget( bCurrentlyAvailable, hTarget, fDuration, nDamageTypes )
     -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
-
-    return FAILURE
 end
 
 -- dodge attack
@@ -207,16 +201,23 @@ function SelectHeroTarget()
 end
 
 -- right click attacks target once
-function RightClickAttack()
-    -- GetBot():ActionQueue_MoveToLocation( GetBot():GetLocation() + Vector(100, 0, 0) )
+function RightClickAttack( status )
 
-    if GetBot():NumQueuedActions() < maxActions then
-        GetBot():ActionQueue_AttackUnit(GetBot():GetTarget(), true)
+    if status == IDLE then
+        GetBot( ):ActionQueue_AttackUnit( GetBot( ):GetTarget( ), true )
+        return RUNNING
+    elseif status == RUNNING then 
+        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK then
+            print ( "RCA - SUCCESS" )
+            return SUCCESS
+        else
+            return RUNNING
+        end
     end
+    return status
     -- GetBot():Action_MoveDirectly(GetBot():GetLocation() - RandomVector(100))
     -- GetBot():ActionImmediate_Chat( "attack", true ) 
     -- print("in RCA, # of queued actions ", GetBot():NumQueuedActions())
-    return SUCCESS
 end
 
 -- select ability to case

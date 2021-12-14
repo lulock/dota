@@ -4,10 +4,10 @@
 --  . unique name identifier                                                        --
 --  . assigned time to complete (currently not implemented)                         --
 --  . status that is                                                                --
---      . IDLE                                                                    --
---      . RUNNING                                                                 --
---      . SUCCESS                                                                 --
---      . FAILURE                                                                 --
+--      . IDLE                                                                      --
+--      . RUNNING                                                                   --
+--      . SUCCESS                                                                   --
+--      . FAILURE                                                                   --
 --                                                                                  --
 -- tick() calls corresponding function in behaviour library (shared by agents)      --
 --                                                                                  --
