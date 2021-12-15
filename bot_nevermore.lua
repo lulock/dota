@@ -22,6 +22,10 @@ local opera = Opera( norms, planner ) -- load plan from json string
 -- bot = GetBot() -- this is probably not necessary
 
 function Think()
+	-- do nothing if dead
+	if not GetBot():IsAlive() then
+		return
+	end
 	
 	-- below does not work. cheats not allowed by bots i guess. 
 	-- if GetGameState() == GAME_STATE_PRE_GAME then

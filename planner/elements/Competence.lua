@@ -33,21 +33,21 @@ end
 function Competence:tick()
     -- When the goal has been achieved, or if none of the elements can fire, the competence terminates.
     for _,goal in pairs(self.goals) do --check all goals
-        --print('checking goal', goal.name)
+        -- print('checking goal', goal.name)
         local goalstatus = goal:tick()
         if not goalstatus and self.status == IDLE then
-            --print('not goal, so tick child element', #self.elements)
+            -- print('not goal, so tick child element', #self.elements)
             for _,element in pairs(self.elements) do -- tick all children
-                --print('ticking competence element', element.name, 'with #senses:', #element.senses, 'and child element')
+                -- print('ticking competence element', element.name, 'with #senses:', #element.senses, 'and child element')
                 self.status = element:tick()
-                --print('and competence returned', self.status)
+                -- print('and competence returned', self.status)
                 if self.status == RUNNING or self.status == SUCCESS then
                     return self.status 
                 end
                 --continue to next child upon failure
             end 
             --if none of the elements can fire, the competence terminates
-            --print('none of the elements can fire, the competence terminates', self.name)
+            -- print('none of the elements can fire, the competence terminates', self.name)
             return self.status
         end
     end

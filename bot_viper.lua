@@ -22,6 +22,11 @@ local opera = Opera( norms, planner ) -- load plan from json string
 -- bot = GetBot() -- this is probably not necessary
 
 function Think()
+	-- do nothing if dead
+	if not GetBot():IsAlive() then
+		return
+	end
+
 	if DotaTime() >= -80 then
 		-- if opera.units == nil then
 		-- 	opera.units = _G['GetUnits']() --call function (by name) in the global namespace

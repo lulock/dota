@@ -24,7 +24,6 @@ local evadeLoc = nil
 local targetAllyHero = nil
 local interval = 10
 
-local evadeLoc = nil
 local maxActions = 4
 local lowHealth = 0.25
 
@@ -32,20 +31,6 @@ local lowHealth = 0.25
 local selectedAbility = GetBot():GetAbilityInSlot( 0 )
 
 -- ACTIONS --
-
--- move to assigned ally unit TODO: refactor
-function GoToPartner( )
-
-    local partnerPos = PARTNERS[ GetBot():GetUnitName() ]
-    local partnerHandle = GetTeamMember( POSITIONS[ partnerPos ] )
-
-    if partnerHandle ~= nil then
-        GetBot():Action_MoveToUnit( partnerHandle ) -- Command a bot to move to the specified unit, this will continue to follow the unit
-        return SUCCESS
-    else
-        return FAILURE
-    end
-end
 
 -- select and set targetLoc as location along lane
 function SelectLaneLocation( status )
@@ -92,7 +77,8 @@ end
 
 -- selects base as safe location
 function SelectSafeLocation( status )
-    -- print('SelectSafeLocation')
+
+    print('SelectSafeLocation', status)
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
     if status == IDLE then
@@ -139,39 +125,44 @@ function SelectTarget( status )
 end
 
 -- dodge attack
-function EvadeAttack()
-    local iproj = GetBot():GetIncomingTrackingProjectiles()
-    -- print("iproj nil?", #iproj)
-    if #iproj > 0 then 
-        local attack = iproj[1]
-        --print('incoming attack at location and is dodgeable?', iproj[1].location, iproj[1].is_dodgeable)
-        if attack.is_dodgeable then
-            if evadeLoc == nil then
+function EvadeAttack( status )
+    
+    if status == IDLE then
+    -- are there incoming projectiles?
+        local iproj = GetBot():GetIncomingTrackingProjectiles()
+        
+        -- if yes ... 
+        if #iproj > 0 then
+
+            -- first consider only first projectile
+            local attack = iproj[1]
+
+            -- is it dogeable?
+            if attack.is_dodgeable then
                 local loc = GetBot():GetLocation()
                 local dist = GetUnitToLocationDistance(GetBot(), attack.location)
-                -- GetBot():Action_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-                -- GetBot():ActionQueue_MoveDirectly( Vector(loc.x - 100, loc.y, loc.z) )
-                -- evadeLoc = Vector(loc.x - 100, loc.y, loc.z)
-                evadeLoc = (attack.location - loc) / dist
+                local evadeLoc = (attack.location - loc) / dist
 
                 -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-                GetBot():ActionPush_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-                print("evaded to", evadeLoc )
-            else
-                if GetUnitToLocationDistance(GetBot(), evadeLoc) < 20 then
-                    print("setting evadeloc to nil")
-                    evadeLoc = nil
+                if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO then -- if not already moving, then move
+                    print( "evaded to", evadeLoc )
+                    GetBot():ActionPush_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
                 end
             end
-            -- check if evade in queue
         end
+        
+        print("current action type is ", GetBot():GetCurrentActionType())
+        print("action queue length is ", GetBot():NumQueuedActions())
+        print( "EVADEATTACK - SUCCESS")
+        return SUCCESS
     end
-    return SUCCESS
+
+    return status
 end
 
 -- select enemy hero target
 function SelectHeroTarget( status )
-    
+    print("SelectHeroTarget ", status)
     if status == IDLE then
         -- first check if any enemy heroes nearby
         local enemyHeroesNearby = GetBot( ):GetNearbyHeroes( 700, true, BOT_MODE_NONE )
@@ -205,7 +196,7 @@ end
 
 -- right click attacks target once
 function RightClickAttack( status )
-
+    print("RightClickAttack ", status)
     if status == IDLE then
         GetBot( ):ActionQueue_AttackUnit( GetBot( ):GetTarget( ), true )
         return RUNNING
@@ -224,7 +215,8 @@ function RightClickAttack( status )
 end
 
 -- select ability to case
-function SelectAbility()
+function SelectAbility( status )
+    print("SelectAbility ", status)
 
     if status == IDLE then
         -- first check if ultimate is available
@@ -252,7 +244,7 @@ end
 
 -- cast ability on target once
 function CastAbility( status )
-
+    print("CastAbility ", status)
     if status == IDLE then
         if selectedAbility:GetTargetType() == 0 then
             GetBot():ActionQueue_UseAbility( selectedAbility )
@@ -310,6 +302,20 @@ function GetUnits()
     end
     
     return units
+end
+
+-- move to assigned ally unit TODO: refactor
+function GoToPartner( )
+
+    local partnerPos = PARTNERS[ GetBot():GetUnitName() ]
+    local partnerHandle = GetTeamMember( POSITIONS[ partnerPos ] )
+
+    if partnerHandle ~= nil then
+        GetBot():Action_MoveToUnit( partnerHandle ) -- Command a bot to move to the specified unit, this will continue to follow the unit
+        return SUCCESS
+    else
+        return FAILURE
+    end
 end
 
 -- use scroll to target location

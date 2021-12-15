@@ -24,7 +24,7 @@
 
 -- function Think()
 -- 	-- do nothing if dead
--- 	if not this_bot:IsAlive() then
+-- 	if not GetBot():IsAlive() then
 --         return
 --     end
 
