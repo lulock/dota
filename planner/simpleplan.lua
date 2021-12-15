@@ -50,7 +50,18 @@ local x = [[{
 					"name": "SelectLaneTowerLocation"
 				},
 				{
-					"name": "TeleportToLocation"
+					"name": "TpToLocation"
+				}
+			]
+		},
+		{
+			"name": "AP-TeleportToBase",
+			"actions": [
+				{
+					"name": "SelectSafeLocation"
+				},
+				{
+					"name": "TpToLocation"
 				}
 			]
 		},

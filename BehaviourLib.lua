@@ -102,7 +102,7 @@ end
 
 -- selects base as safe location
 function SelectSafeLocation( status )
-
+    print( "select safe location" )
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
     if status == IDLE then
@@ -350,6 +350,7 @@ end
 
 -- use scroll to target location
 function TpToLocation( status )
+    print( "TpToLocation" )
     local slot = GetBot( ):FindItemSlot( "item_tpscroll" )
     local scroll = GetBot( ):GetItemInSlot( slot )
     GetBot( ):Action_UseAbilityOnLocation( scroll , targetLoc )
