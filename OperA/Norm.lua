@@ -34,12 +34,12 @@ function Norm:validate()
 
         -- ping at bot location where norm has been violated!! 
         local loc = GetBot():GetLocation()
-        GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
-        --print ('Current behaviour set to:', self.planner.root.currentDriveName,'but it should be ', self.behaviour)
+        -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
+        print ('Current behaviour set to:', self.planner.root.currentDriveName,'but it should be ', self.behaviour)
         return false
     else
         --print ('behaviour approved')
-        --print ('Current behaviour set to:', self.planner.root.currentDriveName,'which aligns with ', self.behaviour)
+        print ('Current behaviour set to:', self.planner.root.currentDriveName,'which aligns with ', self.behaviour)
         return true
     end
     -- maybe this should check obligation / permission against agent's active drive?
