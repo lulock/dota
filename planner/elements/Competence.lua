@@ -52,6 +52,6 @@ function Competence:tick()
         end
     end
     -- when the goal has been achieved the competence terminates
-    self.status = IDLE
-    return SUCCESS
+    self.status = IDLE -- reset status (why does IDLE matter here?)
+    return SUCCESS -- return success, goals achieved
 end

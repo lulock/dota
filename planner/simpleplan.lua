@@ -1,6 +1,14 @@
 local x = [[{
 	"ActionPatterns": [
 		{
+			"name": "AP-EvadeAttack",
+			"actions": [
+				{
+					"name": "EvadeAttack"
+				}
+			]
+		},
+		{
 			"name": "AP-GoToSafeLocation",
 			"actions": [
 				{
@@ -75,7 +83,7 @@ local x = [[{
 					"name": "SelectHeroTarget"
 				},
 				{
-					"name": "SelectAbility"
+					"name": "SelectAbility",
 				},
 				{
 					"name": "CastAbility"

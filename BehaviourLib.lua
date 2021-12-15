@@ -25,10 +25,33 @@ local targetAllyHero = nil
 local interval = 10
 
 local maxActions = 4
-local lowHealth = 0.25
+local lowHealth = 0.8
 
 -- default selected ability is first ability but this might be passive ... 
 local selectedAbility = GetBot():GetAbilityInSlot( 0 )
+
+
+-- HELPER FUNCTIONS --
+
+function clearActions()
+    GetBot():Action_ClearActions( false )
+end
+
+-- returns table of unit handles in order of position (role)
+function GetUnits()
+    local units = { }
+
+    for i=1,5 do
+        local member = GetTeamMember( i )
+        if member ~= nil then
+            local membername = member:GetUnitName()
+            local pos = POSITIONS[ membername ]
+            units[pos] = member
+        end
+    end
+    
+    return units
+end
 
 -- ACTIONS --
 
@@ -43,12 +66,14 @@ end
 
 -- moves to targetLoc location
 function GoToLocation( status )
+    print("GO2LOC", status)
     local epsilon = 10
     if status == IDLE then
         GetBot():ActionQueue_MoveToLocation( targetLoc )
         return RUNNING
     elseif status == RUNNING then 
-        if GetUnitToLocationDistance(GetBot(), targetLoc) < epsilon then
+        if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO then
+            print("GO2LOC - reached DEST")
             return SUCCESS
         else
             return RUNNING
@@ -78,7 +103,6 @@ end
 -- selects base as safe location
 function SelectSafeLocation( status )
 
-    print('SelectSafeLocation', status)
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
     if status == IDLE then
@@ -142,19 +166,27 @@ function EvadeAttack( status )
                 local loc = GetBot():GetLocation()
                 local dist = GetUnitToLocationDistance(GetBot(), attack.location)
                 local evadeLoc = (attack.location - loc) / dist
-
+                
+                -- GetBot():ActionPush_MoveToLocation( loc + ( 10 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+                GetBot():Action_MoveDirectly( loc + ( 100 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+                print( "evaded to", evadeLoc )
                 -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-                if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO then -- if not already moving, then move
-                    print( "evaded to", evadeLoc )
-                    GetBot():ActionPush_MoveToLocation( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-                end
+                
             end
         end
-        
+        GetBot():ActionQueue_AttackUnit( GetBot():GetTarget(), true )
         print("current action type is ", GetBot():GetCurrentActionType())
         print("action queue length is ", GetBot():NumQueuedActions())
-        print( "EVADEATTACK - SUCCESS")
-        return SUCCESS
+        print( "EVADEATTACK - RUNNING")
+        return RUNNING
+    elseif status == RUNNING then
+        -- if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO then -- if not already moving, then move
+        if GetBot():NumQueuedActions() == 0 then 
+            print( "EVADEATTACK - SUCCESS")
+            return SUCCESS
+        else
+            return RUNNING
+        end
     end
 
     return status
@@ -162,7 +194,7 @@ end
 
 -- select enemy hero target
 function SelectHeroTarget( status )
-    print("SelectHeroTarget ", status)
+
     if status == IDLE then
         -- first check if any enemy heroes nearby
         local enemyHeroesNearby = GetBot( ):GetNearbyHeroes( 700, true, BOT_MODE_NONE )
@@ -196,7 +228,7 @@ end
 
 -- right click attacks target once
 function RightClickAttack( status )
-    print("RightClickAttack ", status)
+
     if status == IDLE then
         GetBot( ):ActionQueue_AttackUnit( GetBot( ):GetTarget( ), true )
         return RUNNING
@@ -216,7 +248,6 @@ end
 
 -- select ability to case
 function SelectAbility( status )
-    print("SelectAbility ", status)
 
     if status == IDLE then
         -- first check if ultimate is available
@@ -244,7 +275,6 @@ end
 
 -- cast ability on target once
 function CastAbility( status )
-    print("CastAbility ", status)
     if status == IDLE then
         if selectedAbility:GetTargetType() == 0 then
             GetBot():ActionQueue_UseAbility( selectedAbility )
@@ -265,17 +295,22 @@ function CastAbility( status )
 end
 
 -- selects allied hero to heal TODO: Check the need for this. Voodoo Restoration takes NO TARGET. but perhaps healing salve / tango needs targets to share.
-function SelectHeroToHeal()
-    local alliedHeroesNearby = GetBot():GetNearbyHeroes(1600, false)
+function SelectHeroToHeal( status )
     
-    for _,hero in pairs(alliedHeroesNearby) do
-        if hero:GetHealth()/hero:GetMaxHealth() <= 0.5 and GetBot():GetUnitName() ~= hero:GetUnitName() then
-            targetAllyHero = hero
-            return SUCCESS
+    if status == IDLE then
+        local alliedHeroesNearby = GetBot():GetNearbyHeroes( 700, false )
+        for _,hero in pairs( alliedHeroesNearby ) do
+            if hero:GetHealth()/hero:GetMaxHealth( ) <= 0.5 and GetBot( ):GetUnitName( ) ~= hero:GetUnitName( ) then
+                targetAllyHero = hero -- TODO: use API target setter here instead
+                return SUCCESS
+            end
         end
+
+        return FAILURE -- no allied hero low health, return failure
     end
 
-    return FAILURE 
+    return status
+
 end
 
 -- witch doctor casts healing ability
@@ -288,34 +323,29 @@ function CastHealingAbility()
     return FAILURE
 end
 
--- returns table of unit handles in order of position (role)
-function GetUnits()
-    local units = { }
+-- move to assigned ally unit TODO: refactor
+function GoToPartner( status )
 
-    for i=1,5 do
-        local member = GetTeamMember( i )
-        if member ~= nil then
-            local membername = member:GetUnitName()
-            local pos = POSITIONS[ membername ]
-            units[pos] = member
+    if status == IDLE then
+        local partnerPos = PARTNERS[ GetBot( ):GetUnitName( ) ]
+        local partnerHandle = GetTeamMember( POSITIONS[ partnerPos ] )
+
+        if partnerHandle ~= nil then
+            GetBot():ActionQueue_MoveToUnit( partnerHandle ) -- Command a bot to move to the specified unit, this will continue to follow the unit
+            return RUNNING
+        else
+            return FAILURE
+        end
+
+    elseif status == RUNNING then
+        if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO then
+            print ( "GO2PARTNER - SUCCESS" )
+            return SUCCESS
+        else 
+            return RUNNING
         end
     end
-    
-    return units
-end
-
--- move to assigned ally unit TODO: refactor
-function GoToPartner( )
-
-    local partnerPos = PARTNERS[ GetBot():GetUnitName() ]
-    local partnerHandle = GetTeamMember( POSITIONS[ partnerPos ] )
-
-    if partnerHandle ~= nil then
-        GetBot():Action_MoveToUnit( partnerHandle ) -- Command a bot to move to the specified unit, this will continue to follow the unit
-        return SUCCESS
-    else
-        return FAILURE
-    end
+    return status
 end
 
 -- use scroll to target location
@@ -442,7 +472,17 @@ end
 -- checks if any projectiles incoming towards this unit
 function IsUnderAttack()
     local iproj = GetBot():GetIncomingTrackingProjectiles()
-    return #iproj > 0 and 1 or 0
+    
+    if #iproj > 0 then
+
+        -- first consider only first projectile
+        local attack = iproj[1]
+
+        -- is it dogeable?
+        return attack.is_dodgeable
+    end
+
+    return 0
 end
 
 -- check if allied heroes around have health below 80%

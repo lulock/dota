@@ -49,6 +49,7 @@ function DriveCollection:tick()
             if childStatus == RUNNING or childStatus == SUCCESS then --if running or success, return success this tick
                 self.status = RUNNING
                 if self.currentDriveName ~= drive.name then --if not already running
+                    _G["clearActions"]()
                     self.currentDrive = i --keep track of running drive index (in case of removal later) MAYBE THIS SHOULD BE A POINTER TO DRIVE ITSELFFFF
                     self.currentDriveName = drive.name --keep track of running drive name
                     --print('current active drive index is ', self.currentDrive, 'and drive name is ', self.currentDriveName)
