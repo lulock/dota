@@ -34,7 +34,7 @@ function Norm:validate()
 
         -- ping at bot location where norm has been violated!! 
         local loc = GetBot():GetLocation()
-        GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
+        -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
         --print ('Current behaviour set to:', self.planner.root.currentDriveName,'but it should be ', self.behaviour)
         return false
     else
