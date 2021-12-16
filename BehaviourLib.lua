@@ -18,7 +18,7 @@ BehaviourLib = Class{ }
 -- AGENT --
 -- local bot = GetBot() -- gets bot this script is currently running on
 
--- MEMORY -- 
+-- MEMORY -- TODO: memory val for each pos in team. Table of 5 values. 
 local targetLoc = nil
 local evadeLoc = nil
 local targetAllyHero = nil
@@ -66,14 +66,14 @@ end
 
 -- moves to targetLoc location
 function GoToLocation( status )
-    print("GO2LOC", status)
+    -- print("GO2LOC", status)
     local epsilon = 10
     if status == IDLE then
         GetBot():ActionQueue_MoveToLocation( targetLoc )
         return RUNNING
     elseif status == RUNNING then 
         if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO then
-            print("GO2LOC - reached DEST")
+            -- print("GO2LOC - reached DEST")
             return SUCCESS
         else
             return RUNNING
@@ -91,7 +91,7 @@ function GoToCreepWave( status )
         return RUNNING
     elseif status == RUNNING then 
         if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO then
-            print ("GO2CREEP - reached DEST")
+            -- print ("GO2CREEP - reached DEST")
             return SUCCESS
         else
             return RUNNING
@@ -102,7 +102,7 @@ end
 
 -- selects base as safe location
 function SelectSafeLocation( status )
-    print( "select safe location" )
+    -- print( "select safe location" )
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
     if status == IDLE then
@@ -169,20 +169,20 @@ function EvadeAttack( status )
                 
                 -- GetBot():ActionPush_MoveToLocation( loc + ( 10 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
                 GetBot():Action_MoveDirectly( loc + ( 100 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-                print( "evaded to", evadeLoc )
+                -- print( "evaded to", evadeLoc )
                 -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
                 
             end
         end
         GetBot():ActionQueue_AttackUnit( GetBot():GetTarget(), true )
-        print("current action type is ", GetBot():GetCurrentActionType())
-        print("action queue length is ", GetBot():NumQueuedActions())
-        print( "EVADEATTACK - RUNNING")
+        -- print("current action type is ", GetBot():GetCurrentActionType())
+        -- print("action queue length is ", GetBot():NumQueuedActions())
+        -- print( "EVADEATTACK - RUNNING")
         return RUNNING
     elseif status == RUNNING then
         -- if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO then -- if not already moving, then move
         if GetBot():NumQueuedActions() == 0 then 
-            print( "EVADEATTACK - SUCCESS")
+            -- print( "EVADEATTACK - SUCCESS")
             return SUCCESS
         else
             return RUNNING
@@ -234,7 +234,7 @@ function RightClickAttack( status )
         return RUNNING
     elseif status == RUNNING then 
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK then
-            print ( "RCA - SUCCESS" )
+            -- print ( "RCA - SUCCESS" )
             return SUCCESS
         else
             return RUNNING
@@ -267,7 +267,7 @@ function SelectAbility( status )
                 end
             end
         end
-        print('could not select ability, return failure')
+        -- print('could not select ability, return failure')
         return FAILURE
     end
     return status
@@ -284,7 +284,7 @@ function CastAbility( status )
         return RUNNING
     elseif status == RUNNING then 
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY then
-            print ( "Cast Ability - SUCCESS" )
+            -- print ( "Cast Ability - SUCCESS" )
             return SUCCESS
         else
             return RUNNING
@@ -315,7 +315,7 @@ end
 
 -- witch doctor casts healing ability
 function CastHealingAbility()
-    local ability = GetBot():GetAbilityByName('witch_doctor_voodoo_restoration') -- TODO: Check if this returns nil when not witch doctor
+    -- local ability = GetBot():GetAbilityByName('witch_doctor_voodoo_restoration') -- TODO: Check if this returns nil when not witch doctor
     if ability ~= nil then
         GetBot():ActionPush_UseAbility(ability);
         return SUCCESS
@@ -339,7 +339,7 @@ function GoToPartner( status )
 
     elseif status == RUNNING then
         if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO then
-            print ( "GO2PARTNER - SUCCESS" )
+            -- print ( "GO2PARTNER - SUCCESS" )
             return SUCCESS
         else 
             return RUNNING
@@ -350,7 +350,7 @@ end
 
 -- use scroll to target location
 function TpToLocation( status )
-    print( "TpToLocation" )
+    -- print( "TpToLocation" )
     local slot = GetBot( ):FindItemSlot( "item_tpscroll" )
     local scroll = GetBot( ):GetItemInSlot( slot )
     GetBot( ):Action_UseAbilityOnLocation( scroll , targetLoc )
