@@ -44,3 +44,18 @@ function Norm:validate()
     end
     -- maybe this should check obligation / permission against agent's active drive?
 end
+
+-- constrain to expected behaviour
+function Norm:sanction()
+    
+    for i,drive in pairs(self.planner.root.drives) do
+        if drive.name == self.behaviour then
+            --print('drive is', d.name)
+            norm.planner.root:removeDrive(i) -- remove the drive
+            norm.planner.root:insertDrive(drive, 1) -- re-insert drive as priority # 1
+            -- log role, time of change, and name of new priority drive to console
+            print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', drive.name) 
+            -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
+        end -- TODO: handle if not found
+    end
+end
