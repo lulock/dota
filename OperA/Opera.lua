@@ -28,10 +28,10 @@
 -- notes                                                                            --
 --------------------------------------------------------------------------------------
 --
--- opera needs a pointer to the agent's planner so that it can be 
+-- opera needs a pointer to the agent's plan so that it can be 
 -- 'sanctioned/changed/configured' but also access to the bot's name so that
 -- it can check bot's state?? Or should information about bot be limited to only
--- what the planner states. Opera has access to: WORLD state and PLANNER state ... ?
+-- what the plane states. Opera has access to: WORLD state and PLAN state ... ?
 --
 -- currently, try to check if it is farming time
 -- check if obligation to farm is satisfied
@@ -42,11 +42,11 @@
 
 Opera = Class{ }
 
-function Opera:init(operaFile, planner)
+function Opera:init(operaFile, plan)
     local operaTable = json.decode(operaFile) -- norms loaded as lua table
     -- some OMs
-    self.norms = self:buildNorms(operaTable, planner)
-    self.scenes = self:buildScenes(operaTable)
+    self.norms = self:buildNorms(operaTable, plan)
+    self.scenes = self:buildScenes(operaTable, plan)
     self.currentScenes = {}
 
     -- SM
@@ -62,17 +62,16 @@ function Opera:update()
     end
 end
 
-function Opera:buildNorms(operaTable, planner)
+function Opera:buildNorms(operaTable, plan)
     local norms = {}
     for _, norm in pairs(operaTable.norms) do
-        --print(norm.name, planner.root.name, norm.behaviour, norm.operator)
-        local n = Norm(norm.name, planner, norm.behaviour, norm.operator)
+        local n = Norm(norm.name, plan, norm.behaviour, norm.operator)
         norms[norm.name] = n
     end
     return norms
 end
 
-function Opera:buildScenes(operaTable)
+function Opera:buildScenes(operaTable, plan)
     local scenes = {}
     for _, scene in pairs(operaTable.scenes) do
         -- print('building scene', scene.name, scene.roles, scene.landmarks, scene.results, scene.norms)
@@ -99,7 +98,7 @@ function Opera:buildScenes(operaTable)
             table.insert(rules, rule)
         end
 
-        local s = Scene(scene.name, scene.roles, landmarks, results, rules)
+        local s = Scene(scene.name, scene.roles, landmarks, results, rules, plan)
         --print('scene just created is ', s.name)
         table.insert(scenes, s)
     end
