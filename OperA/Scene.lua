@@ -7,7 +7,7 @@ function Scene:init(name, roles, landmarks, results, rules, plan)
     self.results = results -- sense
     self.rules = rules -- Rule object, condition with norm behaviour expectation
     self.status = IDLE
-    self.prevPlan = nil
+    self.prevDrive = nil
     self.plan = plan
 end
 
@@ -31,8 +31,7 @@ function Scene:update() -- should a scene exit be determined by landmark??
             if not legal then -- if agent in violation
                 print('norm', norm.name, 'will impose SANCTIONS!')
 
-                self.prevPlan = copy1(self.plan)
-                norm:sanction()
+                self.prevDrive = norm:sanction()
 
                 printTable(self.plan.root.drives)
 
@@ -47,6 +46,7 @@ function Scene:update() -- should a scene exit be determined by landmark??
             end
         end
         
+        -- This is broken, probably not a deep copy?
         self.plan = copy1(self.prevPlan) -- reset
         self.prevPlan = nil -- reset 
         self.status = IDLE -- reset

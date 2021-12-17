@@ -18,12 +18,18 @@ BehaviourLib = Class{ }
 -- AGENT --
 -- local bot = GetBot() -- gets bot this script is currently running on
 
--- MEMORY -- TODO: memory val for each pos in team. Table of 5 values. 
+-- MEMORY -- each agent instantiates their own copy of this class.
+
 local targetLoc = nil
 local evadeLoc = nil
 local targetAllyHero = nil
-local interval = 10
 
+local tbot = GetBot( ):GetUnitName( )
+print("in behaviourlib and bot is ", tbot)
+
+-- CONSTANTS --
+
+local interval = 10
 local maxActions = 4
 local lowHealth = 0.8
 
@@ -66,9 +72,9 @@ end
 
 -- moves to targetLoc location
 function GoToLocation( status )
-    -- print("GO2LOC", status)
     local epsilon = 10
     if status == IDLE then
+        print("GO2LOC - queuing action - RUNNING")
         GetBot():ActionQueue_MoveToLocation( targetLoc )
         return RUNNING
     elseif status == RUNNING then 
@@ -88,6 +94,7 @@ function GoToCreepWave( status )
     if status == IDLE then
         local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
         GetBot():ActionQueue_MoveToLocation( laneLocation )
+        print("GO2CW - queuing action - RUNNING")
         return RUNNING
     elseif status == RUNNING then 
         if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO then
@@ -175,6 +182,8 @@ function EvadeAttack( status )
             end
         end
         GetBot():ActionQueue_AttackUnit( GetBot():GetTarget(), true )
+        print("EVADE - queuing action - RUNNING")
+
         -- print("current action type is ", GetBot():GetCurrentActionType())
         -- print("action queue length is ", GetBot():NumQueuedActions())
         -- print( "EVADEATTACK - RUNNING")
@@ -231,6 +240,7 @@ function RightClickAttack( status )
 
     if status == IDLE then
         GetBot( ):ActionQueue_AttackUnit( GetBot( ):GetTarget( ), true )
+        print("RCA - queuing action - RUNNING")
         return RUNNING
     elseif status == RUNNING then 
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK then
@@ -278,8 +288,10 @@ function CastAbility( status )
     if status == IDLE then
         if selectedAbility:GetTargetType() == 0 then
             GetBot():ActionQueue_UseAbility( selectedAbility )
+            print("CASTABILITY - queuing action - RUNNING")
         else
             GetBot():ActionQueue_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
+            print("CASTABILITY - queuing action - RUNNING")
         end
         return RUNNING
     elseif status == RUNNING then 
@@ -332,6 +344,7 @@ function GoToPartner( status )
 
         if partnerHandle ~= nil then
             GetBot():ActionQueue_MoveToUnit( partnerHandle ) -- Command a bot to move to the specified unit, this will continue to follow the unit
+            print("CASTABILITY - queuing action - RUNNING")
             return RUNNING
         else
             return FAILURE

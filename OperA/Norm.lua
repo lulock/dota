@@ -47,6 +47,7 @@ end
 
 -- constrain to expected behaviour
 function Norm:sanction()
+    local prevDrive = self.plan.root.currentDrive
 
     for i,drive in pairs(self.plan.root.drives) do
         if drive.name == self.behaviour then
@@ -58,5 +59,5 @@ function Norm:sanction()
             -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
         end -- TODO: handle if not found
     end
-    return
+    return prevDrive
 end
