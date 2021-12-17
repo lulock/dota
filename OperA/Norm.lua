@@ -47,6 +47,24 @@ end
 
 -- constrain to expected behaviour
 function Norm:sanction()
+    -- local prevDrive = self.plan.root.currentDrive
+
+    for i,drive in pairs(self.plan.root.drives) do
+        if drive.name == self.behaviour then
+            --print('drive is', d.name)
+            self.plan.root:removeDrive(i) -- remove the drive
+            self.plan.root:insertDrive(drive, 1) -- re-insert drive as priority # 1
+            -- log role, time of change, and name of new priority drive to console
+            print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', drive.name) 
+            -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
+            return i, drive -- return prev index and drive
+        end -- TODO: handle if not found
+    end
+    return nil, nil
+end
+
+-- restore
+function Norm:restore()
     local prevDrive = self.plan.root.currentDrive
 
     for i,drive in pairs(self.plan.root.drives) do

@@ -74,11 +74,11 @@ end
 function GoToLocation( status )
     local epsilon = 10
     if status == IDLE then
-        print("GO2LOC - queuing action - RUNNING")
+        print("GO2LOC - queuing action - RUNNING", GetBot():GetUnitName() )
         GetBot():ActionQueue_MoveToLocation( targetLoc )
         return RUNNING
     elseif status == RUNNING then 
-        if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO then
+        if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
             -- print("GO2LOC - reached DEST")
             return SUCCESS
         else
@@ -94,11 +94,11 @@ function GoToCreepWave( status )
     if status == IDLE then
         local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
         GetBot():ActionQueue_MoveToLocation( laneLocation )
-        print("GO2CW - queuing action - RUNNING")
+        print("GO2CREEP - queuing action - RUNNING", GetBot():GetUnitName() )
         return RUNNING
     elseif status == RUNNING then 
-        if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO then
-            -- print ("GO2CREEP - reached DEST")
+        if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
+            print ("GO2CREEP - reached DEST", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -182,7 +182,7 @@ function EvadeAttack( status )
             end
         end
         GetBot():ActionQueue_AttackUnit( GetBot():GetTarget(), true )
-        print("EVADE - queuing action - RUNNING")
+        print("EVADE - queuing action - RUNNING", GetBot():GetUnitName() )
 
         -- print("current action type is ", GetBot():GetCurrentActionType())
         -- print("action queue length is ", GetBot():NumQueuedActions())
@@ -240,11 +240,15 @@ function RightClickAttack( status )
 
     if status == IDLE then
         GetBot( ):ActionQueue_AttackUnit( GetBot( ):GetTarget( ), true )
-        print("RCA - queuing action - RUNNING")
+        print("RCA - queuing action - RUNNING", GetBot():GetUnitName() )
+        print("QUEUELENGTH", GetBot( ):NumQueuedActions( ) )
+        print ("RCA - CURR ACTION TYPE", GetBot( ):GetCurrentActionType ( ) )
+
         return RUNNING
     elseif status == RUNNING then 
-        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK then
-            -- print ( "RCA - SUCCESS" )
+        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK and GetBot():NumQueuedActions() == 0 then
+            print ("RCA - CURR ACTION TYPE", GetBot( ):GetCurrentActionType ( ) )
+            print ( "RCA - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -288,15 +292,16 @@ function CastAbility( status )
     if status == IDLE then
         if selectedAbility:GetTargetType() == 0 then
             GetBot():ActionQueue_UseAbility( selectedAbility )
-            print("CASTABILITY - queuing action - RUNNING")
+            print("CASTABILITY - queuing action - RUNNING", GetBot():GetUnitName() )
         else
             GetBot():ActionQueue_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
-            print("CASTABILITY - queuing action - RUNNING")
+            print("CASTABILITY - queuing action - RUNNING", GetBot():GetUnitName() )
         end
         return RUNNING
     elseif status == RUNNING then 
-        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY then
+        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
             -- print ( "Cast Ability - SUCCESS" )
+            print ( "CASTABILITY - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -351,7 +356,7 @@ function GoToPartner( status )
         end
 
     elseif status == RUNNING then
-        if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO then
+        if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
             -- print ( "GO2PARTNER - SUCCESS" )
             return SUCCESS
         else 

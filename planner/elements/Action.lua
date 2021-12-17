@@ -26,7 +26,7 @@ function Action:init(name, timeToComplete)
 end
 
 function Action:tick()
-    --print('ticking action', self.name)
+    -- print('ticking action', self.name, 'with status', self.status, GetBot():GetUnitName())
     self.status = _G[self.name](self.status)
     return self.status
 end

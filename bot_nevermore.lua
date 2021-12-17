@@ -24,11 +24,6 @@ local opera = Opera( norms, planner ) -- load plan from json string
 function Think()
 
 	-- check action queue length and what the action is ... 
-	if GetBot():NumQueuedActions() > 5 then
-		print("current action type is ", GetBot():GetCurrentActionType())
-		print("and plan's active drive is ", planner.root.currentDriveName)
-	end
-
 	-- do nothing if dead
 	if not GetBot():IsAlive() then
 		return

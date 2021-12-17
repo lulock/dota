@@ -46,8 +46,10 @@ function Scene:update() -- should a scene exit be determined by landmark??
             end
         end
         
-        -- This is broken, probably not a deep copy?
-        self.plan = copy1(self.prevPlan) -- reset
+        -- try without deep copy
+        local drive = self.plan.root.drives[1] -- point to drive
+        self.plan.root:removeDrive(1) -- remove the drive
+        self.plan.root:insertDrive(drive, self.prevDrive) -- re-insert drive in previous prio
         self.prevPlan = nil -- reset 
         self.status = IDLE -- reset
         
