@@ -23,7 +23,7 @@ function Norm:init(name, plan, behaviour, operator)
     self.name = name -- unique name id
     self.plan = plan -- pointer to bot (or rather bot's plan??) 
     self.behaviour = behaviour -- maybe this should be drive ID?
-    self.operator = operator -- OBLIGED / PERMITTED / TODO: NOT PERMITTED
+    self.operator = tonumber(operator) -- OBLIGED / PERMITTED / TODO: NOT PERMITTED
 end
 
 function Norm:validate()
@@ -45,9 +45,18 @@ function Norm:validate()
     -- maybe this should check obligation / permission against agent's active drive?
 end
 
--- constrain to expected behaviour
+-- constrain to expected behaviour and TODO: condition on OPERATOR 
 function Norm:sanction()
     -- local prevDrive = self.plan.root.currentDrive
+    print(self.operator)
+    print(OBLIGED)
+    if self.operator == OBLIGED then
+        print("OBLIGED - make drive prio 1")
+    elseif self.operator == PERMITTED then
+        print("PERMITTED - do nothing if drive is active")
+    elseif self.operator == NOTPERMITTED then
+        print("NOT PERMITTED - remove drive!")
+    end
 
     for i,drive in pairs(self.plan.root.drives) do
         if drive.name == self.behaviour then

@@ -3,12 +3,12 @@ local x = [[{
 		{
 			"name" : "farm",
 			"behaviour" : "DE-FarmLane",
-			"operator" : "PERMITTED"
+			"operator" : "1"
 		},
 		{
 			"name" : "support",
 			"behaviour" : "DE-Support",
-			"operator" : "OBLIGED"
+			"operator" : "0"
 		}
 	],
 	"scenes": [

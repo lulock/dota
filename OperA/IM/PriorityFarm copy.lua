@@ -7,12 +7,12 @@ local x = [[{
 		{
             "name" : "farm",
             "behaviour" : "DE-FarmLane",
-            "operator" : "PERMITTED"
+            "operator" : "1"
         },
         {
             "name" : "harass",
             "behaviour" : "DE-Harass",
-            "operator" : "OBLIGED"
+            "operator" : "0"
 		}
 	],
 	"scenes": [
