@@ -27,51 +27,18 @@ function Norm:init(name, plan, behaviour, operator)
 end
 
 function Norm:validate()
+    local sameDrive =  self.plan.root.currentDriveName == self.behaviour --bool
     print(self.plan, 'is', self.operator, 'to', self.behaviour)
-    if self.operator == OBLIGED then
-        if self.plan.root.currentDriveName ~= self.behaviour then
-            --print ('NORM VIOLATION')
-    
-            -- ping at bot location where norm has been violated!! 
-            local loc = GetBot():GetLocation()
-            -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
-            print ('Current behaviour set to:', self.plan.root.currentDriveName,'but it should be ', self.behaviour)
-            return false
-        else
-            --print ('behaviour approved')
-            print ('Current behaviour set to:', self.plan.root.currentDriveName,'which aligns with ', self.behaviour)
-            return true
-        end
-    elseif self.operator == NOTPERMITTED then
-        if self.plan.root.currentDriveName == self.behaviour then
-            --print ('NORM VIOLATION')
-    
-            -- ping at bot location where norm has been violated!! 
-            local loc = GetBot():GetLocation()
-            -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
-            print ('Current behaviour set to:', self.plan.root.currentDriveName,'but it should NOT be.')
-            return false
-        else
-            --print ('behaviour approved')
-            print ('Current behaviour set to:', self.plan.root.currentDriveName,'which is not ', self.behaviour)
-            return true
-        end
-    elseif self.operator == PERMITTED then 
-        if self.plan.root.currentDriveName ~= self.behaviour then
-            --print ('NORM VIOLATION')
-    
-            -- ping at bot location where norm has been violated!! 
-            local loc = GetBot():GetLocation()
-            -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
-            print ('Current behaviour set to:', self.plan.root.currentDriveName,'but it does not matter')
-            return false
-        else
-            --print ('behaviour approved')
-            print ('Current behaviour set to:', self.plan.root.currentDriveName,'which aligns with permissions to ', self.behaviour)
-            return true
-        end
+    if (self.operator == OBLIGED and not sameDrive) or ( self.operator == NOTPERMITTED and sameDrive ) then        
+        print ('NORM VIOLATION')
+        return false
+        -- local loc = GetBot():GetLocation()
+        -- ping at bot location where norm has been violated!! 
+        -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
+    else -- permitted so doesn't matter, return true
+        return true
     end
-    -- maybe this should check obligation / permission against agent's active drive? yes past leila, yes.
+    
 end
 
 -- constrain to expected behaviour and TODO: condition on OPERATOR 
