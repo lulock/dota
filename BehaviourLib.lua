@@ -215,10 +215,12 @@ function SelectHeroTarget( status )
             for _,hero in pairs( enemyHeroesNearby ) do
                 
                 -- if this hero has a target, then attack
-                if hero:GetAttackTarget( ) ~= nil then
-                    -- location, caster, player, ability, is_dodgeable, is_attack
-                    target = hero
-                    GetBot( ):SetTarget( hero )
+                if hero:CanBeSeen() then
+                    if hero:GetAttackTarget( ) ~= nil then
+                        -- location, caster, player, ability, is_dodgeable, is_attack
+                        target = hero
+                        GetBot( ):SetTarget( hero )
+                    end
                 end
             end
 
@@ -241,13 +243,11 @@ function RightClickAttack( status )
     if status == IDLE then
         GetBot( ):ActionQueue_AttackUnit( GetBot( ):GetTarget( ), true )
         print("RCA - queuing action - RUNNING", GetBot():GetUnitName() )
-        print("QUEUELENGTH", GetBot( ):NumQueuedActions( ) )
-        print ("RCA - CURR ACTION TYPE", GetBot( ):GetCurrentActionType ( ) )
+        -- print("QUEUELENGTH", GetBot( ):NumQueuedActions( ) )
 
         return RUNNING
     elseif status == RUNNING then 
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK and GetBot():NumQueuedActions() == 0 then
-            print ("RCA - CURR ACTION TYPE", GetBot( ):GetCurrentActionType ( ) )
             print ( "RCA - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else

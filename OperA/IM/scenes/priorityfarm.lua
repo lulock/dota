@@ -8,6 +8,11 @@ local x = [[{
 			"operator" : "1"
 		},
 		{
+			"name" : "nofarm",
+			"behaviour" : "DE-FarmLane",
+			"operator" : "2"
+		},
+		{
 			"name" : "harass",
 			"behaviour" : "DE-Harass",
 			"operator" : "0"
@@ -56,7 +61,7 @@ local x = [[{
                         }
                     ], 
                     "consequence" : "farm",
-					"alternative" : "harass"
+					"alternative" : "nofarm"
                 }
             ]
 		}

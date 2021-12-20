@@ -16,11 +16,6 @@ local planner = Planner( file ) -- load plan from json string
 printTable(planner.root.drives) -- DEBUG
 
 local opera = Opera( norms, planner ) -- load plan from json string
--- for _,norm in pairs(opera.norms) do
--- 	--print('norm name is', norm.name)-- DEBUG
--- 	norm:validate()
--- end
--- bot = GetBot() -- this is probably not necessary
 
 function Think()
 	-- do nothing if dead

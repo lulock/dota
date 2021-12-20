@@ -7,7 +7,9 @@ function Scene:init(name, roles, landmarks, results, rules, plan)
     self.results = results -- sense
     self.rules = rules -- Rule object, condition with norm behaviour expectation
     self.status = IDLE
+    self.previdx = nil
     self.prevDrive = nil
+    self.curridx = nil
     self.plan = plan
 end
 
@@ -31,7 +33,7 @@ function Scene:update() -- should a scene exit be determined by landmark??
             if not legal then -- if agent in violation
                 print('norm', norm.name, 'will impose SANCTIONS!')
 
-                self.prevDrive = norm:sanction()
+                self.previdx, self.prevDrive, self.curridx = norm:sanction()
 
                 printTable(self.plan.root.drives)
 
@@ -48,9 +50,12 @@ function Scene:update() -- should a scene exit be determined by landmark??
         
         -- try without deep copy
         local drive = self.plan.root.drives[1] -- point to drive
-        self.plan.root:removeDrive(1) -- remove the drive
-        self.plan.root:insertDrive(drive, self.prevDrive) -- re-insert drive in previous prio
-        self.prevPlan = nil -- reset 
+        if self.curridx ~= nil then self.plan.root:removeDrive(self.curridx) end -- remove the drive
+        if self.prevDrive ~= nil and self.previdx ~= nil then self.plan.root:insertDrive(self.prevDrive, self.previdx ) end -- re-insert drive in previous prio
+        
+        self.prevDrive = nil -- reset 
+        self.previdx = nil -- reset 
+        self.curridx = nil -- reset 
         self.status = IDLE -- reset
         
         print('scene complete, reset to idle')

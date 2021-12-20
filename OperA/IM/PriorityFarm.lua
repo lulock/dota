@@ -9,6 +9,11 @@ local x = [[{
             "behaviour" : "DE-FarmLane",
             "operator" : "1"
         },
+		{
+            "name" : "nofarm",
+            "behaviour" : "DE-FarmLane",
+            "operator" : "2"
+        },
         {
             "name" : "harass",
             "behaviour" : "DE-Harass",
@@ -45,7 +50,7 @@ local x = [[{
             ],
             "norms" : [
                 {
-                    "name" : "harass"
+                    "name" : "nofarm"
                 }
             ],
             "rules" : [
