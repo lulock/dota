@@ -49,10 +49,11 @@ function DriveCollection:tick()
             if childStatus == RUNNING or childStatus == SUCCESS then --if running or success, return success this tick
                 self.status = RUNNING
                 if self.currentDriveName ~= drive.name then --if not already running
-                    _G["clearActions"]()
+                    print('SWITCHING DRIVES CLEAR ACTIONS', GetBot():GetUnitName())
+                    self:reset()
                     self.currentDrive = i --keep track of running drive index (in case of removal later) MAYBE THIS SHOULD BE A POINTER TO DRIVE ITSELFFFF
                     self.currentDriveName = drive.name --keep track of running drive name
-                    --print('current active drive index is ', self.currentDrive, 'and drive name is ', self.currentDriveName)
+                    _G["clearActions"]() -- MAYBE ALSO RESET ALL NODES?
                 end
                 return RUNNING
             end
@@ -77,4 +78,14 @@ end
 function DriveCollection:insertDrive(drive, index)
     -- insert into DC table at specified index
     table.insert(self.drives, index, drive)
+end
+
+function DriveCollection:reset()
+    -- reset all nodes up to running node
+    if self.currentDrive ~= nil then
+        for idx = 1, self.currentDrive do
+            self.drives[idx]:reset()
+        end
+    end
+
 end

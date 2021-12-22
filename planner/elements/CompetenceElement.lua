@@ -33,3 +33,9 @@ function CompetenceElement:tick()
     -- print('competence element ticking trigger element', self.element.name)
     return self.element:tick() --tick trigger element only if all conditions satisfied
 end
+
+function CompetenceElement:reset()
+    -- reset element child
+    self.element:reset()
+
+end

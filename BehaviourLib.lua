@@ -21,7 +21,6 @@ BehaviourLib = Class{ }
 -- MEMORY -- each agent instantiates their own copy of this class.
 
 local targetLoc = nil
-local evadeLoc = nil
 local targetAllyHero = nil
 
 local tbot = GetBot( ):GetUnitName( )
@@ -72,14 +71,17 @@ end
 
 -- moves to targetLoc location
 function GoToLocation( status )
-    local epsilon = 10
-    if status == IDLE then
-        print("GO2LOC - queuing action - RUNNING", GetBot():GetUnitName() )
+    if status == IDLE and GetUnitToLocationDistance( GetBot(), targetLoc) > 700 then
+        -- print("GO2LOC", targetLoc, " - queuing action - RUNNING", GetBot():GetUnitName() )
+        -- print("GO2LOC", targetLoc, " - dist", GetUnitToLocationDistance( GetBot(), targetLoc) )
         GetBot():ActionQueue_MoveToLocation( targetLoc )
+        -- print("QueueLength", GetBot():NumQueuedActions() )
         return RUNNING
     elseif status == RUNNING then 
+        -- print("GO2LOC - RUNNING, curr action is", GetBot():GetCurrentActionType (  ) )
+        -- print("QueueLength", GetBot():NumQueuedActions() )
         if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
-            -- print("GO2LOC - reached DEST")
+            print("GO2LOC - reached DEST")
             return SUCCESS
         else
             return RUNNING
@@ -109,14 +111,23 @@ end
 
 -- selects base as safe location
 function SelectSafeLocation( status )
-    -- print( "select safe location" )
+    -- print( "select safe location", status )
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
-    -- nearbyAlliedTowers = GetBot():GetNearbyTowers(700, false) --for now, return nearby allied towers
     if status == IDLE then
+        local closeTowers = GetBot( ):GetNearbyTowers( 1600, false )
         local baseLoc = GetAncient( GetTeam( ) ):GetLocation( )
-        targetLoc = baseLoc or RandomVector( 700 ) -- and run towards first one otherwise run in random direciton lol.
+        -- targetLoc = closeTowers[1] or baseLoc -- and run towards first one otherwise run in random direciton lol.
+
+        
+        if #closeTowers > 0 then 
+            targetLoc = closeTowers[1]:GetLocation( ) 
+        else 
+            targetLoc = baseLoc 
+        end
+
         return SUCCESS
     end
+    
     return status
 end
 
@@ -129,7 +140,7 @@ function SelectTarget( status )
 
         for _,creep in pairs( enemyCreepsNearby ) do
             -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
-            if creep:GetHealth( ) <= thresholdTarget then            
+            if creep:CanBeSeen( ) and creep:GetHealth( ) <= thresholdTarget then            
                 -- Target setting and getting is available in the API omg 🙄
                 GetBot( ):SetTarget( creep )
                 return SUCCESS
@@ -157,9 +168,11 @@ end
 
 -- dodge attack
 function EvadeAttack( status )
+    -- bool IsLocationPassable( vLocation )
+    -- Returns whether the specified location is passable.
     
     if status == IDLE then
-    -- are there incoming projectiles?
+        -- get all incoming projectiles
         local iproj = GetBot():GetIncomingTrackingProjectiles()
         
         -- if yes ... 
@@ -175,7 +188,7 @@ function EvadeAttack( status )
                 local evadeLoc = (attack.location - loc) / dist
                 
                 -- GetBot():ActionPush_MoveToLocation( loc + ( 10 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-                GetBot():Action_MoveDirectly( loc + ( 100 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
+                GetBot():Action_MoveToLocation( loc + ( 50 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
                 -- print( "evaded to", evadeLoc )
                 -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
                 
@@ -387,6 +400,11 @@ function HasLowHealth( )
     local currentHealth = GetBot( ):GetHealth( )/GetBot( ):GetMaxHealth( )
     return currentHealth < lowHealth and 1 or 0
 end
+-- check if hero has health below 80%
+function HasExtremelyLowHealth( )
+    local currentHealth = GetBot( ):GetHealth( )/GetBot( ):GetMaxHealth( )
+    return currentHealth < 0.3 and 1 or 0
+end
 
 -- check if any enemy hero is within 700 unit radius
 function EnemyNearby( )
@@ -488,21 +506,44 @@ function IsAbilityCastable()
     return 0 -- parsed through all abilities and none are castable
 end
 
--- checks if any projectiles incoming towards this unit
+-- -- checks if any projectiles incoming towards this unit
 function IsUnderAttack()
-    local iproj = GetBot():GetIncomingTrackingProjectiles()
+    -- local iproj = GetBot():GetIncomingTrackingProjectiles()
     
-    if #iproj > 0 then
+    -- if #iproj > 0 then
 
-        -- first consider only first projectile
-        local attack = iproj[1]
+    --     -- first consider only first projectile
+    --     local attack = iproj[1]
 
-        -- is it dogeable?
-        return attack.is_dodgeable
-    end
+    --     -- is it dogeable?
+    --     return attack.is_dodgeable
+    -- end
 
-    return 0
+    return (GetBot():WasRecentlyDamagedByAnyHero(3) or GetBot():WasRecentlyDamagedByCreep(3) or GetBot():WasRecentlyDamagedByTower(3)) and 1 or 0
 end
+
+-- what does this do
+function RecentlyUnderAttack( )
+    
+    -- { { location, caster, player, ability, is_dodgeable, is_attack }, ... } GetIncomingTrackingProjectiles()
+    -- Returns information about all projectiles incoming towards this unit.
+    -- local iProj = GetBot():GetIncomingTrackingProjectiles()
+    -- if #iProj > 0 then
+    --     print("underattack and health is", GetBot():GetHealth()/GetBot():GetMaxHealth())
+    --     return 1
+    -- else
+    --     return 0
+    -- end
+    
+    -- for _, ip in pairs(iProj) do
+    --     if ip ~= nil and ip.caster:IsTower() then
+    --         print("UNDER ATTACK BY TOWER GET OUTTA HERE")
+    --     end
+    -- end
+
+    return (GetBot():WasRecentlyDamagedByAnyHero(10) or GetBot():WasRecentlyDamagedByCreep(10) or GetBot():WasRecentlyDamagedByTower(10)) and 1 or 0
+end
+
 
 -- check if allied heroes around have health below 80%
 function NearbyAllyHasLowHealth( )

@@ -94,7 +94,7 @@ local x = [[{
 					"name": "SelectHeroTarget"
 				},
 				{
-					"name": "SelectAbility",
+					"name": "SelectAbility"
 				},
 				{
 					"name": "CastAbility"
@@ -270,6 +270,45 @@ local x = [[{
 					"element": "C-GoToLane"
 				}
 			]
+		},
+		{
+			"name": "C-Retreat",
+			"goals": [
+				{
+					"name": "HasLowHealth",
+					"value": "0",
+					"comparator": "bool"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-TpRetreat",
+					"Senses": [
+						{
+							"name": "IsScrollAvailable",
+							"value": "1",
+							"comparator": "bool"
+						},
+						{
+							"name": "IsUnderAttack",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-TeleportToBase"
+				},
+				{
+					"name": "CE-Retreat",
+					"Senses": [
+						{
+							"name": "IsWalkableDistance",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-GoToSafeLocation"
+				}
+			]
 		}
 	],
 	"DriveElements": [
@@ -277,12 +316,17 @@ local x = [[{
 			"name": "DE-Retreat",
 			"element":
 			{
-				"name": "AP-GoToSafeLocation"
+				"name": "C-Retreat"
 			},
 			"checkTime": "0",
 			"Senses": [
 				{
 					"name": "HasLowHealth",
+					"value": "1",
+					"comparator": "bool"
+				},
+				{
+					"name": "RecentlyUnderAttack",
 					"value": "1",
 					"comparator": "bool"
 				}

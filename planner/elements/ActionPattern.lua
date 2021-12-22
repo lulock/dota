@@ -45,6 +45,13 @@ function ActionPattern:tick()
     return SUCCESS
 end
 
+function ActionPattern:reset()
+    self.status = IDLE
+    -- reset element child
+    self:resetChildren()
+
+end
+
 function ActionPattern:resetChildren()
     for _,action in pairs(self.actions) do
         action:reset()

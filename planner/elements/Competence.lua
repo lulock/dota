@@ -55,3 +55,11 @@ function Competence:tick()
     self.status = IDLE -- reset status (why does IDLE matter here?)
     return SUCCESS -- return success, goals achieved
 end
+
+function Competence:reset()
+    self.status = IDLE
+    -- reset element children
+    for i, elem in pairs(self.elements) do
+        elem:reset()
+    end
+end

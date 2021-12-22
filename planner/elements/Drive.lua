@@ -31,8 +31,8 @@ end
 function Drive:tick()
     -- print('drive for bot', GetBot():GetUnitName())
     for _,sense in pairs(self.senses) do --check sense conditions
-        -- print('checking sense.', sense.name)
         local senseStatus = sense:tick()
+        -- print('checking sense.', sense.name, "with status", senseStatus)
         if not senseStatus then
             return FAILURE -- drive fails to execute if condition not sensed
         end
@@ -42,4 +42,10 @@ function Drive:tick()
     -- print('running drive', self.name)
     return RUNNING
     -- return RUNNING -- if all sense conditions satisfied, then return running, even if drive competences/actions fail!! 
+end
+
+function Drive:reset()
+    self.status = IDLE
+    -- reset element
+    self.element:reset()
 end
