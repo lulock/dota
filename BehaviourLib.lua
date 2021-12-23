@@ -71,7 +71,7 @@ end
 
 -- moves to targetLoc location
 function GoToLocation( status )
-    if status == IDLE and GetUnitToLocationDistance( GetBot(), targetLoc) > 700 then
+    if status == IDLE then
         -- print("GO2LOC", targetLoc, " - queuing action - RUNNING", GetBot():GetUnitName() )
         -- print("GO2LOC", targetLoc, " - dist", GetUnitToLocationDistance( GetBot(), targetLoc) )
         GetBot():ActionQueue_MoveToLocation( targetLoc )
@@ -92,14 +92,20 @@ end
 
 -- gets lane front and moves to location
 function GoToCreepWave( status )
-    local epsilon = 700
+
+    
+    -- Return the lane front amount (0.0 - 1.0) of the specified teams creeps along the specified lane. Optionally can ignore towers.
+    -- vector GetLaneFrontLocation( nTeam, nLane, fDeltaFromFront )
+    -- Returns the location of the lane front for the specified team and lane. Always ignores towers. Has a third parameter for a distance delta from the front.
+    -- Returns the location the specified amount (0.0 - 1.0) along the specified lane.
+
     if status == IDLE then
         local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
         GetBot():ActionQueue_MoveToLocation( laneLocation )
         print("GO2CREEP - queuing action - RUNNING", GetBot():GetUnitName() )
         return RUNNING
     elseif status == RUNNING then 
-        if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
+        if GetBot():GetCurrentActionType(  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
             print ("GO2CREEP - reached DEST", GetBot():GetUnitName() )
             return SUCCESS
         else
@@ -114,17 +120,9 @@ function SelectSafeLocation( status )
     -- print( "select safe location", status )
     -- { hUnit, ... } GetNearbyTowers( nRadius, bEnemies ) --Returns a table of towers, sorted closest-to-furthest. nRadius must be less than 1600.
     if status == IDLE then
-        local closeTowers = GetBot( ):GetNearbyTowers( 1600, false )
+        -- local closeTowers = GetBot( ):GetNearbyTowers( 1600, false )
         local baseLoc = GetAncient( GetTeam( ) ):GetLocation( )
-        -- targetLoc = closeTowers[1] or baseLoc -- and run towards first one otherwise run in random direciton lol.
-
-        
-        if #closeTowers > 0 then 
-            targetLoc = closeTowers[1]:GetLocation( ) 
-        else 
-            targetLoc = baseLoc 
-        end
-
+        targetLoc = baseLoc 
         return SUCCESS
     end
     
@@ -393,6 +391,24 @@ function Idle( status )
     return SUCCESS
 end
 
+-- does nothing
+function HealSelf( status )
+    if status == IDLE then
+        local itemSlot = GetBot():FindItemSlot('item_flask')
+        local itemHandle = GetBot():GetItemInSlot( itemSlot )
+        GetBot():Action_UseAbilityOnEntity( itemHandle, GetBot() )
+        print("stock count", GetItemStockCount('item_flask'))
+    elseif status == RUNNING then
+        if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
+            return SUCCESS
+        else
+            return RUNNING
+        end
+    end
+
+    return status
+end
+
 -- SENSES --
 
 -- check if hero has health below 80%
@@ -484,6 +500,13 @@ end
 function IsHealingAbilityAvailable()
     local ability = GetBot():GetAbilityByName('witch_doctor_voodoo_restoration')
     return ability:IsFullyCastable() and 1 or 0
+end
+
+-- checks if healing salve is available
+function IsHealingItemAvailable()
+    local itemSlot = GetBot():FindItemSlot('item_flask')
+    -- print("IsHealingItemAvailable? ", itemSlot)
+    return itemSlot > 0 and 1 or 0
 end
 
 

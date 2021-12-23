@@ -44,6 +44,14 @@ local x = [[{
 			]
 		},
 		{
+			"name": "AP-Heal",
+			"actions": [
+				{
+					"name": "HealSelf"
+				}
+			]
+		},
+		{
 			"name": "AP-TeleportToLaneTower",
 			"actions": [
 				{
@@ -312,6 +320,26 @@ local x = [[{
 		}
 	],
 	"DriveElements": [
+		{
+			"name": "DE-Heal",
+			"element": 
+			{
+				"name": "AP-Heal"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "HasLowHealth",
+					"value": "1",
+					"comparator": "bool"
+				},
+				{
+					"name": "IsHealingItemAvailable",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
 		{
 			"name": "DE-Retreat",
 			"element":
