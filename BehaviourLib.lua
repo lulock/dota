@@ -502,13 +502,6 @@ function IsHealingAbilityAvailable()
     return ability:IsFullyCastable() and 1 or 0
 end
 
--- checks if healing salve is available
-function IsHealingItemAvailable()
-    local itemSlot = GetBot():FindItemSlot('item_flask')
-    -- print("IsHealingItemAvailable? ", itemSlot)
-    return itemSlot > 0 and 1 or 0
-end
-
 function IsFarFromPartner()
 
     local partnerPos = PARTNERS[ GetBot():GetUnitName() ]
