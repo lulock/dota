@@ -37,7 +37,7 @@ function Planner:buildCompetence()
         -- start by building new goals (which are Senses)
         local goals = {}
         for _, g in pairs(c.goals) do
-            table.insert(goals, Sense(g.name, g.value, g.comparator)) -- construct new sense
+            table.insert(goals, Sense(g.name, g.value, g.comparator, g.arg or nil)) -- construct new sense
         end
 
         -- next build competence elements
@@ -46,7 +46,7 @@ function Planner:buildCompetence()
             if not self.elements[ce.name] then -- check if competence element exists already
                 local senses = {}
                 for _,s in pairs(ce.Senses) do
-                    table.insert(senses, Sense(s.name, s.value, s.comparator)) -- construct new sense
+                    table.insert(senses, Sense(s.name, s.value, s.comparator, s.arg or nil)) -- construct new sense
                 end
                 table.insert(comp_elements, CompetenceElement(ce.name, senses, self.elements[ce.element])) -- construct new competence element
             else
@@ -68,7 +68,7 @@ function Planner:buildDriveCollection()
 
         local senses = {}
         for _, s in pairs(de.Senses) do
-            local sense = Sense(s.name, s.value, s.comparator)
+            local sense = Sense(s.name, s.value, s.comparator, s.arg or nil)
             --print(s.name, s.value, s.comparator)
             table.insert(senses, sense)
         end

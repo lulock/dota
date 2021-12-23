@@ -78,12 +78,12 @@ function Opera:buildScenes(operaTable, plan)
         
         local landmarks = {}
         for _, l in pairs(scene.landmarks) do
-            table.insert(landmarks, Sense(l.name, l.value, l.comparator))
+            table.insert(landmarks, Sense(l.name, l.value, l.comparator, l.arg))
         end
 
         local results = {}
         for _, res in pairs(scene.results) do
-            table.insert(results, Sense(res.name, res.value, res.comparator))
+            table.insert(results, Sense(res.name, res.value, res.comparator, res.arg))
         end
 
         local rules = {}
@@ -91,7 +91,7 @@ function Opera:buildScenes(operaTable, plan)
             -- construct conditional
             local conditions = {}
             for _, cond in pairs(r.conditions) do
-                table.insert(conditions, Sense(cond.name, cond.value, cond.comparator))
+                table.insert(conditions, Sense(cond.name, cond.value, cond.comparator, cond.arg))
             end
             
             local rule = Rule(conditions, self.norms[r.consequence], self.norms[r.alternative])

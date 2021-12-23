@@ -411,11 +411,11 @@ end
 
 -- SENSES --
 
--- check if hero has health below 80%
-function HasLowHealth( )
-    local currentHealth = GetBot( ):GetHealth( )/GetBot( ):GetMaxHealth( )
-    return currentHealth < lowHealth and 1 or 0
-end
+-- -- check if hero has health below 80%
+-- function HasLowHealth( )
+--     local currentHealth = GetBot( ):GetHealth( )/GetBot( ):GetMaxHealth( )
+--     return currentHealth < lowHealth and 1 or 0
+-- end
 -- check if hero has health below 80%
 function HasExtremelyLowHealth( )
     local currentHealth = GetBot( ):GetHealth( )/GetBot( ):GetMaxHealth( )
@@ -509,7 +509,6 @@ function IsHealingItemAvailable()
     return itemSlot > 0 and 1 or 0
 end
 
-
 function IsFarFromPartner()
 
     local partnerPos = PARTNERS[ GetBot():GetUnitName() ]
@@ -545,28 +544,23 @@ function IsUnderAttack()
     return (GetBot():WasRecentlyDamagedByAnyHero(3) or GetBot():WasRecentlyDamagedByCreep(3) or GetBot():WasRecentlyDamagedByTower(3)) and 1 or 0
 end
 
--- what does this do
-function RecentlyUnderAttack( )
-    
-    -- { { location, caster, player, ability, is_dodgeable, is_attack }, ... } GetIncomingTrackingProjectiles()
-    -- Returns information about all projectiles incoming towards this unit.
-    -- local iProj = GetBot():GetIncomingTrackingProjectiles()
-    -- if #iProj > 0 then
-    --     print("underattack and health is", GetBot():GetHealth()/GetBot():GetMaxHealth())
-    --     return 1
-    -- else
-    --     return 0
-    -- end
-    
-    -- for _, ip in pairs(iProj) do
-    --     if ip ~= nil and ip.caster:IsTower() then
-    --         print("UNDER ATTACK BY TOWER GET OUTTA HERE")
-    --     end
-    -- end
-
-    return (GetBot():WasRecentlyDamagedByAnyHero(10) or GetBot():WasRecentlyDamagedByCreep(10) or GetBot():WasRecentlyDamagedByTower(10)) and 1 or 0
+-- checks if recently damaged by hero, creep, or tower within speicified time
+function RecentlyUnderAttack( time )
+    local nTime = tonumber( time )
+    -- local nTime = tonumber( time ) or 10 -- or default 10
+    return (GetBot():WasRecentlyDamagedByAnyHero(nTime) or GetBot():WasRecentlyDamagedByCreep(nTime) or GetBot():WasRecentlyDamagedByTower(nTime)) and 1 or 0
 end
 
+-- returns this bot's health percentage value within range [0.0, 1.0]
+function Health( )
+    return GetBot():GetHealth() / GetBot():GetMaxHealth()
+end
+
+-- checks if item argument is available
+function IsItemAvailable( item )
+    local itemSlot = GetBot():FindItemSlot( item )
+    return itemSlot > 0 and 1 or 0
+end
 
 -- check if allied heroes around have health below 80%
 function NearbyAllyHasLowHealth( )

@@ -283,9 +283,9 @@ local x = [[{
 			"name": "C-Retreat",
 			"goals": [
 				{
-					"name": "HasLowHealth",
-					"value": "0",
-					"comparator": "bool"
+					"name": "Health",
+					"value": "0.8",
+					"comparator": ">"
 				}
 			],
 			"elements": [
@@ -329,14 +329,15 @@ local x = [[{
 			"checkTime": "0",
 			"Senses": [
 				{
-					"name": "HasLowHealth",
-					"value": "1",
-					"comparator": "bool"
+					"name": "Health",
+					"value": "0.8",
+					"comparator": "<"
 				},
 				{
-					"name": "IsHealingItemAvailable",
+					"name": "IsItemAvailable",
 					"value": "1",
-					"comparator": "bool"
+					"comparator": "bool",
+					"arg": "item_flask"
 				}
 			]
 		},
@@ -349,14 +350,15 @@ local x = [[{
 			"checkTime": "0",
 			"Senses": [
 				{
-					"name": "HasLowHealth",
-					"value": "1",
-					"comparator": "bool"
+					"name": "Health",
+					"value": "0.8",
+					"comparator": "<"
 				},
 				{
 					"name": "RecentlyUnderAttack",
 					"value": "1",
-					"comparator": "bool"
+					"comparator": "bool",
+					"arg": "10"
 				}
 			]
 		},
