@@ -28,6 +28,30 @@ local x = [[{
 			]
 		},
 		{
+			"name": "AP-BuyHealItem",
+			"actions": [
+				{
+					"name": "BuyHealItem"
+				}
+			]
+		},
+		{
+			"name": "AP-HealItem",
+			"actions": [
+				{
+					"name": "HealItem"
+				}
+			]
+		},
+		{
+			"name": "AP-HealAbility",
+			"actions": [
+				{
+					"name": "HealAbility"
+				}
+			]
+		},
+		{
 			"name": "AP-GoToLane",
 			"actions": [
 				{
@@ -111,6 +135,54 @@ local x = [[{
 		}
 	],
 	"Competences": [
+		{
+			"name": "C-Heal",
+			"goals": [
+				{
+					"name": "Health",
+					"value": "80",
+					"comparator": ">"
+				}
+			],
+			"elements": [
+				{
+					"name": "CE-UseHealingAbility",
+					"Senses": [
+						{
+							"name": "IsAbilityAvailable",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "witch_doctor_voodoo_restoration"
+						}
+					],
+					"element": "AP-HealAbility"
+				},
+				{
+					"name": "CE-UseHealingItem",
+					"Senses": [
+						{
+							"name": "IsItemAvailable",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "item-flask"
+						}
+					],
+					"element": "AP-HealItem"
+				},
+				{
+					"name": "CE-BuyHealingItem",
+					"Senses": [
+						{
+							"name": "EnoughGoldForItem",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "item-flask"
+						}
+					],
+					"element": "AP-BuyHealItem"
+				}
+			]
+		},
 		{
 			"name": "C-GoToLane",
 			"goals": [
@@ -324,7 +396,7 @@ local x = [[{
 			"name": "DE-Heal",
 			"element": 
 			{
-				"name": "AP-Heal"
+				"name": "C-Heal"
 			},
 			"checkTime": "0",
 			"Senses": [
@@ -332,12 +404,6 @@ local x = [[{
 					"name": "Health",
 					"value": "0.8",
 					"comparator": "<"
-				},
-				{
-					"name": "IsItemAvailable",
-					"value": "1",
-					"comparator": "bool",
-					"arg": "item_flask"
 				}
 			]
 		},

@@ -7,15 +7,15 @@
 --  . list of desired goals of type Sense                                           --
 --  . ordered list of CompetenceElements                                            --
 --  . status that is                                                                --
---      . IDLE                                                                    --
---      . RUNNING                                                                 --
---      . SUCCESS                                                                 --
---      . FAILURE                                                                 --
+--      . IDLE                                                                      --
+--      . RUNNING                                                                   --
+--      . SUCCESS                                                                   --
+--      . FAILURE                                                                   --
 --                                                                                  --
 -- tick() checks goals and only:                                                    --
 --  . fires competence if any one goal not yet satisfied                            --
---  . returns SUCCESS once all goals satisfied                                    --
---  . returns FAILURE if none of the elements can fire                            --
+--  . returns SUCCESS once all goals satisfied                                      --
+--  . returns FAILURE if none of the elements can fire                              --
 --                                                                                  --
 -- for more on POSH Competences see:                                                --
 --      http://www.cs.bath.ac.uk/~jjb/web/BOD/AgeS02/node11.html                    --
@@ -30,6 +30,7 @@ function Competence:init(name, goals, elements)
     self.status = IDLE
 end
 
+-- TODO: CHECK COMPETENCE ELEMENT FUNCTIONALITY
 function Competence:tick()
     -- When the goal has been achieved, or if none of the elements can fire, the competence terminates.
     for _,goal in pairs(self.goals) do --check all goals

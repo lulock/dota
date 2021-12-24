@@ -342,6 +342,80 @@ function SelectHeroToHeal( status )
 end
 
 -- witch doctor casts healing ability
+function HealAbility( status )
+
+    if status == IDLE then
+        GetBot():Action_UseAbility( 'witch_doctor_voodoo_restoration' );
+        return RUNNING
+    elseif status == RUNNING then
+        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
+            -- print ( "Cast Ability - SUCCESS" )
+            print ( "CASTABILITY - SUCCESS", GetBot():GetUnitName() )
+            return SUCCESS
+        else
+            return RUNNING
+        end
+    end
+
+    return status 
+    
+end
+
+-- witch doctor casts healing ability
+function HealItem( status )
+
+    if status == IDLE then
+
+        local itemSlot = GetBot():FindItemSlot('item_flask')
+        local itemHandle = GetBot():GetItemInSlot( itemSlot )
+        GetBot():Action_UseAbilityOnEntity( itemHandle, GetBot() )
+        print("stock count", GetItemStockCount('item_flask'))
+
+        return RUNNING
+    elseif status == RUNNING then
+        if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
+            -- print ( "Cast Ability - SUCCESS" )
+            print ( "CASTITEM - SUCCESS", GetBot():GetUnitName() )
+            return SUCCESS
+        else
+            return RUNNING
+        end
+    end
+
+    return status 
+    
+end
+
+-- witch doctor casts healing ability
+function BuyHealItem( status )
+
+-- Item Purchase Results
+-- PURCHASE_ITEM_SUCCESS
+-- PURCHASE_ITEM_OUT_OF_STOCK
+-- PURCHASE_ITEM_DISALLOWED_ITEM
+-- PURCHASE_ITEM_INSUFFICIENT_GOLD
+-- PURCHASE_ITEM_NOT_AT_HOME_SHOP
+-- PURCHASE_ITEM_NOT_AT_SIDE_SHOP
+-- PURCHASE_ITEM_NOT_AT_SECRET_SHOP
+-- PURCHASE_ITEM_INVALID_ITEM_NAME
+
+    if status == IDLE then
+        -- buy here 
+        local result = GetBot():ActionImmediate_PurchaseItem ( 'item_flask' )
+        if result == PURCHASE_ITEM_SUCCESS then
+            print ( "BUYITEM - SUCCESS", GetBot():GetUnitName() )
+            print ( "BUYITEM - currAction", GetBot():GetCurrentActionType() )
+            return SUCCESS
+        else
+            return FAILURE
+        end
+    end
+
+    return status 
+    
+end
+
+-- witch doctor casts healing ability
 function CastHealingAbility()
     -- local ability = GetBot():GetAbilityByName('witch_doctor_voodoo_restoration') -- TODO: Check if this returns nil when not witch doctor
     if ability ~= nil then
@@ -553,6 +627,24 @@ end
 function IsItemAvailable( item )
     local itemSlot = GetBot():FindItemSlot( item )
     return itemSlot > 0 and 1 or 0
+end
+
+-- checks if ability argument is available
+function IsAbilityAvailable( ability )
+    local abilityHandle = GetBot():GetAbilityByName( ability )
+    if abilityHandle ~= nil and abilityHandle:IsFullyCastable() then
+        return 1
+    else 
+        return 0
+    end
+    -- return abilityHandle:IsFullyCastable() > 0 and 1 or 0
+end
+
+-- checks if enough gold for item argument
+function EnoughGoldForItem( item )
+    local itemCost = GetItemCost( item )
+    local botGold = GetBot():GetGold( )
+    return botGold >= itemCost and 1 or 0
 end
 
 -- check if allied heroes around have health below 80%
