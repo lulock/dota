@@ -569,11 +569,6 @@ function IsSafeToFarm( )
     return GetBot( ):WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
 end
 
--- check if teleportation scroll is available
-function IsScrollAvailable( )
-    return GetItemStockCount( "item_tpscroll" ) > 0 and 1 or 0
-end
-
 -- check if target is dead
 function IsLastHit( )
     return target:IsAlive( ) and 1 or 0
@@ -683,7 +678,7 @@ function EnoughGoldForItem( item )
     -- print("itemCost", item, 'is', GetItemCost( item ) )
     -- print("a diff itemCost item_arcane_boots is", GetItemCost( 'item_arcane_boots' ) )
     -- print("Stash Val", GetBot():GetStashValue() )
-    local alreadyStashed = GetBot():GetStashValue() >= GetItemCost( item ) 
+    -- local alreadyStashed = GetBot():GetStashValue() >= GetItemCost( item ) 
     return (botGold >= itemCost) and 1 or 0
 end
 

@@ -20,20 +20,19 @@ local abilities = {
 local toBuy = {
 	[1] = "item_branches", -- (50 gold, +1 str, +1 agi, +1 int)
 	[2] = "item_circlet",
-	-- [3] = "item_flask",
-	-- [4] = "item_faerie_fire", 
-	-- [5] = "item_faerie_fire", 
-	-- [6] = "item_faerie_fire", 
-	-- [7] = "item_slippers" 
+	[3] = "item_flask",
+	[4] = "item_faerie_fire", 
+	[5] = "item_slippers" 
 }
+local courier = GetCourier( POSITIONS[GetBot():GetUnitName()] - 1 )
 
 function ItemPurchaseThink()
-
-	-- if GetGameState() == GAME_STATE_PRE_GAME then
-	-- 	for i=1,#startingItems do
-	-- 		toBuy[#toBuy+1] = startingItems[i]
-	-- 	end
-	-- end
+	
+	local stashVal = GetBot():GetStashValue()
+	local cState = GetCourierState( courier )
+	if stashVal > 0 and (cState == COURIER_STATE_IDLE or cState == COURIER_STATE_AT_BASE) then
+		GetBot():ActionImmediate_Courier(GetCourier( POSITIONS[GetBot():GetUnitName()] -1), COURIER_ACTION_TAKE_STASH_ITEMS)
+	end
 
 	if #toBuy > 0 then
 		for idx,item in pairs(toBuy) do
@@ -52,9 +51,9 @@ function ItemPurchaseThink()
 
 	-- otherwise, update next ability
 	local ability = nil
-	local botLevel = bot:Get:Level()
+	local botLevel = bot:GetLevel()
 	-- if level 6, then upgrade ult
-	if botLevel == 6 or  botLevel == 11 or botLevel == 13 then
+	if botLevel == 6 or botLevel == 11 or botLevel == 13 then
 		ability = bot:GetAbilityInSlot( abilities[#abilities] )
 	else
 		ability = bot:GetAbilityInSlot( abilities[nextUpdate] )

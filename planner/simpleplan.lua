@@ -79,6 +79,14 @@ local x = [[{
 			]
 		},
 		{
+			"name": "AP-HealAlly",
+			"actions": [
+				{
+					"name": "CastHealingAbility"
+				}
+			]
+		},
+		{
 			"name": "AP-TeleportToLaneTower",
 			"actions": [
 				{
@@ -194,6 +202,29 @@ local x = [[{
 						}
 					],
 					"element": "AP-BuyHealItem"
+				},
+				{
+					"name": "CE-TpRetreat",
+					"Senses": [
+						{
+							"name": "IsItemAvailable",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "item_tpscroll"
+						},
+						{
+							"name": "RecentlyUnderAttack",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "5"
+						},
+						{
+							"name": "Health",
+							"value": "0.4",
+							"comparator": "<"
+						}
+					],
+					"element": "AP-TeleportToBase"
 				},
 				{
 					"name": "CE-Retreat",
@@ -450,6 +481,27 @@ local x = [[{
 					"value": "1",
 					"comparator": "bool",
 					"arg": "10"
+				}
+			]
+		},
+		{
+			"name": "DE-HealAlly",
+			"element":
+			{
+				"name": "AP-HealAlly"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "NearbyAllyHasLowHealth",
+					"value": "1",
+					"comparator": "bool"
+				},
+				{
+					"name": "IsAbilityAvailable",
+					"value": "1",
+					"comparator": "bool",
+					"arg": "witch_doctor_voodoo_restoration"
 				}
 			]
 		},

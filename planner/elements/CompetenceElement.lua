@@ -18,7 +18,7 @@ CompetenceElement = Class{__includes = PlanElement}
 function CompetenceElement:init(name, senses, element)
     self.name = name --string name
     self.senses = senses --list of senses
-    self.element = element --should probably be renamed to element or something
+    self.element = element 
 end
 
 function CompetenceElement:tick()

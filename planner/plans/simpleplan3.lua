@@ -263,7 +263,7 @@ local x = [[{
 	],
 	"DriveElements": [
 		{
-			"name": "DE-Heal",
+			"name": "DE-HealAlly",
 			"element":
 			{
 				"name": "AP-HealAlly"
@@ -274,6 +274,12 @@ local x = [[{
 					"name": "NearbyAllyHasLowHealth",
 					"value": "1",
 					"comparator": "bool"
+				},
+				{
+					"name": "IsAbilityAvailable",
+					"value": "1",
+					"comparator": "bool",
+					"arg": "witch_doctor_voodoo_restoration"
 				}
 			]
 		},
