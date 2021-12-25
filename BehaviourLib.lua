@@ -363,19 +363,20 @@ end
 
 -- witch doctor casts healing ability
 function HealItem( status )
-
     if status == IDLE then
 
         local itemSlot = GetBot():FindItemSlot('item_flask')
         local itemHandle = GetBot():GetItemInSlot( itemSlot )
         GetBot():Action_UseAbilityOnEntity( itemHandle, GetBot() )
-        print("stock count", GetItemStockCount('item_flask'))
+        -- print("stock count", GetItemStockCount('item_flask'))
+        -- print("slot type", GetBot():GetItemSlotType(itemSlot))
+        -- print("slot main?", GetBot():GetItemSlotType(itemSlot) == ITEM_SLOT_TYPE_MAIN)
 
         return RUNNING
     elseif status == RUNNING then
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
             -- print ( "Cast Ability - SUCCESS" )
-            print ( "CASTITEM - SUCCESS", GetBot():GetUnitName() )
+            print ( "HEALITEM - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -384,6 +385,36 @@ function HealItem( status )
 
     return status 
     
+end
+
+-- TODO
+function CourierStashedItems (status)
+
+    if status == IDLE then
+        -- print("IsCourierAvailable?", IsCourierAvailable())    
+        -- if IsCourierAvailable() then
+        GetBot():ActionImmediate_Courier(GetCourier( POSITIONS[GetBot():GetUnitName()] -1), COURIER_ACTION_TAKE_STASH_ITEMS)
+        -- GetBot():ActionImmediate_Courier(GetCourier( POSITIONS[GetBot():GetUnitName()] ), COURIER_ACTION_TAKE_AND_TRANSFER_ITEMS)
+        return SUCCESS
+
+    -- elseif status == RUNNING then
+    end
+
+    return status
+
+    -- ActionImmediate_Courier(, COURIER_ACTION_TAKE_STASH_ITEMS) 
+    -- bool IsCourierAvailable()
+
+    -- Returns if the courier is available to use.
+
+    -- Returns the number of team couriers
+    -- hCourier GetCourier( nCourier )
+
+    -- Returns a handle to the specified courier (zero based index)
+    -- int GetCourierState( hCourier )
+
+    -- Returns the current state of the specified courier.
+
 end
 
 -- witch doctor casts healing ability
@@ -405,6 +436,7 @@ function BuyHealItem( status )
         if result == PURCHASE_ITEM_SUCCESS then
             print ( "BUYITEM - SUCCESS", GetBot():GetUnitName() )
             print ( "BUYITEM - currAction", GetBot():GetCurrentActionType() )
+            
             return SUCCESS
         else
             return FAILURE
@@ -626,7 +658,8 @@ end
 -- checks if item argument is available
 function IsItemAvailable( item )
     local itemSlot = GetBot():FindItemSlot( item )
-    return itemSlot > 0 and 1 or 0
+    
+    return GetBot():GetItemSlotType(itemSlot) == ITEM_SLOT_TYPE_MAIN and 1 or 0
 end
 
 -- checks if ability argument is available
@@ -644,7 +677,29 @@ end
 function EnoughGoldForItem( item )
     local itemCost = GetItemCost( item )
     local botGold = GetBot():GetGold( )
-    return botGold >= itemCost and 1 or 0
+
+    -- print("Enough Gold?", botGold >= itemCost )
+    -- print("Bot Gold", GetBot():GetGold() )
+    -- print("itemCost", item, 'is', GetItemCost( item ) )
+    -- print("a diff itemCost item_arcane_boots is", GetItemCost( 'item_arcane_boots' ) )
+    -- print("Stash Val", GetBot():GetStashValue() )
+    local alreadyStashed = GetBot():GetStashValue() >= GetItemCost( item ) 
+    return (botGold >= itemCost) and 1 or 0
+end
+
+-- checks if item argument is available
+function IsItemStashed( item )
+    local itemSlot = GetBot():FindItemSlot( item )
+    
+    return GetBot():GetItemSlotType(itemSlot) == ITEM_SLOT_TYPE_STASH and 1 or 0
+end
+
+-- checks if courier available
+function CourierAvailable(  )
+    local courier = GetCourier( POSITIONS[GetBot():GetUnitName()] - 1 )
+    local cState = GetCourierState( courier )
+    
+    return (cState == COURIER_STATE_IDLE or cState == COURIER_STATE_AT_BASE) and 1 or 0
 end
 
 -- check if allied heroes around have health below 80%

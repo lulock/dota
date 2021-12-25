@@ -51,12 +51,22 @@ function ItemPurchaseThink()
 	end
 
 	-- otherwise, update next ability
-	local ability = bot:GetAbilityInSlot( abilities[nextUpdate] )
+	local ability = nil
+	local botLevel = bot:Get:Level()
+	-- if level 6, then upgrade ult
+	if botLevel == 6 or  botLevel == 11 or botLevel == 13 then
+		ability = bot:GetAbilityInSlot( abilities[#abilities] )
+	else
+		ability = bot:GetAbilityInSlot( abilities[nextUpdate] )
+	end
+	
+	
 	if ability ~= nil then
 		bot:ActionImmediate_LevelAbility (ability:GetName())
-		--print('ability leveled up is', ability:GetName())
+		print('ability leveled up is', ability:GetName())
+		nextUpdate = (nextUpdate + 1) % 3
+		print('nextUpdate is', nextUpdate)
 	end
-	nextUpdate = (nextUpdate + 1) % 4
-	--print('nextUpdate is', nextUpdate)
+
 
 end

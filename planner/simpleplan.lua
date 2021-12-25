@@ -32,6 +32,9 @@ local x = [[{
 			"actions": [
 				{
 					"name": "BuyHealItem"
+				},
+				{
+					"name": "CourierStashedItems"
 				}
 			]
 		},
@@ -164,7 +167,7 @@ local x = [[{
 							"name": "IsItemAvailable",
 							"value": "1",
 							"comparator": "bool",
-							"arg": "item-flask"
+							"arg": "item_flask"
 						}
 					],
 					"element": "AP-HealItem"
@@ -176,10 +179,32 @@ local x = [[{
 							"name": "EnoughGoldForItem",
 							"value": "1",
 							"comparator": "bool",
-							"arg": "item-flask"
+							"arg": "item_flask"
+						},
+						{
+							"name": "IsItemStashed",
+							"value": "0",
+							"comparator": "bool",
+							"arg": "item_flask"
+						},
+						{
+							"name": "CourierAvailable",
+							"value": "1",
+							"comparator": "bool"
 						}
 					],
 					"element": "AP-BuyHealItem"
+				},
+				{
+					"name": "CE-Retreat",
+					"Senses": [
+						{
+							"name": "IsWalkableDistance",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-GoToSafeLocation"
 				}
 			]
 		},

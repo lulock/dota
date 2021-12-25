@@ -33,6 +33,30 @@ end
 -- TODO: CHECK COMPETENCE ELEMENT FUNCTIONALITY
 function Competence:tick()
     -- When the goal has been achieved, or if none of the elements can fire, the competence terminates.
+    local goalsAchieved = self:checkGoals()
+
+    if goalsAchieved then 
+        self:reset()
+        return SUCCESS 
+    else 
+        for _,element in pairs(self.elements) do -- tick all children
+            -- print('ticking competence element', element.name, 'with #senses:', #element.senses, 'and child element')
+            self.status = element:tick()
+            -- print('and competence element returned', self.status)
+            if self.status == RUNNING or self.status == SUCCESS then
+                return self.status 
+            end -- else failure go to next competence element
+        end 
+    end
+
+    --if none of the elements can fire, the competence terminates
+    -- print('none of the elements can fire, the competence terminates', self.name)
+    return FAILURE
+end
+
+-- TODO: CHECK COMPETENCE ELEMENT FUNCTIONALITY
+function Competence:oldtick()
+    -- When the goal has been achieved, or if none of the elements can fire, the competence terminates.
     for _,goal in pairs(self.goals) do --check all goals
         -- print('checking goal', goal.name)
         local goalstatus = goal:tick()
@@ -63,4 +87,13 @@ function Competence:reset()
     for i, elem in pairs(self.elements) do
         elem:reset()
     end
+end
+
+function Competence:checkGoals()
+    for _,goal in pairs(self.goals) do --check all goals
+        if not goal:tick() then -- if at least one goal not met
+            return false
+        end
+    end -- else all goals met
+    return true
 end
