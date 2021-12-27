@@ -319,13 +319,14 @@ end
 
 -- cast ability on target once
 function CastAbility( status )
+    print("CASTABILITY - target type", selectedAbility:GetTargetType(), GetBot():GetUnitName())
     if status == IDLE then
-        if selectedAbility:GetTargetType() == 0 then
+        if selectedAbility:GetTargetType() == ABILITY_TARGET_TYPE_NONE then
             GetBot():ActionQueue_UseAbility( selectedAbility )
-            print("CASTABILITY - queuing action - RUNNING", GetBot():GetUnitName() )
+            print("CASTABILITY1 - queuing action - RUNNING", GetBot():GetUnitName() )
         else
             GetBot():ActionQueue_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
-            print("CASTABILITY - queuing action - RUNNING", GetBot():GetUnitName() )
+            print("CASTABILITY2 - queuing action - RUNNING", GetBot():GetUnitName() )
         end
         return RUNNING
     elseif status == RUNNING then 
@@ -369,7 +370,7 @@ function HealAbility( status )
     elseif status == RUNNING then
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
             -- print ( "Cast Ability - SUCCESS" )
-            print ( "CASTABILITY - SUCCESS", GetBot():GetUnitName() )
+            print ( "HEALABILITY - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -485,7 +486,7 @@ function GoToPartner( status )
 
         if partnerHandle ~= nil then
             GetBot():ActionQueue_MoveToUnit( partnerHandle ) -- Command a bot to move to the specified unit, this will continue to follow the unit
-            print("CASTABILITY - queuing action - RUNNING")
+            print("GTP - queuing action - RUNNING")
             return RUNNING
         else
             return FAILURE
