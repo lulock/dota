@@ -23,6 +23,9 @@ local x = [[{
 			"name": "AP-Idle",
 			"actions": [
 				{
+					"name": "GoToCreepWave"
+				},
+				{
 					"name": "Idle"
 				}
 			]

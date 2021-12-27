@@ -101,8 +101,27 @@ function GoToCreepWave( status )
 
     if status == IDLE then
         local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
+
+        local tower = GetBot():GetNearbyTowers( 1600, true )
+        if #tower > 0 then 
+            local tower1 = tower[1] 
+        
+            local towerLoc = tower1:GetLocation()
+            if tower1:CanBeSeen() then
+                print('can see enemy tower', GetBot():GetUnitName())
+                local radius = tower1:GetAttackRange()
+                local withinX = laneLocation.x >= towerLoc.x - radius and laneLocation.x <= towerLoc.x + radius
+                local withinY = laneLocation.y >= towerLoc.y - radius and laneLocation.y <= towerLoc.y + radius
+    
+                if withinX and withinY then 
+                    laneLocation =  laneLocation - RandomVector( 1.3*radius )
+                end
+            end
+
+        end
+        while not IsLocationPassable( laneLocation ) do laneLocation =  laneLocation - RandomVector( 10 ) end 
         GetBot():ActionQueue_MoveToLocation( laneLocation )
-        print("GO2CREEP - queuing action - RUNNING", GetBot():GetUnitName() )
+        print("GO2CREEP - queuing action - RUNNING - laneLoc passable?", IsLocationPassable(laneLocation), GetBot():GetUnitName() )
         return RUNNING
     elseif status == RUNNING then 
         if GetBot():GetCurrentActionType(  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
@@ -345,7 +364,7 @@ end
 function HealAbility( status )
 
     if status == IDLE then
-        GetBot():Action_UseAbility( 'witch_doctor_voodoo_restoration' );
+        GetBot():Action_UseAbility( GetBot():GetAbilityByName( 'witch_doctor_voodoo_restoration' ) )
         return RUNNING
     elseif status == RUNNING then
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
@@ -494,6 +513,7 @@ end
 
 -- does nothing
 function Idle( status )
+    GetBot():Action_MoveDirectly( GetBot():GetLocation() + RandomVector( 10 ) )
     return SUCCESS
 end
 
