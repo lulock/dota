@@ -24,7 +24,7 @@ local targetLoc = nil
 local targetAllyHero = nil
 
 local tbot = GetBot( ):GetUnitName( )
-print("in behaviourlib and bot is ", tbot)
+--print("in behaviourlib and bot is ", tbot)
 
 -- CONSTANTS --
 
@@ -34,6 +34,7 @@ local lowHealth = 0.8
 
 -- default selected ability is first ability but this might be passive ... 
 local selectedAbility = GetBot():GetAbilityInSlot( 0 )
+print('Unit Name, Role, Dota Time, Drive, Hero Level, Hero Kills, Hero Deaths, Hero Assists')
 
 
 -- HELPER FUNCTIONS --
@@ -81,7 +82,7 @@ function GoToLocation( status )
         -- print("GO2LOC - RUNNING, curr action is", GetBot():GetCurrentActionType (  ) )
         -- print("QueueLength", GetBot():NumQueuedActions() )
         if GetBot():GetCurrentActionType (  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
-            print("GO2LOC - reached DEST")
+            --print("GO2LOC - reached DEST")
             return SUCCESS
         else
             return RUNNING
@@ -108,7 +109,7 @@ function GoToCreepWave( status )
         
             local towerLoc = tower1:GetLocation()
             if tower1:CanBeSeen() then
-                print('can see enemy tower', GetBot():GetUnitName())
+                --print('can see enemy tower', GetBot():GetUnitName())
                 local radius = tower1:GetAttackRange()
                 local withinX = laneLocation.x >= towerLoc.x - radius and laneLocation.x <= towerLoc.x + radius
                 local withinY = laneLocation.y >= towerLoc.y - radius and laneLocation.y <= towerLoc.y + radius
@@ -121,11 +122,11 @@ function GoToCreepWave( status )
         end
         while not IsLocationPassable( laneLocation ) do laneLocation =  laneLocation - RandomVector( 10 ) end 
         GetBot():ActionQueue_MoveToLocation( laneLocation )
-        print("GO2CREEP - queuing action - RUNNING - laneLoc passable?", IsLocationPassable(laneLocation), GetBot():GetUnitName() )
+        --print("GO2CREEP - queuing action - RUNNING - laneLoc passable?", IsLocationPassable(laneLocation), GetBot():GetUnitName() )
         return RUNNING
     elseif status == RUNNING then 
         if GetBot():GetCurrentActionType(  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
-            print ("GO2CREEP - reached DEST", GetBot():GetUnitName() )
+            --print ("GO2CREEP - reached DEST", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -206,13 +207,13 @@ function EvadeAttack( status )
                 
                 -- GetBot():ActionPush_MoveToLocation( loc + ( 10 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
                 GetBot():Action_MoveToLocation( loc + ( 50 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
-                -- print( "evaded to", evadeLoc )
+                -- --print( "evaded to", evadeLoc )
                 -- GetBot():ActionPush_MoveDirectly( loc + ( 200 * Vector( evadeLoc.y, -evadeLoc.x, 0 )) )
                 
             end
         end
         GetBot():ActionQueue_AttackUnit( GetBot():GetTarget(), true )
-        print("EVADE - queuing action - RUNNING", GetBot():GetUnitName() )
+        --print("EVADE - queuing action - RUNNING", GetBot():GetUnitName() )
 
         -- print("current action type is ", GetBot():GetCurrentActionType())
         -- print("action queue length is ", GetBot():NumQueuedActions())
@@ -272,13 +273,13 @@ function RightClickAttack( status )
 
     if status == IDLE then
         GetBot( ):ActionQueue_AttackUnit( GetBot( ):GetTarget( ), true )
-        print("RCA - queuing action - RUNNING", GetBot():GetUnitName() )
+        --print("RCA - queuing action - RUNNING", GetBot():GetUnitName() )
         -- print("QUEUELENGTH", GetBot( ):NumQueuedActions( ) )
 
         return RUNNING
     elseif status == RUNNING then 
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK and GetBot():NumQueuedActions() == 0 then
-            print ( "RCA - SUCCESS", GetBot():GetUnitName() )
+            --print ( "RCA - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -291,6 +292,7 @@ function RightClickAttack( status )
 end
 
 -- select ability to case
+-- BUGFIX: Select Ability based on type and based on behaviour. If harassing, then select ability with target hero. If farming, then select ability with target creep.
 function SelectAbility( status )
 
     if status == IDLE then
@@ -303,9 +305,10 @@ function SelectAbility( status )
         else
             for i = 0, 23 do
                 a = GetBot():GetAbilityInSlot( i )
-                if a ~= nil and not a:IsPassive() and a:IsFullyCastable() and a:GetAbilityDamage() > 0 then
+                -- only select ability that is active, can be seen, fully castable, applies damage, and targets all units or no target. 
+                if a ~= nil and not a:IsPassive() and not a:IsHidden() and a:IsFullyCastable() and a:GetAbilityDamage() > 0 and (a:GetTargetType() == ABILITY_TARGET_TYPE_ALL or a:GetTargetType() == ABILITY_TARGET_TYPE_NONE) then
                     selectedAbility = a 
-                    --print('selected ability is ', a:GetName())
+                    print('selected ability is ', a:GetName())
                     --print('selected ability damage is ', a:GetAbilityDamage())
                     return SUCCESS
                 end
@@ -319,20 +322,21 @@ end
 
 -- cast ability on target once
 function CastAbility( status )
-    print("CASTABILITY - target type", selectedAbility:GetTargetType(), GetBot():GetUnitName())
+    --print("CASTABILITY - target type", selectedAbility:GetTargetType(), GetBot():GetUnitName())
     if status == IDLE then
+        print("target type ", selectedAbility:GetTargetType(), GetBot():GetUnitName() )
         if selectedAbility:GetTargetType() == ABILITY_TARGET_TYPE_NONE then
             GetBot():ActionQueue_UseAbility( selectedAbility )
-            print("CASTABILITY1 - queuing action - RUNNING", GetBot():GetUnitName() )
+            --print("CASTABILITY1 - queuing action - RUNNING", GetBot():GetUnitName() )
         else
             GetBot():ActionQueue_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
-            print("CASTABILITY2 - queuing action - RUNNING", GetBot():GetUnitName() )
+            --print("CASTABILITY2 - queuing action - RUNNING", GetBot():GetUnitName() )
         end
         return RUNNING
     elseif status == RUNNING then 
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
             -- print ( "Cast Ability - SUCCESS" )
-            print ( "CASTABILITY - SUCCESS", GetBot():GetUnitName() )
+            --print ( "CASTABILITY - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -370,7 +374,7 @@ function HealAbility( status )
     elseif status == RUNNING then
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
             -- print ( "Cast Ability - SUCCESS" )
-            print ( "HEALABILITY - SUCCESS", GetBot():GetUnitName() )
+            --print ( "HEALABILITY - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -396,7 +400,7 @@ function HealItem( status )
     elseif status == RUNNING then
         if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
             -- print ( "Cast Ability - SUCCESS" )
-            print ( "HEALITEM - SUCCESS", GetBot():GetUnitName() )
+            --print ( "HEALITEM - SUCCESS", GetBot():GetUnitName() )
             return SUCCESS
         else
             return RUNNING
@@ -454,8 +458,8 @@ function BuyHealItem( status )
         -- buy here 
         local result = GetBot():ActionImmediate_PurchaseItem ( 'item_flask' )
         if result == PURCHASE_ITEM_SUCCESS then
-            print ( "BUYITEM - SUCCESS", GetBot():GetUnitName() )
-            print ( "BUYITEM - currAction", GetBot():GetCurrentActionType() )
+            --print ( "BUYITEM - SUCCESS", GetBot():GetUnitName() )
+            --print ( "BUYITEM - currAction", GetBot():GetCurrentActionType() )
             
             return SUCCESS
         else
@@ -486,7 +490,7 @@ function GoToPartner( status )
 
         if partnerHandle ~= nil then
             GetBot():ActionQueue_MoveToUnit( partnerHandle ) -- Command a bot to move to the specified unit, this will continue to follow the unit
-            print("GTP - queuing action - RUNNING")
+            --print("GTP - queuing action - RUNNING")
             return RUNNING
         else
             return FAILURE
@@ -524,7 +528,7 @@ function HealSelf( status )
         local itemSlot = GetBot():FindItemSlot('item_flask')
         local itemHandle = GetBot():GetItemInSlot( itemSlot )
         GetBot():Action_UseAbilityOnEntity( itemHandle, GetBot() )
-        print("stock count", GetItemStockCount('item_flask'))
+        --print("stock count", GetItemStockCount('item_flask'))
     elseif status == RUNNING then
         if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
             return SUCCESS

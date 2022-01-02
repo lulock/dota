@@ -44,19 +44,22 @@ end
 -- constrain to expected behaviour and TODO: condition on OPERATOR 
 function Norm:sanction()
     -- local prevDrive = self.plan.root.currentDrive
-    print(self.operator)
-    print(OBLIGED)
+    -- print(self.operator)
+    -- print(OBLIGED)
     if self.operator == OBLIGED then
-        print("OBLIGED - make drive prio 1")
+        print("OBLIGED - make drive prio 2 after heal lol")
+        local prio = 2
         for i,drive in pairs(self.plan.root.drives) do
             if drive.name == self.behaviour then
                 --print('drive is', d.name)
                 self.plan.root:removeDrive(i) -- remove the drive
-                self.plan.root:insertDrive(drive, 1) -- re-insert drive as priority # 1
+                self.plan.root:insertDrive(drive, prio) -- re-insert drive as priority # 1
                 -- log role, time of change, and name of new priority drive to console
-                print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', drive.name) 
+
+                self:log(drive)
+
                 -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
-                return i, drive, 1 -- return prev index and drive
+                return i, drive, prio -- return prev index and drive
             end -- TODO: handle if not found
         end
     elseif self.operator == NOTPERMITTED then
@@ -67,7 +70,9 @@ function Norm:sanction()
                 self.plan.root:removeDrive(i) -- remove the drive
                 -- self.plan.root:insertDrive(drive, 1) -- re-insert drive as priority # 1
                 -- log role, time of change, and name of new priority drive to console
-                print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', drive.name) 
+                
+                self:log(drive)
+                
                 -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
                 return i, drive, nil -- return prev index and drive
             end -- TODO: handle if not found
@@ -78,6 +83,11 @@ function Norm:sanction()
 
 
     return nil, nil, nil
+end
+
+function Norm:log(drive)
+    local nPlayerID =  GetBot():GetPlayerID()
+    print(GetBot():GetUnitName(), POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', drive.name, GetHeroLevel( nPlayerID ), ', ', GetHeroKills( nPlayerID ), ', ', GetHeroDeaths( nPlayerID ), ', ', GetHeroAssists( nPlayerID ) ) 
 end
 
 -- restore

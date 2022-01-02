@@ -24,14 +24,14 @@ function Scene:update() -- should a scene exit be determined by landmark??
             end
         end
         self.status = RUNNING
-        print('scene running, check rules')
+        -- print('scene running, check rules')
 
         for _, rule in pairs(self.rules) do -- check rules
             local norm = rule:tick() -- get norm / expected behaviour
             local legal = norm:validate() -- check if in compliance with norm
 
             if not legal then -- if agent in violation
-                print('norm', norm.name, 'will impose SANCTIONS!')
+                -- print('norm', norm.name, 'will impose SANCTIONS!')
 
                 self.previdx, self.prevDrive, self.curridx = norm:sanction()
 

@@ -61,9 +61,9 @@ function ItemPurchaseThink()
 	
 	if ability ~= nil then
 		bot:ActionImmediate_LevelAbility (ability:GetName())
-		print('ability leveled up is', ability:GetName())
+		-- print('ability leveled up is', ability:GetName())
 		nextUpdate = (nextUpdate + 1) % 3
-		print('nextUpdate is', nextUpdate)
+		-- print('nextUpdate is', nextUpdate)
 	end
 
 end

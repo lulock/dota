@@ -49,7 +49,7 @@ function DriveCollection:tick()
             if childStatus == RUNNING or childStatus == SUCCESS then --if running or success, return success this tick
                 self.status = RUNNING
                 if self.currentDriveName ~= drive.name then --if not already running
-                    print('SWITCHING DRIVES from' , self.currentDriveName, 'to', drive.name, 'CLEAR ACTIONS', GetBot():GetUnitName())
+                    -- print('SWITCHING DRIVES from' , self.currentDriveName, 'to', drive.name, 'CLEAR ACTIONS', GetBot():GetUnitName())
                     self:reset()
                     self.currentDrive = i --keep track of running drive index (in case of removal later) MAYBE THIS SHOULD BE A POINTER TO DRIVE ITSELFFFF
                     self.currentDriveName = drive.name --keep track of running drive name

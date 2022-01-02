@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------------------------
--- this script handles control item purchasing by Shadow Fiend bot                                       --
+-- this script handles control item purchasing by Viper bot                                              --
 --  . ItemPurchaseThink() - Called every frame. Responsible for purchasing items.                        --
 --    . currently starts with 3x Iron Branch, Healing Salve, 2x Slippers of Agility                      --
 -- NOTE Some items have strange names. This Reddit post helped immensely:                                --
@@ -11,36 +11,32 @@ local nextUpdate = 0
 
 local abilities = { 
 	[0] = 0, 
-	[1] = 3,
-	[2] = 4, 
-	[3] = 5
+	[1] = 1,
+	[2] = 2, 
+	[3] = 3
 }
 
 -- starting items
 local toBuy = {
 	[1] = "item_branches", -- (50 gold, +1 str, +1 agi, +1 int)
-	[2] = "item_circlet",
+	[2] = "item_branches",
 	[3] = "item_flask",
 	[4] = "item_faerie_fire", 
 	[5] = "item_slippers" 
 }
-local courier = GetCourier( POSITIONS[GetBot():GetUnitName()] - 1 )
 
 function ItemPurchaseThink()
-	
-	local stashVal = GetBot():GetStashValue()
-	local cState = GetCourierState( courier )
-	if stashVal > 0 and (cState == COURIER_STATE_IDLE or cState == COURIER_STATE_AT_BASE) then
-		GetBot():ActionImmediate_Courier(GetCourier( POSITIONS[GetBot():GetUnitName()] -1), COURIER_ACTION_TAKE_STASH_ITEMS)
-	end
+
+	-- if GetGameState() == GAME_STATE_PRE_GAME then
+	-- 	for i=1,#startingItems do
+	-- 		toBuy[#toBuy+1] = startingItems[i]
+	-- 	end
+	-- end
 
 	if #toBuy > 0 then
 		for idx,item in pairs(toBuy) do
-			local cost = GetItemCost( item ) 
-			if cost <= bot:GetGold() then -- purchase item if bot can afford it
-				bot:ActionImmediate_PurchaseItem( item )
-				table.remove(toBuy, idx)
-			end
+			bot:ActionImmediate_PurchaseItem( item )
+			table.remove(toBuy, idx)
 		end
 	end
 	
@@ -48,7 +44,7 @@ function ItemPurchaseThink()
 	if bot:GetAbilityPoints() <= 0 then
 		return
 	end
-
+	
 	-- otherwise, update next ability
 	local ability = nil
 	local botLevel = bot:GetLevel()
@@ -66,6 +62,5 @@ function ItemPurchaseThink()
 		nextUpdate = (nextUpdate + 1) % 3
 		-- print('nextUpdate is', nextUpdate)
 	end
-
 
 end

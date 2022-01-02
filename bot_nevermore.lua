@@ -21,7 +21,7 @@ local opera = Opera( norms, planner ) -- load plan from json string
 -- end
 -- bot = GetBot() -- this is probably not necessary
 
-local flag = true
+local flag = false
 local tower1 = GetTower(TEAM_RADIANT, TOWER_MID_1)
 local tower2 = GetTower(TEAM_DIRE, TOWER_MID_1)
 local towerLoc = tower1:GetLocation()
