@@ -28,8 +28,10 @@ function Sense:tick()
     local val = nil
     
     if self.arg ~= nil then
+        -- print("CALLING W ARG", self.name, self.arg)
         val = _G[self.name](self.arg) --call function (by name) in the global namespace with argument
     else
+        -- print("CALLING", self.name)
         val = _G[self.name]() --call function (by name) in the global namespace with no argument
     end
 

@@ -264,15 +264,27 @@ local x = [[{
 					"element": "AP-GoToLane"
 				},
 				{
-					"name": "CE-Teleport",
+					"name": "CE-TpRetreat",
 					"Senses": [
 						{
-							"name": "IsScrollAvailable",
+							"name": "IsItemAvailable",
 							"value": "1",
-							"comparator": "bool"
+							"comparator": "bool",
+							"arg": "item_tpscroll"
+						},
+						{
+							"name": "RecentlyUnderAttack",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "5"
+						},
+						{
+							"name": "Health",
+							"value": "0.4",
+							"comparator": "<"
 						}
 					],
-					"element": "AP-TeleportToLaneTower"
+					"element": "AP-TeleportToBase"
 				}
 			]
 		},
@@ -301,17 +313,6 @@ local x = [[{
 						}
 					],
 					"element": "AP-RightClickAttack"
-				},
-				{
-					"name": "CE-Teleport",
-					"Senses": [
-						{
-							"name": "IsScrollAvailable",
-							"value": "1",
-							"comparator": "bool"
-						}
-					],
-					"element": "AP-TeleportToLaneTower"
 				}
 			]
 		},
@@ -424,14 +425,21 @@ local x = [[{
 					"name": "CE-TpRetreat",
 					"Senses": [
 						{
-							"name": "IsScrollAvailable",
+							"name": "IsItemAvailable",
 							"value": "1",
-							"comparator": "bool"
+							"comparator": "bool",
+							"arg": "item_tpscroll"
 						},
 						{
-							"name": "IsUnderAttack",
+							"name": "RecentlyUnderAttack",
 							"value": "1",
-							"comparator": "bool"
+							"comparator": "bool",
+							"arg": "5"
+						},
+						{
+							"name": "Health",
+							"value": "0.4",
+							"comparator": "<"
 						}
 					],
 					"element": "AP-TeleportToBase"
@@ -452,6 +460,27 @@ local x = [[{
 	],
 	"DriveElements": [
 		{
+			"name": "DE-Retreat",
+			"element":
+			{
+				"name": "C-Retreat"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "Health",
+					"value": "0.4",
+					"comparator": "<"
+				},
+				{
+					"name": "RecentlyUnderAttack",
+					"value": "1",
+					"comparator": "bool",
+					"arg": "5"
+				}
+			]
+		},
+		{
 			"name": "DE-Heal",
 			"element": 
 			{
@@ -463,27 +492,6 @@ local x = [[{
 					"name": "Health",
 					"value": "0.8",
 					"comparator": "<"
-				}
-			]
-		},
-		{
-			"name": "DE-Retreat",
-			"element":
-			{
-				"name": "C-Retreat"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "Health",
-					"value": "0.8",
-					"comparator": "<"
-				},
-				{
-					"name": "RecentlyUnderAttack",
-					"value": "1",
-					"comparator": "bool",
-					"arg": "10"
 				}
 			]
 		},

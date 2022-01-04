@@ -154,10 +154,21 @@ function SelectTarget( status )
 
     if status == IDLE then
         local enemyCreepsNearby = GetBot( ):GetNearbyCreeps( 700, true )
-        local thresholdTarget = 2*GetBot( ):GetAttackDamage( )
 
-        for _,creep in pairs( enemyCreepsNearby ) do
+        for i,creep in pairs( enemyCreepsNearby ) do
+            local thresholdTarget = 2*creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL)
             -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
+            print("CREEP", i, "HEALTH:", creep:GetHealth( ))
+            print("INCOMING DAMAGE:", creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL))
+            print("INCOMING PROJ#:", #creep:GetIncomingTrackingProjectiles( ))
+            print("other damage taken?:", creep:GetAttackDamage( ) * #creep:GetIncomingTrackingProjectiles( ))
+            print("Hero GetAttackDamage:", GetBot():GetAttackDamage( ))
+            print("Hero GetAttackRange:", GetBot():GetAttackRange( ))
+            print("Hero GetAttackSpeed:", GetBot():GetAttackSpeed( ))
+            print("Hero GetSecondsPerAttack:", GetBot():GetSecondsPerAttack( ))
+            print("Hero GetEstimatedDamageToTarget:", GetBot():GetEstimatedDamageToTarget( false, creep, GetBot():GetSecondsPerAttack( ), DAMAGE_TYPE_ALL ))
+            print("Hero GetEstimatedDamageToTarget:", GetBot():GetEstimatedDamageToTarget( false, creep, GetBot():GetSecondsPerAttack( ), DAMAGE_TYPE_PHYSICAL ))
+            
             if creep:CanBeSeen( ) and creep:GetHealth( ) <= thresholdTarget then            
                 -- Target setting and getting is available in the API omg 🙄
                 GetBot( ):SetTarget( creep )

@@ -37,8 +37,6 @@ function printPath(dist, waypoints)
 end
 
 function Think()
-
-	DebugDrawCircle( tower1:GetLocation(), tower1:GetBoundingRadius(), 255, 0, 0 )
 	
 	if flag then 
 		local tAvoidanceZones = AddAvoidanceZone( towerLoc, 100 )
