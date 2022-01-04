@@ -34,7 +34,7 @@ function Scene:update() -- should a scene exit be determined by landmark??
                 -- print('norm', norm.name, 'will impose SANCTIONS!')
 
                 self.previdx, self.prevDrive, self.curridx = norm:sanction()
-
+                print("NEW PLAN", GetBot():GetUnitName())
                 printTable(self.plan.root.drives)
 
             end
@@ -49,7 +49,8 @@ function Scene:update() -- should a scene exit be determined by landmark??
         end
         
         -- try without deep copy
-        local drive = self.plan.root.drives[1] -- point to drive
+        -- local drive = self.plan.root.drives[3] -- point to drive
+        -- print("curr ID", self.curridx)
         if self.curridx ~= nil then self.plan.root:removeDrive(self.curridx) end -- remove the drive
         if self.prevDrive ~= nil and self.previdx ~= nil then self.plan.root:insertDrive(self.prevDrive, self.previdx ) end -- re-insert drive in previous prio
         

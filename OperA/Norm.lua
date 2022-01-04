@@ -36,6 +36,7 @@ function Norm:validate()
         -- ping at bot location where norm has been violated!! 
         -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
     else -- permitted so doesn't matter, return true
+        print ('NORM COMPLIANCE')
         return true
     end
     
@@ -48,7 +49,7 @@ function Norm:sanction()
     -- print(OBLIGED)
     if self.operator == OBLIGED then
         print("OBLIGED - make drive prio 2 after heal lol")
-        local prio = 2
+        local prio = 3
         for i,drive in pairs(self.plan.root.drives) do
             if drive.name == self.behaviour then
                 --print('drive is', d.name)

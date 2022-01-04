@@ -184,6 +184,29 @@ local x = [[{
 					"element": "AP-HealItem"
 				},
 				{
+					"name": "CE-BuyHealingItem",
+					"Senses": [
+						{
+							"name": "EnoughGoldForItem",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "item_flask"
+						},
+						{
+							"name": "IsItemStashed",
+							"value": "0",
+							"comparator": "bool",
+							"arg": "item_flask"
+						},
+						{
+							"name": "CourierAvailable",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-BuyHealItem"
+				},
+				{
 					"name": "CE-TpRetreat",
 					"Senses": [
 						{
@@ -494,6 +517,21 @@ local x = [[{
 			]
 		},
 		{
+			"name": "DE-Harass",
+			"element": 
+			{
+				"name": "C-Harass"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "EnemyNearby",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
+		{
 			"name": "DE-FarmLane",
 			"element": 
 			{
@@ -527,7 +565,22 @@ local x = [[{
 					"comparator": "bool"
 				}
 			]
-		}
+		},
+		{
+			"name": "DE-Support",
+			"element":
+			{
+				"name": "AP-Follow"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "IsFarFromPartner",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
 	]
 }]]
 
