@@ -20,7 +20,7 @@ end
 
 function Rule:tick()
     for _, condition in pairs(self.conditions) do
-        print('if ', condition.name)
+        -- print('if ', condition.name)
         if not condition:tick() then
             -- print('as per norm, the expected behaviour is ', self.alternative.name)
             return self.alternative -- conditions not true, return alt norm behaviour

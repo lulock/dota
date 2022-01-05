@@ -32,9 +32,19 @@ local interval = 10
 local maxActions = 4
 local lowHealth = 0.8
 
+local LocTest = 
+{
+    [1] = nil,
+    [2] = nil,
+    [3] = nil,
+    [4] = nil,
+    [5] = nil
+
+}
+
 -- default selected ability is first ability but this might be passive ... 
 local selectedAbility = GetBot():GetAbilityInSlot( 0 )
-print('Unit Name, Role, Dota Time, Drive, Hero Level, Hero Kills, Hero Deaths, Hero Assists')
+print('Unit Name, Role, Dota Time, Drive, Hero Level, Hero Gold, Hero Kills, Hero Deaths, Hero Assists')
 
 
 -- HELPER FUNCTIONS --
@@ -101,7 +111,7 @@ function GoToCreepWave( status )
     -- Returns the location the specified amount (0.0 - 1.0) along the specified lane.
 
     if status == IDLE then
-        local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200)
+        local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200) - RandomVector( 100 )
 
         local tower = GetBot():GetNearbyTowers( 1600, true )
         if #tower > 0 then 
@@ -120,13 +130,23 @@ function GoToCreepWave( status )
             end
 
         end
-        while not IsLocationPassable( laneLocation ) do laneLocation =  laneLocation - RandomVector( 10 ) end 
+        while not IsLocationPassable( laneLocation ) do 
+            laneLocation = laneLocation - RandomVector( 10 )
+            -- print("recalc loc", GetBot():GetUnitName())
+        end 
+
+        LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] = laneLocation
         GetBot():ActionQueue_MoveToLocation( laneLocation )
         --print("GO2CREEP - queuing action - RUNNING - laneLoc passable?", IsLocationPassable(laneLocation), GetBot():GetUnitName() )
         return RUNNING
     elseif status == RUNNING then 
-        if GetBot():GetCurrentActionType(  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0 then
-            --print ("GO2CREEP - reached DEST", GetBot():GetUnitName() )
+        print ("GO2CREEP - reached DEST?", GetUnitToLocationDistance( GetBot(), LocTest[ POSITIONS[ GetBot():GetUnitName() ] ]), GetBot():GetUnitName() )
+        while not IsLocationPassable( LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] ) do 
+            LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] = LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] - RandomVector( 10 )
+            print("recalc loc", GetBot():GetUnitName())
+        end 
+
+        if (GetBot():GetCurrentActionType(  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0) or (GetUnitToLocationDistance( GetBot(), LocTest[ POSITIONS[ GetBot():GetUnitName() ] ]) <= 20) then
             return SUCCESS
         else
             return RUNNING
@@ -160,15 +180,15 @@ function SelectTarget( status )
             -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
             
             if creep:CanBeSeen( ) and creep:GetHealth( ) <= thresholdTarget and creep:GetHealth( ) > 0 then            
-                print("CREEP", i, "HEALTH:", creep:GetHealth( ))
-                print("INCOMING DAMAGE:", creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL))
-                print("INCOMING PROJ#:", #creep:GetIncomingTrackingProjectiles( ))
-                print("other damage taken?:", creep:GetAttackDamage( ) * #creep:GetIncomingTrackingProjectiles( ))
+                -- print("CREEP", i, "HEALTH:", creep:GetHealth( ))
+                -- print("INCOMING DAMAGE:", creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL))
+                -- print("INCOMING PROJ#:", #creep:GetIncomingTrackingProjectiles( ))
+                -- print("other damage taken?:", creep:GetAttackDamage( ) * #creep:GetIncomingTrackingProjectiles( ))
                 -- print("Hero GetAttackDamage:", GetBot():GetAttackDamage( ))
                 -- print("Hero GetAttackRange:", GetBot():GetAttackRange( ))
                 -- print("Hero GetAttackSpeed:", GetBot():GetAttackSpeed( ))
                 -- print("Hero GetSecondsPerAttack:", GetBot():GetSecondsPerAttack( ))
-                print("Hero GetEstimatedDamageToTarget:", GetBot():GetEstimatedDamageToTarget( false, creep, GetBot():GetSecondsPerAttack( ), DAMAGE_TYPE_PHYSICAL ))
+                -- print("Hero GetEstimatedDamageToTarget:", GetBot():GetEstimatedDamageToTarget( false, creep, GetBot():GetSecondsPerAttack( ), DAMAGE_TYPE_PHYSICAL ))
                 -- Target setting and getting is available in the API omg 🙄
                 GetBot( ):SetTarget( creep )
                 return SUCCESS
@@ -284,9 +304,9 @@ function RightClickAttack( status )
     if status == IDLE then
 
         GetBot( ):Action_AttackUnit( GetBot( ):GetTarget( ), true )
-        print("RCA - action - RUNNING", GetBot():GetUnitName() )
-        print("TARGET HEALTH", GetBot( ):GetTarget( ):GetHealth( ) )
-        print("TARGET DAMAGE", GetBot( ):GetTarget( ):GetActualIncomingDamage( GetBot( ):GetAttackDamage( ), DAMAGE_TYPE_PHYSICAL ) )
+        -- print("RCA - action - RUNNING", GetBot():GetUnitName() )
+        -- print("TARGET HEALTH", GetBot( ):GetTarget( ):GetHealth( ) )
+        -- print("TARGET DAMAGE", GetBot( ):GetTarget( ):GetActualIncomingDamage( GetBot( ):GetAttackDamage( ), DAMAGE_TYPE_PHYSICAL ) )
 
         return SUCCESS
     -- elseif status == RUNNING then 

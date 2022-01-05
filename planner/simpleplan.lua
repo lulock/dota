@@ -184,6 +184,29 @@ local x = [[{
 					"element": "AP-HealItem"
 				},
 				{
+					"name": "CE-BuyHealingItem",
+					"Senses": [
+						{
+							"name": "EnoughGoldForItem",
+							"value": "1",
+							"comparator": "bool",
+							"arg": "item_flask"
+						},
+						{
+							"name": "IsItemStashed",
+							"value": "0",
+							"comparator": "bool",
+							"arg": "item_flask"
+						},
+						{
+							"name": "CourierAvailable",
+							"value": "1",
+							"comparator": "bool"
+						}
+					],
+					"element": "AP-BuyHealItem"
+				},
+				{
 					"name": "CE-TpRetreat",
 					"Senses": [
 						{
@@ -490,6 +513,21 @@ local x = [[{
 					"value": "1",
 					"comparator": "bool",
 					"arg": "witch_doctor_voodoo_restoration"
+				}
+			]
+		},
+		{
+			"name": "DE-Harass",
+			"element": 
+			{
+				"name": "C-Harass"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "EnemyNearby",
+					"value": "1",
+					"comparator": "bool"
 				}
 			]
 		},

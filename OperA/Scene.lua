@@ -16,65 +16,113 @@ end
 function Scene:update() -- should a scene exit be determined by landmark?? 
     
     if self.status == IDLE then
+
+        -- check landmarks for scene start
+        for _, landmark in pairs(self.landmarks) do
+            if not landmark:tick() then
+                return false -- return
+            end
+        end 
+        
+        -- all landmarks sensed, set status to running
+        self.status = RUNNING
+    end
+        -- print('scene running, check rules')
+
+    if self.status == RUNNING then
+        
+        -- check results for scene ende
+        local complete = self:checkResults()
+
+        if complete then 
+            return self:reset()
+        else
+            return self:checkRules()
+        end
+
+    end
+
+    return false
+    
+end
+
+function Scene:OldUpdate() -- should a scene exit be determined by landmark?? 
+    
+    if self.status == IDLE then
         for _, landmark in pairs(self.landmarks) do
             -- has the scene begun? This is a world sense
             if not landmark:tick() then
                 --print('landmark not sensed. return false')
                 return false 
             end
-        end
+        end -- all landmarks sensed, set status to running.
+
         self.status = RUNNING
         -- print('scene running, check rules')
-
-        for _, rule in pairs(self.rules) do -- check rules
-            local norm = rule:tick() -- get norm / expected behaviour
-            local legal = norm:validate() -- check if in compliance with norm
-
-            if not legal then -- if agent in violation
-                -- print('norm', norm.name, 'will impose SANCTIONS!')
-
-                self.previdx, self.prevDrive, self.curridx = norm:sanction()
-                print("NEW PLAN", GetBot():GetUnitName())
-                printTable(self.plan.root.drives)
-
-            end
-        end
-
+        self:checkRules()
         return true
-    elseif self.status == RUNNING then
-        for _, result in pairs(self.results) do
-            if not result:tick() then -- if result still not met
-                return false
-            end
+
+    elseif self.status == RUNNING then -- wrong because the behaviour can change mid-scene!!! Always check norm in compliance or not.
+        
+        local complete = self:checkResults()
+
+        if not complete then 
+            self:checkRules()
         end
-        
-        -- try without deep copy
-        -- local drive = self.plan.root.drives[3] -- point to drive
-        -- print("curr ID", self.curridx)
-        if self.curridx ~= nil then self.plan.root:removeDrive(self.curridx) end -- remove the drive
-        if self.prevDrive ~= nil and self.previdx ~= nil then self.plan.root:insertDrive(self.prevDrive, self.previdx ) end -- re-insert drive in previous prio
-        
-        self.prevDrive = nil -- reset 
-        self.previdx = nil -- reset 
-        self.curridx = nil -- reset 
-        self.status = IDLE -- reset
-        
-        print('scene complete, reset to idle')
-        printTable(self.plan.root.drives)
 
         return true
     end
 
-        -- if all landmarks sensed, set to RUNNING and check norms
-            -- if norms violated impose sanctions
-            -- return
-        -- else return 
-
-    -- elseif status is RUNNING, then check all results
-        
-        -- if all results sensed then revert to prev plan and set status to IDLE
     return false
     
+end
+
+function Scene:checkRules()
+
+    for _, rule in pairs(self.rules) do -- check rules
+        local norm = rule:tick() -- get norm / expected behaviour
+        local legal = norm:validate() -- check if in compliance with norm
+
+        if not legal then -- if agent in violation
+            -- print('norm', norm.name, 'will impose SANCTIONS!')
+
+            self.previdx, self.prevDrive, self.curridx = norm:sanction()
+            print("NEW PLAN", GetBot():GetUnitName())
+            printTable(self.plan.root.drives)
+
+        end
+    end
+
+    return true
+
+end
+
+function Scene:checkResults()
+
+    for _, result in pairs(self.results) do
+        if not result:tick() then -- if result still not met, return
+            return false
+        end
+    end -- all results met
+    
+    return true
+end
+
+function Scene:reset()
+    
+    -- reset --
+    if self.curridx ~= nil then self.plan.root:removeDrive(self.curridx) end -- remove the drive
+    if self.prevDrive ~= nil and self.previdx ~= nil then self.plan.root:insertDrive(self.prevDrive, self.previdx ) end -- re-insert drive in previous prio
+    
+    self.prevDrive = nil 
+    self.previdx = nil 
+    self.curridx = nil  
+    self.status = IDLE 
+    
+    print('scene complete, reset to idle')
+    printTable(self.plan.root.drives)
+    return true
+
 end
 
 function Scene:OldUpdate()

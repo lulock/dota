@@ -54,6 +54,12 @@ local x = [[{
 			"actions": [
 				{
 					"name": "HealAbility"
+				},
+				{
+					"name": "SelectSafeLocation"
+				},
+				{
+					"name": "GoToLocation"
 				}
 			]
 		},
@@ -78,6 +84,12 @@ local x = [[{
 			"actions": [
 				{
 					"name": "HealSelf"
+				},
+				{
+					"name": "SelectSafeLocation"
+				},
+				{
+					"name": "GoToLocation"
 				}
 			]
 		},
@@ -182,29 +194,6 @@ local x = [[{
 						}
 					],
 					"element": "AP-HealItem"
-				},
-				{
-					"name": "CE-BuyHealingItem",
-					"Senses": [
-						{
-							"name": "EnoughGoldForItem",
-							"value": "1",
-							"comparator": "bool",
-							"arg": "item_flask"
-						},
-						{
-							"name": "IsItemStashed",
-							"value": "0",
-							"comparator": "bool",
-							"arg": "item_flask"
-						},
-						{
-							"name": "CourierAvailable",
-							"value": "1",
-							"comparator": "bool"
-						}
-					],
-					"element": "AP-BuyHealItem"
 				},
 				{
 					"name": "CE-TpRetreat",
@@ -565,22 +554,7 @@ local x = [[{
 					"comparator": "bool"
 				}
 			]
-		},
-		{
-			"name": "DE-Support",
-			"element":
-			{
-				"name": "AP-Follow"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "IsFarFromPartner",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
+		}
 	]
 }]]
 

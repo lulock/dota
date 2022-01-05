@@ -18,6 +18,7 @@ printTable(planner.root.drives) -- DEBUG
 local opera = Opera( norms, planner ) -- load plan from json string
 
 function Think()
+
 	-- do nothing if dead
 	if not GetBot():IsAlive() then
         return
@@ -28,7 +29,12 @@ function Think()
 			opera.units = _G['GetUnits']() --call function (by name) in the global namespace
 		end
 		
+		-- every 5 seconds print gold
+		if DotaTime() % 5 == 0 then 
+			print(GetBot():GetUnitName(), "," ,GetBot():GetLevel(), ",", GetBot():GetGold())
+		end
+
 		planner.root:tick() -- Return values (SUCCESS, RUNNING, or FAILURE) handled by parent nodes.
-		-- opera:update()
+		opera:update()
 	end
 end

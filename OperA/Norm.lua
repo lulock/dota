@@ -28,15 +28,15 @@ end
 
 function Norm:validate()
     local sameDrive =  self.plan.root.currentDriveName == self.behaviour --bool
-    print(self.plan, 'is', self.operator, 'to', self.behaviour)
+    -- print(self.plan, 'is', self.operator, 'to', self.behaviour)
     if (self.operator == OBLIGED and not sameDrive) or ( self.operator == NOTPERMITTED and sameDrive ) then        
-        print ('NORM VIOLATION')
+        -- print ('NORM VIOLATION')
         return false
         -- local loc = GetBot():GetLocation()
         -- ping at bot location where norm has been violated!! 
         -- GetBot():ActionImmediate_Ping(loc.x, loc.y, true)
     else -- permitted so doesn't matter, return true
-        print ('NORM COMPLIANCE')
+        -- print ('NORM COMPLIANCE')
         return true
     end
     
@@ -48,13 +48,13 @@ function Norm:sanction()
     -- print(self.operator)
     -- print(OBLIGED)
     if self.operator == OBLIGED then
-        print("OBLIGED - make drive prio 2 after heal lol")
-        local prio = 3
+        -- print("OBLIGED - make drive prio after heal lol")
+        local prio = 4
         for i,drive in pairs(self.plan.root.drives) do
             if drive.name == self.behaviour then
                 --print('drive is', d.name)
                 self.plan.root:removeDrive(i) -- remove the drive
-                self.plan.root:insertDrive(drive, prio) -- re-insert drive as priority # 1
+                self.plan.root:insertDrive(drive, prio) -- re-insert drive as priority over harass (this can be done more intelligently)
                 -- log role, time of change, and name of new priority drive to console
 
                 self:log(drive)
@@ -64,7 +64,7 @@ function Norm:sanction()
             end -- TODO: handle if not found
         end
     elseif self.operator == NOTPERMITTED then
-        print("NOT PERMITTED - remove drive!")
+        -- print("NOT PERMITTED - remove drive!")
         for i,drive in pairs(self.plan.root.drives) do
             if drive.name == self.behaviour then
                 --print('drive is', d.name)
@@ -88,7 +88,7 @@ end
 
 function Norm:log(drive)
     local nPlayerID =  GetBot():GetPlayerID()
-    print(GetBot():GetUnitName(), POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', drive.name, GetHeroLevel( nPlayerID ), ', ', GetHeroKills( nPlayerID ), ', ', GetHeroDeaths( nPlayerID ), ', ', GetHeroAssists( nPlayerID ) ) 
+    print(GetBot():GetUnitName(), POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', drive.name, GetBot():GetLevel(), ', ', GetBot():GetGold(), ', ', GetHeroKills( nPlayerID ), ', ', GetHeroDeaths( nPlayerID ), ', ', GetHeroAssists( nPlayerID ) ) 
 end
 
 -- restore
