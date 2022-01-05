@@ -1,0 +1,23 @@
+Unit Name, Role, Dota Time, Drive, Hero Level, Hero Gold, Hero Kills, Hero Deaths, Hero Assists
+ActionPatterns	nil
+Competences	nil
+DriveElements	nil
+1	DE-Retreat
+2	DE-Heal
+3	DE-HealAlly
+4	DE-Harass
+5	DE-FarmLane
+6	DE-Idle
+ActionPatterns	nil
+Competences	nil
+DriveElements	nil
+1	DE-Retreat
+2	DE-Heal
+3	DE-HealAlly
+4	DE-Harass
+5	DE-FarmLane
+6	DE-Idle
+GetTeamMember parameter 1: expected integer but got void.
+Script Runtime Error: ...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:172: Parameter type mismatch
+GetTeamMember parameter 1: expected integer but got void.
+Script Runtime Error: ...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:172: Parameter type mismatch

@@ -85,7 +85,7 @@ function GoToLocation( status )
     if status == IDLE then
         -- print("GO2LOC", targetLoc, " - queuing action - RUNNING", GetBot():GetUnitName() )
         -- print("GO2LOC", targetLoc, " - dist", GetUnitToLocationDistance( GetBot(), targetLoc) )
-        GetBot():ActionQueue_MoveToLocation( targetLoc )
+        GetBot():Action_MoveToLocation( targetLoc )
         -- print("QueueLength", GetBot():NumQueuedActions() )
         return RUNNING
     elseif status == RUNNING then 
@@ -111,7 +111,7 @@ function GoToCreepWave( status )
     -- Returns the location the specified amount (0.0 - 1.0) along the specified lane.
 
     if status == IDLE then
-        local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200) - RandomVector( 100 )
+        local laneLocation = GetLaneFrontLocation(GetBot():GetTeam(), GetBot():GetAssignedLane(), -200) - RandomVector( 20 )
 
         local tower = GetBot():GetNearbyTowers( 1600, true )
         if #tower > 0 then 
@@ -130,23 +130,19 @@ function GoToCreepWave( status )
             end
 
         end
-        while not IsLocationPassable( laneLocation ) do 
-            laneLocation = laneLocation - RandomVector( 10 )
-            -- print("recalc loc", GetBot():GetUnitName())
-        end 
 
         LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] = laneLocation
-        GetBot():ActionQueue_MoveToLocation( laneLocation )
+        GetBot():Action_MoveToLocation( laneLocation )
         --print("GO2CREEP - queuing action - RUNNING - laneLoc passable?", IsLocationPassable(laneLocation), GetBot():GetUnitName() )
         return RUNNING
     elseif status == RUNNING then 
-        print ("GO2CREEP - reached DEST?", GetUnitToLocationDistance( GetBot(), LocTest[ POSITIONS[ GetBot():GetUnitName() ] ]), GetBot():GetUnitName() )
+        -- print ("GO2CREEP - reached DEST?", GetUnitToLocationDistance( GetBot(), LocTest[ POSITIONS[ GetBot():GetUnitName() ] ]), GetBot():GetUnitName() )
         while not IsLocationPassable( LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] ) do 
             LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] = LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] - RandomVector( 10 )
-            print("recalc loc", GetBot():GetUnitName())
+            -- print("recalc loc", GetBot():GetUnitName())
         end 
 
-        if (GetBot():GetCurrentActionType(  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0) or (GetUnitToLocationDistance( GetBot(), LocTest[ POSITIONS[ GetBot():GetUnitName() ] ]) <= 20) then
+        if (GetBot():GetCurrentActionType(  ) ~=  BOT_ACTION_TYPE_MOVE_TO and GetBot():NumQueuedActions() == 0) or (GetUnitToLocationDistance( GetBot(), LocTest[ POSITIONS[ GetBot():GetUnitName() ] ]) <= 60) then
             return SUCCESS
         else
             return RUNNING
@@ -242,7 +238,7 @@ function EvadeAttack( status )
                 
             end
         end
-        GetBot():ActionQueue_AttackUnit( GetBot():GetTarget(), true )
+        GetBot():Action_AttackUnit( GetBot():GetTarget(), true )
         --print("EVADE - queuing action - RUNNING", GetBot():GetUnitName() )
 
         -- print("current action type is ", GetBot():GetCurrentActionType())
@@ -358,10 +354,10 @@ function CastAbility( status )
     if status == IDLE then
         print("target type ", selectedAbility:GetTargetType(), GetBot():GetUnitName() )
         if selectedAbility:GetTargetType() == ABILITY_TARGET_TYPE_NONE then
-            GetBot():ActionQueue_UseAbility( selectedAbility )
+            GetBot():Action_UseAbility( selectedAbility )
             --print("CASTABILITY1 - queuing action - RUNNING", GetBot():GetUnitName() )
         else
-            GetBot():ActionQueue_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
+            GetBot():Action_UseAbilityOnEntity( selectedAbility , GetBot():GetTarget() )
             --print("CASTABILITY2 - queuing action - RUNNING", GetBot():GetUnitName() )
         end
         return RUNNING
@@ -623,7 +619,9 @@ end
 
 -- check if it is safe to farm
 function IsSafeToFarm( )
-    return GetBot( ):WasRecentlyDamagedByAnyHero( interval ) and 0 or 1 -- for now, it's safe to farm if no hero is attacking bot
+    -- print("not safetofarm", GetBot( ):WasRecentlyDamagedByAnyHero( interval ) or GetBot( ):GetHealth( )/GetBot():GetMaxHealth( ) < 0.8)
+    -- GetBot( ):WasRecentlyDamagedByAnyHero( interval )
+    return (Health( ) > 0.8) and 1 or 0 -- for now, it's safe to farm if no hero is attacking bot
 end
 
 -- check if target is dead

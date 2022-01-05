@@ -87,6 +87,7 @@ function Scene:checkRules()
             -- print('norm', norm.name, 'will impose SANCTIONS!')
 
             self.previdx, self.prevDrive, self.curridx = norm:sanction()
+            self:log()
             print("NEW PLAN", GetBot():GetUnitName())
             printTable(self.plan.root.drives)
 
@@ -119,6 +120,7 @@ function Scene:reset()
     self.curridx = nil  
     self.status = IDLE 
     
+    self:log()
     print('scene complete, reset to idle')
     printTable(self.plan.root.drives)
     return true
@@ -161,6 +163,18 @@ function Scene:OldUpdate()
     --print('scene complete! return true')
     return true
     
+end
+
+function Scene:log()
+    local nPlayerID =  GetBot():GetPlayerID()
+
+    local partnerPos = PARTNERS[ GetBot():GetUnitName() ]
+    local partnerHandle = GetTeamMember( partnerPos )
+
+    local nPartnerID =  partnerHandle:GetPlayerID()
+
+    print(GetBot():GetUnitName(), POSITIONS[GetBot():GetUnitName()], DotaTime(), GetBot():GetLevel(), GetBot():GetGold(), GetHeroKills( nPlayerID ), GetHeroDeaths( nPlayerID ), GetHeroAssists( nPlayerID ) ) 
+    print(partnerHandle:GetUnitName(), POSITIONS[partnerHandle:GetUnitName()], DotaTime(), partnerHandle:GetLevel(), partnerHandle:GetGold(), GetHeroKills( nPartnerID ), GetHeroDeaths( nPartnerID ), GetHeroAssists( nPartnerID ) ) 
 end
 
 -- function Scene:activate()

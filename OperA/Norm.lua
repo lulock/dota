@@ -49,7 +49,7 @@ function Norm:sanction()
     -- print(OBLIGED)
     if self.operator == OBLIGED then
         -- print("OBLIGED - make drive prio after heal lol")
-        local prio = 4
+        local prio = 1
         for i,drive in pairs(self.plan.root.drives) do
             if drive.name == self.behaviour then
                 --print('drive is', d.name)
@@ -72,7 +72,7 @@ function Norm:sanction()
                 -- self.plan.root:insertDrive(drive, 1) -- re-insert drive as priority # 1
                 -- log role, time of change, and name of new priority drive to console
                 
-                self:log(drive)
+                -- self:log(drive)
                 
                 -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
                 return i, drive, nil -- return prev index and drive
