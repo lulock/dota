@@ -20,7 +20,7 @@ BehaviourLib = Class{ }
 
 -- MEMORY -- each agent instantiates their own copy of this class.
 
-local targetLoc = nil
+-- local targetLoc = nil
 local targetAllyHero = nil
 
 local tbot = GetBot( ):GetUnitName( )
@@ -32,6 +32,15 @@ local interval = 10
 local maxActions = 4
 local lowHealth = 0.8
 
+local targetLoc = 
+{
+    [1] = nil,
+    [2] = nil,
+    [3] = nil,
+    [4] = nil,
+    [5] = nil
+
+}
 local LocTest = 
 {
     [1] = nil,
@@ -40,6 +49,15 @@ local LocTest =
     [4] = nil,
     [5] = nil
 
+}
+
+BOUNTY = 
+{
+    [1] = 0,
+    [2] = 0,
+    [3] = 0,
+    [4] = 0,
+    [5] = 0
 }
 
 -- default selected ability is first ability but this might be passive ... 
@@ -74,7 +92,7 @@ end
 -- select and set targetLoc as location along lane
 function SelectLaneLocation( status )
     if status == IDLE then
-        targetLoc = GetLocationAlongLane( GetBot( ):GetAssignedLane( ) , 0.5)
+        targetLoc[ POSITIONS[ GetBot():GetUnitName() ] ] = GetLocationAlongLane( GetBot( ):GetAssignedLane( ) , 0.5)
         return SUCCESS
     end
     return status
@@ -85,7 +103,7 @@ function GoToLocation( status )
     if status == IDLE then
         -- print("GO2LOC", targetLoc, " - queuing action - RUNNING", GetBot():GetUnitName() )
         -- print("GO2LOC", targetLoc, " - dist", GetUnitToLocationDistance( GetBot(), targetLoc) )
-        GetBot():Action_MoveToLocation( targetLoc )
+        GetBot():Action_MoveToLocation( targetLoc[ POSITIONS[ GetBot():GetUnitName() ] ] )
         -- print("QueueLength", GetBot():NumQueuedActions() )
         return RUNNING
     elseif status == RUNNING then 
@@ -123,9 +141,11 @@ function GoToCreepWave( status )
                 local radius = tower1:GetAttackRange()
                 local withinX = laneLocation.x >= towerLoc.x - radius and laneLocation.x <= towerLoc.x + radius
                 local withinY = laneLocation.y >= towerLoc.y - radius and laneLocation.y <= towerLoc.y + radius
+                -- Draws a line from vStar to vEnd in the specified color for one frame.
+                DebugDrawCircle( towerLoc, radius, 255, 0, 0 )
     
                 if withinX and withinY then 
-                    laneLocation =  laneLocation - RandomVector( 1.3*radius )
+                    laneLocation =  laneLocation - RandomVector( 1*radius )
                 end
             end
 
@@ -137,8 +157,9 @@ function GoToCreepWave( status )
         return RUNNING
     elseif status == RUNNING then 
         -- print ("GO2CREEP - reached DEST?", GetUnitToLocationDistance( GetBot(), LocTest[ POSITIONS[ GetBot():GetUnitName() ] ]), GetBot():GetUnitName() )
+        -- print ("GO2CREEP - TIME", DotaTime() )
         while not IsLocationPassable( LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] ) do 
-            LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] = LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] - RandomVector( 10 )
+            LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] = LocTest[ POSITIONS[ GetBot():GetUnitName() ] ] - RandomVector( 20 )
             -- print("recalc loc", GetBot():GetUnitName())
         end 
 
@@ -158,7 +179,7 @@ function SelectSafeLocation( status )
     if status == IDLE then
         -- local closeTowers = GetBot( ):GetNearbyTowers( 1600, false )
         local baseLoc = GetAncient( GetTeam( ) ):GetLocation( )
-        targetLoc = baseLoc 
+        targetLoc[ POSITIONS[ GetBot():GetUnitName() ] ] = baseLoc 
         return SUCCESS
     end
     
@@ -172,7 +193,10 @@ function SelectTarget( status )
         local enemyCreepsNearby = GetBot( ):GetNearbyCreeps( GetBot():GetAttackRange( ), true )
 
         for i,creep in pairs( enemyCreepsNearby ) do
-            local thresholdTarget = 2*creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL)
+            -- local thresholdTarget = 2*creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL)
+            local thresholdTarget = creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL) + (creep:GetAttackDamage( ) * #creep:GetIncomingTrackingProjectiles( ))
+
+            -- local thresholdTarget = 2*GetBot():GetAttackDamage() -- heuristic works well for Witch Doc, Shadow Fiend, but not Sniper
             -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
             
             if creep:CanBeSeen( ) and creep:GetHealth( ) <= thresholdTarget and creep:GetHealth( ) > 0 then            
@@ -187,6 +211,8 @@ function SelectTarget( status )
                 -- print("Hero GetEstimatedDamageToTarget:", GetBot():GetEstimatedDamageToTarget( false, creep, GetBot():GetSecondsPerAttack( ), DAMAGE_TYPE_PHYSICAL ))
                 -- Target setting and getting is available in the API omg 🙄
                 GetBot( ):SetTarget( creep )
+                local rc_pos = POSITIONS[GetBot():GetUnitName()]
+                BOUNTY[ rc_pos ] = BOUNTY[ rc_pos ] + GetBot( ):GetTarget():GetBountyGoldMax()
                 return SUCCESS
             end
         end
@@ -298,7 +324,7 @@ end
 function RightClickAttack( status )
 
     if status == IDLE then
-
+        
         GetBot( ):Action_AttackUnit( GetBot( ):GetTarget( ), true )
         -- print("RCA - action - RUNNING", GetBot():GetUnitName() )
         -- print("TARGET HEALTH", GetBot( ):GetTarget( ):GetHealth( ) )
@@ -540,7 +566,7 @@ function TpToLocation( status )
     -- print( "TpToLocation" )
     local slot = GetBot( ):FindItemSlot( "item_tpscroll" )
     local scroll = GetBot( ):GetItemInSlot( slot )
-    GetBot( ):Action_UseAbilityOnLocation( scroll , targetLoc )
+    GetBot( ):Action_UseAbilityOnLocation( scroll , targetLoc[ POSITIONS[ GetBot():GetUnitName() ] ] )
     return SUCCESS
 end
 
@@ -548,24 +574,6 @@ end
 function Idle( status )
     GetBot():Action_MoveDirectly( GetBot():GetLocation() + RandomVector( 10 ) )
     return SUCCESS
-end
-
--- does nothing
-function HealSelf( status )
-    if status == IDLE then
-        local itemSlot = GetBot():FindItemSlot('item_flask')
-        local itemHandle = GetBot():GetItemInSlot( itemSlot )
-        GetBot():Action_UseAbilityOnEntity( itemHandle, GetBot() )
-        --print("stock count", GetItemStockCount('item_flask'))
-    elseif status == RUNNING then
-        if GetBot():GetCurrentActionType() ~= BOT_ACTION_TYPE_USE_ABILITY and GetBot():NumQueuedActions() == 0 then
-            return SUCCESS
-        else
-            return RUNNING
-        end
-    end
-
-    return status
 end
 
 -- SENSES --

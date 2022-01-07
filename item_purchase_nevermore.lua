@@ -28,11 +28,11 @@ local courier = GetCourier( POSITIONS[GetBot():GetUnitName()] - 1 )
 
 function ItemPurchaseThink()
 	
-	local stashVal = GetBot():GetStashValue()
-	local cState = GetCourierState( courier )
-	if stashVal > 0 and (cState == COURIER_STATE_IDLE or cState == COURIER_STATE_AT_BASE) then
-		GetBot():ActionImmediate_Courier(GetCourier( POSITIONS[GetBot():GetUnitName()] -1), COURIER_ACTION_TAKE_STASH_ITEMS)
-	end
+	-- local stashVal = GetBot():GetStashValue()
+	-- local cState = GetCourierState( courier )
+	-- if stashVal > 0 and (cState == COURIER_STATE_IDLE or cState == COURIER_STATE_AT_BASE) then
+	-- 	GetBot():ActionImmediate_Courier(GetCourier( POSITIONS[GetBot():GetUnitName()] -1), COURIER_ACTION_TAKE_STASH_ITEMS)
+	-- end
 
 	if #toBuy > 0 then
 		for idx,item in pairs(toBuy) do

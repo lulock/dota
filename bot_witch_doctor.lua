@@ -29,6 +29,6 @@ function Think()
 		end
 		
 		planner.root:tick() -- Return values (SUCCESS, RUNNING, or FAILURE) handled by parent nodes.
-		opera:update()
+		-- opera:update()
 	end
 end

@@ -46,12 +46,6 @@ local x = [[{
 			"actions": [
 				{
 					"name": "HealItem"
-				},
-				{
-					"name": "SelectSafeLocation"
-				},
-				{
-					"name": "GoToLocation"
 				}
 			]
 		},
@@ -60,12 +54,6 @@ local x = [[{
 			"actions": [
 				{
 					"name": "HealAbility"
-				},
-				{
-					"name": "SelectSafeLocation"
-				},
-				{
-					"name": "GoToLocation"
 				}
 			]
 		},
@@ -82,6 +70,14 @@ local x = [[{
 			"actions": [
 				{
 					"name": "GoToPartner"
+				}
+			]
+		},
+		{
+			"name": "AP-Heal",
+			"actions": [
+				{
+					"name": "HealSelf"
 				}
 			]
 		},
@@ -186,29 +182,6 @@ local x = [[{
 						}
 					],
 					"element": "AP-HealItem"
-				},
-				{
-					"name": "CE-BuyHealingItem",
-					"Senses": [
-						{
-							"name": "EnoughGoldForItem",
-							"value": "1",
-							"comparator": "bool",
-							"arg": "item_flask"
-						},
-						{
-							"name": "IsItemStashed",
-							"value": "0",
-							"comparator": "bool",
-							"arg": "item_flask"
-						},
-						{
-							"name": "CourierAvailable",
-							"value": "1",
-							"comparator": "bool"
-						}
-					],
-					"element": "AP-BuyHealItem"
 				},
 				{
 					"name": "CE-TpRetreat",
@@ -473,14 +446,14 @@ local x = [[{
 			"Senses": [
 				{
 					"name": "Health",
-					"value": "0.3",
+					"value": "0.5",
 					"comparator": "<"
 				},
 				{
 					"name": "RecentlyUnderAttack",
 					"value": "1",
 					"comparator": "bool",
-					"arg": "5"
+					"arg": "10"
 				}
 			]
 		},
@@ -521,6 +494,21 @@ local x = [[{
 			]
 		},
 		{
+			"name": "DE-Harass",
+			"element": 
+			{
+				"name": "C-Harass"
+			},
+			"checkTime": "0",
+			"Senses": [
+				{
+					"name": "EnemyNearby",
+					"value": "1",
+					"comparator": "bool"
+				}
+			]
+		},
+		{
 			"name": "DE-FarmLane",
 			"element": 
 			{
@@ -535,21 +523,6 @@ local x = [[{
 				},
 				{
 					"name": "IsSafeToFarm",
-					"value": "1",
-					"comparator": "bool"
-				}
-			]
-		},
-		{
-			"name": "DE-Harass",
-			"element": 
-			{
-				"name": "C-Harass"
-			},
-			"checkTime": "0",
-			"Senses": [
-				{
-					"name": "EnemyNearby",
 					"value": "1",
 					"comparator": "bool"
 				}

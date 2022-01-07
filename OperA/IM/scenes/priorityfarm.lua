@@ -5,7 +5,7 @@ local x = [[{
 		{
 			"name" : "farm",
 			"behaviour" : "DE-FarmLane",
-			"operator" : "0"
+			"operator" : "1"
 		},
 		{
 			"name" : "nofarm",

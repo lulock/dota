@@ -26,6 +26,7 @@ function Scene:update() -- should a scene exit be determined by landmark??
         
         -- all landmarks sensed, set status to running
         self.status = RUNNING
+        self:log()
     end
         -- print('scene running, check rules')
 
@@ -37,40 +38,9 @@ function Scene:update() -- should a scene exit be determined by landmark??
         if complete then 
             return self:reset()
         else
-            return self:checkRules()
+            -- return self:checkRules()
         end
 
-    end
-
-    return false
-    
-end
-
-function Scene:OldUpdate() -- should a scene exit be determined by landmark?? 
-    
-    if self.status == IDLE then
-        for _, landmark in pairs(self.landmarks) do
-            -- has the scene begun? This is a world sense
-            if not landmark:tick() then
-                --print('landmark not sensed. return false')
-                return false 
-            end
-        end -- all landmarks sensed, set status to running.
-
-        self.status = RUNNING
-        -- print('scene running, check rules')
-        self:checkRules()
-        return true
-
-    elseif self.status == RUNNING then -- wrong because the behaviour can change mid-scene!!! Always check norm in compliance or not.
-        
-        local complete = self:checkResults()
-
-        if not complete then 
-            self:checkRules()
-        end
-
-        return true
     end
 
     return false
@@ -88,8 +58,8 @@ function Scene:checkRules()
 
             self.previdx, self.prevDrive, self.curridx = norm:sanction()
             self:log()
-            print("NEW PLAN", GetBot():GetUnitName())
-            printTable(self.plan.root.drives)
+            -- print("NEW PLAN", GetBot():GetUnitName())
+            -- printTable(self.plan.root.drives)
 
         end
     end
@@ -121,8 +91,8 @@ function Scene:reset()
     self.status = IDLE 
     
     self:log()
-    print('scene complete, reset to idle')
-    printTable(self.plan.root.drives)
+    -- print('scene complete, reset to idle')
+    -- printTable(self.plan.root.drives)
     return true
 
 end
@@ -172,8 +142,9 @@ function Scene:log()
     local partnerHandle = GetTeamMember( partnerPos )
 
     local nPartnerID =  partnerHandle:GetPlayerID()
+    local rc_pos = POSITIONS[GetBot():GetUnitName()]
 
-    print(GetBot():GetUnitName(), POSITIONS[GetBot():GetUnitName()], DotaTime(), GetBot():GetLevel(), GetBot():GetGold(), GetHeroKills( nPlayerID ), GetHeroDeaths( nPlayerID ), GetHeroAssists( nPlayerID ) ) 
+    print(GetBot():GetUnitName(), POSITIONS[GetBot():GetUnitName()], DotaTime(), GetBot():GetLevel(), GetBot():GetGold(), BOUNTY[ rc_pos ], GetHeroKills( nPlayerID ), GetHeroDeaths( nPlayerID ), GetHeroAssists( nPlayerID ) ) 
     print(partnerHandle:GetUnitName(), POSITIONS[partnerHandle:GetUnitName()], DotaTime(), partnerHandle:GetLevel(), partnerHandle:GetGold(), GetHeroKills( nPartnerID ), GetHeroDeaths( nPartnerID ), GetHeroAssists( nPartnerID ) ) 
 end
 

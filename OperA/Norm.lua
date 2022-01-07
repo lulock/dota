@@ -57,7 +57,7 @@ function Norm:sanction()
                 self.plan.root:insertDrive(drive, prio) -- re-insert drive as priority over harass (this can be done more intelligently)
                 -- log role, time of change, and name of new priority drive to console
 
-                self:log(drive)
+                -- self:log(drive)
 
                 -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
                 return i, drive, prio -- return prev index and drive

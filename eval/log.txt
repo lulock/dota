@@ -1,837 +1,143 @@
-ï»¿01/05 15:42:03 +++ CSODOTALobby.lobby_id: 27537240076615244
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: id: 76561198067907180
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: team: DOTA_GC_TEAM_SPECTATOR
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: name: "lulock"
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: slot: 1
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: leaver_status: DOTA_LEAVER_DISCONNECTED
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: coach_team: DOTA_GC_TEAM_GOOD_GUYS
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: favorite_team_packed: 0
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: is_plus_subscriber: false
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: disabled_random_hero_bits: 2197815294
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: coach_rating: 0
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: was_mvp_last_game: false
-01/05 15:42:03 +++ CSODOTALobby.all_members[0]: is_steam_china: false
-01/05 15:42:03 +++ CSODOTALobby.member_indices[0]: 0
-01/05 15:42:03 +++ CSODOTALobby.leader_id: 76561198067907180
-01/05 15:42:03 +++ CSODOTALobby.server_id: 90154754692073483
-01/05 15:42:03 +++ CSODOTALobby.game_mode: 1
-01/05 15:42:03 +++ CSODOTALobby.state: SERVERSETUP
-01/05 15:42:03 +++ CSODOTALobby.lobby_type: PRACTICE
-01/05 15:42:03 +++ CSODOTALobby.allow_cheats: true
-01/05 15:42:03 +++ CSODOTALobby.fill_with_bots: true
-01/05 15:42:03 +++ CSODOTALobby.intro_mode: false
-01/05 15:42:03 +++ CSODOTALobby.game_name: "Battle 0"
-01/05 15:42:03 +++ CSODOTALobby.team_details[0]: team_complete: false
-01/05 15:42:03 +++ CSODOTALobby.team_details[1]: team_complete: false
-01/05 15:42:03 +++ CSODOTALobby.server_region: 0
-01/05 15:42:03 +++ CSODOTALobby.cm_pick: DOTA_CM_RANDOM
-01/05 15:42:03 +++ CSODOTALobby.match_id: 6360525934
-01/05 15:42:03 +++ CSODOTALobby.allow_spectating: false
-01/05 15:42:03 +++ CSODOTALobby.bot_difficulty_radiant: BOT_DIFFICULTY_EASY
-01/05 15:42:03 +++ CSODOTALobby.game_version: GAME_VERSION_CURRENT
-01/05 15:42:03 +++ CSODOTALobby.pass_key: "FarOut00"
-01/05 15:42:03 +++ CSODOTALobby.leagueid: 0
-01/05 15:42:03 +++ CSODOTALobby.penalty_level_radiant: 0
-01/05 15:42:03 +++ CSODOTALobby.penalty_level_dire: 0
-01/05 15:42:03 +++ CSODOTALobby.series_type: 0
-01/05 15:42:03 +++ CSODOTALobby.radiant_series_wins: 0
-01/05 15:42:03 +++ CSODOTALobby.dire_series_wins: 0
-01/05 15:42:03 +++ CSODOTALobby.allchat: false
-01/05 15:42:03 +++ CSODOTALobby.dota_tv_delay: LobbyDotaTV_10
-01/05 15:42:03 +++ CSODOTALobby.lan: true
-01/05 15:42:03 +++ CSODOTALobby.extra_messages[0]: id: 8821
-01/05 15:42:03 +++ CSODOTALobby.extra_messages[0]: contents: "\010\000"
-01/05 15:42:03 +++ CSODOTALobby.visibility: DOTALobbyVisibility_Unlisted
-01/05 15:42:03 +++ CSODOTALobby.previous_match_override: 0
-01/05 15:42:03 +++ CSODOTALobby.game_start_time: 1641382922
-01/05 15:42:03 +++ CSODOTALobby.pause_setting: LobbyDotaPauseSetting_Unlimited
-01/05 15:42:03 +++ CSODOTALobby.bot_difficulty_dire: BOT_DIFFICULTY_EASY
-01/05 15:42:03 +++ CSODOTALobby.bot_radiant: 1
-01/05 15:42:03 +++ CSODOTALobby.bot_dire: 1
-01/05 15:42:03 +++ CSODOTALobby.selection_priority_rules: k_DOTASelectionPriorityRules_Manual
-01/05 15:42:03 +++ CSODOTALobby.current_primary_event: EVENT_ID_FALL_2021
-01/05 15:42:03 +++ CSODOTALobby.league_node_id: 0
-01/05 15:42:03 +++ CSODOTALobby.league_phase: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]: event_id: 19
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]: account_points {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   account_id: 107641452
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   plus_subscription_data {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:     hero_badges {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:       hero_id: 400
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:       hero_badge_xp: 1
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:     }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:     hero_badges {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:       hero_id: 410
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:       hero_badge_xp: 2
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:     }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   wager_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   rank_wager_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   tip_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:     remaining: 10
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:     max: 10
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   periodic_point_adjustments {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   bounties {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   tip_amount_index: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   active_event_season_id: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   teleport_fx_level: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   arcana_event_periodic_resource {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[0]: }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]: event_id: 26
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]: account_points {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   account_id: 107641452
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   owned: true
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   wager_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   rank_wager_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   tip_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   periodic_point_adjustments {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   bounties {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   tip_amount_index: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   active_event_season_id: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   teleport_fx_level: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   arcana_event_periodic_resource {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[1]: }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[2]: event_id: 33
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]: event_id: 34
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]: account_points {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   account_id: 107641452
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   owned: true
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   wager_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   rank_wager_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   tip_tokens {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   periodic_point_adjustments {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   bounties {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   tip_amount_index: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   active_event_season_id: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   teleport_fx_level: 0
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   arcana_event_periodic_resource {
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]:   }
-01/05 15:42:03 +++ CSODOTALobby.lobby_event_points[3]: }
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[0]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[1]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[2]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[3]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[4]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[5]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[6]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[7]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[8]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[9]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[10]: 0
-01/05 15:42:03 +++ CSODOTALobby.requested_hero_ids[11]: 0
-01/05 15:42:03 +++ CSODOTALobby.with_scenario_save: false
-01/05 15:42:03 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:03 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:03 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:03 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:03 SetLiveSpectatorDetails -1 1
-01/05 15:42:03 CDOTAGCServerSystem::SOChanged setting match ID to 6360525934
-01/05 15:42:03 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 446 bytes
-01/05 15:42:03 [Server] ActivateServerFromLobby - IsLan: YES, IsDedicatedServer: NO
-01/05 15:42:03 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:03 [Server] PlayerID 10 [U:1:107641452] assigned to team 1 on slot -1
-01/05 15:42:03 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:03 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:03 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:03 SetLiveSpectatorDetails -1 1
-01/05 15:42:03 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:03 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:03 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:03 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:03 SetLiveSpectatorDetails -1 1
-01/05 15:42:03 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_INIT'
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 0, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 1, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 2, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 3, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 4, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 5, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 6, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 7, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 8, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 9, ignoring
-01/05 15:42:03 [GCClient] Send msg 4506 (k_EMsgGCServerAvailable), 8 bytes
-01/05 15:42:03 Server:  Running [192.168.1.32:27015]
-01/05 15:42:03 Client:  Connected [loopback:1] [last packet 0.011 sec ago]
-01/05 15:42:03 [EngineServiceManager] ----- Status -----
-01/05 15:42:03 [EngineServiceManager] @ Current  :  game
-01/05 15:42:03 [Client] source   : slot 0
-01/05 15:42:03 [Client] version  : 47/47 9202 secure  public
-01/05 15:42:03 [Client] steamid  : [A:1:2419836939:19269] (90154754692073483)
-01/05 15:42:03 [Client] players  : 1 humans, 1 bots (0 max) (not hibernating) (unreserved)
-01/05 15:42:03 [Client] ---------spawngroups----
-01/05 15:42:03 [Client] loaded spawngroup(  1)  : SV:  [1: start | main lump | mapload]
-01/05 15:42:03 [Client] ---------players--------
-01/05 15:42:03 [Client]   id     time ping loss      state   rate name
-01/05 15:42:03 [Client]    1    00:06    0    0     active 1000000 'lulock'
-01/05 15:42:03 [Client]    2      BOT    0    0     active      0 'SourceTV'
-01/05 15:42:03 [Client] Lobby MatchID: 6360525934
-01/05 15:42:03 [Client]       ID: 0061d4f954dc7e4c
-01/05 15:42:03 [Client]       Type: PRACTICE
-01/05 15:42:03 [Client]       State: SERVERSETUP
-01/05 15:42:03 [Client]       GameMode: DOTA_GAMEMODE_AP
-01/05 15:42:03 [Client] GameState: DOTA_GAMERULES_STATE_INIT Times: Transition=0.00 Current=6.60
-01/05 15:42:03 [Client] #end
-01/05 15:42:03 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
-01/05 15:42:03 WriteSteamRemoteStorageFileAsync( "scripts/dota_local_disk_lobby_data.txt" ) -> at 3539.977
-01/05 15:42:03 Telling Steam not to update the app for the next 900 seconds
-01/05 15:42:03 WriteSteamRemoteStorageFileAsync( "cfg/chat.cfg" ) -> at 3539.981
-01/05 15:42:03 [GCClient] Send msg 7272 (k_EMsgGCLeaveChatChannel), 12 bytes
-01/05 15:42:03 CAsyncWriteInProgress::OnComplete( "scripts/dota_local_disk_lobby_data.txt" ) -> Success at 3540.007
-01/05 15:42:03 CAsyncWriteInProgress::OnComplete( "cfg/chat.cfg" ) -> Success at 3540.007
-01/05 15:42:03 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
-01/05 15:42:03 --- CSODOTALobby.state: SERVERSETUP
-01/05 15:42:03 +++ CSODOTALobby.state: RUN
-01/05 15:42:03 +++ CSODOTALobby.connect: "217.165.26.222:27015 192.168.1.32:27015"
-01/05 15:42:03 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:03 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:03 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:03 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:03 SetLiveSpectatorDetails -1 1
-01/05 15:42:03 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD'
-01/05 15:42:03 void CDOTAGamerules::State_Enter_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 0/1
-01/05 15:42:03 [GCClient] Send msg 4508 (k_EMsgGCGameServerInfo), 90 bytes
-01/05 15:42:03 --- Sent CMsgGameServerInfo to GC
-01/05 15:42:03 server_public_ip_addr: 3651476190
-server_private_ip_addr: 3232235808
-server_port: 27015
-server_tv_port: 27020
-server_key: ""
-server_hibernation: false
-server_type: GAME
-server_region: 0
-server_loadavg: 3.52001953
-server_tv_broadcast_time: -1.53333342
-server_game_time: -30.0000019
-relay_slots_max: 64
-relays_connected: 0
-relay_clients_connected: 0
-tv_secret_code: 14379286133241963643
-server_version: 5144
-server_cluster: 0
-assigned_server_tv_port: 27020
-allow_custom_games: BOTH
-build_version: 5144
-tf_server_count: 1
-is_recording_match_training_data: false
 
-01/05 15:42:03 ---
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 0, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 1, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 2, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 3, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 4, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 5, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 6, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 7, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 8, ignoring
-01/05 15:42:03 [Server] PR:GetSelectedHeroName called with bogus player id 9, ignoring
-01/05 15:42:03 Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 5.1s ago, urgency is 0.0s
-01/05 15:42:03 connected_players {
-  steam_id: 76561198067907180
-  hero_id: 0
-}
-game_state: DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD
+[VScript] npc_dota_hero_witch_doctor	5	43.56600189209	1	463	0	0	0	0
+[VScript] npc_dota_hero_sniper	1	43.56600189209	1	333	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	50.899223327637	1	509	1443	0	0	0
+[VScript] npc_dota_hero_sniper	1	50.899223327637	1	345	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	55.565818786621	1	517	2223	0	0	0
+[VScript] npc_dota_hero_sniper	1	55.565818786621	1	353	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	73.233711242676	1	593	3939	0	0	0
+[VScript] npc_dota_hero_sniper	1	73.233711242676	1	383	0	0	0
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/sniper/sniper.vmdl for entity npc_dota_hero_sniper
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/gyro/gyro.vmdl for entity npc_dota_hero_gyrocopter
+[Client]  1167: 0.251300 msec change 'playbackRateChanged()' on field m_flPlaybackRate(path=12/9) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/bristleback/bristleback.vmdl for entity npc_dota_hero_bristleback
+[Client]  1163: 0.254000 msec change 'playbackRateChanged()' on field m_flPlaybackRate(path=12/9) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
+[Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
+Sending CMsgConnectedPlayers for reason KILLS.  Last send was 217.5s ago, urgency is 60.0s
+game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
 first_blood_happened: false
-send_reason: GAME_STATE
-radiant_kills: 0
+send_reason: KILLS
+radiant_kills: 1
 dire_kills: 0
-radiant_lead: 0
-building_state: 19138340
-
-01/05 15:42:03 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 38 bytes
-01/05 15:42:03 C:Gamerules: entering state 'DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD'
-01/05 15:42:03 void C_DOTAGamerules::State_Enter_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 0/1
-01/05 15:42:03 [Client] LoadingDisplay changed from LOADING to WAITING_FOR_PLAYERS (map="start")
-01/05 15:42:03 [Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD
-01/05 15:42:03 [Client] PregameHud - eGameState is now DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 0/1. m_waitingForPlayersState: 0
-01/05 15:42:03 void CDOTAGamerules::WaitForPlayersSuccess(): Loaded/expected players: 1/1
-01/05 15:42:03 S:Gamerules: WAIT_FOR_PLAYERS_TO_LOAD entering substate EWFPS_Success
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:03 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 [GCClient] Recv msg 7014 (k_EMsgGCOtherLeftChannel), 26 bytes
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:42:04 --- CSODOTALobby.all_members[0]: leaver_status: DOTA_LEAVER_DISCONNECTED
-01/05 15:42:04 +++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD
-01/05 15:42:04 +++ CSODOTALobby.first_blood_happened: false
-01/05 15:42:04 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:04 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:04 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:04 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:04 SetLiveSpectatorDetails -1 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 void CDOTAGamerules::State_Think_WAIT_FOR_PLAYERS_TO_LOAD(): Loaded/expected players: 1/1. m_waitingForPlayersState: 1
-01/05 15:42:04 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP'
-01/05 15:42:04 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_HERO_SELECTION'
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377217 to slot 0 FakeClient=1 preferred slot = 0
-01/05 15:42:04 [Server] PR:SetPlayerName 0:[I:0:0] "Cosmin"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377218 to slot 1 FakeClient=1 preferred slot = 1
-01/05 15:42:04 [Server] PR:SetPlayerName 1:[I:0:0] "Thomas"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377219 to slot 2 FakeClient=1 preferred slot = 2
-01/05 15:42:04 [Server] PR:SetPlayerName 2:[I:0:0] "ÃdÃ¡m"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377220 to slot 3 FakeClient=1 preferred slot = 3
-01/05 15:42:04 [Server] PR:SetPlayerName 3:[I:0:0] "Astrid"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377221 to slot 4 FakeClient=1 preferred slot = 4
-01/05 15:42:04 [Server] PR:SetPlayerName 4:[I:0:0] "ÐÐ¸ÐºÐ¾Ð»Ð°"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377222 to slot 5 FakeClient=1 preferred slot = 5
-01/05 15:42:04 [Server] PR:SetPlayerName 5:[I:0:0] "à¸ªà¸¥à¸´à¸à¸²"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377223 to slot 6 FakeClient=1 preferred slot = 6
-01/05 15:42:04 [Server] PR:SetPlayerName 6:[I:0:0] "Xico"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377224 to slot 7 FakeClient=1 preferred slot = 7
-01/05 15:42:04 [Server] PR:SetPlayerName 7:[I:0:0] "Mikael"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377225 to slot 8 FakeClient=1 preferred slot = 8
-01/05 15:42:04 [Server] PR:SetPlayerName 8:[I:0:0] "ãã«ã"
-01/05 15:42:04 [Server] CDOTA_PlayerResource: Adding player SteamID 90071996842377226 to slot 9 FakeClient=1 preferred slot = 9
-01/05 15:42:04 [Server] PR:SetPlayerName 9:[I:0:0] "ÎÎ±ÏÎ¯Î½Î±"
-01/05 15:42:04 SV: Started streaming map dota spawngroup 2
-01/05 15:42:04 Muted Players: Starting replay recording in 10 seconds...
-01/05 15:42:04 [Server] PR:SetSelectedHero 0:[I:0:0] npc_dota_hero_sniper(35)
-01/05 15:42:04 [Server] PR:SetSelectedHero 1:[I:0:0] npc_dota_hero_nevermore(11)
-01/05 15:42:04 [Server] PR:SetSelectedHero 2:[I:0:0] npc_dota_hero_tidehunter(29)
-01/05 15:42:04 [Server] PR:SetSelectedHero 3:[I:0:0] npc_dota_hero_crystal_maiden(5)
-01/05 15:42:04 [Server] PR:SetSelectedHero 4:[I:0:0] npc_dota_hero_witch_doctor(30)
-01/05 15:42:04 [Server] PR:SetSelectedHero 5:[I:0:0] npc_dota_hero_gyrocopter(72)
-01/05 15:42:04 [Server] PR:SetSelectedHero 6:[I:0:0] npc_dota_hero_viper(47)
-01/05 15:42:04 [Server] PR:SetSelectedHero 7:[I:0:0] npc_dota_hero_bristleback(99)
-01/05 15:42:04 [Server] PR:SetSelectedHero 8:[I:0:0] npc_dota_hero_shadow_shaman(27)
-01/05 15:42:04 [Server] PR:SetSelectedHero 9:[I:0:0] npc_dota_hero_ogre_magi(84)
-01/05 15:42:04 Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 1.1s ago, urgency is 0.0s
-01/05 15:42:04 game_state: DOTA_GAMERULES_STATE_HERO_SELECTION
-first_blood_happened: false
-send_reason: GAME_STATE
-radiant_kills: 0
-dire_kills: 0
-radiant_lead: 0
-building_state: 19138340
-
-01/05 15:42:04 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 25 bytes
-01/05 15:42:04 C:Gamerules: entering state 'DOTA_GAMERULES_STATE_HERO_SELECTION'
-01/05 15:42:04 [Client] LoadingDisplay changed from WAITING_FOR_PLAYERS to NONE (map="start")
-01/05 15:42:04 [Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_HERO_SELECTION
-01/05 15:42:04 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_STRATEGY_TIME'
-01/05 15:42:04 Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 0.0s ago, urgency is 0.0s
-01/05 15:42:04 game_state: DOTA_GAMERULES_STATE_STRATEGY_TIME
-first_blood_happened: false
-send_reason: GAME_STATE
-radiant_kills: 0
-dire_kills: 0
-radiant_lead: 0
-building_state: 19138340
-
-01/05 15:42:04 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 25 bytes
-01/05 15:42:04 C:Gamerules: entering state 'DOTA_GAMERULES_STATE_STRATEGY_TIME'
-01/05 15:42:04 [Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_STRATEGY_TIME
-01/05 15:42:04 [Client] PregameHud - bIsPreloading is now 0
-01/05 15:42:04 [Client] PregameHud - eGameState is now DOTA_GAMERULES_STATE_HERO_SELECTION
-01/05 15:42:04 [Client] PregameHud - eGameState is now DOTA_GAMERULES_STATE_STRATEGY_TIME
-01/05 15:42:05 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:42:05 --- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD
-01/05 15:42:05 +++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_HERO_SELECTION
-01/05 15:42:05 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:05 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:05 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:05 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:05 SetLiveSpectatorDetails -1 1
-01/05 15:42:05 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:42:05 --- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_HERO_SELECTION
-01/05 15:42:05 +++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_STRATEGY_TIME
-01/05 15:42:05 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:05 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:05 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:05 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:05 SetLiveSpectatorDetails -1 1
-01/05 15:42:06 FixupResourceName: Illegal path, missing extension passed in ("II$¸°++¯õ")!
-01/05 15:42:06 [ResourceSystem] 		[ FAIL ] - Manifest contains an illegal resource name "II$¸°++¯õ"!
-01/05 15:42:06 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:06 [ResourceSystem] 		[ FAIL ] - Manifest contains an illegal resource name ""!
-01/05 15:42:06 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:06 [ResourceSystem] 		[ FAIL ] - Manifest contains an illegal resource name ""!
-01/05 15:42:06 [Server] Unable to load grid nav for world "prefabs/promotional_dire_fountain" (ERROR_FILEOPEN: File not found)
-01/05 15:42:06 [Client] Unable to load grid nav for world "prefabs/promotional_dire_fountain" (ERROR_FILEOPEN: File not found)
-01/05 15:42:06 [ResourceSystem] Error loading resource file "materials/vgui/hud/heroicons.vtex_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:42:07 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:07 Unsupported number of values found in grass tile. Expected 256. Found 1207977984
-01/05 15:42:07 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:07 Unsupported number of values found in grass tile. Expected 256. Found 1207977984
-01/05 15:42:08 FixupResourceName: Illegal path, missing extension passed in ("II$¸°++¯õ")!
-01/05 15:42:08 Unsupported number of values found in grass tile. Expected 256. Found 1207977984
-01/05 15:42:09 [RenderSystem] Attempting to purge m_fencedResourceList.Count() = 0, m_pendingFencedResourceQueue.Count() = 4, nCurrentCmdBuffersAvailable = 0, nAllocatedCommandBuffers = 1500
-01/05 15:42:09 [Server] Unable to load grid nav for world "prefabs/promotional_radiant_fountain" (ERROR_FILEOPEN: File not found)
-01/05 15:42:09 [Client] Unable to load grid nav for world "prefabs/promotional_radiant_fountain" (ERROR_FILEOPEN: File not found)
-01/05 15:42:16 [HLTV Server] Recording SourceTV replay to replays/auto-20220105-1542-start-lulock.dem...
-01/05 15:42:16 [HLTV Server] playdemo replays/auto-20220105-1542-start-lulock.dem
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:22 [RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in  CTextureManagerVK::GetImageView
-01/05 15:42:36 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_TEAM_SHOWCASE'
-01/05 15:42:36 Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 32.2s ago, urgency is 0.0s
-01/05 15:42:36 game_state: DOTA_GAMERULES_STATE_TEAM_SHOWCASE
-first_blood_happened: false
-send_reason: GAME_STATE
-radiant_kills: 0
-dire_kills: 0
-radiant_lead: 0
-building_state: 19138340
-
-01/05 15:42:36 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 25 bytes
-01/05 15:42:36 C:Gamerules: entering state 'DOTA_GAMERULES_STATE_TEAM_SHOWCASE'
-01/05 15:42:36 [Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_TEAM_SHOWCASE
-01/05 15:42:37 [Client] PregameHud - eGameState is now DOTA_GAMERULES_STATE_TEAM_SHOWCASE
-01/05 15:42:38 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:42:38 --- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_STRATEGY_TIME
-01/05 15:42:38 +++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_TEAM_SHOWCASE
-01/05 15:42:38 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:38 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:38 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:38 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:38 SetLiveSpectatorDetails -1 1
-01/05 15:42:52 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD'
-01/05 15:42:52 Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 16.0s ago, urgency is 0.0s
-01/05 15:42:52 game_state: DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD
-first_blood_happened: false
-send_reason: GAME_STATE
-radiant_kills: 0
-dire_kills: 0
-radiant_lead: 0
-building_state: 19138340
-
-01/05 15:42:52 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 25 bytes
-01/05 15:42:52 [Server] Created physics for maps/dota/world_physics.vphys
-01/05 15:42:53 [SpawnGroup] SynchronouslySpawnGroup for group 'CL:  [15: dota | world_layer_dire_base | <none>]' took 1554us
-01/05 15:42:53 [SpawnGroup] SynchronouslySpawnGroup for group 'CL:  [16: dota | world_layer_radiant_base | <none>]' took 2271us
-01/05 15:42:53 [Client] Created physics for maps/dota/world_physics.vphys
-01/05 15:42:53 C:Gamerules: entering state 'DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD'
-01/05 15:42:53 [Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD
-01/05 15:42:53 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_PRE_GAME'
-01/05 15:42:53 m_flPreGameStartTime set to 38.40
-01/05 15:42:53 m_flStateTransitionTime set to 128.40
-01/05 15:42:53 [GCClient] Send msg 8744 (k_EMsgServerToGCGetGuildContracts), 17 bytes
-01/05 15:42:53 Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 0.4s ago, urgency is 0.0s
-01/05 15:42:53 game_state: DOTA_GAMERULES_STATE_PRE_GAME
-first_blood_happened: false
-send_reason: GAME_STATE
-radiant_kills: 0
-dire_kills: 0
-radiant_lead: 0
+radiant_lead: 253
 building_state: 4784201
 
-01/05 15:42:53 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 25 bytes
-01/05 15:42:53 Height map file (maps/prefabs/promotional_radiant_fountain.vhcg) not found, this will make ground height traces more expensive! Recompile the map to generate a height map.
-01/05 15:42:53 Height map file (maps/prefabs/promotional_dire_fountain.vhcg) not found, this will make ground height traces more expensive! Recompile the map to generate a height map.
-01/05 15:42:53 [VScript] Unit Name, Role, Dota Time, Drive, Hero Level, Hero Gold, Hero Kills, Hero Deaths, Hero Assists
-01/05 15:42:53 [VScript] ActionPatterns	nil
-01/05 15:42:53 [VScript] Competences	nil
-01/05 15:42:53 [VScript] DriveElements	nil
-01/05 15:42:53 [VScript] 1	DE-Retreat
-01/05 15:42:53 [VScript] 2	DE-Heal
-01/05 15:42:53 [VScript] 3	DE-HealAlly
-01/05 15:42:53 [VScript] 4	DE-Harass
-01/05 15:42:53 [VScript] 5	DE-FarmLane
-01/05 15:42:53 [VScript] 6	DE-Idle
-01/05 15:42:53 C:Gamerules: entering state 'DOTA_GAMERULES_STATE_PRE_GAME'
-01/05 15:42:53 [Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_PRE_GAME
-01/05 15:42:53 [Client] PregameHud - SetPreGameVisible 0
-01/05 15:42:53 [VScript] ActionPatterns	nil
-01/05 15:42:53 [VScript] Competences	nil
-01/05 15:42:53 [VScript] DriveElements	nil
-01/05 15:42:53 [VScript] 1	DE-Retreat
-01/05 15:42:53 [VScript] 2	DE-Heal
-01/05 15:42:53 [VScript] 3	DE-HealAlly
-01/05 15:42:53 [VScript] 4	DE-Harass
-01/05 15:42:53 [VScript] 5	DE-FarmLane
-01/05 15:42:53 [VScript] 6	DE-Idle
-01/05 15:42:53 [Client] PregameHud - eGameState is now DOTA_GAMERULES_STATE_PRE_GAME
-01/05 15:42:53 [Client] PregameHud - SetPreGameVisible 1
-01/05 15:42:53 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 1392 (was 2342)
-01/05 15:42:53 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:42:53 --- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_TEAM_SHOWCASE
-01/05 15:42:53 +++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD
-01/05 15:42:53 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:53 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:53 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:53 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:53 SetLiveSpectatorDetails -1 1
-01/05 15:42:53 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 676 (was 1526)
-01/05 15:42:53 [ResourceSystem] Error loading resource file "particles/ui/ui_aghs_pregamebg_ambient_mist.vpcf_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:42:54 [GCClient] Recv msg 8745 (k_EMsgServerToGCGetGuildContractsResponse), 17 bytes
-01/05 15:42:54 [Particles] WARNING: Particle system 'particles/ui/ui_aghs_pregamebg_ambient_mist.vpcf' was not precached correctly. Performing blocking load....
-01/05 15:42:54 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:42:54 --- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD
-01/05 15:42:54 +++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_PRE_GAME
-01/05 15:42:54 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:42:54 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:42:54 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:42:54 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:42:54 SetLiveSpectatorDetails -1 1
-01/05 15:42:54 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:54 [ResourceSystem] 		[ FAIL ] - Manifest contains an illegal resource name ""!
-01/05 15:42:54 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:54 Unsupported number of values found in grass tile. Expected 256. Found 1207977984
-01/05 15:42:54 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:54 [ResourceSystem] 		[ FAIL ] - Manifest contains an illegal resource name ""!
-01/05 15:42:54 FixupResourceName: Illegal path, missing extension passed in ("")!
-01/05 15:42:54 Unsupported number of values found in grass tile. Expected 256. Found 1207977984
-01/05 15:42:58 [Client] PregameHud - SetPreGameVisible 0
-01/05 15:43:42 S:Gamerules: entering state 'DOTA_GAMERULES_STATE_GAME_IN_PROGRESS'
-01/05 15:43:42 m_flGameStartTime set to 87.93
-01/05 15:43:42 Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 49.6s ago, urgency is 0.0s
-01/05 15:43:42 game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
-first_blood_happened: false
-send_reason: GAME_STATE
-radiant_kills: 0
-dire_kills: 0
-radiant_lead: 40
-building_state: 4784201
-
-01/05 15:43:42 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 25 bytes
-01/05 15:43:42 C:Gamerules: entering state 'DOTA_GAMERULES_STATE_GAME_IN_PROGRESS'
-01/05 15:43:42 [Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
-01/05 15:43:42 [Client] CDOTA_Hud_Main::DeleteGameEndScreen deleted GameEndContainer
-01/05 15:43:43 [GCClient] Send msg 4508 (k_EMsgGCGameServerInfo), 90 bytes
-01/05 15:43:43 --- Sent CMsgGameServerInfo to GC
-01/05 15:43:43 server_public_ip_addr: 3651476190
-server_private_ip_addr: 3232235808
-server_port: 27015
-server_tv_port: 27020
-server_key: ""
-server_hibernation: false
-server_type: GAME
-server_region: 0
-server_loadavg: 2.99951172
-server_tv_broadcast_time: 95.1666718
-server_game_time: 0.0333328247
-relay_slots_max: 64
-relays_connected: 0
-relay_clients_connected: 0
-tv_secret_code: 14379286133241963643
-server_version: 5144
-server_cluster: 0
-assigned_server_tv_port: 27020
-allow_custom_games: BOTH
-build_version: 5144
-tf_server_count: 1
-is_recording_match_training_data: false
-
-01/05 15:43:43 ---
-01/05 15:43:43 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:43:43 --- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_PRE_GAME
-01/05 15:43:43 +++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
-01/05 15:43:43 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:43:43 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:43:43 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:43:43 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:43:43 SetLiveSpectatorDetails -1 1
-01/05 15:43:53 CSwapChainBase::QueuePresentAndWait() looped for 21 iterations without a present event.
-01/05 15:44:14 [VScript] GetTeamMember parameter 1: expected integer but got void.
-01/05 15:44:14 [VScript] Script Runtime Error: ...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:172: Parameter type mismatch
-stack traceback:
-	[C]: in function 'GetTeamMember'
-	...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:172: in function 'log'
-	...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:90: in function 'update'
-	...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Opera.lua:61: in function 'update'
-	...eta/game/dota/scripts/vscripts/bots/bot_witch_doctor.lua:32: in function <...eta/game/dota/scripts/vscripts/bots/bot_witch_doctor.lua:20>
-01/05 15:45:32 [VScript] GetTeamMember parameter 1: expected integer but got void.
-01/05 15:45:32 [VScript] Script Runtime Error: ...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:172: Parameter type mismatch
-stack traceback:
-	[C]: in function 'GetTeamMember'
-	...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:172: in function 'log'
-	...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Scene.lua:123: in function 'update'
-	...a 2 beta/game/dota/scripts/vscripts/bots/OperA/Opera.lua:61: in function 'update'
-	...eta/game/dota/scripts/vscripts/bots/bot_witch_doctor.lua:32: in function <...eta/game/dota/scripts/vscripts/bots/bot_witch_doctor.lua:20>
-01/05 15:45:50 Script function 'Think' on bot npc_dota_hero_nevermore took 3.793ms
-01/05 15:46:09 [Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
-01/05 15:46:09 Sending CMsgConnectedPlayers for reason FIRST_BLOOD.  Last send was 147.0s ago, urgency is 0.0s
-01/05 15:46:09 game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 26 bytes
+[GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
+[Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
+[Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
+[Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
+[Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
+SetLiveSpectatorDetails -1 1
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/ogre_magi/ogre_magi.vmdl for entity npc_dota_hero_ogre_magi
+[VScript] npc_dota_hero_witch_doctor	5	271.24096679688	2	990	3939	0	0	0
+[VScript] npc_dota_hero_sniper	1	271.24096679688	4	891	0	0	0
+[Client]  1284: 0.273200 msec change 'OnCellChanged()' on field m_vecX(path=12/3) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
+[VScript] npc_dota_hero_witch_doctor	5	297.56787109375	2	1067	6006	0	0	0
+[VScript] npc_dota_hero_sniper	1	297.56787109375	4	969	0	0	0
+[Client]  1313: 0.254400 msec change 'clientSideAnimCycleReset()' on field m_nNewSequenceParity(path=12/10) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/ogre_magi/ogre_magi.vmdl for entity npc_dota_hero_ogre_magi
+[Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
+Sending CMsgConnectedPlayers for reason FIRST_BLOOD.  Last send was 164.0s ago, urgency is 0.0s
+game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
 first_blood_happened: true
 send_reason: FIRST_BLOOD
-radiant_kills: 0
-dire_kills: 1
-radiant_lead: -953
+radiant_kills: 2
+dire_kills: 0
+radiant_lead: 764
 building_state: 4784201
 
-01/05 15:46:09 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 34 bytes
-01/05 15:46:10 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:46:10 --- CSODOTALobby.first_blood_happened: false
-01/05 15:46:10 +++ CSODOTALobby.first_blood_happened: true
-01/05 15:46:10 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:46:10 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:46:10 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:46:10 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:46:10 SetLiveSpectatorDetails -1 1
-01/05 15:46:29 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:29 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:29 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:37 CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/gyro/gyro.vmdl for entity npc_dota_hero_gyrocopter
-01/05 15:46:45 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:45 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:45 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:49 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:49 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:49 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:56 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:56 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:46:56 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:47:30 [Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
-01/05 15:47:31 Sending CMsgConnectedPlayers for reason KILLS.  Last send was 81.6s ago, urgency is 60.0s
-01/05 15:47:31 game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 26 bytes
+[GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
+--- CSODOTALobby.first_blood_happened: false
++++ CSODOTALobby.first_blood_happened: true
+[Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
+[Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
+[Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
+[Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
+SetLiveSpectatorDetails -1 1
+[VScript] npc_dota_hero_witch_doctor	5	413.20629882812	2	1316	6006	0	0	0
+[VScript] npc_dota_hero_sniper	1	413.20629882812	5	1361	0	0	0
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+[VScript] npc_dota_hero_witch_doctor	5	430.53540039062	2	1347	6006	0	0	0
+[VScript] npc_dota_hero_sniper	1	430.53540039062	5	1428	0	0	0
+[Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
+[SteamNetSockets] Certificate expires in 44h54m at 1641635644 (current time 1641473990), will renew in 42h54m
+Sending CMsgConnectedPlayers for reason KILLS.  Last send was 60.3s ago, urgency is 60.0s
+game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
 first_blood_happened: true
 send_reason: KILLS
-radiant_kills: 0
-dire_kills: 2
-radiant_lead: -1684
+radiant_kills: 3
+dire_kills: 0
+radiant_lead: 974
 building_state: 4784201
 
-01/05 15:47:31 [GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 34 bytes
-01/05 15:47:32 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 490 bytes
-01/05 15:47:32 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
-01/05 15:47:32 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
-01/05 15:47:32 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
-01/05 15:47:32 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
-01/05 15:47:32 SetLiveSpectatorDetails -1 1
-01/05 15:47:59 CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/sniper/sniper.vmdl for entity npc_dota_hero_sniper
-01/05 15:48:03 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:48:03 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:48:03 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:48:08 CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/crystal_maiden/crystal_maiden.vmdl for entity npc_dota_hero_crystal_maiden
-01/05 15:48:45 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:48:45 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:48:45 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:49:00 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:49:00 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:49:00 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:49:04 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:49:04 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:49:04 WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-01/05 15:49:06 ChangeGameUIState: DOTA_GAME_UI_DOTA_INGAME -> DOTA_GAME_UI_STATE_DASHBOARD
-01/05 15:49:06 [GCClient] Send msg 7197 (k_EMsgGCMatchmakingStatsRequest), 8 bytes
-01/05 15:49:07 [GCClient] Send msg 8673 (k_EMsgClientToGCRequestGuildData), 19 bytes
-01/05 15:49:07 CSwapChainBase::QueuePresentAndWait() looped for 21 iterations without a present event.
-01/05 15:49:07 [GCClient] Recv msg 8674 (k_EMsgClientToGCRequestGuildDataResponse), 19 bytes
-01/05 15:49:08 [Vfx] No valid vcs file found for shader generic.vfx
-01/05 15:49:08 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:08 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:08 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:08 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:08 [GCClient] Recv msg 7198 (k_EMsgGCMatchmakingStatsResponse), 326 bytes
-01/05 15:49:09 [MeshSystem] Model models/courier/aghanim_courier/aghanim_courier.vmdl: Attempted to attach attachment ear1_end_R to an unknown bone R_ear_2!
-01/05 15:49:09 [MeshSystem] Model models/courier/aghanim_courier/aghanim_courier.vmdl: Attempted to attach attachment ear0_end_L to an unknown bone L_ear_2!
-01/05 15:49:09 [AnimResource] Model models/courier/aghanim_courier/aghanim_courier.vmdl: group !embedded_sequence_data!models/courier/aghanim_courier/aghanim_courier.vmdl: missing referenced sequence "donkey_turns"
-01/05 15:49:09 [GCClient] Send msg 7035 (k_EMsgGCAbandonCurrentGame), 8 bytes
-01/05 15:49:09 [Client] CL:  disconnect local lobby disconnect
-01/05 15:49:09 [Client] CL:  Server disconnected: 2: NETWORK_DISCONNECT_DISCONNECT_BY_USER
-01/05 15:49:09 [HLTV Server] SourceTV shutting down
-01/05 15:49:09 [HLTV Server] CHLTVServer::Shutdown
-01/05 15:49:09 [HLTV Server] Completed SourceTV demo "replays/auto-20220105-1542-start-lulock.dem", recording time 420.3
-01/05 15:49:09 [Server] CNetworkGameServerBase::SetServerState (ss_active -> ss_dead)
-01/05 15:49:09 [stringtables] HLTV:  CNetworkStringTableContainer::RemoveAllTables:  removing 20 tables
-01/05 15:49:09 [Server] SV:  Server shutting down: NETWORK_DISCONNECT_DISCONNECT_BY_USER (2)
-01/05 15:49:09 [Server] CNetworkGameServerBase::SetServerState (ss_active -> ss_dead)
-01/05 15:49:09 [Server] SV:  Disconnect client 'lulock' from server(1): NETWORK_DISCONNECT_SHUTDOWN
-01/05 15:49:09 [SignonState] Client 1 'lulock' signon state SIGNONSTATE_FULL -> SIGNONSTATE_NONE
-01/05 15:49:09 [NetSteamConn] Closing Steam Net Connection on socket 'server' to loopback:0, handle #2822497763 (1001 NETWORK_DISCONNECT_SHUTDOWN)
-01/05 15:49:09 [NetSteamConn] CloseSteamNetConnection handle #2822497763 (userdata 0)
-01/05 15:49:09 [NetSteamConn] Disassociating NetChan       lulock                      [-1] (unknown) from Steam Net Connection handle #2822497763 (userdata 0)
-01/05 15:49:09 [NetSteamConn] Removing Steam Net Connection for loopback:0, handle #2822497763
-01/05 15:49:09 [Server] SV:  AsyncUnloadSpawnGroup( 15 ) -- no such group
-01/05 15:49:09 [Server] SV:  AsyncUnloadSpawnGroup( 16 ) -- no such group
-01/05 15:49:09 [Server] CSteam3ServerS1::ShutdownGameServer
-01/05 15:49:09 [Networking] CNetworkSystem::ShutdownGameServer
-01/05 15:49:09 [Networking] Closing 'server' UDP listen socket
-01/05 15:49:09 [Networking] Closing 'server' P2P listen socket
-01/05 15:49:09 [Networking] Closing 'server' poll group
-01/05 15:49:09 [Networking] Closing 'hltv' UDP listen socket
-01/05 15:49:09 [Networking] Closing 'hltv' P2P listen socket
-01/05 15:49:09 [Networking] Closing 'hltv' poll group
-01/05 15:49:09 [Server] CDOTAGCServerSystem::SOCacheUnsubscribed: Clearing the lobby while game rules is still in state DOTA_GAMERULES_STATE_GAME_IN_PROGRESS(5).
-01/05 15:49:09 [Client] CL:  Disconnecting from server: NETWORK_DISCONNECT_DISCONNECT_BY_USER
-01/05 15:49:09 [NetSteamConn] Closing Steam Net Connection on socket 'client' to loopback:1, handle #3494392137 (1002 NETWORK_DISCONNECT_DISCONNECT_BY_USER)
-01/05 15:49:09 [NetSteamConn] CloseSteamNetConnection handle #3494392137 (userdata 1)
-01/05 15:49:09 [NetSteamConn] Disassociating NetChan       client                      [-1] (unknown) from Steam Net Connection handle #3494392137 (userdata 1)
-01/05 15:49:09 [NetSteamConn] Removing Steam Net Connection for loopback:1, handle #3494392137
-01/05 15:49:09 [Networking] Closing 'client' poll group
-01/05 15:49:09 [HostStateManager] CHostStateMgr::QueueNewRequest( Idle (levelload), 7 )
-01/05 15:49:09 [EngineServiceManager] SwitchToLoop levelload requested:  id [7] addons []
-01/05 15:49:10 [Client] CL:  IGameSystem::LoopDeactivateAllSystems {
-01/05 15:49:10 WriteSteamRemoteStorageFileAsync( "scripts/control_groups.txt" ) -> at 3966.559
-01/05 15:49:10 [Client] CL:  } IGameSystem::LoopDeactivateAllSystems done
-01/05 15:49:10 [stringtables] CL:  CNetworkStringTableContainer::RemoveAllTables:  removing 20 tables
-01/05 15:49:10 [Server] SV:  IGameSystem::LoopDeactivateAllSystems {
-01/05 15:49:10 [Host] HO:  IGameSystem::LoopDeactivateAllSystems {
-01/05 15:49:10 [Host] HO:  } IGameSystem::LoopDeactivateAllSystems done
-01/05 15:49:10 [Server] SV:  } IGameSystem::LoopDeactivateAllSystems done
-01/05 15:49:10 [stringtables] SV:  CNetworkStringTableContainer::RemoveAllTables:  removing 20 tables
-01/05 15:49:10 ILocalize::AddFile() failed to load file "resource/localization/broadcastfacts_english.txt".
-01/05 15:49:10 [Client] CL:  CGameRulesGameSystem::GameShutdown uninstalled game rules
-01/05 15:49:10 [Client] CL:  CGameRules::CGameRules destructed
-01/05 15:49:10 WriteSteamRemoteStorageFileAsync( "voice_ban.dt" ) -> at 3967.072
-01/05 15:49:10 [Server] SV:  CGameRulesGameSystem::GameShutdown uninstalled game rules
-01/05 15:49:10 [Server] SV:  CGameRules::CGameRules destructed
-01/05 15:49:10 ChangeGameUIState: DOTA_GAME_UI_STATE_DASHBOARD -> DOTA_GAME_UI_STATE_LOADING_SCREEN
-01/05 15:49:10 [Client] LoadingDisplay changed from NONE to LOADING (map="")
-01/05 15:49:10 [HostStateManager] Idle (levelload)
-01/05 15:49:10 CAsyncWriteInProgress::OnComplete( "scripts/control_groups.txt" ) -> Success at 3967.168
-01/05 15:49:10 [GCClient] Recv msg 25 (k_ESOMsg_CacheUnsubscribed), 21 bytes
-01/05 15:49:10 [GCClient] Recv msg 7010 (k_EMsgGCJoinChatChannelResponse), 81 bytes
-01/05 15:49:10 [GCClient] Recv msg 7010 (k_EMsgGCJoinChatChannelResponse), 81 bytes
-01/05 15:49:10 CAsyncWriteInProgress::OnComplete( "voice_ban.dt" ) -> Success at 3967.169
-01/05 15:49:10 [NetSteamConn] Steam Net connection #3494392137 pipe closed by peer, reason 1001: NETWORK_DISCONNECT_SHUTDOWN
-01/05 15:49:10 [NetSteamConn] CloseSteamNetConnection handle #3494392137 (userdata -1)
-01/05 15:49:10 [Client] CL:  CLoopModeLevelLoad::MaybeSwitchToGameLoop switching to "game" loopmode with addons ()
-01/05 15:49:10 [EngineServiceManager] SwitchToLoop game requested:  id [7] addons []
-01/05 15:49:10 [SOCache] CGCSOCacheUnsubscribedJob(owner=<Lobby:27537240076615244>)
-01/05 15:49:10 Telling Steam it is safe to update the app
-01/05 15:49:10 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 26372 (was 26382)
-01/05 15:49:10 [ResourceSystem] Error loading resource file "panorama/images/spellicons/dota_base_ability_png.vtex_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [Server] CNetworkGameServerBase::SetServerState (ss_dead -> ss_waitingforgamesessionmanifest)
-01/05 15:49:11 [Server] SV:  maxplayers set to 1
-01/05 15:49:11 Initializing script VM...
-01/05 15:49:11 ...done
-01/05 15:49:11 CSpeechScriptBridge was double-initialized: tearing down and rebuilding
-01/05 15:49:11 [Server] SV:  Spawn Server: <empty>
-01/05 15:49:11 [Server] CNetworkGameServerBase::SetServerState (ss_waitingforgamesessionmanifest -> ss_loading)
-01/05 15:49:11 WriteSteamRemoteStorageFileAsync( "cfg/chat.cfg" ) -> at 3967.459
-01/05 15:49:11 [GCClient] Send msg 7272 (k_EMsgGCLeaveChatChannel), 12 bytes
-01/05 15:49:11 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 20670 (was 27090)
-01/05 15:49:11 **** Panel SliderAndMarkers has fill-parent-flow for width, but isn't in a flowing right layout
-01/05 15:49:11 **** Panel TimeScrubSlider has fill-parent-flow for width, but isn't in a flowing right layout
-01/05 15:49:11 [Server] CNetworkGameServerBase::SetServerState (ss_loading -> ss_active)
-01/05 15:49:11 CAsyncWriteInProgress::OnComplete( "cfg/chat.cfg" ) -> Success at 3967.494
-01/05 15:49:11 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 16016 (was 20696)
-01/05 15:49:11 [Client] CL:  CWaitForGameServerStartupPrerequisite done waiting for server
-01/05 15:49:11 [Client] CL:  CCreateGameClientJob creating client connection to 'loopback'
-01/05 15:49:11 [Networking] Created poll group for socket 'client'
-01/05 15:49:11 [Networking] Created poll group for socket 'server'
-01/05 15:49:11 [Networking] Connected loopback client=5a0e4bc7@loopback:1 <-> server=3ac2ba3b@loopback:0
-01/05 15:49:11 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 9759 (was 16149)
-01/05 15:49:11 [NetSteamConn] Associating NetChan       lulock            loopback:0[1] (loopback:0) with Steam Net Connection handle #985840187 (userdata 1)
-01/05 15:49:11 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 6945 (was 9765)
-01/05 15:49:11 [NetSteamConn] Associating NetChan       client            loopback:1[0] (loopback:1) with Steam Net Connection handle #1510886343 (userdata 0)
-01/05 15:49:11 [Client] CL:  Connected to 'loopback:1'
-01/05 15:49:11 [Server] SV:  Sending server info to client 'lulock' at loopback:0
-01/05 15:49:11 [Server] SV:  WriteInitialSpawnGroups sending 1 groups
-01/05 15:49:11 [Server] Client 1 'lulock' setting rate to 80000
-01/05 15:49:11 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 3623 (was 7073)
-01/05 15:49:11 [Client] Game: "Dota 2"
-01/05 15:49:11 [Client] Map: "<empty>"
-01/05 15:49:11 [Client] Players: 1 (0 bots) / 1 humans
-01/05 15:49:11 [Client] Build: 9202 (revision 6985338)
-01/05 15:49:11 [Client] Server Number: 10
-01/05 15:49:11 [SignonState] CL:  CNetworkGameClient::ProcessServerInfo
-01/05 15:49:11 ReadSteamRemoteStorageFile( bufOut, "voice_ban.dt" ) -> 0.081754 seconds
-01/05 15:49:11 [Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 392 (was 3752)
-01/05 15:49:11 [GCClient] Recv msg 7014 (k_EMsgGCOtherLeftChannel), 26 bytes
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_6_2699_9821.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_3_2699_9825.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_2_2699_9827.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_1_2699_9829.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_4_2699_9835.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_1_2699_9839.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2699_9851.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2699_9848.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2699_25701.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2699_25707.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2699_26396.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_8_2699_26645.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_7_2699_27172.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_7_2699_27175.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_4_2699_9823.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_5_2699_27178.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_6_2699_27320.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_2_2699_9841.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_9_2699_27340.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_8_2699_27461.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_good_9_2699_27484.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_3_2699_9837.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/roshan_location_2699_27790.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2699_27805.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2699_27807.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/bad_result_position_2699_28052.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/bad_result_position_2699_28058.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/bad_result_position_2699_28056.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/bad_result_position_2699_28060.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/bad_result_position_2699_28066.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2716_4090_43.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2716_4090_49.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/unnamed_2716_2431_58.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:11 [ResourceSystem] Error loading resource file "maps/dota/entities/neutralcamp_evil_5_2699_9833.vmdl_c" (Error: ERROR_FILEOPEN: File not found)
-01/05 15:49:12 [RenderSystem] Attempting to purge m_fencedResourceList.Count() = 0, m_pendingFencedResourceQueue.Count() = 4, nCurrentCmdBuffersAvailable = 0, nAllocatedCommandBuffers = 1500
-01/05 15:49:13 [Client] CL:  CGameClientConnectPrerequisite connection succeeded
-01/05 15:49:13 ChangeGameUIState: DOTA_GAME_UI_STATE_LOADING_SCREEN -> DOTA_GAME_UI_STATE_DASHBOARD
-01/05 15:49:13 [Client] LoadingDisplay changed from LOADING to NONE (map="<empty>")
-01/05 15:49:13 [Server] SV:  IGameSystem::LoopActivateAllSystems {
-01/05 15:49:13 [Host] HO:  IGameSystem::LoopActivateAllSystems {
-01/05 15:49:13 [Host] HO:  } IGameSystem::LoopActivateAllSystems done
-01/05 15:49:13 [Server] SV:  } IGameSystem::LoopActivateAllSystems done
-01/05 15:49:13 [Server] SV:  Game started
-01/05 15:49:13 [Client] CL:  IGameSystem::LoopActivateAllSystems {
-01/05 15:49:13 ReadSteamRemoteStorageFile( bufOut, "scripts/control_groups.txt" ) -> 0.003669 seconds
-01/05 15:49:13 [Client] CL:  } IGameSystem::LoopActivateAllSystems done
-01/05 15:49:13 [SignonState] CL:  CNetworkGameClient::OnSwitchLoopModeFinished( game : success )
-01/05 15:49:13 [Server] SV:  Sending full update to client lulock (reason:  initial update)
-01/05 15:49:13 [Client] CL:  Receiving uncompressed update from server
-01/05 15:49:13 [Networking]       client            loopback:1[0]:  NetChan Setting Timeout to 30.00 seconds
-01/05 15:49:13 [Client] CL:  Signon traffic "client":  incoming 61.767 KB [110 pkts], outgoing 1.004 KB [105 pkts]
-01/05 15:49:13 [Networking]       lulock            loopback:0[1]:  NetChan Setting Timeout to 20.00 seconds
-01/05 15:49:14 [Vfx] No valid vcs file found for shader generic.vfx
-01/05 15:49:14 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:14 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:14 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:14 [MaterialSystem] /opt/buildbot/buildworker/source2_dota_rel_osx64/build/src/materialsystem2/material2.cpp(1332): Error creating shader generic.vfx for material materials/dev/gray_50.vmat!
-01/05 15:49:14 [MeshSystem] Model models/courier/aghanim_courier/aghanim_courier.vmdl: Attempted to attach attachment ear1_end_R to an unknown bone R_ear_2!
-01/05 15:49:14 [MeshSystem] Model models/courier/aghanim_courier/aghanim_courier.vmdl: Attempted to attach attachment ear0_end_L to an unknown bone L_ear_2!
-01/05 15:49:14 [AnimResource] Model models/courier/aghanim_courier/aghanim_courier.vmdl: group !embedded_sequence_data!models/courier/aghanim_courier/aghanim_courier.vmdl: missing referenced sequence "donkey_turns"
-01/05 15:49:16 ProtoBufHelper::ParseJSON: Ignoring extra JSON key 'success', which is not found in protobuf message 'CMsgDOTAPlayerInfoList'!
-01/05 15:49:21 ProtoBufHelper::ParseJSON: Ignoring extra JSON key 'success', which is not found in protobuf message 'CMsgDOTAPlayerInfoList'!
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 26 bytes
+[GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
+[Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
+[Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
+[Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
+[Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
+SetLiveSpectatorDetails -1 1
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/viper/viper.vmdl for entity npc_dota_hero_viper
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+[SteamNetSockets] Certificate expires in 47h50m at 1641646283 (current time 1641474082), will renew in 45h50m
+[VScript] npc_dota_hero_witch_doctor	5	527.51171875	2	1518	6006	0	0	0
+[VScript] npc_dota_hero_sniper	1	527.51171875	6	1707	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	530.51098632812	2	1523	6966	0	0	0
+[VScript] npc_dota_hero_sniper	1	530.51098632812	6	1712	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	531.5107421875	3	1525	7526	0	0	0
+[VScript] npc_dota_hero_sniper	1	531.5107421875	6	1714	0	0	0
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/gyro/gyro.vmdl for entity npc_dota_hero_gyrocopter
+[VScript] npc_dota_hero_witch_doctor	5	534.1767578125	3	1530	8918	0	0	0
+[VScript] npc_dota_hero_sniper	1	534.1767578125	6	1719	0	0	0
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
+[VScript] npc_dota_hero_witch_doctor	5	556.837890625	3	1650	12838	0	0	0
+[VScript] npc_dota_hero_sniper	1	556.837890625	6	1804	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	559.17065429688	3	1654	12838	0	0	0
+[VScript] npc_dota_hero_sniper	1	559.17065429688	7	1808	0	0	0
