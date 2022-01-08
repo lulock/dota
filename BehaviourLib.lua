@@ -186,33 +186,53 @@ function SelectSafeLocation( status )
     return status
 end
 
+-- helper function, health extrapolation
+function PredictHealth( unit )
+    -- local currHealth = unit:GetHealth( )
+    local iProj = unit:GetIncomingTrackingProjectiles( )
+
+    local currHealth = unit:GetHealth( )
+    -- print("currHealth", currHealth)
+    for i, p in pairs(iProj) do
+        -- print("info about proj #", i, 
+        -- "loc:", p.location, 
+        -- "caster:", p.caster, 
+        -- "player:", p.player, 
+        -- "ability:", p.ability, 
+        -- "dodge:", p.is_dodgeable, 
+        -- "attack:", p.is_attack,
+        -- "is caster hero?:", p.caster:IsHero())
+
+        -- local actualDamage = unit:GetActualIncomingDamage(p.caster:GetAttackDamage(), DAMAGE_TYPE_ALL)
+        -- print("caster attack damage", p.caster:GetAttackDamage())
+        -- print("caster estimated damage to target", p.caster:GetEstimatedDamageToTarget(false, unit, GetBot():GetSecondsPerAttack() , DAMAGE_TYPE_ALL))
+        -- print("caster attack projectile speed", p.caster:GetAttackProjectileSpeed())
+        -- print("caster attack projectile seconds per attack", p.caster:GetSecondsPerAttack())
+        -- print("actualDamage from caster is", actualDamage)
+
+        currHealth = currHealth - p.caster:GetEstimatedDamageToTarget(false, unit, GetBot():GetSecondsPerAttack() , DAMAGE_TYPE_ALL)
+        -- print("discounted unit health is", i, currHealth)
+    end
+    return currHealth
+    -- { { location, caster, player, ability, is_dodgeable, is_attack }, ... } GetIncomingTrackingProjectiles()
+
+    -- Returns information about all projectiles incoming towards this unit.
+
+end
+
 -- sets creepTarget as creep with lowest health around
 function SelectTarget( status )
 
     if status == IDLE then
+        local secondsPerAttack = GetBot():GetSecondsPerAttack()
         local enemyCreepsNearby = GetBot( ):GetNearbyCreeps( GetBot():GetAttackRange( ), true )
-
         for i,creep in pairs( enemyCreepsNearby ) do
-            -- local thresholdTarget = 2*creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL)
-            local thresholdTarget = creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL) + (creep:GetAttackDamage( ) * #creep:GetIncomingTrackingProjectiles( ))
-
-            -- local thresholdTarget = 2*GetBot():GetAttackDamage() -- heuristic works well for Witch Doc, Shadow Fiend, but not Sniper
-            -- Gets an estimate of the amount of damage that this unit can do to the specified unit. If bCurrentlyAvailable is true, it takes into account mana and cooldown status.
-            
-            if creep:CanBeSeen( ) and creep:GetHealth( ) <= thresholdTarget and creep:GetHealth( ) > 0 then            
-                -- print("CREEP", i, "HEALTH:", creep:GetHealth( ))
-                -- print("INCOMING DAMAGE:", creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL))
-                -- print("INCOMING PROJ#:", #creep:GetIncomingTrackingProjectiles( ))
-                -- print("other damage taken?:", creep:GetAttackDamage( ) * #creep:GetIncomingTrackingProjectiles( ))
-                -- print("Hero GetAttackDamage:", GetBot():GetAttackDamage( ))
-                -- print("Hero GetAttackRange:", GetBot():GetAttackRange( ))
-                -- print("Hero GetAttackSpeed:", GetBot():GetAttackSpeed( ))
-                -- print("Hero GetSecondsPerAttack:", GetBot():GetSecondsPerAttack( ))
-                -- print("Hero GetEstimatedDamageToTarget:", GetBot():GetEstimatedDamageToTarget( false, creep, GetBot():GetSecondsPerAttack( ), DAMAGE_TYPE_PHYSICAL ))
-                -- Target setting and getting is available in the API omg 🙄
+            local thresholdTarget = GetUnitToUnitDistance(creep, GetBot() )*0.01*creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL)
+            -- local thresholdTarget = GetUnitToUnitDistance(creep, GetBot() )*0.01*creep:GetBot():GetAttackDamage()
+            if creep:CanBeSeen( ) and (creep:GetHealth() <= thresholdTarget ) then
+                -- GetBot():Action_AttackUnit( creep, true )
+                -- print("creep health", creep:GetHealth() )
                 GetBot( ):SetTarget( creep )
-                local rc_pos = POSITIONS[GetBot():GetUnitName()]
-                BOUNTY[ rc_pos ] = BOUNTY[ rc_pos ] + GetBot( ):GetTarget():GetBountyGoldMax()
                 return SUCCESS
             end
         end
@@ -323,13 +343,11 @@ end
 -- right click attacks target once
 function RightClickAttack( status )
 
-    if status == IDLE then
-        
+    if status == IDLE then        
         GetBot( ):Action_AttackUnit( GetBot( ):GetTarget( ), true )
         -- print("RCA - action - RUNNING", GetBot():GetUnitName() )
         -- print("TARGET HEALTH", GetBot( ):GetTarget( ):GetHealth( ) )
         -- print("TARGET DAMAGE", GetBot( ):GetTarget( ):GetActualIncomingDamage( GetBot( ):GetAttackDamage( ), DAMAGE_TYPE_PHYSICAL ) )
-
         return SUCCESS
     -- elseif status == RUNNING then 
     --     if GetBot( ):GetCurrentActionType ( ) ~=  BOT_ACTION_TYPE_ATTACK and GetBot():NumQueuedActions() == 0 then
