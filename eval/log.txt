@@ -1,53 +1,171 @@
-
-[VScript] npc_dota_hero_witch_doctor	5	43.56600189209	1	463	0	0	0	0
-[VScript] npc_dota_hero_sniper	1	43.56600189209	1	333	0	0	0
-[VScript] npc_dota_hero_witch_doctor	5	50.899223327637	1	509	1443	0	0	0
-[VScript] npc_dota_hero_sniper	1	50.899223327637	1	345	0	0	0
-[VScript] npc_dota_hero_witch_doctor	5	55.565818786621	1	517	2223	0	0	0
-[VScript] npc_dota_hero_sniper	1	55.565818786621	1	353	0	0	0
-[VScript] npc_dota_hero_witch_doctor	5	73.233711242676	1	593	3939	0	0	0
-[VScript] npc_dota_hero_sniper	1	73.233711242676	1	383	0	0	0
-CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/sniper/sniper.vmdl for entity npc_dota_hero_sniper
-CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/gyro/gyro.vmdl for entity npc_dota_hero_gyrocopter
-[Client]  1167: 0.251300 msec change 'playbackRateChanged()' on field m_flPlaybackRate(path=12/9) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
-CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/bristleback/bristleback.vmdl for entity npc_dota_hero_bristleback
-[Client]  1163: 0.254000 msec change 'playbackRateChanged()' on field m_flPlaybackRate(path=12/9) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
-[Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
-Sending CMsgConnectedPlayers for reason KILLS.  Last send was 217.5s ago, urgency is 60.0s
-game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+ate: DOTA_GAMERULES_STATE_PRE_GAME
 first_blood_happened: false
-send_reason: KILLS
-radiant_kills: 1
+send_reason: GAME_STATE
+radiant_kills: 0
 dire_kills: 0
-radiant_lead: 253
+radiant_lead: 0
 building_state: 4784201
 
-[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 26 bytes
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 25 bytes
+Height map file (maps/prefabs/promotional_radiant_fountain.vhcg) not found, this will make ground height traces more expensive! Recompile the map to generate a height map.
+Height map file (maps/prefabs/promotional_dire_fountain.vhcg) not found, this will make ground height traces more expensive! Recompile the map to generate a height map.
+[SpawnGroup] SynchronouslySpawnGroup for group 'CL:  [15: dota | world_layer_dire_base | <none>]' took 1255us
+[SpawnGroup] SynchronouslySpawnGroup for group 'CL:  [16: dota | world_layer_radiant_base | <none>]' took 1899us
+[Client] Created physics for maps/dota/world_physics.vphys
+C:Gamerules: entering state 'DOTA_GAMERULES_STATE_PRE_GAME'
+[Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_PRE_GAME
+[Client] PregameHud - SetPreGameVisible 0
+[VScript] Unit Name, Role, Dota Time, Drive, Hero Level, Hero Gold, Hero Kills, Hero Deaths, Hero Assists
+[VScript] ActionPatterns	nil
+[VScript] Competences	nil
+[VScript] DriveElements	nil
+[VScript] 1	DE-Retreat
+[VScript] 2	DE-Heal
+[VScript] 3	DE-HealAlly
+[VScript] 4	DE-FarmLane
+[VScript] 5	DE-Harass
+[VScript] 6	DE-Idle
+[Client] PregameHud - eGameState is now DOTA_GAMERULES_STATE_PRE_GAME
+[Client] PregameHud - SetPreGameVisible 1
+[Panorama] DispatchAsyncEvent backlog, failed to dispatch all this frame. Remaining queue depth: 675 (was 2345)
+[VScript] ActionPatterns	nil
+[VScript] Competences	nil
+[VScript] DriveElements	nil
+[VScript] 1	DE-Retreat
+[VScript] 2	DE-Heal
+[VScript] 3	DE-HealAlly
+[VScript] 4	DE-FarmLane
+[VScript] 5	DE-Harass
+[VScript] 6	DE-Idle
 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
+--- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_TEAM_SHOWCASE
++++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD
 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
 SetLiveSpectatorDetails -1 1
+[GCClient] Recv msg 8745 (k_EMsgServerToGCGetGuildContractsResponse), 17 bytes
+[ResourceSystem] Error loading resource file "particles/ui/ui_aghs_pregamebg_ambient_mist.vpcf_c" (Error: ERROR_FILEOPEN: File not found)
+[Particles] WARNING: Particle system 'particles/ui/ui_aghs_pregamebg_ambient_mist.vpcf' was not precached correctly. Performing blocking load....
+Attempting to use invalid particle definition "particles/ui/ui_aghs_pregamebg_ambient_mist.vpcf"!
+[GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
+--- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD
++++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_PRE_GAME
+[Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
+[Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
+[Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
+[Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
+SetLiveSpectatorDetails -1 1
+[WorldRenderer] CWorldRendererMgr::ServiceWorldRequests long frame: 79.532893ms
+[WorldRenderer] CWorldRendererMgr::ServiceWorldRequests long frame: 51.286298ms
+[Client] PregameHud - SetPreGameVisible 0
+[RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in CTextureManagerDx11::GetResourceView
+[RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in CTextureManagerDx11::GetResourceView
+[RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in CTextureManagerDx11::GetResourceView
+[RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in CTextureManagerDx11::GetResourceView
+[RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in CTextureManagerDx11::GetResourceView
+[RenderSystem] Texture manager doesn't know about texture "materials/vgui/hud/heroicons.vtex" - returning error texture in CTextureManagerDx11::GetResourceView
+S:Gamerules: entering state 'DOTA_GAMERULES_STATE_GAME_IN_PROGRESS'
+m_flGameStartTime set to 49.67
+Sending CMsgConnectedPlayers for reason GAME_STATE.  Last send was 11.7s ago, urgency is 0.0s
+game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+first_blood_happened: false
+send_reason: GAME_STATE
+radiant_kills: 0
+dire_kills: 0
+radiant_lead: -50
+building_state: 4784201
+
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 34 bytes
+C:Gamerules: entering state 'DOTA_GAMERULES_STATE_GAME_IN_PROGRESS'
+[Client] CDOTA_Hud_Main::EventGameRulesStateChanged DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+[Client] CDOTA_Hud_Main::DeleteGameEndScreen deleted GameEndContainer
+[GCClient] Send msg 4508 (k_EMsgGCGameServerInfo), 90 bytes
+--- Sent CMsgGameServerInfo to GC
+server_public_ip_addr: 36852600
+server_private_ip_addr: 2887749633
+server_port: 27015
+server_tv_port: 27020
+server_key: ""
+server_hibernation: false
+server_type: GAME
+server_region: 0
+server_loadavg: 0.096866332
+server_tv_broadcast_time: 56.7333374
+server_game_time: 0.0333328247
+relay_slots_max: 64
+relays_connected: 0
+relay_clients_connected: 0
+tv_secret_code: 14907463577308401589
+server_version: 5145
+server_cluster: 0
+assigned_server_tv_port: 27020
+allow_custom_games: BOTH
+build_version: 5145
+tf_server_count: 1
+is_recording_match_training_data: false
+
+---
+[GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
+--- CSODOTALobby.game_state: DOTA_GAMERULES_STATE_PRE_GAME
++++ CSODOTALobby.game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+[Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
+[Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
+[Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
+[Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
+SetLiveSpectatorDetails -1 1
+[VScript] npc_dota_hero_witch_doctor	5	43.56600189209	1	423	763	0	0	0
+[VScript] npc_dota_hero_sniper	1	43.56600189209	1	293	813	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	137.91152954102	2	580	920	0	0	0
+[VScript] npc_dota_hero_sniper	1	137.91152954102	2	710	1230	0	0	0
+[Developer] 'CDOTA_Bot_Script::GetActualIncomingDamage' called on an entity (npc_dota_creep_badguys_melee at -99 -75 128) that cannot be seen!
+[Developer] 'CDOTA_Bot_Script::GetActualIncomingDamage' called on an entity (npc_dota_creep_badguys_melee at -105 -77 128) that cannot be seen!
+[Developer] 'CDOTA_Bot_Script::GetActualIncomingDamage' called on an entity (npc_dota_creep_badguys_melee at -96 -71 128) that cannot be seen!
+[VScript] npc_dota_hero_witch_doctor	5	139.57855224609	2	583	923	0	0	0
+[VScript] npc_dota_hero_sniper	1	139.57855224609	2	713	1233	0	0	0
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/tidehunter/tidehunter.vmdl for entity npc_dota_hero_tidehunter
+[Developer] 'CDOTA_Bot_Script::GetActualIncomingDamage' called on an entity (npc_dota_creep_badguys_melee at -202 -59 124) that cannot be seen!
+[Developer] 'CDOTA_Bot_Script::GetActualIncomingDamage' called on an entity (npc_dota_creep_badguys_melee at -210 -67 118) that cannot be seen!
+[Developer] 'CDOTA_Bot_Script::GetActualIncomingDamage' called on an entity (npc_dota_creep_badguys_melee at -146 -124 120) that cannot be seen!
+[Developer] 'CDOTA_Bot_Script::GetActualIncomingDamage' called on an entity (npc_dota_creep_badguys_melee at -156 -129 114) that cannot be seen!
+[VScript] npc_dota_hero_witch_doctor	5	174.91943359375	2	642	982	0	0	0
+[VScript] npc_dota_hero_sniper	1	174.91943359375	2	807	1327	0	0	0
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/gyro/gyro.vmdl for entity npc_dota_hero_gyrocopter
+[VScript] npc_dota_hero_witch_doctor	5	187.92221069336	3	664	1004	0	0	0
+[VScript] npc_dota_hero_sniper	1	187.92221069336	2	829	1349	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	196.25732421875	3	718	1058	0	0	0
+[VScript] npc_dota_hero_sniper	1	196.25732421875	3	883	1403	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	269.91061401367	3	730	1070	0	0	0
+[VScript] npc_dota_hero_sniper	1	269.91061401367	3	1075	1595	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	301.56954956055	3	783	1123	0	0	0
+[VScript] npc_dota_hero_sniper	1	301.56954956055	3	1201	1721	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	304.23556518555	3	788	1128	0	0	0
+[VScript] npc_dota_hero_sniper	1	304.23556518555	3	1244	1764	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	314.56637573242	3	806	1146	0	0	0
+[VScript] npc_dota_hero_sniper	1	314.56637573242	4	1299	1819	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	315.23287963867	3	807	1147	0	0	0
+[VScript] npc_dota_hero_sniper	1	315.23287963867	4	1300	1820	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	322.89767456055	3	821	1161	0	0	0
+[VScript] npc_dota_hero_sniper	1	322.89767456055	4	1314	1834	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	324.8971862793	3	824	1164	0	0	0
+[VScript] npc_dota_hero_sniper	1	324.8971862793	4	1317	1837	0	0	0
+[VScript] npc_dota_hero_witch_doctor	5	353.55685424805	4	875	1215	0	0	0
+[VScript] npc_dota_hero_sniper	1	353.55685424805	4	1368	1888	0	0	0
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/sniper/sniper.vmdl for entity npc_dota_hero_sniper
 CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/ogre_magi/ogre_magi.vmdl for entity npc_dota_hero_ogre_magi
-[VScript] npc_dota_hero_witch_doctor	5	271.24096679688	2	990	3939	0	0	0
-[VScript] npc_dota_hero_sniper	1	271.24096679688	4	891	0	0	0
-[Client]  1284: 0.273200 msec change 'OnCellChanged()' on field m_vecX(path=12/3) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
-[VScript] npc_dota_hero_witch_doctor	5	297.56787109375	2	1067	6006	0	0	0
-[VScript] npc_dota_hero_sniper	1	297.56787109375	4	969	0	0	0
-[Client]  1313: 0.254400 msec change 'clientSideAnimCycleReset()' on field m_nNewSequenceParity(path=12/10) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
-CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/ogre_magi/ogre_magi.vmdl for entity npc_dota_hero_ogre_magi
+[SteamNetSockets] Certificate expires in 21h09m at 1641828960 (current time 1641752791), will renew in 19h09m
 [Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
-Sending CMsgConnectedPlayers for reason FIRST_BLOOD.  Last send was 164.0s ago, urgency is 0.0s
+Sending CMsgConnectedPlayers for reason FIRST_BLOOD.  Last send was 396.1s ago, urgency is 0.0s
 game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
 first_blood_happened: true
 send_reason: FIRST_BLOOD
-radiant_kills: 2
-dire_kills: 0
-radiant_lead: 764
+radiant_kills: 0
+dire_kills: 1
+radiant_lead: -1502
 building_state: 4784201
 
-[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 26 bytes
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 34 bytes
 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
 --- CSODOTALobby.first_blood_happened: false
 +++ CSODOTALobby.first_blood_happened: true
@@ -56,88 +174,59 @@ building_state: 4784201
 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
 SetLiveSpectatorDetails -1 1
-[VScript] npc_dota_hero_witch_doctor	5	413.20629882812	2	1316	6006	0	0	0
-[VScript] npc_dota_hero_sniper	1	413.20629882812	5	1361	0	0	0
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-[VScript] npc_dota_hero_witch_doctor	5	430.53540039062	2	1347	6006	0	0	0
-[VScript] npc_dota_hero_sniper	1	430.53540039062	5	1428	0	0	0
 [Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
-[SteamNetSockets] Certificate expires in 44h54m at 1641635644 (current time 1641473990), will renew in 42h54m
-Sending CMsgConnectedPlayers for reason KILLS.  Last send was 60.3s ago, urgency is 60.0s
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/sniper/sniper.vmdl for entity npc_dota_hero_sniper
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/ogre_magi/ogre_magi.vmdl for entity npc_dota_hero_ogre_magi
+[Server] Client (account 0) tried to execute invalid order (12). Ability cannot be upgraded.
+Sending CMsgConnectedPlayers for reason KILLS.  Last send was 60.0s ago, urgency is 60.0s
 game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
 first_blood_happened: true
 send_reason: KILLS
-radiant_kills: 3
-dire_kills: 0
-radiant_lead: 974
+radiant_kills: 1
+dire_kills: 1
+radiant_lead: -1575
 building_state: 4784201
 
-[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 26 bytes
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 34 bytes
 [GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
 [Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
 [Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
 [Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
 [Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
 SetLiveSpectatorDetails -1 1
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/viper/viper.vmdl for entity npc_dota_hero_viper
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-[SteamNetSockets] Certificate expires in 47h50m at 1641646283 (current time 1641474082), will renew in 45h50m
-[VScript] npc_dota_hero_witch_doctor	5	527.51171875	2	1518	6006	0	0	0
-[VScript] npc_dota_hero_sniper	1	527.51171875	6	1707	0	0	0
-[VScript] npc_dota_hero_witch_doctor	5	530.51098632812	2	1523	6966	0	0	0
-[VScript] npc_dota_hero_sniper	1	530.51098632812	6	1712	0	0	0
-[VScript] npc_dota_hero_witch_doctor	5	531.5107421875	3	1525	7526	0	0	0
-[VScript] npc_dota_hero_sniper	1	531.5107421875	6	1714	0	0	0
-CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/gyro/gyro.vmdl for entity npc_dota_hero_gyrocopter
-[VScript] npc_dota_hero_witch_doctor	5	534.1767578125	3	1530	8918	0	0	0
-[VScript] npc_dota_hero_sniper	1	534.1767578125	6	1719	0	0	0
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-WARNING: unsupported large blur radius (16), clamped to 12 (inset box-shadow on 'PanoramaEngineConsole', requested by 'ButtonAndLevel')
-[VScript] npc_dota_hero_witch_doctor	5	556.837890625	3	1650	12838	0	0	0
-[VScript] npc_dota_hero_sniper	1	556.837890625	6	1804	0	0	0
-[VScript] npc_dota_hero_witch_doctor	5	559.17065429688	3	1654	12838	0	0	0
-[VScript] npc_dota_hero_sniper	1	559.17065429688	7	1808	0	0	0
+[Client]    94: 0.245100 msec change 'playbackRateChanged()' on field m_flPlaybackRate(path=12/9) for ent npc_dota_creep_lane(C_DOTA_BaseNPC_Creep_Lane) name='npc_dota_creep_lane'
+[Client]   811: 0.243900 msec change 'gameSceneNodeLocalAnglesChanged()' on field m_angRotation(path=14/7) for ent npc_dota_hero_tidehunter(C_DOTA_Unit_Hero_Tidehunter) name='npc_dota_hero_tidehunter'
+[VScript] npc_dota_hero_witch_doctor	5	487.19091796875	4	1046	1386	0	0	0
+[VScript] npc_dota_hero_sniper	1	487.19091796875	5	1712	2132	0	1	0
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/crystal_maiden/crystal_maiden.vmdl for entity npc_dota_hero_crystal_maiden
+[VScript] npc_dota_hero_witch_doctor	5	498.85473632812	5	1066	1406	0	0	0
+[VScript] npc_dota_hero_sniper	1	498.85473632812	5	1732	2152	0	1	0
+[VScript] npc_dota_hero_witch_doctor	5	504.52001953125	5	1076	1416	0	0	0
+[VScript] npc_dota_hero_sniper	1	504.52001953125	5	1742	2162	0	1	0
+[VScript] npc_dota_hero_witch_doctor	5	504.85327148438	5	1077	1417	0	0	0
+[VScript] npc_dota_hero_sniper	1	504.85327148438	5	1743	2163	0	1	0
+[Developer] Hero survived a lethal attack because of a recent heal!
+[Server] Client (account 0) tried to execute invalid order (20). Unit is dead.
+Sending CMsgConnectedPlayers for reason KILLS.  Last send was 61.0s ago, urgency is 60.0s
+game_state: DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+first_blood_happened: true
+send_reason: KILLS
+radiant_kills: 1
+dire_kills: 2
+radiant_lead: -1956
+building_state: 4784201
+
+[GCClient] Send msg 7034 (k_EMsgGCConnectedPlayers), 34 bytes
+[VScript] target type 	0	npc_dota_hero_nevermore
+[GCClient] Recv msg 26 (k_ESOMsg_UpdateMultiple), 487 bytes
+[Server] PR:SetPlayerName 10:[U:1:107641452] "lulock"
+[Server] PR:SetPlusSubscriptionStatus 10:[U:1:107641452] IsPlusSubscriber:No
+[Server] PR:SetWasMVPLastGame 10:[U:1:107641452] WasMVPLastGame:No
+[Server] PR:SetFavoriteTeamPacked 10:[U:1:107641452] unFavTeamPacked:0
+SetLiveSpectatorDetails -1 1
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/ogre_magi/ogre_magi.vmdl for entity npc_dota_hero_ogre_magi
+[SteamNetSockets] Certificate expires in 47h50m at 1641925157 (current time 1641752956), will renew in 45h50m
+[Server] Client (account 0) tried to execute invalid order (60). Ability is hidden.
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment attach_fx on model models/heroes/tidehunter/tidehunter.vmdl for entity npc_dota_hero_tidehunter
+[VScript] npc_dota_hero_witch_doctor	5	593.63159179688	5	1199	1539	0	1	0
+[VScript] npc_dota_hero_sniper	1	593.63159179688	6	1976	2396	0	1	0

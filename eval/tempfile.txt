@@ -1,28 +1,38 @@
-npc_dota_hero_witch_doctor	5	43.56600189209	1	463	0	0	0	0
-npc_dota_hero_sniper	1	43.56600189209	1	333	0	0	0
-npc_dota_hero_witch_doctor	5	50.899223327637	1	509	1443	0	0	0
-npc_dota_hero_sniper	1	50.899223327637	1	345	0	0	0
-npc_dota_hero_witch_doctor	5	55.565818786621	1	517	2223	0	0	0
-npc_dota_hero_sniper	1	55.565818786621	1	353	0	0	0
-npc_dota_hero_witch_doctor	5	73.233711242676	1	593	3939	0	0	0
-npc_dota_hero_sniper	1	73.233711242676	1	383	0	0	0
-npc_dota_hero_witch_doctor	5	271.24096679688	2	990	3939	0	0	0
-npc_dota_hero_sniper	1	271.24096679688	4	891	0	0	0
-npc_dota_hero_witch_doctor	5	297.56787109375	2	1067	6006	0	0	0
-npc_dota_hero_sniper	1	297.56787109375	4	969	0	0	0
-npc_dota_hero_witch_doctor	5	413.20629882812	2	1316	6006	0	0	0
-npc_dota_hero_sniper	1	413.20629882812	5	1361	0	0	0
-npc_dota_hero_witch_doctor	5	430.53540039062	2	1347	6006	0	0	0
-npc_dota_hero_sniper	1	430.53540039062	5	1428	0	0	0
-npc_dota_hero_witch_doctor	5	527.51171875	2	1518	6006	0	0	0
-npc_dota_hero_sniper	1	527.51171875	6	1707	0	0	0
-npc_dota_hero_witch_doctor	5	530.51098632812	2	1523	6966	0	0	0
-npc_dota_hero_sniper	1	530.51098632812	6	1712	0	0	0
-npc_dota_hero_witch_doctor	5	531.5107421875	3	1525	7526	0	0	0
-npc_dota_hero_sniper	1	531.5107421875	6	1714	0	0	0
-npc_dota_hero_witch_doctor	5	534.1767578125	3	1530	8918	0	0	0
-npc_dota_hero_sniper	1	534.1767578125	6	1719	0	0	0
-npc_dota_hero_witch_doctor	5	556.837890625	3	1650	12838	0	0	0
-npc_dota_hero_sniper	1	556.837890625	6	1804	0	0	0
-npc_dota_hero_witch_doctor	5	559.17065429688	3	1654	12838	0	0	0
-npc_dota_hero_sniper	1	559.17065429688	7	1808	0	0	0
+npc_dota_hero_witch_doctor	5	43.56600189209	1	423	763	0	0	0
+npc_dota_hero_sniper	1	43.56600189209	1	293	813	0	0	0
+npc_dota_hero_witch_doctor	5	137.91152954102	2	580	920	0	0	0
+npc_dota_hero_sniper	1	137.91152954102	2	710	1230	0	0	0
+npc_dota_hero_witch_doctor	5	139.57855224609	2	583	923	0	0	0
+npc_dota_hero_sniper	1	139.57855224609	2	713	1233	0	0	0
+npc_dota_hero_witch_doctor	5	174.91943359375	2	642	982	0	0	0
+npc_dota_hero_sniper	1	174.91943359375	2	807	1327	0	0	0
+npc_dota_hero_witch_doctor	5	187.92221069336	3	664	1004	0	0	0
+npc_dota_hero_sniper	1	187.92221069336	2	829	1349	0	0	0
+npc_dota_hero_witch_doctor	5	196.25732421875	3	718	1058	0	0	0
+npc_dota_hero_sniper	1	196.25732421875	3	883	1403	0	0	0
+npc_dota_hero_witch_doctor	5	269.91061401367	3	730	1070	0	0	0
+npc_dota_hero_sniper	1	269.91061401367	3	1075	1595	0	0	0
+npc_dota_hero_witch_doctor	5	301.56954956055	3	783	1123	0	0	0
+npc_dota_hero_sniper	1	301.56954956055	3	1201	1721	0	0	0
+npc_dota_hero_witch_doctor	5	304.23556518555	3	788	1128	0	0	0
+npc_dota_hero_sniper	1	304.23556518555	3	1244	1764	0	0	0
+npc_dota_hero_witch_doctor	5	314.56637573242	3	806	1146	0	0	0
+npc_dota_hero_sniper	1	314.56637573242	4	1299	1819	0	0	0
+npc_dota_hero_witch_doctor	5	315.23287963867	3	807	1147	0	0	0
+npc_dota_hero_sniper	1	315.23287963867	4	1300	1820	0	0	0
+npc_dota_hero_witch_doctor	5	322.89767456055	3	821	1161	0	0	0
+npc_dota_hero_sniper	1	322.89767456055	4	1314	1834	0	0	0
+npc_dota_hero_witch_doctor	5	324.8971862793	3	824	1164	0	0	0
+npc_dota_hero_sniper	1	324.8971862793	4	1317	1837	0	0	0
+npc_dota_hero_witch_doctor	5	353.55685424805	4	875	1215	0	0	0
+npc_dota_hero_sniper	1	353.55685424805	4	1368	1888	0	0	0
+npc_dota_hero_witch_doctor	5	487.19091796875	4	1046	1386	0	0	0
+npc_dota_hero_sniper	1	487.19091796875	5	1712	2132	0	1	0
+npc_dota_hero_witch_doctor	5	498.85473632812	5	1066	1406	0	0	0
+npc_dota_hero_sniper	1	498.85473632812	5	1732	2152	0	1	0
+npc_dota_hero_witch_doctor	5	504.52001953125	5	1076	1416	0	0	0
+npc_dota_hero_sniper	1	504.52001953125	5	1742	2162	0	1	0
+npc_dota_hero_witch_doctor	5	504.85327148438	5	1077	1417	0	0	0
+npc_dota_hero_sniper	1	504.85327148438	5	1743	2163	0	1	0
+npc_dota_hero_witch_doctor	5	593.63159179688	5	1199	1539	0	1	0
+npc_dota_hero_sniper	1	593.63159179688	6	1976	2396	0	1	0

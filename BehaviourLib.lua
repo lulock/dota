@@ -142,7 +142,7 @@ function GoToCreepWave( status )
                 local withinX = laneLocation.x >= towerLoc.x - radius and laneLocation.x <= towerLoc.x + radius
                 local withinY = laneLocation.y >= towerLoc.y - radius and laneLocation.y <= towerLoc.y + radius
                 -- Draws a line from vStar to vEnd in the specified color for one frame.
-                DebugDrawCircle( towerLoc, radius, 255, 0, 0 )
+                -- DebugDrawCircle( towerLoc, radius, 255, 0, 0 )
     
                 if withinX and withinY then 
                     laneLocation =  laneLocation - RandomVector( 1*radius )
@@ -227,7 +227,8 @@ function SelectTarget( status )
         local secondsPerAttack = GetBot():GetSecondsPerAttack()
         local enemyCreepsNearby = GetBot( ):GetNearbyCreeps( GetBot():GetAttackRange( ), true )
         for i,creep in pairs( enemyCreepsNearby ) do
-            local thresholdTarget = GetUnitToUnitDistance(creep, GetBot() )*0.01*creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL)
+        local secondsPerAttack = GetBot():GetSecondsPerAttack()
+            local thresholdTarget = secondsPerAttack*creep:GetActualIncomingDamage(GetBot():GetAttackDamage(), DAMAGE_TYPE_PHYSICAL)
             -- local thresholdTarget = GetUnitToUnitDistance(creep, GetBot() )*0.01*creep:GetBot():GetAttackDamage()
             if creep:CanBeSeen( ) and (creep:GetHealth() <= thresholdTarget ) then
                 -- GetBot():Action_AttackUnit( creep, true )
