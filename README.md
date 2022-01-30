@@ -29,3 +29,14 @@ Dota 2 MAS designed using OperA and BOD.
 ## Cheats to help debug in-game
 
 https://dota2.fandom.com/wiki/Cheats
+
+## AWKWARD bot in action
+
+#### Last Hits
+![Last Hits](https://github.com/lulock/dota/blob/master/img/LastHit.gif "Last Hits")
+
+#### Heal and Retreat
+![Heal and Retreat](https://github.com/lulock/dota/blob/master/img/HealRetreat.gif "Heal and Retreat")
+
+#### Priority Farm Social Norm
+![OperA Norm Enforcement](https://github.com/lulock/dota/blob/master/img/OperA.gif "OperA Social Norm Enforcement")
