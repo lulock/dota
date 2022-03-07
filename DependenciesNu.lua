@@ -1,6 +1,9 @@
 --------------------------------------------------------------------------------------
 -- this is where all dependencies live (:                                           --
 --------------------------------------------------------------------------------------
+function GetScriptDirectory()
+    return "C:/Program Files (x86)/Steam/steamapps/common/dota 2 beta/game/dota/scripts/vscripts/bots/"
+end
 
 -- utility functions
 Class = require ( GetScriptDirectory().."/utils/class" )
@@ -25,6 +28,7 @@ require ( GetScriptDirectory().."/planner/elements/Competence" )
 require ( GetScriptDirectory().."/planner/elements/CompetenceElement" )
 
 -- behaviour library and global constants
-require ( GetScriptDirectory().."/BehaviourLib" )
+-- require ( GetScriptDirectory().."/BehaviourLib" )
 require ( GetScriptDirectory().."/Constants" )
--- require ( GetScriptDirectory().."/Team" )
+
+-- require("C:/Program Files (x86)/Steam/steamapps/common/dota 2 beta/game/dota/scripts/vscripts/bots/Constants")

@@ -44,13 +44,35 @@ Opera = Class{ }
 
 function Opera:init(operaFile, plan)
     local operaTable = json.decode(operaFile) -- norms loaded as lua table
-    -- some OMs
+    -- some OMs ... TODO: there is repetition below. consider refactor!!
     self.norms = self:buildNorms(operaTable, plan)
     self.scenes = self:buildScenes(operaTable, plan)
     self.currentScenes = {}
 
+    -- TODO: refactor and create a load/reload function.
+    self.normFileName = "/OperA/IM/scenes/testx"
+    self.roleNormFile = reload ( self.normFileName ) -- json string
+
+    local roleNormTable = json.decode(self.roleNormFile)
+    self.roleNorms = self:buildNorms(roleNormTable, plan)
+
     -- SM
     self.units = nil 
+
+end
+
+function reload(module)
+    if package.loaded[module] ~= nil then    
+        package.loaded[module] = nil
+    end
+    return require( GetScriptDirectory() .. module ) 
+end
+
+function Opera:reloadNorms()
+    -- reload incase changes made to role norms in-game
+    self.roleNormFile = reload(self.normFileName)
+    local roleNormTable = json.decode(self.roleNormFile)
+    self.roleNorms = self:buildNorms(roleNormTable, plan) 
 end
 
 function Opera:update()
@@ -60,6 +82,16 @@ function Opera:update()
         --print('scene', scene.name)
         local s = scene:update()
     end
+
+    self:reloadNorms()
+
+    for _,roleNorm in pairs(self.roleNorms) do
+        print("ROLE NORM FOR", GetBot():GetUnitName(), "IS" )
+        for i,v in pairs(roleNorm) do
+            print(i,v)
+        end
+    end
+
 end
 
 function Opera:buildNorms(operaTable, plan)

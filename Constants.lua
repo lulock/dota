@@ -67,3 +67,5 @@ FAILURE = 3
 OBLIGED = 0
 PERMITTED = 1
 NOTPERMITTED = 2
+
+WD = {["no"] = 1}

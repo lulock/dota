@@ -346,7 +346,7 @@ function RightClickAttack( status )
 
     if status == IDLE then        
         GetBot( ):Action_AttackUnit( GetBot( ):GetTarget( ), true )
-        -- print("RCA - action - RUNNING", GetBot():GetUnitName() )
+        print("RCA - action - RUNNING", GetBot():GetUnitName() )
         -- print("TARGET HEALTH", GetBot( ):GetTarget( ):GetHealth( ) )
         -- print("TARGET DAMAGE", GetBot( ):GetTarget( ):GetActualIncomingDamage( GetBot( ):GetAttackDamage( ), DAMAGE_TYPE_PHYSICAL ) )
         return SUCCESS

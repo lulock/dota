@@ -1,5 +1,4 @@
 -- priority farming scene for pos 5 role.
--- TODO: add new variable "Rules". IF (condition) THEN (consequence) ELSE (alternative). Norm is name of the expected behaviour (Drive)
 local x = [[{
 	"norms": [
 		{
