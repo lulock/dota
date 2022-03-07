@@ -62,8 +62,8 @@ function Opera:init(operaFile, plan)
 end
 
 function reload(module)
-    if package.loaded[module] ~= nil then    
-        package.loaded[module] = nil
+    if package.loaded[GetScriptDirectory() .. module] ~= nil then    
+        package.loaded[GetScriptDirectory() .. module] = nil
     end
     return require( GetScriptDirectory() .. module ) 
 end
