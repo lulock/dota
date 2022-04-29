@@ -57,8 +57,9 @@ function Scene:checkRules()
             -- print('norm', norm.name, 'will impose SANCTIONS!')
 
             self.previdx, self.prevDrive, self.curridx = norm:sanction()
-            self:log()
-            -- print("NEW PLAN", GetBot():GetUnitName())
+            -- self:log()
+            GetBot():ActionImmediate_Chat( 'scene start', true )
+            print("NEW PLAN", GetBot():GetUnitName())
             -- printTable(self.plan.root.drives)
 
         end
@@ -80,6 +81,9 @@ function Scene:checkResults()
 end
 
 function Scene:reset()
+    GetBot():ActionImmediate_Chat( 'scene end', true )
+
+    -- Have a bot say something in team chat, bAllChat true to say to all chat instead
     
     -- reset --
     if self.curridx ~= nil then self.plan.root:removeDrive(self.curridx) end -- remove the drive
@@ -90,7 +94,7 @@ function Scene:reset()
     self.curridx = nil  
     self.status = IDLE 
     
-    self:log()
+    -- self:log()
     -- print('scene complete, reset to idle')
     -- printTable(self.plan.root.drives)
     return true
@@ -172,6 +176,7 @@ function Scene:sanction()
             norm.plan.root:insertDrive(d, 1) -- re-insert drive as priority # 1
             -- log role, time of change, and name of new priority drive to console
             print(POSITIONS[GetBot():GetUnitName()], ', ', DotaTime(),', ', d.name) 
+            -- GetBot():ActionImmediate_Chat( 'scene start', true )
             -- these console logs are dumped into a text file by steam. Postprocess file by tokenising on [VScript] and then the rest should be CSV format.
         end -- TODO: handle if not found
     end

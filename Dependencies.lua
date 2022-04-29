@@ -5,6 +5,7 @@
 -- utility functions
 Class = require ( GetScriptDirectory().."/utils/class" )
 json = require ( GetScriptDirectory().."/utils/json" )
+require ( GetScriptDirectory().."/utils/utility" )
 
 -- opera
 o = require ( GetScriptDirectory().."/OperA/Opera" )

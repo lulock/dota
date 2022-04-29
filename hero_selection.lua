@@ -32,7 +32,7 @@ function UpdateLaneAssignments()
         return {
         [1] = LANE_BOT,
         -- [1] = LANE_MID,
-        [2] = LANE_MID,
+        [2] = LANE_BOT,
         [3] = LANE_TOP,
         [4] = LANE_TOP,
         [5] = LANE_BOT,

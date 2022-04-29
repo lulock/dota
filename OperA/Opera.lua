@@ -86,10 +86,10 @@ function Opera:update()
     self:reloadNorms()
 
     for _,roleNorm in pairs(self.roleNorms) do
-        print("ROLE NORM FOR", GetBot():GetUnitName(), "IS" )
-        for i,v in pairs(roleNorm) do
-            print(i,v)
-        end
+        -- print("ROLE NORM FOR", GetBot():GetUnitName(), "IS" )
+        -- for i,v in pairs(roleNorm) do
+        --     print(i,v)
+        -- end
     end
 
 end

@@ -346,7 +346,7 @@ function RightClickAttack( status )
 
     if status == IDLE then        
         GetBot( ):Action_AttackUnit( GetBot( ):GetTarget( ), true )
-        print("RCA - action - RUNNING", GetBot():GetUnitName() )
+        -- print("RCA - action - RUNNING", GetBot():GetUnitName() )
         -- print("TARGET HEALTH", GetBot( ):GetTarget( ):GetHealth( ) )
         -- print("TARGET DAMAGE", GetBot( ):GetTarget( ):GetActualIncomingDamage( GetBot( ):GetAttackDamage( ), DAMAGE_TYPE_PHYSICAL ) )
         return SUCCESS
@@ -648,7 +648,7 @@ end
 function IsSafeToFarm( )
     -- print("not safetofarm", GetBot( ):WasRecentlyDamagedByAnyHero( interval ) or GetBot( ):GetHealth( )/GetBot():GetMaxHealth( ) < 0.8)
     -- GetBot( ):WasRecentlyDamagedByAnyHero( interval )
-    return (Health( ) > 0.8) and 1 or 0 -- for now, it's safe to farm if no hero is attacking bot
+    return (Health( ) > 0.8) and 1 or 0 -- for now, it's safe to farm if health > 80%
 end
 
 -- check if target is dead
