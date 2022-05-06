@@ -26,7 +26,10 @@ local toBuy = {
 }
 
 function ItemPurchaseThink()
-
+	-- do nothing if dead
+	if not GetBot():IsAlive() then
+		return
+	end
 	-- if GetGameState() == GAME_STATE_PRE_GAME then
 	-- 	for i=1,#startingItems do
 	-- 		toBuy[#toBuy+1] = startingItems[i]

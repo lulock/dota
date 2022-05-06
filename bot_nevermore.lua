@@ -38,13 +38,13 @@ end
 
 function Think()
 	
-	if flag then 
-		local tAvoidanceZones = AddAvoidanceZone( towerLoc, 100 )
-		GeneratePath( vStart, vEnd, {tAvoidanceZones}, printPath )
-		print( #GetAvoidanceZones() )
+	-- if flag then 
+	-- 	local tAvoidanceZones = AddAvoidanceZone( towerLoc, 100 )
+	-- 	GeneratePath( vStart, vEnd, {tAvoidanceZones}, printPath )
+	-- 	print( #GetAvoidanceZones() )
 
-		flag = false
-	end
+	-- 	flag = false
+	-- end
 
 	-- int AddAvoidanceZone( vLocationAndRadius )
 

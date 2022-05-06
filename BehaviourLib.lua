@@ -697,7 +697,7 @@ end
 function IsAbilityCastable()
     for i = 0, 23 do
         a = GetBot():GetAbilityInSlot( i )
-        if a ~= nil and a:IsFullyCastable() and not a:IsPassive() then
+        if a ~= nil and a:IsFullyCastable() and not a:IsPassive() and not a:IsHidden() then
             return 1 -- at least one ability can be cast
         end
     end
@@ -742,7 +742,7 @@ end
 -- checks if ability argument is available
 function IsAbilityAvailable( ability )
     local abilityHandle = GetBot():GetAbilityByName( ability )
-    if abilityHandle ~= nil and abilityHandle:IsFullyCastable() then
+    if abilityHandle ~= nil and abilityHandle:IsFullyCastable() and not abilityHandle:IsHidden() then
         return 1
     else 
         return 0

@@ -20,8 +20,7 @@
 --------------------------------------------------------------------------------------
 
 DriveCollection = Class{__includes = PlanElement}
-
-local qFile = require ( GetScriptDirectory().."/planner/plans/testqvals" ) -- json string
+-- local qFile = require ( GetScriptDirectory().."/planner/plans/testqvals" ) -- json string
 
 function DriveCollection:init(name, drives)
     self.name = name --name
@@ -31,15 +30,16 @@ function DriveCollection:init(name, drives)
     self.currentDrive = nil -- keep pointer to currently running drive index
     self.currentDriveName = nil -- keep pointer to currently running drive name
     self.priorityKeys = {}
-    
+    self.qFile = reload("/planner/plans/testqvals")
     for idx=1, #self.drives do table.insert(self.priorityKeys, idx) end -- initiate priority keys in default order
 end
 
 function DriveCollection:tick()
 
     -- q priority structure
+    qFile = reload("/planner/plans/testqvals")
     local qvals = json.decode(qFile)
-    -- print("QVALS ARE", qvals)
+    -- print("QVALS ARE")
     -- for k,v in pairs(qvals.values) do print(k,v) end
     if #qvals.values > 0 then
         self.priorityKeys = self:sort(qvals.values)
@@ -117,6 +117,8 @@ function DriveCollection:sort( qvals )
     -- sort keys by decreasing Qvalues
     table.sort(sortkeys, function(a,b) return qvals[a] > qvals[b] end)
 
+    print("in sort keys")
+    for i,sk in pairs(sortkeys) do print(i,sk) end
     self.priority = sortkeys
 
 end
@@ -164,3 +166,10 @@ function DriveCollection:nopriotick()
         return FAILURE
     end
 end
+
+-- function reload(module)
+--     if package.loaded[GetScriptDirectory() .. module] ~= nil then    
+--         package.loaded[GetScriptDirectory() .. module] = nil
+--     end
+--     return require( GetScriptDirectory() .. module ) 
+-- end

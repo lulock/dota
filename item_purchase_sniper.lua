@@ -32,6 +32,10 @@ function ItemPurchaseThink()
 	-- 		toBuy[#toBuy+1] = startingItems[i]
 	-- 	end
 	-- end
+	-- do nothing if dead
+	if not GetBot():IsAlive() then
+		return
+	end
 
 	if #toBuy > 0 then
 		for idx,item in pairs(toBuy) do

@@ -26,17 +26,23 @@ function Scene:update() -- should a scene exit be determined by landmark??
         
         -- all landmarks sensed, set status to running
         self.status = RUNNING
+        
         -- self:log()
     end
         -- print('scene running, check rules')
 
     if self.status == RUNNING then
+        -- printTable(self.plan.root.drives)
+        -- print("qvals")
+        -- for i,key in pairs(self.plan.root.priorityKeys) do print(i,key) end
+        -- print("order")
+        -- for i,key in pairs(self.plan.root.priorityKeys) do print(self.plan.root.drives[key].name) end
         
         -- check results for scene ende
         local complete = self:checkResults()
 
         if complete then 
-            return self:reset()
+            -- return self:reset()
         else
             return self:checkRules()
         end
@@ -56,10 +62,10 @@ function Scene:checkRules()
         if not legal then -- if agent in violation
             -- print('norm', norm.name, 'will impose SANCTIONS!')
 
-            self.previdx, self.prevDrive, self.curridx = norm:sanction()
+            -- self.previdx, self.prevDrive, self.curridx = norm:sanction()
             -- self:log()
-            GetBot():ActionImmediate_Chat( 'scene start', true )
-            print("NEW PLAN", GetBot():GetUnitName())
+            -- GetBot():ActionImmediate_Chat( 'scene start', true )
+            -- print("NEW PLAN", GetBot():GetUnitName())
             -- printTable(self.plan.root.drives)
 
         end
@@ -81,7 +87,7 @@ function Scene:checkResults()
 end
 
 function Scene:reset()
-    GetBot():ActionImmediate_Chat( 'scene end', true )
+    -- GetBot():ActionImmediate_Chat( 'scene end', true )
 
     -- Have a bot say something in team chat, bAllChat true to say to all chat instead
     
